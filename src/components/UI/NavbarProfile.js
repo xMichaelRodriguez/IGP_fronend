@@ -1,10 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./styles.css";
 export const NavbarProfile = () => {
+  const { name } = useSelector((state) => state.auth);
   return (
     <>
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-md navbar-dark primary mb-3">
         <Link className="navbar-brand" to="/">
           UVS
         </Link>
@@ -21,7 +23,7 @@ export const NavbarProfile = () => {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarColor03">
-          <ul className="navbar-nav mr-auto ml-md">
+          <ul className="navbar-nav mr-auto ml-md px-2">
             <li className="nav-item active">
               <h3>
                 <Link className="nav-link" to="/">
@@ -44,11 +46,9 @@ export const NavbarProfile = () => {
               </h3>
             </li>
           </ul>
-          <ul class="navbar-nav ml-auto ">
-            <li class="nav-item active">
-              <Link to="/auth/login" className="btn primary">
-                Login
-              </Link>
+          <ul className="navbar-nav ml-auto px-3">
+            <li className="nav-item active">
+              <h3 className="text-light">{name}</h3>
             </li>
           </ul>
         </div>

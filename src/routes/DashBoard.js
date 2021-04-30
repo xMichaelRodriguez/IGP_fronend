@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { LoginScreen } from "../components/auth/LoginScreen";
 import { HomeScreen } from "../components/home/HomeScreen";
 import { NoticeScreen } from "../components/noticies/NoticeScreen";
 import { OrganizationScreen } from "../components/organizations/OrganizationScreen";
@@ -12,7 +11,7 @@ export const DashBoard = () => {
   return (
     <>
       <NavbarScreen />
-      <div>
+      <div className="container">
         <Switch>
           <Route path="/noticies" component={NoticeScreen} />
 

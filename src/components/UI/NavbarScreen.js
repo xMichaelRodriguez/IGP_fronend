@@ -1,10 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 import "./styles.css";
 export const NavbarScreen = () => {
+  const history = useHistory();
+  const { name } = useSelector((state) => state.auth);
   return (
     <>
-      <nav className="navbar navbar-expand-md navbar-dark primary">
+      <nav className="navbar navbar-expand-md navbar-dark primary mb-3">
         <Link className="navbar-brand" to="/">
           UVS
         </Link>
@@ -58,11 +61,21 @@ export const NavbarScreen = () => {
               </h3>
             </li>
           </ul>
-          <ul class="navbar-nav ml-auto ">
-            <li class="nav-item active">
-              <Link to="/auth/login" className="btn btn-secondary btn-lg">
-                Login
-              </Link>
+          <ul className="navbar-nav ml-auto ">
+            <li className="nav-item active">
+              {!name ? (
+                <Link to="/auth/login" className="btn btn-secondary btn-lg">
+                  Login
+                </Link>
+              ) : (
+                <h3
+                  onClick={() => {
+                    history.push("/profile/");
+                  }}
+                >
+                  {name}
+                </h3>
+              )}
             </li>
           </ul>
         </div>
