@@ -1,7 +1,6 @@
 import { fetchAsync, fetchSync } from "../helpers/fetching";
 import { types } from "../types/types";
 // all modules
-import Notiflix from "notiflix";
 export const startLogin = (email, password) => {
   return async (dispatch) => {
     const resp = await fetchSync("auth", { email, password }, "POST");
@@ -14,7 +13,6 @@ export const startLogin = (email, password) => {
       dispatch(removeError());
     } else {
       dispatch(setError(body.msg));
-      Notiflix.Notify.Failure(body.msg);
     }
   };
 };

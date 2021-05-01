@@ -20,11 +20,10 @@ export const StoryScreen = () => {
   return (
     <>
       <button className="btn btn-info mb-3" onClick={handleNewStory}>
-        <i className="fas fa-plus"></i>
-        Nueva historia
+        <i className="fas fa-plus"></i> &nbsp; Nueva historia
       </button>
       <hr />
-      <div className="card-columns">
+      <div className="row">
         {stories ? (
           stories.map(({ id, title, body }) => (
             <StoryItem title={title} body={body} id={id} key={id} />
