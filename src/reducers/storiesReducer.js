@@ -7,38 +7,38 @@ const initialState = {
 
 export const storiesReducer = (state = initialState, action) => {
   switch (action.type) {
-    // case types.eventSetActive:
+    case types.storySetActive:
+      return {
+        ...state,
+        activeStory: action.payload,
+      };
+
+    // case types.StoryactiveStoryAddNew:
     //   return {
     //     ...state,
-    //     activeEvent: action.payload,
+    //     StoryactiveStorys: [...state.StoryactiveStorys, action.payload],
     //   };
 
-    // case types.eventAddNew:
-    //   return {
-    //     ...state,
-    //     events: [...state.events, action.payload],
-    //   };
+    case types.storyClearActive:
+      return {
+        ...state,
+        activeStory: null,
+      };
 
-    // case types.eventClearActiveEvent:
+    // case types.StoryactiveStoryUpdated:
     //   return {
     //     ...state,
-    //     activeEvent: null,
-    //   };
-
-    // case types.eventUpdated:
-    //   return {
-    //     ...state,
-    //     events: state.events.map((e) =>
+    //     StoryactiveStorys: state.StoryactiveStorys.map((e) =>
     //       e.id === action.payload.id ? action.payload : e
     //     ),
     //   };
 
-    // case types.eventDeleted:
-    //   return {
-    //     ...state,
-    //     events: state.events.filter((e) => e.id !== state.activeEvent.id),
-    //     activeEvent: null,
-    //   };
+    case types.storyDeleted:
+      return {
+        ...state,
+        stories: state.stories.filter((e) => e.id !== state.activeStory.id),
+        activeStory: null,
+      };
 
     case types.storyLoaded:
       return {
@@ -46,7 +46,7 @@ export const storiesReducer = (state = initialState, action) => {
         stories: [...action.payload],
       };
 
-    // case types.eventLogout:
+    // case types.StoryactiveStoryLogout:
     //   return {
     //     ...initialState,
     //   };
