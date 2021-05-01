@@ -18,7 +18,6 @@ export const startstoryAddNew = (story) => {
       });
       const resp = await fetchAsync("stories/new", story, "POST");
       const body = await resp.json();
-      console.log(body);
       if (body.ok) {
         dispatch(storyAddNew(story));
         Swal.close();
@@ -59,3 +58,47 @@ const storyLoaded = (stories) => ({
   payload: stories,
 });
 // export const storyLogout = () => ({ type: types.storyLogout });
+export const startstoryDeleted = () => {
+  return async (dispatch, getState) => {
+    const { id } = getState().story.activeStory;
+    try {
+      Swal.fire({
+        title: "Eliminando...",
+        text: "Por favor espere...",
+        allowOutsideClick: false,
+        allowEnterKey: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+          Swal.showLoading();
+        },
+      });
+
+      const resp = await fetchAsync(`stories/${id}`, {}, "DELETE");
+      const body = await resp.json();
+
+      if (body.ok) {
+        dispatch(storyDeleted());
+        Swal.close();
+        Swal.fire("Historia Eliminada", "", "success");
+      } else {
+        Swal.close();
+        Swal.fire("Error", body.msg, "error");
+      }
+    } catch (error) {
+      Swal.close();
+      console.log(error);
+    }
+  };
+};
+
+const storyDeleted = () => ({ type: types.storyDeleted });
+
+export const StorySetActive = (story) => ({
+  type: types.storySetActive,
+  payload: story,
+});
+
+export const storyClearActive = () => ({
+  type: types.storyClearActive,
+});

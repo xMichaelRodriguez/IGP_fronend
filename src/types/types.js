@@ -14,4 +14,8 @@ export const types = {
   storyLoaded: "[STORY]  Story Loaded",
   storyStartAddNew: "[STORY] Start Add New",
   storyAddNew: "[STORY] Add New",
+  storyClearActive: "[story] Clear Active story",
+  storyUpdated: "[story] story Updated",
+  storyDeleted: "[story] story Deleted",
+  storySetActive: "[story] story set active",
 };
