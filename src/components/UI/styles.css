@@ -38,7 +38,15 @@
   transition: all 0.5s;
 }
 
-.react-chatbot-kit-chat-message-container{
+.react-chatbot-kit-chat-message-container {
   background-color: white !important;
- 
+  border: 1px solid #fafafafa;
+}
+.react-chatbot-kit-chat-inner-container {
+  filter: drop-shadow(0 0 0.15rem #282828);
+}
+
+.react-chatbot-kit-chat-input:focus {
+  outline: none !important;
+  filter: drop-shadow(0 0 0.10rem #282828);
 }

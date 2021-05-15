@@ -6,17 +6,31 @@ class ActionProvider {
     this.createClientMessage = createClientMessage;
   }
 
-  handleJavascriptList = () => {
+  handleDerechos = () => {
     const message = this.createChatBotMessage(
       "Fantástico, tengo los siguientes recursos para ti sobre derechos",
       {
         widget: "Derechos",
       }
     );
+
+    this.updateChatbotState(message);
+  };
+
+  handleOrganizations = () => {
+    const message = this.createChatBotMessage(
+      "Fantástico, tengo los siguientes recursos para ti sobre las Organizaciones",
+      {
+        widget: "Organizaciones",
+      }
+    );
+
     this.updateChatbotState(message);
   };
   greet() {
     const greetingMessage = this.createChatBotMessage("Hi, friend.");
+
+    
     this.updateChatbotState(greetingMessage);
   }
 

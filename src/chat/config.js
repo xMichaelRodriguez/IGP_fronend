@@ -4,7 +4,7 @@ import { LearningOptions } from "./LearningOptions";
 import { LinkList } from "./LinkList";
 
 import { FaUserAstronaut, FaUserCircle } from "react-icons/fa";
-import { BsChevronDown } from "react-icons/bs";
+import { OrganizationsView } from "./OrganizationsView";
 
 const config = {
   botName: "UvsBot",
@@ -56,6 +56,19 @@ const config = {
         ],
       },
     },
+    {
+      widgetName: "Organizaciones",
+      widgetFunc: (props) => <OrganizationsView {...props} />,
+      props: {
+        options: [
+          {
+            title: "Derecho a la vida",
+            text: "El derecho a la vida es un derecho universal, es decir que le corresponde a todo ser humano. Es un derecho necesario para poder concretizar todos los demás derechos universales. El derecho a la vida significa tener la oportunidad de vivir nuestra propia vida.",
+            id: 1,
+          },
+        ],
+      },
+    },
   ],
   // Defines an object of custom components that will replace the stock chatbot components.
   customComponents: {
@@ -87,7 +100,7 @@ const config = {
     // Replaces the default bot avatar
     botAvatar: (props) => (
       <div
-        className="bg-info title-white"
+        className="bg-info text-white"
         style={{ height: 50, width: 37, marginRight: 10, borderRadius: "50px" }}
       >
         <FaUserAstronaut className=" mr-3 ml-1 mr-1" />

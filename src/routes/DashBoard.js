@@ -7,6 +7,7 @@ import { StoryScreen } from "../components/stories/StoryScreen";
 import { NavbarScreen } from "../components/UI/NavbarScreen";
 import { ViolenceScreen } from "../components/violence/ViolenceScreen";
 
+//chatbot
 import Chatbot from "react-chatbot-kit";
 import config from "../chat/config";
 import MessageParser from "../chat/MessageParser";
@@ -60,7 +61,7 @@ export const DashBoard = () => {
           )}
 
           <button
-            className="btn primary mt-2 rounded-circle cursor chat"
+            className="btn primary mt-2 rounded-circle cursor chat shadow"
             onClick={handlerDisplayChat}
           >
             <BsFillChatSquareFill size="2rem" />

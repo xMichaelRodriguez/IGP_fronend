@@ -5,19 +5,20 @@ export const LearningOptions = (props) => {
   const options = [
     {
       text: "¿Quieres saber cuáles son tus derechos fundamentales?",
-      handler: props.actionProvider.handleJavascriptList,
+      handler: props.actionProvider.handleDerechos,
       id: 1,
     },
-    { text: "Data visualization", handler: () => {}, id: 2 },
-    { text: "APIs", handler: () => {}, id: 3 },
-    { text: "Security", handler: () => {}, id: 4 },
-    { text: "Interview prep", handler: () => {}, id: 5 },
+    {
+      text: "¿Quieres saber que organizaciones protegen tus derechos?",
+      handler: props.actionProvider.handleOrganizations,
+      id: 2,
+    },
   ];
 
   const optionsMarkup = options.map((option) => (
     <blockquote
       key={option.id}
-      class="blockquote primary rounded p-2 cursor "
+      className="blockquote primary rounded p-2 cursor shadow-sm"
       onClick={option.handler}
     >
       <p className="m-auto">
@@ -28,7 +29,7 @@ export const LearningOptions = (props) => {
 
   return (
     <div
-      className="d-flex  align-items-start flex-wrap container-sm   "
+      className="d-flex  align-items-start flex-wrap container-sm"
       style={{ marginRight: "auto", padding: 5 }}
     >
       {optionsMarkup}

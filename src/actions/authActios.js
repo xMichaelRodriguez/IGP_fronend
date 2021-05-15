@@ -29,7 +29,7 @@ export const startChecking = () => {
 
       dispatch(login({ uid: body.uid, name: body.name }));
     } else {
-      dispatch(checkingFish());
+      return dispatch(checkingFish());
     }
   };
 };
