@@ -7,4 +7,38 @@
   background-color: #440552;
 }
 
+.cursor {
+  margin-right: auto !important;
+}
+.cursor:hover {
+  cursor: pointer;
+  background-color: #440552 !important;
+  text-decoration: underline;
+}
 
+.positions {
+  bottom: 45px;
+  font-size: 30px;
+  padding: 25px;
+  position: fixed;
+  right: 25px;
+  width: 300px;
+}
+
+.chat {
+  bottom: 25px;
+  font-size: 30px;
+  padding: 25px;
+  position: fixed;
+  right: 25px;
+}
+
+.react-chatbot-kit-chat-btn-send:hover {
+  background-color: #440552 !important;
+  transition: all 0.5s;
+}
+
+.react-chatbot-kit-chat-message-container{
+  background-color: white !important;
+ 
+}
