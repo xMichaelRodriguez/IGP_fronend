@@ -24,15 +24,17 @@ export const StoryScreen = () => {
         <i className="fas fa-plus"></i> &nbsp; Nueva historia
       </button>
       <hr />
-      <div className="row">
-        {stories ? (
-          stories.map(({ id, title, body }) => (
+
+      {stories ? (
+        <div className="card-columns">
+          {stories.map(({ id, title, body }) => (
             <StoryItem title={title} body={body} id={id} key={id} />
-          ))
-        ) : (
-          <NotFiles />
-        )}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <NotFiles />
+      )}
+
       {activeStory && <DeleteButtonFab />}
     </>
   );

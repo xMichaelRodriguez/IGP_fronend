@@ -1,30 +1,72 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useLocation } from "react-router";
 import { startstoryDeleted, storyClearActive } from "../../actions/events";
-
+import {
+  noticeClearActive,
+  startnoticeDeleted,
+} from "../../actions/noticesActions";
+//css
+import "../UI/styles.css";
+//icons
+import { FaEdit, FaTimes, FaTrash } from "react-icons/fa";
 export const DeleteButtonFab = () => {
+  const location = useLocation();
+  const history = useHistory();
   const dispatch = useDispatch();
+  const { activeNotice } = useSelector((state) => state.notice);
+  const { activeStory } = useSelector((state) => state.story);
 
+  useEffect(() => {
+    if (!location.pathname.includes("noticies")) {
+      dispatch(noticeClearActive());
+    } else if (!location.pathname.includes("stories")) {
+      dispatch(storyClearActive());
+    }
+  }, [location, dispatch]);
   const handleDelete = () => {
-    dispatch(startstoryDeleted());
+    if (activeNotice && location.pathname.includes("noticies")) {
+      dispatch(startnoticeDeleted());
+    }
+
+    if (activeStory && location.pathname.includes("stories")) {
+      dispatch(startstoryDeleted());
+    }
   };
   const handleClear = () => {
-    dispatch(storyClearActive());
+    if (location.pathname.includes("/noticies")) {
+      dispatch(noticeClearActive());
+    } else if (location.pathname.includes("/stories")) {
+      dispatch(storyClearActive());
+    }
   };
+
+  const handleEdit = () => {
+    if (location.pathname.includes("stories")) {
+      history.push("/profile/new-story");
+    } else if (location.pathname.includes("noticies")) {
+      history.push("/profile/new-notice");
+    }
+  };
+
   return (
     <div
-      class="btn-group"
+      className="btn-group"
       style={{ position: "fixed", left: "20px", bottom: "10px" }}
       role="group"
       aria-label="Basic example"
     >
-      <button type="button" class="btn btn-danger" onClick={handleDelete}>
-        <i className="fas fa-trash"></i>
+      <button type="button" className="btn btn-danger" onClick={handleDelete}>
+        <FaTrash />
         <span> Borrar</span>
       </button>
-      <button type="button" class="btn btn-info" onClick={handleClear}>
+      <button type="button" className="btn btn-secondary" onClick={handleEdit}>
+        <span>Editar </span>
+        <FaEdit />
+      </button>
+      <button type="button" className="btn btn-info" onClick={handleClear}>
         <span>Cancelar </span>
-        <i className="fas fa-times"></i>
+        <FaTimes />
       </button>
     </div>
   );

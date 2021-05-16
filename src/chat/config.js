@@ -108,8 +108,13 @@ const config = {
     ),
     // Replaces the default bot chat message container
     // botChatMessage: (props) => <CustomChatMessage {...props} />,
+    
     // Replaces the default user icon
-    userAvatar: (props) => <FaUserCircle className="px-1 ml-2" />,
+    userAvatar: (props) => (
+      <div>
+        <FaUserCircle className="px-1 ml-2" size="2.3rem" />
+      </div>
+    ),
     // // Replaces the default user chat message
     // userChatMessage: (props) => <MyUserChatMessage {...props} />,
   },

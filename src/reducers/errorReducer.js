@@ -1,13 +1,17 @@
 import { types } from "../types/types";
 
-export const errorReducer = (state = {}, action) => {
+const initialState = {
+  msgError: "",
+};
+export const errorReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.setError:
       return {
         ...state,
         msgError: action.payload,
       };
-    case types.removeError:
+
+    case types.uiRemoveError:
       return {
         ...state,
         msgError: "",

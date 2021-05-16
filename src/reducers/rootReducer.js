@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import { authReducer } from "./authReducer";
 import { errorReducer } from "./errorReducer";
+import { noticiesReducer } from "./noticiesReducer";
 import { storiesReducer } from "./storiesReducer";
 import { uiReducer } from "./uiReducer";
 export const rootReducer = combineReducers({
@@ -8,4 +9,5 @@ export const rootReducer = combineReducers({
   error: errorReducer,
   story: storiesReducer,
   UI: uiReducer,
+  notice: noticiesReducer,
 });

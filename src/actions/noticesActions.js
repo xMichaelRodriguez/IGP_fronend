@@ -2,7 +2,7 @@ import { fetchAsync } from "../helpers/fetching";
 import { types } from "../types/types";
 import Swal from "sweetalert2";
 import { removeError } from "./authActios";
-export const startstoryAddNew = (story) => {
+export const startnoticeAddNew = (notice) => {
   return async (dispatch) => {
     try {
       Swal.fire({
@@ -16,14 +16,15 @@ export const startstoryAddNew = (story) => {
           Swal.showLoading();
         },
       });
-      const resp = await fetchAsync("stories/new", story, "POST");
+      const resp = await fetchAsync("noticies/newNotice", notice, "POST");
       const body = await resp.json();
+
       if (body.ok) {
-        dispatch(storyAddNew(story));
+        dispatch(noticeAddNew(notice));
         Swal.close();
         Swal.fire(
           "Guardado!!",
-          `La historia:${body.story.title} ha sido guardada`,
+          `La noticia:${notice.title} ha sido guardada`,
           "success"
         );
         dispatch(removeError());
@@ -35,30 +36,45 @@ export const startstoryAddNew = (story) => {
   };
 };
 
-const storyAddNew = (story) => ({
-  type: types.storyAddNew,
-  payload: story,
+const noticeAddNew = (notice) => ({
+  type: types.noticeAddNew,
+  payload: notice,
 });
 
-export const storyStartLoading = () => {
+export const noticeStartLoading = () => {
   return async (dipatch) => {
     try {
-      const resp = await fetchAsync("stories");
+      const resp = await fetchAsync("noticies");
       const body = await resp.json();
-
-      dipatch(storyLoaded(body.stories));
+      if (body.ok) {
+        dipatch(noticeLoaded(body.noticies));
+      }
     } catch (error) {
       console.log(error);
     }
   };
 };
 
-const storyLoaded = (stories) => ({
-  type: types.storyLoaded,
-  payload: stories,
+export const noticeStartLoadingLast = () => {
+  return async (dipatch) => {
+    try {
+      const resp = await fetchAsync("noticies/lastest");
+      const body = await resp.json();
+      if (body.ok) {
+        dipatch(noticeLoaded(body.noticies));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+const noticeLoaded = (noticies) => ({
+  type: types.noticeLoaded,
+  payload: noticies,
 });
 
-export const storyStartUpdated = (story) => {
+export const noticetStartUpdated = (notice) => {
   return async (dispatch) => {
     try {
       Swal.fire({
@@ -73,18 +89,24 @@ export const storyStartUpdated = (story) => {
         },
       });
 
-      const resp = await fetchAsync(`stories/${story.id}`, story, "PUT");
+      const resp = await fetchAsync(
+        `noticies/editNotice/${notice.id}`,
+        notice,
+        "PUT"
+      );
       const body = await resp.json();
 
       if (body.ok) {
-        dispatch(storyUpdated(story));
-        dispatch(storyClearActive());
+        dispatch(noticetUpdated(notice));
+        dispatch(noticeClearActive());
         Swal.close();
-        Swal.fire("Historia Actualizado", story.title, "success");
+        Swal.fire("Noticia Actualizado", body.notice.title, "success");
       } else {
         Swal.close();
         Swal.fire("Error", body.msg, "error");
       }
+
+      console.log(body.ok);
     } catch (error) {
       Swal.close();
 
@@ -93,15 +115,15 @@ export const storyStartUpdated = (story) => {
   };
 };
 
-const storyUpdated = (story) => ({
-  type: types.storyUpdated,
-  payload: story,
+const noticetUpdated = (notice) => ({
+  type: types.noticeUpdated,
+  payload: notice,
 });
 
-// export const storyLogout = () => ({ type: types.storyLogout });
-export const startstoryDeleted = () => {
+// export const noticeLogout = () => ({ type: types.noticeLogout });
+export const startnoticeDeleted = () => {
   return async (dispatch, getState) => {
-    const { id } = getState().story.activeStory;
+    const { id } = getState().notice.activeNotice;
     try {
       Swal.fire({
         title: "Eliminando...",
@@ -115,13 +137,17 @@ export const startstoryDeleted = () => {
         },
       });
 
-      const resp = await fetchAsync(`stories/${id}`, {}, "DELETE");
+      const resp = await fetchAsync(
+        `noticies/deleteNotice/${id}`,
+        {},
+        "DELETE"
+      );
       const body = await resp.json();
 
       if (body.ok) {
-        dispatch(storyDeleted());
+        dispatch(noticeDeleted());
         Swal.close();
-        Swal.fire("Historia Eliminada", "", "success");
+        Swal.fire("Noticia  Eliminada", "", "success");
       } else {
         Swal.close();
         Swal.fire("Error", body.msg, "error");
@@ -133,13 +159,16 @@ export const startstoryDeleted = () => {
   };
 };
 
-const storyDeleted = () => ({ type: types.storyDeleted });
+const noticeDeleted = () => ({ type: types.noticeDeleted });
 
-export const StorySetActive = (story) => ({
-  type: types.storySetActive,
-  payload: story,
+export const noticeSetActive = (notice) => ({
+  type: types.noticeSetActive,
+  payload: notice,
 });
 
-export const storyClearActive = () => ({
-  type: types.storyClearActive,
+export const noticeClearActive = () => ({
+  type: types.noticeClearActive,
 });
+
+
+

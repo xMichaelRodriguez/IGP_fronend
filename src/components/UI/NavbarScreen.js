@@ -9,7 +9,13 @@ export const NavbarScreen = () => {
     <>
       <nav className="navbar navbar-expand-md navbar-dark primary mb-3">
         <Link className="navbar-brand" to="/">
-          UVS
+          <img
+            src="https://i.imgur.com/WNKowqR.jpg"
+            className="rounded"
+            width="70"
+            height="70"
+            alt="UVS"
+          />
         </Link>
         <button
           className="navbar-toggler"

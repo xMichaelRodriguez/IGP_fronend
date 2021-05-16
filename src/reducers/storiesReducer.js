@@ -25,13 +25,13 @@ export const storiesReducer = (state = initialState, action) => {
         activeStory: null,
       };
 
-    // case types.StoryactiveStoryUpdated:
-    //   return {
-    //     ...state,
-    //     StoryactiveStorys: state.StoryactiveStorys.map((e) =>
-    //       e.id === action.payload.id ? action.payload : e
-    //     ),
-    //   };
+    case types.storyUpdated:
+      return {
+        ...state,
+        stories: state.stories.map((e) =>
+          e.id === action.payload.id ? action.payload : e
+        ),
+      };
 
     case types.storyDeleted:
       return {

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { BsFillCaretRightFill } from "react-icons/bs";
 import { FaFacebookSquare, FaTwitterSquare, FaYoutube } from "react-icons/fa";
 
-import { a } from "react-router-dom";
-
 export const OrganizationsView = () => {
   const [organization, setOrganization] = useState([]);
 
@@ -33,15 +31,16 @@ export const OrganizationsView = () => {
                 <blockquote className="blockquote text-center highlight">
                   <div className="mb-1">
                     <div className="font-weight-bold">
-                      {!organization.avatar_file_url.includes('missing') ? (
+                      {!organization.avatar_file_url.includes("missing") ? (
                         <img
                           className="img-fluid w-50 h-50"
                           src={`https://www.transparencia.gob.sv/${organization.avatar_file_url}`}
-                          alt={organization.avatar_file_name}
+                          alt={`${organization.avatar_file_name}`}
                         />
                       ) : (
                         <img
                           className="img-fluid w-50 h-50"
+                          alt="not found"
                           src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg"
                         />
                       )}
@@ -64,7 +63,11 @@ export const OrganizationsView = () => {
                       <li className="mb-2">
                         <BsFillCaretRightFill />
                         <span className="font-weight-bold"> Sitio web: </span>
-                        <a href={organization.website_url} target="_blank">
+                        <a
+                          href={organization.website_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           {organization.website_url}
                         </a>
                       </li>
@@ -79,6 +82,7 @@ export const OrganizationsView = () => {
                                 <a
                                   href={organization.twitter_url}
                                   target="_blank"
+                                  rel="noopener noreferrer"
                                 >
                                   <FaTwitterSquare size="1.5rem" />
                                 </a>
@@ -93,6 +97,7 @@ export const OrganizationsView = () => {
                               <a
                                 href={organization.facebook_url}
                                 target="_blank"
+                                rel="noopener noreferrer"
                               >
                                 <FaFacebookSquare size="1.5rem" />
                               </a>
@@ -107,6 +112,7 @@ export const OrganizationsView = () => {
                                 href={organization.youtube_url}
                                 className="bg-red"
                                 target="_blank"
+                                rel="noopener noreferrer"
                               >
                                 <FaYoutube
                                   size="1.5rem"

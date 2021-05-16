@@ -28,11 +28,33 @@ class ActionProvider {
     this.updateChatbotState(message);
   };
   greet() {
-    const greetingMessage = this.createChatBotMessage("Hola, Amigo.");
+    const greetingMessage = this.createChatBotMessage(
+      "Hola, Amigo. Necesitas algo?"
+    );
 
     this.updateChatbotState(greetingMessage);
   }
 
+  queTalMessage() {
+    const writeMessage = this.createChatBotMessage(
+      "bien, con ganas de chatear contigo, amigo :)"
+    );
+    this.updateChatbotState(writeMessage);
+  }
+
+  messageNeged() {
+    const writeMessage = this.createChatBotMessage(
+      "ok, que tengas un lindo dia :)"
+    );
+    this.updateChatbotState(writeMessage);
+  }
+
+  messageSuccess() {
+    const writeMessage = this.createChatBotMessage("Que quieres aprender?", {
+      widget: "LearningOptions",
+    });
+    this.updateChatbotState(writeMessage);
+  }
   updateChatbotState(message) {
     // NOTE: This function is set in the constructor, and is passed in      // from the top level Chatbot component. The setState function here     // actually manipulates the top level state of the Chatbot, so it's     // important that we make sure that we preserve the previous state.
 

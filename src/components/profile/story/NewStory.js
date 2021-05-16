@@ -1,25 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { useForm } from "../../../hooks/useForm";
 import validator from "validator";
 import { useDispatch, useSelector } from "react-redux";
-import { startstoryAddNew } from "../../../actions/events";
+import { startstoryAddNew, storyStartUpdated } from "../../../actions/events";
 import { setError } from "../../../actions/authActios";
-export const NewStory = () => {
-  const { msgError } = useSelector((state) => state.error);
-  const history = useHistory();
-  const dispatch = useDispatch();
-  const [formValuue, handleInputChange, reset] = useForm({
-    title: "",
-    body: "",
-  });
 
-  const { title, body } = formValuue;
+import "./storyStyles.css";
+import { FaSave } from "react-icons/fa";
+
+const initEvent = {
+  title: "",
+  body: "",
+};
+export const NewStory = () => {
+  const history = useHistory();
+  const { msgError } = useSelector((state) => state.error);
+  const { activeStory } = useSelector((state) => state.story);
+  const dispatch = useDispatch();
+  const [formValue, setFormValue] = useState(initEvent);
+
+  const { title, body } = formValue;
+  useEffect(() => {
+    if (activeStory) {
+      setFormValue(activeStory);
+    } else {
+      setFormValue(initEvent);
+    }
+  }, [activeStory, setFormValue]);
+
+  //manejo de los cambios de los inputs
+  const handleInputChange = ({ target }) => {
+    setFormValue({
+      ...formValue,
+      [target.name]: target.value,
+    });
+  };
 
   const handleSavedStory = () => {
     if (isFormValid()) {
-      dispatch(startstoryAddNew(formValuue));
-      reset();
+      if (activeStory) {
+        setFormValue(initEvent);
+        dispatch(storyStartUpdated(formValue));
+      } else {
+        dispatch(startstoryAddNew(formValue));
+        setFormValue(initEvent);
+      }
     }
   };
 
@@ -60,50 +85,62 @@ export const NewStory = () => {
       >
         &#x2039; Volver
       </button>
-      <form className="shadow px-5">
-        <div className="form-group py-3">
-          <label htmlFor="exampleFormControlInput1 font-weight-bolder">
-            Titulo
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Titulo"
-            name="title"
-            value={title}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group  py-3">
-          <label htmlFor="exampleFormControlInput1 font-weight-bolder">
-            Cuerpo
-          </label>
-          <textarea
-            className="form-control mb-3"
-            rows="3"
-            placeholder="todo empezo en.."
-            name="body"
-            value={body}
-            onChange={handleInputChange}
-          ></textarea>
-        </div>
-        <div className="py-4">
-          <button
-            className="btn btn-info btn-lg w-25  d-flex justify-content-around "
-            type="button"
-            onClick={handleSavedStory}
-          >
-            <p className="m-auto">Guardar</p>
-            <i className="fas fa-save fa-2x"></i>
-          </button>
-        </div>
-        {!!msgError && (
-          <div className="container py-2">
-            <div className="alert alert-danger " role="alert">
-              <span className="  font-weight-normal">{msgError}</span>
-            </div>
+
+      <form className="shadow-p px-5">
+        <fieldset className="mb-2">
+          <legend className="py-3 font-weight-bold">
+            {activeStory ? "Editar Historia" : "Nueva Historia"}
+          </legend>
+          <div className="form-group py-3 ">
+            <label
+              htmlFor="exampleFormControlInput1 "
+              className="font-weight-bold"
+            >
+              Titulo
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Titulo"
+              name="title"
+              value={title}
+              onChange={handleInputChange}
+            />
           </div>
-        )}
+          <div className="form-group  py-3">
+            <label
+              htmlFor="exampleFormControlInput1 "
+              className="font-weight-bold"
+            >
+              Cuerpo
+            </label>
+            <textarea
+              className="form-control mb-3"
+              rows="3"
+              placeholder="todo empezo en.."
+              name="body"
+              value={body}
+              onChange={handleInputChange}
+            ></textarea>
+          </div>
+          <div className="py-4">
+            <button
+              className="btn btn-info btn-lg w-25  d-flex justify-content-around "
+              type="button"
+              onClick={handleSavedStory}
+            >
+              <FaSave size="1.5rem" className="mr-1" />{" "}
+              {activeStory ? "publicar cambios" : "publicar"}
+            </button>
+          </div>
+          {!!msgError && (
+            <div className="container py-2">
+              <div className="alert alert-danger " role="alert">
+                <span className="  font-weight-normal">{msgError}</span>
+              </div>
+            </div>
+          )}
+        </fieldset>
       </form>
     </>
   );

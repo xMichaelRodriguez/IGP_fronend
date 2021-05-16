@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { HomeScreen } from "../components/home/HomeScreen";
 import { NoticeScreen } from "../components/noticies/NoticeScreen";
@@ -17,9 +17,17 @@ import ActionProvider from "../chat/ActionProvider";
 import { BsFillChatSquareFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { uiCloseChat, uiOpenChat } from "../actions/uiActions";
+import { noticeStartLoadingLast } from "../actions/noticesActions";
 export const DashBoard = () => {
   const { ChatOpen } = useSelector((state) => state.UI);
+  const { noticies } = useSelector((state) => state.notice);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(noticeStartLoadingLast());
+  }, [dispatch]);
+
+  
+  console.log(noticies);
 
   const handlerDisplayChat = () => {
     if (ChatOpen) {
@@ -61,7 +69,7 @@ export const DashBoard = () => {
           )}
 
           <button
-            className="btn primary mt-2 rounded-circle cursor chat shadow"
+            className="btn primary mt-2 rounded-circle cursor chat shadow animate__animated animate__rubberBand"
             onClick={handlerDisplayChat}
           >
             <BsFillChatSquareFill size="2rem" />

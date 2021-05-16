@@ -21,4 +21,15 @@ export const types = {
   storyUpdated: "[story] story Updated",
   storyDeleted: "[story] story Deleted",
   storySetActive: "[story] story set active",
+
+  //noticies
+  noticeLoaded: "[notice]  Story Loaded",
+  noticeStartAddNew: "[notice] Start Add New",
+  noticeAddNew: "[notice] Add New",
+  noticeClearActive: "[notice] Clear Active notice",
+  noticeUpdated: "[notice] notice Updated",
+  noticeDeleted: "[notice] notice Deleted",
+  noticeSetActive: "[notice] notice set active",
 };
+
+
