@@ -8,20 +8,18 @@ class MessageParser {
   parse(message) {
     const lowerCaseMessage = message.toLowerCase();
 
-    if (lowerCaseMessage.length > 3) {
-      if (
-        lowerCaseMessage.includes("hello") ||
-        lowerCaseMessage.includes("hi")
-      ) {
-        this.actionProvider.greet();
-      }
+    if (
+      lowerCaseMessage.includes("hola") ||
+      lowerCaseMessage.includes("alguien")
+    ) {
+      this.actionProvider.greet();
+    }
 
-      if (lowerCaseMessage.includes("derechos")) {
-        this.actionProvider.handleDerechos();
-      }
-      if (lowerCaseMessage.includes("organizaciones")) {
-        this.actionProvider.handleOrganizations();
-      }
+    if (lowerCaseMessage.includes("derechos")) {
+      this.actionProvider.handleDerechos();
+    }
+    if (lowerCaseMessage.includes("organizaciones")) {
+      this.actionProvider.handleOrganizations();
     }
   }
 }
