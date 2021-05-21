@@ -44,7 +44,7 @@ const noticeAddNew = (notice) => ({
 export const noticeStartLoading = () => {
   return async (dipatch) => {
     try {
-      const resp = await fetchAsync("noticies");
+      const resp = await fetchAsync("noticies/?page=1");
       const body = await resp.json();
       if (body.ok) {
         dipatch(noticeLoaded(body.noticies));
@@ -169,6 +169,3 @@ export const noticeSetActive = (notice) => ({
 export const noticeClearActive = () => ({
   type: types.noticeClearActive,
 });
-
-
-

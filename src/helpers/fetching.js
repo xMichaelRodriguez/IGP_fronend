@@ -17,13 +17,14 @@ export const fetchSync = (endPoint, data, method = "GET") => {
 
 export const fetchAsync = (endPoint, data, method = "GET") => {
   const url = `${baseUrl}/${endPoint}`; //localhost:4000/api/...
-  const token = localStorage.getItem("token") || "";
-
+  const token =localStorage.getItem("token") || "";
+  
+  
   if (method === "GET") {
     return fetch(url, {
       method,
       headers: {
-        "x-token": token,
+        "x-token": token.toString(),
       },
     });
   } else {

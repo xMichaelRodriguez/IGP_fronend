@@ -1,3 +1,6 @@
 .shadow-p {
-    box-shadow: 0px 0px 8px -2px #282828;
+  box-shadow: 0px 0px 8px -2px #282828;
+}
+.hand:hover {
+  cursor: no-drop;
 }

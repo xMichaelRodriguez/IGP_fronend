@@ -1,7 +1,11 @@
 import { types } from "../types/types";
 
 const initialState = {
-  stories: [],
+  stories: {
+    storyArr: [],
+    total_docs: null,
+    total_page: null,
+  },
   activeStory: null,
 };
 
@@ -28,7 +32,7 @@ export const storiesReducer = (state = initialState, action) => {
     case types.storyUpdated:
       return {
         ...state,
-        stories: state.stories.map((e) =>
+        storyArr: state.stories.storyArr.map((e) =>
           e.id === action.payload.id ? action.payload : e
         ),
       };
@@ -43,7 +47,11 @@ export const storiesReducer = (state = initialState, action) => {
     case types.storyLoaded:
       return {
         ...state,
-        stories: [...action.payload],
+        stories: {
+          storyArr: [...action.payload.stories],
+          total_docs: action.payload.total_docs,
+          total_page: action.payload.total_page,
+        },
       };
 
     // case types.StoryactiveStoryLogout:

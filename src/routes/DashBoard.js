@@ -17,22 +17,19 @@ import ActionProvider from "../chat/ActionProvider";
 import { BsFillChatSquareFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { uiCloseChat, uiOpenChat } from "../actions/uiActions";
-import { noticeStartLoadingLast } from "../actions/noticesActions";
+import { noticeStartLoading } from "../actions/noticesActions";
+import { storyStartLoading } from "../actions/events";
+
 export const DashBoard = () => {
   const { ChatOpen } = useSelector((state) => state.UI);
-  const { noticies } = useSelector((state) => state.notice);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(noticeStartLoadingLast());
-  }, [dispatch]);
-
-  
-  console.log(noticies);
 
   const handlerDisplayChat = () => {
     if (ChatOpen) {
       dispatch(uiCloseChat());
+      
     } else {
+     
       dispatch(uiOpenChat());
     }
   };

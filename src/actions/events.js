@@ -2,6 +2,8 @@ import { fetchAsync } from "../helpers/fetching";
 import { types } from "../types/types";
 import Swal from "sweetalert2";
 import { removeError } from "./authActios";
+import moment from "moment";
+
 export const startstoryAddNew = (story) => {
   return async (dispatch) => {
     try {
@@ -40,13 +42,17 @@ const storyAddNew = (story) => ({
   payload: story,
 });
 
-export const storyStartLoading = () => {
+export const storyStartLoading = ({ page = 1 }) => {
   return async (dipatch) => {
     try {
-      const resp = await fetchAsync("stories");
+      const resp = await fetchAsync(`stories/?page=${page}`);
       const body = await resp.json();
+     
+      if (body.ok) {
+        delete body.ok;
 
-      dipatch(storyLoaded(body.stories));
+        dipatch(storyLoaded(body));
+      }
     } catch (error) {
       console.log(error);
     }
@@ -72,8 +78,12 @@ export const storyStartUpdated = (story) => {
           Swal.showLoading();
         },
       });
+      const history = {
+        ...story,
+        date: moment(),
+      };
 
-      const resp = await fetchAsync(`stories/${story.id}`, story, "PUT");
+      const resp = await fetchAsync(`stories/${story.id}`, history, "PUT");
       const body = await resp.json();
 
       if (body.ok) {
