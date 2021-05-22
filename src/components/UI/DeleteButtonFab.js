@@ -43,16 +43,16 @@ export const DeleteButtonFab = () => {
 
   const handleEdit = () => {
     if (location.pathname.includes("stories")) {
-      history.push("/profile/new-story");
+      history.push("/profile/manage-story");
     } else if (location.pathname.includes("noticies")) {
-      history.push("/profile/new-notice");
+      history.push("/profile/manage-notice");
     }
   };
 
   return (
     <div
-      className="btn-group"
-      style={{ position: "fixed", left: "20px", bottom: "10px" }}
+      className="btn-group animate__animated   animate__zoomIn"
+      style={{ position: "fixed", left: "20px", bottom: "80px" }}
       role="group"
       aria-label="Basic example"
     >

@@ -1,27 +1,28 @@
-import React from "react";
 import moment from "moment";
 import "moment/locale/es";
-import { Link, useLocation } from "react-router-dom";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { StorySetActive } from "../../../actions/events";
-export const StoryNavItem = ({ title, body, date, id }) => {
+import { useLocation } from "react-router";
+import { Link } from "react-router-dom";
+import { noticeSetActive } from "../../../actions/noticesActions";
+
+export const NoticeNavItem = ({ title, body, date, id }) => {
   const location = useLocation();
   const dispatch = useDispatch();
-  const story = {
+  const notice = {
     title,
     body,
     date,
     id,
   };
-  const handleStoryActive = () => {
+  const handleNoticeActive = () => {
     if (location.pathname.includes("/profile")) {
-      dispatch(StorySetActive(story));
+      dispatch(noticeSetActive(notice));
     }
   };
-
   return (
     <div className="card  animate__animated   animate__zoomIn">
-      <div className="card-body" onDoubleClick={handleStoryActive}>
+      <div className="card-body" onDoubleClick={handleNoticeActive}>
         <div className="card-title">
           <h3>{title}</h3>
         </div>
@@ -33,7 +34,7 @@ export const StoryNavItem = ({ title, body, date, id }) => {
         </div>
         {!location.pathname.includes("/profile") && (
           <div className="card-link mt-2">
-            <Link className="btn btn-link" to={`/stories/${id}`}>
+            <Link className="btn btn-link" to={`/noticies/${id}`}>
               Leer Mas...
             </Link>
           </div>

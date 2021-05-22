@@ -2,6 +2,7 @@ import { fetchAsync } from "../helpers/fetching";
 import { types } from "../types/types";
 import Swal from "sweetalert2";
 import { removeError } from "./authActios";
+import moment from "moment";
 export const startnoticeAddNew = (notice) => {
   return async (dispatch) => {
     try {
@@ -16,19 +17,23 @@ export const startnoticeAddNew = (notice) => {
           Swal.showLoading();
         },
       });
-      const resp = await fetchAsync("noticies/newNotice", notice, "POST");
+      const modNotice = {
+        ...notice,
+        date: moment(),
+      };
+      const resp = await fetchAsync("noticies/newNotice", modNotice, "POST");
       const body = await resp.json();
 
       if (body.ok) {
-        dispatch(noticeAddNew(notice));
+        dispatch(noticeAddNew(modNotice));
         Swal.close();
         Swal.fire(
           "Guardado!!",
           `La noticia:${notice.title} ha sido guardada`,
           "success"
         );
-        dispatch(removeError());
       }
+      dispatch(removeError());
     } catch (error) {
       console.log(error);
       Swal.close();
@@ -41,27 +46,16 @@ const noticeAddNew = (notice) => ({
   payload: notice,
 });
 
-export const noticeStartLoading = () => {
+export const noticeStartLoading = ({ page = 1 }) => {
   return async (dipatch) => {
     try {
-      const resp = await fetchAsync("noticies/?page=1");
+      const resp = await fetchAsync(`noticies/?page=${page}`);
       const body = await resp.json();
-      if (body.ok) {
-        dipatch(noticeLoaded(body.noticies));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
 
-export const noticeStartLoadingLast = () => {
-  return async (dipatch) => {
-    try {
-      const resp = await fetchAsync("noticies/lastest");
-      const body = await resp.json();
       if (body.ok) {
-        dipatch(noticeLoaded(body.noticies));
+        delete body.ok;
+
+        dipatch(noticeLoaded(body));
       }
     } catch (error) {
       console.log(error);
@@ -89,18 +83,23 @@ export const noticetStartUpdated = (notice) => {
         },
       });
 
+      const modNotice = {
+        ...notice,
+        date: moment(),
+      };
+
       const resp = await fetchAsync(
         `noticies/editNotice/${notice.id}`,
-        notice,
+        modNotice,
         "PUT"
       );
       const body = await resp.json();
 
       if (body.ok) {
-        dispatch(noticetUpdated(notice));
+        dispatch(noticetUpdated(body.noticies));
         dispatch(noticeClearActive());
         Swal.close();
-        Swal.fire("Noticia Actualizado", body.notice.title, "success");
+        Swal.fire("Historia Actualizado", notice.title, "success");
       } else {
         Swal.close();
         Swal.fire("Error", body.msg, "error");
@@ -110,7 +109,7 @@ export const noticetStartUpdated = (notice) => {
     } catch (error) {
       Swal.close();
 
-      console.log(error);
+      console.error(error);
     }
   };
 };
@@ -146,6 +145,7 @@ export const startnoticeDeleted = () => {
 
       if (body.ok) {
         dispatch(noticeDeleted());
+        dispatch(noticeStartLoading({}));
         Swal.close();
         Swal.fire("Noticia  Eliminada", "", "success");
       } else {

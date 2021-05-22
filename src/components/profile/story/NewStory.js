@@ -35,7 +35,6 @@ export const NewStory = () => {
       [target.name]: target.value,
     });
   };
-
   const handleSavedStory = () => {
     if (isFormValid()) {
       if (activeStory) {
@@ -77,7 +76,7 @@ export const NewStory = () => {
     <>
       <button
         type="button"
-        className="btn btn-link font-weight-bolder"
+        className="btn btn-link font-weight-bolder animate__animated animate__fadeIn"
         style={{ fontSize: "15px" }}
         onClick={() => {
           history.push("/profile/stories");
@@ -86,7 +85,7 @@ export const NewStory = () => {
         &#x2039; Volver
       </button>
 
-      <form className="shadow-p px-5">
+      <form className="shadow-p px-5 animate__animated animate__zoomIn">
         <fieldset className="mb-2">
           <legend className="py-3 font-weight-bold">
             {activeStory ? "Editar Historia" : "Nueva Historia"}
@@ -116,7 +115,7 @@ export const NewStory = () => {
             </label>
             <textarea
               className="form-control mb-3"
-              rows="3"
+              rows="5"
               placeholder="todo empezo en.."
               name="body"
               value={body}

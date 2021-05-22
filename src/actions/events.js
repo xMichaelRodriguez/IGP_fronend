@@ -18,14 +18,19 @@ export const startstoryAddNew = (story) => {
           Swal.showLoading();
         },
       });
-      const resp = await fetchAsync("stories/new", story, "POST");
+
+      const modStory = {
+        ...story,
+        date: moment(),
+      };
+      const resp = await fetchAsync("stories/new", modStory, "POST");
       const body = await resp.json();
       if (body.ok) {
-        dispatch(storyAddNew(story));
+        dispatch(storyAddNew(modStory));
         Swal.close();
         Swal.fire(
           "Guardado!!",
-          `La historia:${body.story.title} ha sido guardada`,
+          `La historia:${modStory.title} ha sido guardada`,
           "success"
         );
         dispatch(removeError());
@@ -47,7 +52,7 @@ export const storyStartLoading = ({ page = 1 }) => {
     try {
       const resp = await fetchAsync(`stories/?page=${page}`);
       const body = await resp.json();
-     
+
       if (body.ok) {
         delete body.ok;
 
@@ -95,6 +100,7 @@ export const storyStartUpdated = (story) => {
         Swal.close();
         Swal.fire("Error", body.msg, "error");
       }
+      dispatch(removeError());
     } catch (error) {
       Swal.close();
 

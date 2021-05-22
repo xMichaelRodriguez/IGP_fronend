@@ -13,7 +13,7 @@ export const StoryScreen = () => {
   }, [dispatch]);
 
   return (
-    <div className="list-group ">
+    <div className="list-group animate__animated   animate__zoomIn">
       {storyArr.length !== 0 &&
         storyArr.map((story) => (
           <span

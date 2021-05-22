@@ -1,5 +1,6 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
+import { FooterScreen } from "../components/footer/FooterScreen";
 
 import { NewNotice } from "../components/profile/notice/NewNotice";
 import { NoticeSchreen } from "../components/profile/notice/NoticeSchreen";
@@ -14,14 +15,15 @@ export const ProfileRoute = () => {
       <div className="container ">
         <Switch>
           <Route exact path="/profile/noticies" component={NoticeSchreen} />
-          <Route exact path="/profile/new-notice" component={NewNotice} />
+          <Route exact path="/profile/manage-notice" component={NewNotice} />
 
           <Route exact path="/profile/stories" component={StoryScreen} />
-          <Route exact path="/profile/new-story" component={NewStory} />
+          <Route exact path="/profile/manage-story" component={NewStory} />
 
           <Redirect exact to="/profile" />
         </Switch>
       </div>
+      <FooterScreen />
     </>
   );
 };

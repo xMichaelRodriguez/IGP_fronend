@@ -6,9 +6,8 @@ import { StoryNavItem } from "./StoryNavItem";
 const INITIAL_PAGE = 1;
 
 export const StoryNav = () => {
-  const { storyArr } = useSelector((state) => state.story.stories);
-  const dispatch = useDispatch({});
-  const { total_page } = useSelector((state) => state.story.stories);
+  const { storyArr,total_page } = useSelector((state) => state.story.stories);
+  const dispatch = useDispatch();
   //useState
   const [pageNext, setPageNext] = useState(INITIAL_PAGE);
 
@@ -17,10 +16,7 @@ export const StoryNav = () => {
   }, [dispatch]);
 
 
-  //maneja intracion en los item de cada pagina
-  const handleItempage = (numberPage) => {
-    dispatch(storyStartLoading({ page: numberPage }));
-  };
+
 
   //next Page
   const handleNextPage = () => {
@@ -47,11 +43,11 @@ export const StoryNav = () => {
 
   return !!storyArr ? (
     <>
-      <nav aria-label="Page navigation example">
-        <ul className="pagination justify-content-end">
+      <nav aria-label="Page navigation example ">
+        <ul className="pagination justify-content-end animate__animated   animate__fadeIn">
           <li
             className={`page-item ${
-              pageNext === INITIAL_PAGE ? "disabled hand" : ""
+              pageNext === INITIAL_PAGE ? "disabled hand" : "active"
             }`}
             onClick={handlePrevpage}
           >
@@ -63,7 +59,7 @@ export const StoryNav = () => {
 
           <li
             className={`page-item ${
-              pageNext === total_page ? "disabled hand" : ""
+              pageNext === total_page ? "disabled hand" : "active"
             }`}
             onClick={handleNextPage}
           >

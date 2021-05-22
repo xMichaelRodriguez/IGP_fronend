@@ -7,8 +7,8 @@ import { NoticeScreen } from "../noticies/NoticeScreen";
 export const HomeScreen = () => {
   return (
     <>
-      <section style={{ backgroundColor: "#F5F5F5" }} className="p-3 mb-3 card">
-        <div className="d-flex justify-content-between">
+      <div style={{ backgroundColor: "#F5F5F5" }} className="p-3 mb-3 card ">
+        <div className="d-flex justify-content-between animate__animated   animate__fadeIn">
           <h4>Nuevas Historias</h4>
           <Link to="/stories">
             <h4>
@@ -18,12 +18,12 @@ export const HomeScreen = () => {
         </div>
         <hr />
         <StoryScreen />
-      </section>
-      <section style={{ backgroundColor: "#F5F5F5" }} className="p-3 mb-4 card">
-        <div className="d-flex justify-content-between">
+      </div>
+      <section style={{ backgroundColor: "#F5F5F5" }} className="p-3 mb-5 card  ">
+        <div className="d-flex justify-content-between animate__animated   animate__fadeIn ">
           <h4>Nuevas Noticias</h4>
           <Link to="/noticies">
-            <h4>
+            <h4 className="">
               Todas las noticias <BsArrowRight />
             </h4>
           </Link>

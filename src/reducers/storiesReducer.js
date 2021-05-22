@@ -32,16 +32,19 @@ export const storiesReducer = (state = initialState, action) => {
     case types.storyUpdated:
       return {
         ...state,
-        storyArr: state.stories.storyArr.map((e) =>
-          e.id === action.payload.id ? action.payload : e
-        ),
+        story: {
+          stories: state.stories.storyArr.map((e) =>
+            e.id === action.payload.id ? action.payload : e
+          ),
+        },
       };
 
     case types.storyDeleted:
       return {
         ...state,
-        stories: state.stories.filter((e) => e.id !== state.activeStory.id),
-        activeStory: null,
+        stories: state.stories.storyArr.filter(
+          (e) => e.id !== state.activeStory.id
+        ),
       };
 
     case types.storyLoaded:

@@ -1,27 +1,29 @@
+import moment from "moment";
+import "moment/locale/es"
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { noticeStartLoading } from "../../actions/noticesActions";
 
 export const NoticeScreen = () => {
-  const { noticies } = useSelector((state) => state.notice);
+  const { noticeArr } = useSelector((state) => state.notice.noticies);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(noticeStartLoading());
+    dispatch(noticeStartLoading({}));
   }, [dispatch]);
 
   return (
     <div>
-      {!!noticies && (
-        <div className="list-group">
-          {noticies.map((notice) => (
+      {!!noticeArr && (
+        <div className="list-group animate__animated   animate__zoomIn">
+          {noticeArr.map((notice) => (
             <span
               className="list-group-item  flex-column align-items-start "
               key={notice.id}
             >
               <div className="d-flex w-100 justify-content-between">
                 <h5 className="mb-1">{notice.title}</h5>
-                {/* <small>3 days ago</small> */}
+                <small>{moment(notice.date).calendar()}</small>
               </div>
               <p className="mb-1">{`${notice.body.substr(0, 100)} ...`}</p>
               <small>Donec id elit non mi porta.</small>

@@ -26,12 +26,7 @@ export const StoryScreen = () => {
   }, [dispatch]);
 
   const handleNewStory = () => {
-    history.push("/profile/new-story");
-  };
-
-  //maneja intracion en los item de cada pagina
-  const handleItempage = (numberPage) => {
-    dispatch(storyStartLoading({ page: numberPage }));
+    history.push("/profile/manage-story");
   };
 
   //next Page
@@ -59,7 +54,7 @@ export const StoryScreen = () => {
 
   return (
     <>
-      <button className="btn btn-info mb-3" onClick={handleNewStory}>
+      <button className="btn btn-info mb-3  animate__animated animate__fadeIn" onClick={handleNewStory}>
         <BsPlus size="1.5rem" /> &nbsp; Nueva historia
       </button>
       <hr />
@@ -67,10 +62,10 @@ export const StoryScreen = () => {
       {storyArr && storyArr.length !== 0 ? (
         <>
           <nav aria-label="Page navigation example">
-            <ul className="pagination justify-content-end">
+            <ul className="pagination justify-content-end animate__animated animate__fadeIn">
               <li
                 className={`page-item ${
-                  pageNext === INITIAL_PAGE ? "disabled hand" : ""
+                  pageNext === INITIAL_PAGE ? "disabled hand" : "active"
                 }`}
                 onClick={handlePrevpage}
               >
@@ -82,7 +77,7 @@ export const StoryScreen = () => {
 
               <li
                 className={`page-item ${
-                  pageNext === total_page ? "disabled hand" : ""
+                  pageNext === total_page ? "disabled hand " : "active"
                 }`}
                 onClick={handleNextPage}
               >

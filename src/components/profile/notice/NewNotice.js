@@ -3,7 +3,7 @@ import "../story/storyStyles.css";
 import { FaSave } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import validator from "validator";
-import { setError } from "../../../actions/authActios";
+import { removeError, setError } from "../../../actions/authActios";
 import {
   noticeClearActive,
   noticetStartUpdated,
@@ -51,6 +51,7 @@ export const NewNotice = () => {
         setFormValue(initEvent);
       } else {
         dispatch(startnoticeAddNew(formValue));
+
         setFormValue(initEvent);
       }
     }
@@ -84,7 +85,7 @@ export const NewNotice = () => {
     <>
       <button
         type="button"
-        className="btn btn-link font-weight-bolder"
+        className="btn btn-link font-weight-bolder animate__animated animate__fadeIn"
         style={{ fontSize: "15px" }}
         onClick={() => {
           history.push("/profile/noticies");
@@ -94,7 +95,10 @@ export const NewNotice = () => {
         &#x2039; Volver
       </button>
 
-      <form className="mb-3 shadow-p p-4" onSubmit={handleSavedNotice}>
+      <form
+        className="mb-3 shadow-p p-4 mb-5 animate__animated animate__zoomIn"
+        onSubmit={handleSavedNotice}
+      >
         <fieldset>
           <legend className="font-weight-bold">
             {activeNotice ? "Editar Notica" : "Nueva Noticia"}
@@ -150,7 +154,7 @@ export const NewNotice = () => {
               name="body"
               onChange={handleInputChange}
               placeholder="notica..."
-              rows="10"
+              rows="5"
             ></textarea>
             <span className="invalid-feedback">
               {(msgError.includes("Cuerpo") || msgError.includes("almenos")) &&

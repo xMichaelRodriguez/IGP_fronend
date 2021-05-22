@@ -7,7 +7,7 @@ export const NavbarScreen = () => {
   const { name } = useSelector((state) => state.auth);
   return (
     <>
-      <nav className="navbar navbar-expand-md navbar-dark primary mb-3">
+      <nav className="navbar navbar-expand-md navbar-dark primary mb-3 container-fluid">
         <Link className="navbar-brand" to="/">
           <img
             src="https://i.imgur.com/WNKowqR.jpg"
@@ -54,7 +54,7 @@ export const NavbarScreen = () => {
             </li>
             <li className="nav-item">
               <h3>
-                <Link className="nav-link" to="organizations">
+                <Link className="nav-link" to="/organizations">
                   Organizaciones
                 </Link>
               </h3>
