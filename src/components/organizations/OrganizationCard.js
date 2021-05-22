@@ -1,9 +1,7 @@
 import React from "react";
 import {
   BsArrowReturnLeft,
-  BsEnvelope,
   BsEnvelopeFill,
-  BsInfoCircle,
   BsInfoCircleFill,
 } from "react-icons/bs";
 import { FaFacebook, FaFileAlt, FaTwitter, FaYoutube } from "react-icons/fa";
@@ -214,15 +212,14 @@ export const OrganizationCard = () => {
                 </p>
               </div>
             </div>
-          
-          
-          <div className="card-link mt-3">
-            <Link className='btn btn-outline-info' to="/organizations">
-              <BsArrowReturnLeft/><span>Volver</span>
-            </Link>
+
+            <div className="card-link mt-3">
+              <Link className="btn btn-outline-info" to="/organizations">
+                <BsArrowReturnLeft />
+                <span>Volver</span>
+              </Link>
+            </div>
           </div>
-          </div>
-                
         </div>
       )}
     </>

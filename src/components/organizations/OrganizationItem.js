@@ -2,7 +2,6 @@ import React from "react";
 import {
   BsCaretRightFill,
   BsEnvelope,
-  BsFillInfoCircleFill,
 } from "react-icons/bs";
 import { useHistory } from "react-router";
 export const OrganizationItem = ({

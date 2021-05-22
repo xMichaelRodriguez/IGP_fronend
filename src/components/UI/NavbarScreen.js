@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { Link} from "react-router-dom";
 import "./styles.css";
 
 import { FaSignOutAlt, FaUserCircle } from "react-icons/fa";
 import { startLogout } from "../../actions/authActios";
 export const NavbarScreen = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  
   const { name } = useSelector((state) => state.auth);
   return (
     <>

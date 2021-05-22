@@ -3,7 +3,7 @@ import "../story/storyStyles.css";
 import { FaSave } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import validator from "validator";
-import { removeError, setError } from "../../../actions/authActios";
+import {  setError } from "../../../actions/authActios";
 import {
   noticeClearActive,
   noticetStartUpdated,

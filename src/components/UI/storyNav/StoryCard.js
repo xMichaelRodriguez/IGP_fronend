@@ -20,7 +20,7 @@ export const StoryCard = ({ history }) => {
         setStory(body.stories);
       }
     })();
-  }, []);
+  }, [storyId]);
   if (story === {}) {
     return (
       <div className="d-flex justify-content-center m-auto">

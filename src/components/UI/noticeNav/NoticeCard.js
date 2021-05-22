@@ -19,7 +19,7 @@ export const NoticeCard = () => {
         setNotice(body.noticies);
       }
     })();
-  }, []);
+  }, [noticeId]);
   return notice !== {} ? (
     <div className="card animate__animated   animate__zoomIn">
       <div className="card-body">
