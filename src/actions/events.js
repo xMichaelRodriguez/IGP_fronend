@@ -136,6 +136,8 @@ export const startstoryDeleted = () => {
 
       if (body.ok) {
         dispatch(storyDeleted());
+        dispatch(storyStartLoading({}));
+       
         Swal.close();
         Swal.fire("Historia Eliminada", "", "success");
       } else {

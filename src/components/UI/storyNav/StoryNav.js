@@ -43,7 +43,7 @@ export const StoryNav = () => {
 
   return !!storyArr ? (
     <>
-      <nav aria-label="Page navigation example ">
+      <nav aria-label="Page navigation example mb-3">
         <ul className="pagination justify-content-end animate__animated   animate__fadeIn">
           <li
             className={`page-item ${
@@ -69,7 +69,7 @@ export const StoryNav = () => {
           </li>
         </ul>
       </nav>
-      <div className="card-columns">
+      <div className="card-columns mt-3">
         {storyArr.map((story) => (
           <StoryNavItem key={story.id} {...story} />
         ))}

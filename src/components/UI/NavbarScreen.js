@@ -1,8 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import "./styles.css";
+
+import { FaSignOutAlt, FaUserCircle } from "react-icons/fa";
+import { startLogout } from "../../actions/authActios";
 export const NavbarScreen = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const { name } = useSelector((state) => state.auth);
   return (
@@ -68,21 +72,39 @@ export const NavbarScreen = () => {
             </li>
           </ul>
           <ul className="navbar-nav ml-auto ">
-            <li className="nav-item active">
-              {!name ? (
+            {!name ? (
+              <li className="nav-item ">
                 <Link to="/auth/login" className="btn btn-secondary btn-lg">
                   Login
                 </Link>
-              ) : (
-                <h3
-                  onClick={() => {
-                    history.push("/profile/");
-                  }}
+              </li>
+            ) : (
+              <li className="nav-item dropleft">
+                <button
+                  className="btn btn-secondary btn-lg dropdown-toggle ml-2 mb-2"
+                  id="navbarDropdownMenuLink"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
                 >
                   {name}
-                </h3>
-              )}
-            </li>
+                </button>
+                <div
+                  className="dropdown-menu"
+                  aria-labelledby="navbarDropdownMenuLink"
+                >
+                  <Link className="dropdown-item" to="/profile">
+                    <FaUserCircle /> Perfil
+                  </Link>
+                  <button
+                    className="dropdown-item"
+                    onClick={() => dispatch(startLogout())}
+                  >
+                    <FaSignOutAlt /> Cerrar sesión
+                  </button>
+                </div>
+              </li>
+            )}
           </ul>
         </div>
       </nav>

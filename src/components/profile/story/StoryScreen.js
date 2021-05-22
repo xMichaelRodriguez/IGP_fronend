@@ -54,7 +54,10 @@ export const StoryScreen = () => {
 
   return (
     <>
-      <button className="btn btn-info mb-3  animate__animated animate__fadeIn" onClick={handleNewStory}>
+      <button
+        className="btn btn-info mb-3  animate__animated animate__fadeIn"
+        onClick={handleNewStory}
+      >
         <BsPlus size="1.5rem" /> &nbsp; Nueva historia
       </button>
       <hr />
@@ -88,9 +91,9 @@ export const StoryScreen = () => {
             </ul>
           </nav>
 
-          <div className="card-columns">
-            {storyArr.map(({ id, title, body }) => (
-              <StoryNavItem title={title} body={body} id={id} key={id} />
+          <div className="card-columns mb-4">
+            {storyArr.map((story) => (
+              <StoryNavItem {...story} key={story.id} />
             ))}
           </div>
         </>

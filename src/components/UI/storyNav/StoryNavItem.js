@@ -20,7 +20,7 @@ export const StoryNavItem = ({ title, body, date, id }) => {
   };
 
   return (
-    <div className="card  animate__animated   animate__zoomIn">
+    <div className="card mt-2 animate__animated   animate__zoomIn">
       <div className="card-body" onDoubleClick={handleStoryActive}>
         <div className="card-title">
           <h3>{title}</h3>

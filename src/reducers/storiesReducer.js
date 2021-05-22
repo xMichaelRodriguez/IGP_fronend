@@ -45,6 +45,7 @@ export const storiesReducer = (state = initialState, action) => {
         stories: state.stories.storyArr.filter(
           (e) => e.id !== state.activeStory.id
         ),
+        activeStory:null
       };
 
     case types.storyLoaded:

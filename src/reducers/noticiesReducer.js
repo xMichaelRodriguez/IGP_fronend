@@ -45,7 +45,7 @@ export const noticiesReducer = (state = initialState, action) => {
         noticies: state.noticies.noticeArr.filter(
           (e) => e.id !== state.activeNotice.id
         ),
-        activeNotice: null,
+      activeNotice: null,
       };
 
     case types.noticeLoaded:

@@ -53,13 +53,13 @@ export const DashBoard = () => {
 
           <Route path="./learning-about-violence" component={ViolenceScreen} />
 
-          <Route path="/" component={HomeScreen} />
+          <Route exact path="/" component={HomeScreen} />
         </Switch>
 
         <div className="positions">
           {ChatOpen && (
             <div
-              className={`mb-3 animate__animated ${
+              className={`mb-5 animate__animated ${
                 ChatOpen === false
                   ? "animate__fadeInDown"
                   : " animate__fadeInUp"
