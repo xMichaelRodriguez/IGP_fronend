@@ -40,14 +40,14 @@ export const NavbarScreen = () => {
             </li>
             <li className="nav-item">
               <h3>
-                <Link className="nav-link" to="noticies">
+                <Link className="nav-link" to="/noticies">
                   Noticias
                 </Link>
               </h3>
             </li>
             <li className="nav-item">
               <h3>
-                <Link className="nav-link" to="stories">
+                <Link className="nav-link" to="/stories">
                   Historias de vida
                 </Link>
               </h3>

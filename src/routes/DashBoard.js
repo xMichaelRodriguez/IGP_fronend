@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { HomeScreen } from "../components/home/HomeScreen";
 import { NoticeScreen } from "../components/noticies/NoticeScreen";
 import { OrganizationScreen } from "../components/organizations/OrganizationScreen";
-import { StoryScreen } from "../components/stories/StoryScreen";
 import { NavbarScreen } from "../components/UI/NavbarScreen";
 import { ViolenceScreen } from "../components/violence/ViolenceScreen";
 
@@ -17,8 +16,8 @@ import ActionProvider from "../chat/ActionProvider";
 import { BsFillChatSquareFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { uiCloseChat, uiOpenChat } from "../actions/uiActions";
-import { noticeStartLoading } from "../actions/noticesActions";
-import { storyStartLoading } from "../actions/events";
+import { StoryNav } from "../components/UI/storyNav/StoryNav";
+import { StoryCard } from "../components/UI/storyNav/StoryCard";
 
 export const DashBoard = () => {
   const { ChatOpen } = useSelector((state) => state.UI);
@@ -27,9 +26,7 @@ export const DashBoard = () => {
   const handlerDisplayChat = () => {
     if (ChatOpen) {
       dispatch(uiCloseChat());
-      
     } else {
-     
       dispatch(uiOpenChat());
     }
   };
@@ -40,7 +37,8 @@ export const DashBoard = () => {
         <Switch>
           <Route path="/noticies" component={NoticeScreen} />
 
-          <Route path="/stories" component={StoryScreen} />
+          <Route exact path="/stories/:storyId" component={StoryCard} />
+          <Route path="/stories" component={StoryNav} />
 
           <Route path="/organizations" component={OrganizationScreen} />
           <Route path="/learning-about-violence" component={ViolenceScreen} />

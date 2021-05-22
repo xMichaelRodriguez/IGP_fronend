@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  noticeSetActive,
-  noticeStartLoading,
-} from "../../actions/noticesActions";
+import { noticeStartLoading } from "../../actions/noticesActions";
 
 export const NoticeScreen = () => {
   const { noticies } = useSelector((state) => state.notice);
