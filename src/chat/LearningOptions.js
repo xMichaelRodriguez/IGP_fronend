@@ -22,6 +22,7 @@ export const LearningOptions = (props) => {
       onClick={option.handler}
     >
       <p className="m-auto">
+     
         <FaChevronRight /> {option.text}
       </p>
     </blockquote>

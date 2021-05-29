@@ -16,7 +16,7 @@ export const OrganizationsView = () => {
     getData();
   }, []);
   return (
-    <ul className="list-group mb-5">
+    <ul className="list-group mb-5" style={{ listStyle: "none" }}>
       {organization !== [] ? (
         organization.map((organization) => (
           <>
@@ -28,7 +28,7 @@ export const OrganizationsView = () => {
                 key={organization.id}
                 className="a-list-item mb-2 shadow px-3 bg-secondary"
               >
-                <blockquote className="blockquote text-center highlight">
+                <blockquote className="blockquote text-center highlight text-break">
                   <div className="mb-1">
                     <div className="font-weight-bold">
                       {!organization.avatar_file_url.includes("missing") ? (

@@ -3,7 +3,7 @@ import "../story/storyStyles.css";
 import { FaSave } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import validator from "validator";
-import {  setError } from "../../../actions/authActios";
+import { setError, uiRemoveError } from "../../../actions/authActios";
 import {
   noticeClearActive,
   noticetStartUpdated,
@@ -78,7 +78,7 @@ export const NewNotice = () => {
       );
       return false;
     }
-
+    dispatch(uiRemoveError());
     return true;
   };
   return (
@@ -88,8 +88,9 @@ export const NewNotice = () => {
         className="btn btn-link font-weight-bolder animate__animated animate__fadeIn"
         style={{ fontSize: "15px" }}
         onClick={() => {
-          history.push("/profile/noticies");
           dispatch(noticeClearActive());
+          dispatch(uiRemoveError());
+          history.push("/profile/noticies");
         }}
       >
         &#x2039; Volver

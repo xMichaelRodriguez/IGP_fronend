@@ -1,8 +1,11 @@
-export const getOrganizations = async (categories) => {
+export const getOrganizations = async () => {
   const url = "https://www.transparencia.gob.sv/api/v1/institutions.json";
-  const resp = await fetch(url);
+  const resp = await fetch(url, {
+    // mode: "no-cors",
+  });
+ 
   const data = await resp.json();
-  const organizations = data.map((organization) => {
+  const organizations =!!data && data.map((organization) => {
     return {
       ...organization,
     };

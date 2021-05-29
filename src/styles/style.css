@@ -1,17 +1,33 @@
 html {
-    min-height: 100%;
-    position: relative;
-  }
-  body {
-    margin: 0;
-    margin-bottom: 40px;
-  }
-  .footer {
-   
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    
-    height: 40px;
-    color: white;
-  }
+  min-height: 100%;
+  position: relative;
+}
+body {
+  margin: 0;
+  margin-bottom: 40px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  height: 40px;
+  color: white;
+}
+
+.link-list-item {
+  filter: drop-shadow(0 0 0.1rem #282828);
+}
+.link-list-item:hover {
+  filter: drop-shadow(0 0 0.15em #282828);
+}
+
+.centered {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

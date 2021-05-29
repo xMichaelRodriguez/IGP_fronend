@@ -6,12 +6,14 @@ const initialState = {
 export const errorReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.setError:
+     
       return {
         ...state,
         msgError: action.payload,
       };
 
-    case types.uiRemoveError:
+    case types.removeError:
+      console.log('hola')
       return {
         ...state,
         msgError: "",

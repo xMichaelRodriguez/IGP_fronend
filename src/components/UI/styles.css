@@ -17,12 +17,12 @@
 }
 
 .positions {
-  bottom: 45px;
+  bottom: 30px;
   font-size: 30px;
   padding: 25px;
   position: fixed;
-  right: 25px;
-  width: 300px;
+  right: 50px;
+  width: 250px;
 }
 
 .chat {
@@ -39,8 +39,8 @@
 }
 
 .react-chatbot-kit-chat-message-container {
-  background-color: white !important;
-  border: 1px solid #fafafafa;
+  background-color: #fbfbfb !important;
+  border: 1px solid #fbfbfb;
 }
 .react-chatbot-kit-chat-inner-container {
   filter: drop-shadow(0 0 0.15rem #282828);
@@ -51,4 +51,12 @@
   filter: drop-shadow(0 0 0.1rem #282828);
 }
 
-
+@media (max-width: 512px) {
+  .react-chatbot-kit-chat-inner-container {
+    width: 250px;
+  }
+  .positions {
+    width: 100px;
+  }
+  
+}

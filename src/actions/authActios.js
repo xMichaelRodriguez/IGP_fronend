@@ -10,7 +10,7 @@ export const startLogin = (email, password) => {
       localStorage.setItem("token-initDate", new Date().getTime());
 
       dispatch(login({ uid: body.uid, name: body.name }));
-      dispatch(removeError());
+      dispatch(uiRemoveError());
     } else {
       dispatch(setError(body.msg));
     }
@@ -53,11 +53,9 @@ export const setError = (error) => ({
   payload: error,
 });
 
-export const removeError = () => {
-  return {
-    type: types.removeError,
-  };
-};
+export const uiRemoveError = () => ({
+  type: types.removeError,
+});
 
 const login = (user) => ({
   type: types.authLogin,

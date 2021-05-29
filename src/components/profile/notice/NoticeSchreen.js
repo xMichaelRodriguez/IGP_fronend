@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
-import { FaPlus } from "react-icons/fa";
+import { BsChevronLeft, BsChevronRight, BsPlus } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { noticeStartLoading } from "../../../actions/noticesActions";
+import { useHistory } from "react-router";
+import {
+  noticeClearActive,
+  noticeStartLoading,
+} from "../../../actions/noticesActions";
 import { NotFiles } from "../../../helpers/NotFiles";
 import { DeleteButtonFab } from "../../UI/DeleteButtonFab";
 import { NoticeNavItem } from "../../UI/noticeNav/NoticeNavItem";
 const INITIAL_PAGE = 1;
 export const NoticeSchreen = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const { noticeArr, total_page } = useSelector(
     (state) => state.notice.noticies
@@ -42,14 +45,19 @@ export const NoticeSchreen = () => {
   useEffect(() => {
     dispatch(noticeStartLoading({ page: pageNext }));
   }, [dispatch, pageNext]);
+
+  const handleNewNotice = () => {
+    dispatch(noticeClearActive());
+    history.push("/profile/manage-notice");
+  };
   return (
     <>
-      <Link
-        to="/profile/manage-notice"
-        className="btn btn-info animate__animated animate__fadeIn"
+      <button
+        className="btn btn-info mb-3  animate__animated animate__fadeIn"
+        onClick={handleNewNotice}
       >
-        <FaPlus /> Nueva Noticia
-      </Link>
+        <BsPlus size="1.5rem" /> &nbsp; Nueva Noticia
+      </button>
       <hr />
       {!!noticeArr ? (
         <>

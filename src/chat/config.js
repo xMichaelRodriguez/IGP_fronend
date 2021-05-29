@@ -59,15 +59,7 @@ const config = {
     {
       widgetName: "Organizaciones",
       widgetFunc: (props) => <OrganizationsView {...props} />,
-      props: {
-        options: [
-          {
-            title: "Derecho a la vida",
-            text: "El derecho a la vida es un derecho universal, es decir que le corresponde a todo ser humano. Es un derecho necesario para poder concretizar todos los demás derechos universales. El derecho a la vida significa tener la oportunidad de vivir nuestra propia vida.",
-            id: 1,
-          },
-        ],
-      },
+      props: {},
     },
   ],
   // Defines an object of custom components that will replace the stock chatbot components.
@@ -108,7 +100,7 @@ const config = {
     ),
     // Replaces the default bot chat message container
     // botChatMessage: (props) => <CustomChatMessage {...props} />,
-    
+
     // Replaces the default user icon
     userAvatar: (props) => (
       <div>

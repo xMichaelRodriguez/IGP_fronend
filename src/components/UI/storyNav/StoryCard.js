@@ -34,7 +34,7 @@ export const StoryCard = ({ history }) => {
   return (
     <div className="card p-3 mb-5   animate__animated   animate__zoomIn">
       <div className="card-body">
-        <div className="card-title d-flex justify-content-between   animate__animated   animate__zoomIn">
+        <div className="card-title d-block justify-content-between   animate__animated   animate__zoomIn">
           <h1>{story.title}</h1>
           <h6 className="text-muted">{moment(story.date).calendar()}</h6>
         </div>

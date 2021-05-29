@@ -1,7 +1,7 @@
 import { fetchAsync } from "../helpers/fetching";
 import { types } from "../types/types";
 import Swal from "sweetalert2";
-import { removeError } from "./authActios";
+import { uiRemoveError } from "./authActios";
 import moment from "moment";
 
 export const startstoryAddNew = (story) => {
@@ -27,13 +27,14 @@ export const startstoryAddNew = (story) => {
       const body = await resp.json();
       if (body.ok) {
         dispatch(storyAddNew(modStory));
+        dispatch(uiRemoveError());
         Swal.close();
         Swal.fire(
           "Guardado!!",
           `La historia:${modStory.title} ha sido guardada`,
           "success"
         );
-        dispatch(removeError());
+        dispatch(uiRemoveError());
       }
     } catch (error) {
       console.log(error);
@@ -94,13 +95,14 @@ export const storyStartUpdated = (story) => {
       if (body.ok) {
         dispatch(storyUpdated(story));
         dispatch(storyClearActive());
+
         Swal.close();
         Swal.fire("Historia Actualizado", story.title, "success");
+        dispatch(uiRemoveError());
       } else {
         Swal.close();
         Swal.fire("Error", body.msg, "error");
       }
-      dispatch(removeError());
     } catch (error) {
       Swal.close();
 
@@ -137,7 +139,7 @@ export const startstoryDeleted = () => {
       if (body.ok) {
         dispatch(storyDeleted());
         dispatch(storyStartLoading({}));
-       
+
         Swal.close();
         Swal.fire("Historia Eliminada", "", "success");
       } else {

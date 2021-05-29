@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { storyStartLoading } from "../../../actions/events";
+import { storyStartLoading, storyClearActive } from "../../../actions/events";
 import { DeleteButtonFab } from "../../UI/DeleteButtonFab";
 import { StoryNavItem } from "../../UI/storyNav/StoryNavItem";
 // icons
@@ -26,6 +26,7 @@ export const StoryScreen = () => {
   }, [dispatch]);
 
   const handleNewStory = () => {
+    dispatch(storyClearActive());
     history.push("/profile/manage-story");
   };
 

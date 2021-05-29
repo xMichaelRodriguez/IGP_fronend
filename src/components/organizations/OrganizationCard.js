@@ -144,8 +144,8 @@ export const OrganizationCard = () => {
                             >
                               {newOrganization.facebook_username !== "" ? (
                                 <p>
-                                  <FaFacebook className="text-danger" />{" "}
-                                  {newOrganization.Facebook_username}
+                                  <FaFacebook className="text-primary" />{" "}
+                                  {newOrganization.facebook_username}
                                 </p>
                               ) : (
                                 <p>Sin Facebook</p>

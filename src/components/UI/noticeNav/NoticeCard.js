@@ -1,5 +1,6 @@
 import moment from "moment";
 import "moment/locale/es";
+
 import React, { useEffect, useState } from "react";
 import { BsArrowReturnLeft } from "react-icons/bs";
 import { useParams } from "react-router";
@@ -23,7 +24,7 @@ export const NoticeCard = () => {
   return notice !== {} ? (
     <div className="card animate__animated   animate__zoomIn">
       <div className="card-body">
-        <div className="card-title d-flex justify-content-between  animate__animated   animate__zoomIn">
+        <div className="card-title titulo_card d-block justify-content-between  animate__animated   animate__zoomIn">
           <h1>{notice.title}</h1>
           <h6 className="text-muted">{moment(notice.date).calendar()}</h6>
         </div>

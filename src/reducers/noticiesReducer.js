@@ -17,11 +17,7 @@ export const noticiesReducer = (state = initialState, action) => {
         activeNotice: action.payload,
       };
 
-    // case types.noticeactivenoticeAddNew:
-    //   return {
-    //     ...state,
-    //     noticeactivenotices: [...state.noticeactivenotices, action.payload],
-    //   };
+   
 
     case types.noticeClearActive:
       return {

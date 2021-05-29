@@ -1,7 +1,7 @@
 import { fetchAsync } from "../helpers/fetching";
 import { types } from "../types/types";
 import Swal from "sweetalert2";
-import { removeError } from "./authActios";
+import { uiRemoveError } from "./authActios";
 import moment from "moment";
 export const startnoticeAddNew = (notice) => {
   return async (dispatch) => {
@@ -33,7 +33,7 @@ export const startnoticeAddNew = (notice) => {
           "success"
         );
       }
-      dispatch(removeError());
+      dispatch(uiRemoveError());
     } catch (error) {
       console.log(error);
       Swal.close();

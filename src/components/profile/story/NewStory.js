@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import validator from "validator";
 import { useDispatch, useSelector } from "react-redux";
-import { startstoryAddNew, storyStartUpdated } from "../../../actions/events";
-import { setError } from "../../../actions/authActios";
+import {
+  startstoryAddNew,
+  storyClearActive,
+  storyStartUpdated,
+} from "../../../actions/events";
+import { uiRemoveError, setError } from "../../../actions/authActios";
 
 import "./storyStyles.css";
 import { FaSave } from "react-icons/fa";
@@ -35,7 +39,8 @@ export const NewStory = () => {
       [target.name]: target.value,
     });
   };
-  const handleSavedStory = () => {
+  const handleSavedStory = (e) => {
+    e.preventDefault();
     if (isFormValid()) {
       if (activeStory) {
         setFormValue(initEvent);
@@ -68,7 +73,7 @@ export const NewStory = () => {
       );
       return false;
     }
-
+    dispatch(uiRemoveError());
     return true;
   };
 
@@ -79,66 +84,86 @@ export const NewStory = () => {
         className="btn btn-link font-weight-bolder animate__animated animate__fadeIn"
         style={{ fontSize: "15px" }}
         onClick={() => {
+          dispatch(uiRemoveError());
+          dispatch(storyClearActive());
           history.push("/profile/stories");
         }}
       >
         &#x2039; Volver
       </button>
 
-      <form className="shadow-p px-5 animate__animated animate__zoomIn">
-        <fieldset className="mb-2">
-          <legend className="py-3 font-weight-bold">
-            {activeStory ? "Editar Historia" : "Nueva Historia"}
+      <form
+        className="mb-3 shadow-p p-4 mb-5 animate__animated animate__zoomIn"
+        onSubmit={handleSavedStory}
+      >
+        <fieldset>
+          <legend className="font-weight-bold">
+            {activeStory ? "Editar Notica" : "Nueva Noticia"}
           </legend>
-          <div className="form-group py-3 ">
-            <label
-              htmlFor="exampleFormControlInput1 "
-              className="font-weight-bold"
-            >
-              Titulo
+
+          <div
+            className={`form-group ${
+              (msgError.includes("Titulo") || msgError.includes("Minimo")) &&
+              "has-danger"
+            }`}
+          >
+            <label htmlFor="title" className="form-label mt-4 font-weight-bold">
+              Title
             </label>
             <input
               type="text"
-              className="form-control"
-              placeholder="Titulo"
-              name="title"
+              className={`form-control ${
+                (msgError.includes("Titulo") || msgError.includes("Minimo")) &&
+                "is-invalid"
+              }`}
+              id="title"
               value={title}
+              name="title"
               onChange={handleInputChange}
+              aria-describedby="emailHelp"
+              placeholder="Enter email"
             />
+            <span className="invalid-feedback">
+              {(msgError.includes("Titulo") || msgError.includes("Minimo")) &&
+                msgError}
+            </span>
           </div>
-          <div className="form-group  py-3">
+          <div
+            className={`form-group ${
+              (msgError.includes("Cuerpo") || msgError.includes("almenos")) &&
+              "has-danger"
+            }`}
+          >
             <label
-              htmlFor="exampleFormControlInput1 "
-              className="font-weight-bold"
+              htmlFor="noticebody"
+              className="form-label mt-4 font-weight-bold"
             >
-              Cuerpo
+              Cuerpo de la noticia
             </label>
             <textarea
-              className="form-control mb-3"
-              rows="5"
-              placeholder="todo empezo en.."
-              name="body"
+              type="text"
+              className={`form-control ${
+                (msgError.includes("Cuerpo") || msgError.includes("almenos")) &&
+                "is-invalid"
+              }`}
+              id="noticebody"
               value={body}
+              name="body"
               onChange={handleInputChange}
+              placeholder="notica..."
+              rows="5"
             ></textarea>
+            <span className="invalid-feedback">
+              {(msgError.includes("Cuerpo") || msgError.includes("almenos")) &&
+                msgError}
+            </span>
           </div>
-          <div className="py-4">
-            <button
-              className="btn btn-info btn-lg w-25  d-flex justify-content-around "
-              type="button"
-              onClick={handleSavedStory}
-            >
+          <div className="mb-3">
+            <button type="submit" className="btn btn-info btn-lg  ">
               <FaSave size="1.5rem" className="mr-1" />{" "}
               {activeStory ? "publicar cambios" : "publicar"}
             </button>
           </div>
-          {!!msgError && (
-            <div className="container py-2">
-              <div className="alert alert-danger " role="alert">
-                <span className="  font-weight-normal">{msgError}</span>
-              </div>
-            </div>
-          )}
         </fieldset>
       </form>
     </>
