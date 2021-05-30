@@ -5,12 +5,13 @@ export const LinkList = (props) => {
   const linkMarkup = props.options.map((link) => (
     <li
       key={link.id}
-      className="link-list-item  ml-auto mr-auto mt-auto mb-3  px-3 bg-secondary "
+      className=" card  ml-auto mr-auto mt-auto mb-3  px-3 bg-secondary "
       style={{ maxWidth: "250px", borderRadius: "2%" }}
     >
       <blockquote className="blockquote text-justify highlight py-3">
         <p clasclassName="mb-1 ">
-          <BsChevronRight />{link.title}
+          <BsChevronRight />
+          {link.title}
         </p>
         <footer className="blockquote-footer">
           <span className="Source Title">{link.text}</span>

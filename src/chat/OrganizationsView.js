@@ -1,41 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BsFillCaretRightFill } from "react-icons/bs";
 import { FaFacebookSquare, FaTwitterSquare, FaYoutube } from "react-icons/fa";
+import { useOrganizations } from "../hooks/useOrganizations";
 
 export const OrganizationsView = () => {
-  const [organization, setOrganization] = useState([]);
+  const { data: organization, loading } = useOrganizations();
 
-  useEffect(() => {
-    async function getData() {
-      const result = await fetch(
-        "https://www.transparencia.gob.sv/api/v1/institutions.json"
-      );
-      const body = await result.json();
-      setOrganization(body);
-    }
-    getData();
-  }, []);
   return (
-    <ul className="list-group mb-5" style={{ listStyle: "none" }}>
-      {organization !== [] ? (
-        organization.map((organization) => (
+    <>
+      {loading && (
+        <h1>
+          <div className="d-flex justify-content-center">
+            <strong>Cargando...</strong>
+            <div className="spinner-grow" role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          </div>
+        </h1>
+      )}
+
+      <ul className="list-group mb-5" style={{ listStyle: "none" }}>
+        {organization.map((org) => (
           <>
-            {(organization.acronym.includes("CONNA") ||
-              organization.acronym.includes("ISNA") ||
-              organization.acronym.includes("PDDH") ||
-              organization.acronym.includes("MINEDUCYT")) && (
+            {(org.acronym.includes("CONNA") ||
+              org.acronym.includes("ISNA") ||
+              org.acronym.includes("PDDH") ||
+              org.acronym.includes("MINEDUCYT")) && (
               <li
-                key={organization.id}
-                className="a-list-item mb-2 shadow px-3 bg-secondary"
+                key={org.id}
+                className="card a-list-item mb-2  px-3 bg-secondary"
               >
                 <blockquote className="blockquote text-center highlight text-break">
                   <div className="mb-1">
                     <div className="font-weight-bold">
-                      {!organization.avatar_file_url.includes("missing") ? (
+                      {!org.avatar_file_url.includes("missing") ? (
                         <img
                           className="img-fluid w-50 h-50"
-                          src={`https://www.transparencia.gob.sv/${organization.avatar_file_url}`}
-                          alt={`${organization.avatar_file_name}`}
+                          src={`https://www.transparencia.gob.sv/${org.avatar_file_url}`}
+                          alt={`${org.avatar_file_name}`}
                         />
                       ) : (
                         <img
@@ -56,7 +58,7 @@ export const OrganizationsView = () => {
                           <span className="font-weight-bold">
                             Encargado/a:{" "}
                           </span>
-                          {organization.officer_name}
+                          {org.officer_name}
                         </span>
                       </li>
 
@@ -64,11 +66,11 @@ export const OrganizationsView = () => {
                         <BsFillCaretRightFill />
                         <span className="font-weight-bold"> Sitio web: </span>
                         <a
-                          href={organization.website_url}
+                          href={org.website_url}
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          {organization.website_url}
+                          {org.website_url}
                         </a>
                       </li>
                       <li className="mb-2 text-center">
@@ -76,11 +78,11 @@ export const OrganizationsView = () => {
                         <span className="font-weight-bold">Redes</span>
                         <div className="row">
                           <div className="col-md-4">
-                            {organization.twitter_url &&
-                            !organization.twitter_url.includes(",") ? (
+                            {org.twitter_url &&
+                            !org.twitter_url.includes(",") ? (
                               <>
                                 <a
-                                  href={organization.twitter_url}
+                                  href={org.twitter_url}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                 >
@@ -92,10 +94,10 @@ export const OrganizationsView = () => {
                             )}
                           </div>
                           <div className="col-md-4">
-                            {organization.facebook_url &&
-                            !organization.facebook_url.includes(",") ? (
+                            {org.facebook_url &&
+                            !org.facebook_url.includes(",") ? (
                               <a
-                                href={organization.facebook_url}
+                                href={org.facebook_url}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
@@ -106,10 +108,10 @@ export const OrganizationsView = () => {
                             )}
                           </div>
                           <div className="col-md-4">
-                            {organization.youtube_url &&
-                            !organization.youtube_url.includes(",") ? (
+                            {org.youtube_url &&
+                            !org.youtube_url.includes(",") ? (
                               <a
-                                href={organization.youtube_url}
+                                href={org.youtube_url}
                                 className="bg-red"
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -130,22 +132,15 @@ export const OrganizationsView = () => {
                   <footer className="blockquote-footer">
                     <span className="Source Title">
                       <span className="font-weight-bold">correo:</span>{" "}
-                      {organization.officer_email}
+                      {org.officer_email}
                     </span>
                   </footer>
                 </blockquote>
               </li>
             )}
           </>
-        ))
-      ) : (
-        <>
-          <div class="spinner-border text-info" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
-          <span>Cargando contenido...</span>
-        </>
-      )}
-    </ul>
+        ))}
+      </ul>
+    </>
   );
 };

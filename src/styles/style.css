@@ -15,12 +15,7 @@ body {
   color: white;
 }
 
-.link-list-item {
-  filter: drop-shadow(0 0 0.1rem #282828);
-}
-.link-list-item:hover {
-  filter: drop-shadow(0 0 0.15em #282828);
-}
+
 
 .centered {
   display: flex;
