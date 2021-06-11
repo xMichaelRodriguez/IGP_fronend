@@ -1,32 +1,49 @@
-import React from "react";
-import { useOrganizations } from "../../hooks/useOrganizations";
-import { OrganizationItem } from "./OrganizationItem";
+import React from 'react';
+import { Fragment } from 'react';
+import { useLocation } from 'react-router';
+import { useOrganizations } from '../../hooks/useOrganizations';
+import { OrganizationItem } from './OrganizationItem';
 
 export const OrganizationScreen = () => {
-  const { data: organizations, loading } = useOrganizations();
-  return (
-    <>
-      {loading && (
-        <h1>
-          <div className="d-flex justify-content-center">
-            <strong>Cargando...</strong>
-            <div className="spinner-grow" role="status">
-              <span className="sr-only">Loading...</span>
-            </div>
-          </div>
-        </h1>
-      )}
-      <div className="card-columns ">
-        {organizations.map(
-          (organization) =>
-            (organization.acronym.includes("CONNA") ||
-            organization.acronym.includes("MINEDUCYT") ||
-            organization.acronym.includes("PDDH") ||
-              organization.acronym.includes("ISNA")) && (
-              <OrganizationItem key={organization.id} {...organization} />
-            )
-        )}
-      </div>
-    </>
-  );
+	const location = useLocation();
+
+	const { data: organizations, loading } = useOrganizations();
+	return (
+		<Fragment>
+			{loading && (
+				<h1>
+					<div className="d-flex justify-content-center">
+						<strong>Cargando...</strong>
+						<div className="spinner-grow" role="status">
+							<span className="sr-only">Loading...</span>
+						</div>
+					</div>
+				</h1>
+			)}
+			<div className="card-columns ">
+				{!location.pathname.includes('/organizations') ? (
+					organizations.map(
+						(organization) =>
+							(organization.acronym.includes('CONNA') ||
+								organization.acronym.includes('MINEDUCYT') ||
+								organization.acronym.includes('PDDH')) && (
+								<OrganizationItem key={organization.id} {...organization} />
+							)
+					)
+				) : (
+					organizations.map(
+						(organization) =>
+							(organization.acronym.includes('CONNA') ||
+								organization.acronym.includes('MINEDUCYT') ||
+								organization.acronym.includes('ISNA') ||
+								organization.acronym.includes('PNC') ||
+								organization.acronym.includes('FGR') ||
+								organization.acronym.includes('PDDH')) && (
+								<OrganizationItem key={organization.id} {...organization} />
+							)
+					)
+				)}
+			</div>
+		</Fragment>
+	);
 };

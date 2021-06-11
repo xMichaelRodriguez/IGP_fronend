@@ -27,7 +27,7 @@ export const OrganizationCard = () => {
           </div>
         </h1>
       ) : (
-        <div className="card px-5 mb-5 container animate__animated   animate__zoomIn">
+        <div className="card px-1 mb-5 container animate__animated   animate__zoomIn">
           <div className="d-flex justify-content-center">
             <img
               className="card-img-top img-thumbnail text-center"
