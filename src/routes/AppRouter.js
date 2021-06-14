@@ -1,13 +1,17 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter as Router, Redirect, Switch } from "react-router-dom";
-import { AuthRouter } from "./AuthRouter";
-import { DashBoard } from "./DashBoard";
-import { PrivateRoutes } from "./PrivateRoute";
-import { ProfileRoute } from "./ProfileRoute";
-import { PublicRoutes } from "./PublicRoutes";
-import { startChecking } from "../actions/authActios";
-import { WaitScreen } from "../components/wait/WaitScreen";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  BrowserRouter as HashRouter,
+  Redirect,
+  Switch,
+} from 'react-router-dom';
+import { AuthRouter } from './AuthRouter';
+import { DashBoard } from './DashBoard';
+import { PrivateRoutes } from './PrivateRoute';
+import { ProfileRoute } from './ProfileRoute';
+import { PublicRoutes } from './PublicRoutes';
+import { startChecking } from '../actions/authActios';
+import { WaitScreen } from '../components/wait/WaitScreen';
 export const AppRouter = () => {
   const { checking, uid } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -19,25 +23,25 @@ export const AppRouter = () => {
     return <WaitScreen />;
   }
   return (
-    <Router>
+    <HashRouter>
       <div>
         <Switch>
           <PrivateRoutes
             isAuthenticated={!!uid}
-            path="/profile"
+            path='/profile'
             render={ProfileRoute}
           />
           <PublicRoutes
             isAuthenticated={!!uid}
-            path="/auth"
+            path='/auth'
             render={AuthRouter}
           />
 
-          <PublicRoutes isAuthenticated={!!uid} path="/" render={DashBoard} />
+          <PublicRoutes isAuthenticated={!!uid} path='/' render={DashBoard} />
 
-          <Redirect to="/" />
+          <Redirect to='/' />
         </Switch>
       </div>
-    </Router>
+    </HashRouter>
   );
 };
