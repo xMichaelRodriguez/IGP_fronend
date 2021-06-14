@@ -1,11 +1,11 @@
-import moment from "moment";
-import "moment/locale/es";
+import moment from 'moment';
+import 'moment/locale/es';
 
-import React, { useEffect, useState } from "react";
-import { BsArrowReturnLeft } from "react-icons/bs";
-import { useParams } from "react-router";
-import { Link } from "react-router-dom";
-import { fetchSync } from "../../../helpers/fetching";
+import React, { useEffect, useState } from 'react';
+import { BsArrowReturnLeft } from 'react-icons/bs';
+import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
+import { fetchSync } from '../../../helpers/fetching';
 
 export const NoticeCard = () => {
   const { noticeId } = useParams();
@@ -22,31 +22,31 @@ export const NoticeCard = () => {
     })();
   }, [noticeId]);
   return notice !== {} ? (
-    <div className="card animate__animated   animate__zoomIn">
-      <div className="card-body">
-        <div className="card-title titulo_card d-block justify-content-between  animate__animated   animate__zoomIn">
+    <div className='card animate__animated   animate__fadeIn'>
+      <div className='card-body'>
+        <div className='card-title titulo_card d-block justify-content-between  animate__animated   animate__fadeIn'>
           <h1>{notice.title}</h1>
-          <h6 className="text-muted">{moment(notice.date).calendar()}</h6>
+          <h6 className='text-muted'>{moment(notice.date).calendar()}</h6>
         </div>
 
         <p
-          className="card-text text-justify animate__animated   animate__zoomIn"
-          style={{ fontSize: "20px" }}
+          className='card-text text-justify animate__animated   animate__fadeIn'
+          style={{ fontSize: '20px' }}
         >
           {notice.body}
         </p>
       </div>
-      <div className="card-footer animate__animated   animate__zoomIn">
-        <Link className="btn btn-info btn-lg" to="/noticies">
-          <BsArrowReturnLeft size="1.5rem" /> Volver
+      <div className='card-footer animate__animated   animate__fadeIn'>
+        <Link className='btn btn-info btn-lg' to='/noticies'>
+          <BsArrowReturnLeft size='1.5rem' /> Volver
         </Link>
       </div>
     </div>
   ) : (
-    <div className="d-flex justify-content-center">
+    <div className='d-flex justify-content-center'>
       <strong>Cargando...</strong>
-      <div className="spinner-grow" role="status">
-        <span className="sr-only">Loading...</span>
+      <div className='spinner-grow' role='status'>
+        <span className='sr-only'>Loading...</span>
       </div>
     </div>
   );
