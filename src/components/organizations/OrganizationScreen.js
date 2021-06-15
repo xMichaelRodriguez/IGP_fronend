@@ -20,7 +20,7 @@ export const OrganizationScreen = () => {
           </div>
         </h1>
       )}
-      <div className='row'>
+      <div className='row animate__animated   animate__fadeIn'>
         {!location.pathname.includes('/organizations')
           ? organizations.map(
               (organization) =>

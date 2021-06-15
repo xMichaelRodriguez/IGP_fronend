@@ -13,77 +13,80 @@ export const HomeScreen = () => {
         style={{
           backgroundColor: '#fff',
         }}
-        className='p-3 mb-3    d-flex justify-content-center'
+        className='p-3 mb-3    d-flex justify-content-center animate__animated   animate__fadeIn'
       >
         <div
           id='carouselExampleIndicators'
-          class='carousel slide w-100'
+          className='carousel slide w-100'
           data-ride='carousel'
         >
-          <ol class='carousel-indicators'>
+          <ol className='carousel-indicators'>
             <li
               data-target='#carouselExampleIndicators'
               data-slide-to='0'
-              class='active'
+              className='active'
             />
             <li data-target='#carouselExampleIndicators' data-slide-to='1' />
             <li data-target='#carouselExampleIndicators' data-slide-to='2' />
           </ol>
-          <div class='carousel-inner'>
-            <div class='carousel-item active'>
+          <div className='carousel-inner'>
+            <div className='carousel-item active'>
               <img
-                class='d-block img-fluid w-100'
+                className='d-block img-fluid w-100'
                 style={{ height: '300px' }}
                 src='https://www.cetys.mx/noticias/wp-content/uploads/2020/11/No-Violencia-Contra-las-Mujeres-Comunicado.png'
-                alt='First slide'
+                alt=''
               />
             </div>
 
-            <div class='carousel-item'>
+            <div className='carousel-item'>
               <img
-                class='d-block w-100'
+                className='d-block w-100'
                 style={{ height: '300px' }}
                 src='https://rtvc-assets-radionica3.s3.amazonaws.com/s3fs-public/styles/image_750x424/public/field/image/article/front-cpva.jpg?itok=X0zWlaLz'
-                alt='Third slide'
+                alt=''
               />
             </div>
 
-            <div class='carousel-item'>
+            <div className='carousel-item'>
               <img
-                class='d-block w-100'
+                className='d-block w-100'
                 style={{ height: '300px' }}
                 src='https://www.elpaisdelosjovenes.com/wp-content/uploads/2020/03/violencia1.jpg'
-                alt='Third slide'
+                alt=''
               />
             </div>
           </div>
           <a
-            class='carousel-control-prev'
+            className='carousel-control-prev'
             href='#carouselExampleIndicators'
             role='button'
             data-slide='prev'
           >
-            <span class='carousel-control-prev-icon' aria-hidden='true' />
-            <span class='sr-only'>Previous</span>
+            <span className='carousel-control-prev-icon' aria-hidden='true' />
+            <span className='sr-only'>Previous</span>
           </a>
           <a
-            class='carousel-control-next'
+            className='carousel-control-next'
             href='#carouselExampleIndicators'
             role='button'
             data-slide='next'
           >
-            <span class='carousel-control-next-icon' aria-hidden='true' />
-            <span class='sr-only'>Next</span>
+            <span className='carousel-control-next-icon' aria-hidden='true' />
+            <span className='sr-only'>Next</span>
           </a>
         </div>
       </section>
 
-      <section style={{ backgroundColor: '#fff' }}>
+      <section
+        style={{ backgroundColor: '#fff' }}
+        className='animate__animated   animate__fadeIn'
+      >
         <div className='row'>
           <div className='col-md-6 mt-auto mb-auto  text-center'>
             <h1 className='font-italic'>Una Vida De Seguridad UVS</h1>
             <p className='text-justify px-2' style={{ fontSize: '20px' }}>
-              es una Web App y App Móvil educativa que surge, para dar respuesta
+              Es una Web App y App Móvil educativa que surge, para dar respuesta
               de forma organizada a la realidad salvadoreña de violencia en los
               niños, niñas y adolescentes, y la necesidad de trabajar de la mano
               con MINEDUCYT, CONNA para llevar información sobre la violencia a
@@ -93,47 +96,69 @@ export const HomeScreen = () => {
               podrían salir de ello.
             </p>
           </div>
-          <div className='col-md-6 mt-auto mb-auto'>
-            <img src='https://i.imgur.com/WNKowqR.jpg' className='img-fluid' />
+          <div className='col-md-6 m-auto'>
+            <img
+              src='https://i.imgur.com/WNKowqR.jpg'
+              alt=''
+              className='img-fluid '
+            />
           </div>
         </div>
       </section>
 
-      <section style={{ backgroundColor: '#fff' }} className='p-3 mb-3  '>
-        <div className='d-flex justify-content-between animate__animated   animate__fadeIn'>
-          <h4>Nuevas Historias</h4>
-          <Link to='/stories'>
-            <h4>
-              Todas las historias <BsArrowRight />
-            </h4>
-          </Link>
+      <section
+        style={{ backgroundColor: '#fff' }}
+        className='p-3 mb-3  animate__animated   animate__fadeIn'
+      >
+        <div className='row animate__animated   animate__fadeIn'>
+          <div className='col-md-6'>
+            <h4>Nuevas Historias</h4>
+          </div>
+          <div className='col-md-6'>
+            <Link to='/stories' className='float-right'>
+              <h4>
+                Todas las historias <BsArrowRight />
+              </h4>
+            </Link>
+          </div>
         </div>
-        <hr />
+
         <StoryScreen />
       </section>
       <section style={{ backgroundColor: '#fff' }} className='p-3 mb-5   '>
-        <div className='d-flex justify-content-between animate__animated   animate__fadeIn '>
-          <h4>Nuevas Noticias</h4>
-          <Link to='/noticies'>
-            <h4 className=''>
-              Todas las noticias <BsArrowRight />
-            </h4>
-          </Link>
+        <div className='row animate__animated   animate__fadeIn '>
+          <div className='col-md-6'>
+            <h4>Nuevas Noticias</h4>
+          </div>
+          <div className='col-md-6'>
+            <Link to='/noticies' className='float-right'>
+              <h4 className=''>
+                Todas las noticias <BsArrowRight />
+              </h4>
+            </Link>
+          </div>
         </div>
-        <hr />
+
         <NoticeScreen />
       </section>
 
-      <section style={{ backgroundColor: '#fff' }} className='p-3 mb-5 '>
-        <div className='d-flex justify-content-between animate__animated   animate__fadeIn '>
-          <h4>Organizaciones</h4>
-          <Link to='/organizations'>
-            <h4 className=''>
-              Todas las Organizaciones <BsArrowRight />
-            </h4>
-          </Link>
+      <section
+        style={{ backgroundColor: '#fff' }}
+        className='p-3 mb-5 animate__animated   animate__fadeIn'
+      >
+        <div className='row  '>
+          <div className='col-md-6'>
+            <h4>Organizaciones</h4>
+          </div>
+          <div className='col-md-6'>
+            <Link to='/organizations' className='float-right'>
+              <h4 className=''>
+                Todas las Organizaciones <BsArrowRight />
+              </h4>
+            </Link>
+          </div>
         </div>
-        <hr />
+
         <OrganizationScreen />
       </section>
     </Fragment>

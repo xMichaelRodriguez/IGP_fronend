@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { BsChevronLeft, BsChevronRight, BsPlus } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import React, { useEffect, useState } from 'react';
+import { BsChevronLeft, BsChevronRight, BsPlus } from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import {
   noticeClearActive,
   noticeStartLoading,
-} from "../../../actions/noticesActions";
-import { NotFiles } from "../../../helpers/NotFiles";
-import { DeleteButtonFab } from "../../UI/DeleteButtonFab";
-import { NoticeNavItem } from "../../UI/noticeNav/NoticeNavItem";
+} from '../../../actions/noticesActions';
+import { NotFiles } from '../../../helpers/NotFiles';
+import { DeleteButtonFab } from '../../UI/DeleteButtonFab';
+import { NoticeNavItem } from '../../UI/noticeNav/NoticeNavItem';
 const INITIAL_PAGE = 1;
 export const NoticeSchreen = () => {
   const history = useHistory();
@@ -48,28 +48,28 @@ export const NoticeSchreen = () => {
 
   const handleNewNotice = () => {
     dispatch(noticeClearActive());
-    history.push("/profile/manage-notice");
+    history.push('/profile/manage-notice');
   };
   return (
     <>
       <button
-        className="btn btn-info mb-3  animate__animated animate__fadeIn"
+        className='btn btn-info mb-3  animate__animated animate__fadeIn'
         onClick={handleNewNotice}
       >
-        <BsPlus size="1.5rem" /> &nbsp; Nueva Noticia
+        <BsPlus size='1.5rem' /> &nbsp; Nueva Noticia
       </button>
       <hr />
       {!!noticeArr ? (
         <>
-          <nav aria-label="Page navigation example ">
-            <ul className="pagination justify-content-end animate__animated animate__fadeIn">
+          <nav aria-label='Page navigation example '>
+            <ul className='pagination justify-content-end animate__animated animate__fadeIn'>
               <li
                 className={`page-item ${
-                  pageNext === INITIAL_PAGE ? "disabled hand" : "active"
+                  pageNext === INITIAL_PAGE ? 'disabled hand' : 'active'
                 }`}
                 onClick={handlePrevpage}
               >
-                <span className="page-link" style={{ cursor: "pointer" }}>
+                <span className='page-link' style={{ cursor: 'pointer' }}>
                   <BsChevronLeft />
                   Anterior
                 </span>
@@ -77,17 +77,17 @@ export const NoticeSchreen = () => {
 
               <li
                 className={`page-item ${
-                  pageNext === total_page ? "disabled hand " : "active"
+                  pageNext === total_page ? 'disabled hand ' : 'active'
                 }`}
                 onClick={handleNextPage}
               >
-                <span className="page-link " style={{ cursor: "pointer" }}>
+                <span className='page-link ' style={{ cursor: 'pointer' }}>
                   Siguiente <BsChevronRight />
                 </span>
               </li>
             </ul>
           </nav>
-          <div className="card-columns">
+          <div className='card-columns mb-5'>
             {noticeArr.map((notice) => (
               <NoticeNavItem key={notice.id} {...notice} />
             ))}

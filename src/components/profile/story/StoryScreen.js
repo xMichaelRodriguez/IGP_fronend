@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
-import { storyStartLoading, storyClearActive } from "../../../actions/events";
-import { DeleteButtonFab } from "../../UI/DeleteButtonFab";
-import { StoryNavItem } from "../../UI/storyNav/StoryNavItem";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
+import { storyStartLoading, storyClearActive } from '../../../actions/events';
+import { DeleteButtonFab } from '../../UI/DeleteButtonFab';
+import { StoryNavItem } from '../../UI/storyNav/StoryNavItem';
 // icons
-import { BsPlus, BsChevronRight, BsChevronLeft } from "react-icons/bs";
+import { BsPlus, BsChevronRight, BsChevronLeft } from 'react-icons/bs';
 
 const INITIAL_PAGE = 1;
 export const StoryScreen = () => {
@@ -27,7 +27,7 @@ export const StoryScreen = () => {
 
   const handleNewStory = () => {
     dispatch(storyClearActive());
-    history.push("/profile/manage-story");
+    history.push('/profile/manage-story');
   };
 
   //next Page
@@ -56,24 +56,24 @@ export const StoryScreen = () => {
   return (
     <>
       <button
-        className="btn btn-info mb-3  animate__animated animate__fadeIn"
+        className='btn btn-info mb-3  animate__animated animate__fadeIn'
         onClick={handleNewStory}
       >
-        <BsPlus size="1.5rem" /> &nbsp; Nueva historia
+        <BsPlus size='1.5rem' /> &nbsp; Nueva historia
       </button>
       <hr />
 
       {storyArr && storyArr.length !== 0 ? (
         <>
-          <nav aria-label="Page navigation example">
-            <ul className="pagination justify-content-end animate__animated animate__fadeIn">
+          <nav aria-label='Page navigation example'>
+            <ul className='pagination justify-content-end animate__animated animate__fadeIn'>
               <li
                 className={`page-item ${
-                  pageNext === INITIAL_PAGE ? "disabled hand" : "active"
+                  pageNext === INITIAL_PAGE ? 'disabled hand' : 'active'
                 }`}
                 onClick={handlePrevpage}
               >
-                <span className="page-link" style={{ cursor: "pointer" }}>
+                <span className='page-link' style={{ cursor: 'pointer' }}>
                   <BsChevronLeft />
                   Anterior
                 </span>
@@ -81,18 +81,18 @@ export const StoryScreen = () => {
 
               <li
                 className={`page-item ${
-                  pageNext === total_page ? "disabled hand " : "active"
+                  pageNext === total_page ? 'disabled hand ' : 'active'
                 }`}
                 onClick={handleNextPage}
               >
-                <span className="page-link " style={{ cursor: "pointer" }}>
+                <span className='page-link ' style={{ cursor: 'pointer' }}>
                   Siguiente <BsChevronRight />
                 </span>
               </li>
             </ul>
           </nav>
 
-          <div className="card-columns mb-4">
+          <div className='card-columns mb-5'>
             {storyArr.map((story) => (
               <StoryNavItem {...story} key={story.id} />
             ))}
@@ -101,9 +101,9 @@ export const StoryScreen = () => {
       ) : (
         <>
           <strong>Cargando...</strong>
-          <div className="d-flex justify-content-center">
-            <div className="spinner-border" role="status">
-              <span className="sr-only">Loading...</span>
+          <div className='d-flex justify-content-center'>
+            <div className='spinner-border' role='status'>
+              <span className='sr-only'>Loading...</span>
             </div>
           </div>
         </>

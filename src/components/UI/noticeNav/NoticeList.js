@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { noticeStartLoading } from "../../../actions/noticesActions";
-import { NoticeNavItem } from "./NoticeNavItem";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { noticeStartLoading } from '../../../actions/noticesActions';
+import { NoticeNavItem } from './NoticeNavItem';
 
 const INITIAL_PAGE = 1;
 export const NoticeList = () => {
@@ -42,32 +42,32 @@ export const NoticeList = () => {
     <>
       {!!noticeArr ? (
         <>
-          <nav aria-label="Page navigation example">
-            <ul className="pagination justify-content-end animate__animated   animate__fadeIn">
+          <nav aria-label='Page navigation example'>
+            <ul className='pagination justify-content-end animate__animated   animate__fadeIn'>
               <li
                 className={`page-item ${
-                  pageNext === INITIAL_PAGE ? "disabled hand" : "active"
+                  pageNext === INITIAL_PAGE ? 'disabled hand' : 'active'
                 }`}
                 onClick={handlePrevpage}
               >
-                <span className="page-link" style={{ cursor: "pointer" }}>
+                <span className='page-link' style={{ cursor: 'pointer' }}>
                   Anterior
                 </span>
               </li>
 
               <li
                 className={`page-item ${
-                  pageNext === total_page ? "disabled hand" : "active"
+                  pageNext === total_page ? 'disabled hand' : 'active'
                 }`}
                 onClick={handleNextPage}
               >
-                <span className="page-link " style={{ cursor: "pointer" }}>
+                <span className='page-link ' style={{ cursor: 'pointer' }}>
                   Siguiente
                 </span>
               </li>
             </ul>
           </nav>
-          <div className="card-columns">
+          <div className='card-columns mb-5'>
             {noticeArr.map((notice) => (
               <NoticeNavItem key={notice.id} {...notice} />
             ))}

@@ -22,7 +22,7 @@ export const NoticeCard = () => {
     })();
   }, [noticeId]);
   return notice !== {} ? (
-    <div className='card animate__animated   animate__fadeIn'>
+    <div className='card animate__animated   animate__fadeIn '>
       <div className='card-body'>
         <div className='card-title titulo_card d-block justify-content-between  animate__animated   animate__fadeIn'>
           <h1>{notice.title}</h1>

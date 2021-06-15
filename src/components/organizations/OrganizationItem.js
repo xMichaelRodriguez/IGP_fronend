@@ -14,7 +14,7 @@ export const OrganizationItem = ({
 }) => {
   const history = useHistory();
   return (
-    <div class='col-md-4 mb-3'>
+    <div className='col-md-4 mb-3'>
       <div className='card mt-2 animate__animated   animate__fadeIn'>
         <div className='card-body'>
           <div className='card-title'>
