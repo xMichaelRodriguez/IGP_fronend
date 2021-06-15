@@ -86,13 +86,13 @@ export const ViolenceScreen = () => {
         </div>
       </section>
 
-      <section className=' w-100 animate__animated   animate__fadeIn'>
+      <section className=' w-100 animate__animated   animate__fadeIn mb-5'>
         <h2 className='text-center'>
           <ins>Cuentos</ins>
         </h2>
         <div className='embed-responsive embed-responsive-16by9'>
           <iframe
-            className='embed-responsive-item h-50'
+            className='embed-responsive-item h-100'
             src='https://www.youtube.com/embed/eqA-rVwSZk8'
             title='Cuento'
           ></iframe>
