@@ -6,9 +6,10 @@ import {
 } from 'react-icons/bs';
 import { FaFacebook, FaFileAlt, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useOrganizations } from '../../hooks/useOrganizations';
 export const OrganizationCard = () => {
+  const history = useHistory();
   const { organization_acronym } = useParams();
   const { data: organizations, loading } = useOrganizations();
   const newOrganization =
@@ -214,10 +215,13 @@ export const OrganizationCard = () => {
             </div>
 
             <div className='card-link mt-3'>
-              <Link className='btn btn-outline-info' to='/organizations'>
+              <button
+                className='btn btn-outline-info'
+                onClick={() => history.goBack()}
+              >
                 <BsArrowReturnLeft />
                 <span>Volver</span>
-              </Link>
+              </button>
             </div>
           </div>
         </div>
