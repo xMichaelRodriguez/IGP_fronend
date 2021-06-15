@@ -39,7 +39,7 @@ export const NoticeList = () => {
   }, [dispatch, pageNext]);
 
   return (
-    <>
+    <div className='container'>
       {!!noticeArr ? (
         <>
           <nav aria-label='Page navigation example'>
@@ -76,6 +76,6 @@ export const NoticeList = () => {
       ) : (
         <h1>hola</h1>
       )}
-    </>
+    </div>
   );
 };

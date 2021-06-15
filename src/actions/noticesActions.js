@@ -1,14 +1,14 @@
-import { fetchAsync } from "../helpers/fetching";
-import { types } from "../types/types";
-import Swal from "sweetalert2";
-import { uiRemoveError } from "./authActios";
-import moment from "moment";
+import { fetchAsync } from '../helpers/fetching';
+import { types } from '../types/types';
+import Swal from 'sweetalert2';
+import { uiRemoveError } from './authActios';
+import moment from 'moment';
 export const startnoticeAddNew = (notice) => {
   return async (dispatch) => {
     try {
       Swal.fire({
-        title: "Guardando...",
-        text: "Por favor espere...",
+        title: 'Guardando...',
+        text: 'Por favor espere...',
         allowOutsideClick: false,
         allowEnterKey: false,
         allowEscapeKey: false,
@@ -21,16 +21,16 @@ export const startnoticeAddNew = (notice) => {
         ...notice,
         date: moment(),
       };
-      const resp = await fetchAsync("noticies/newNotice", modNotice, "POST");
+      const resp = await fetchAsync('noticies/newNotice', modNotice, 'POST');
       const body = await resp.json();
 
       if (body.ok) {
         dispatch(noticeAddNew(modNotice));
         Swal.close();
         Swal.fire(
-          "Guardado!!",
+          'Guardado!!',
           `La noticia:${notice.title} ha sido guardada`,
-          "success"
+          'success'
         );
       }
       dispatch(uiRemoveError());
@@ -72,8 +72,8 @@ export const noticetStartUpdated = (notice) => {
   return async (dispatch) => {
     try {
       Swal.fire({
-        title: "Actualizando...",
-        text: "Por favor espere...",
+        title: 'Actualizando...',
+        text: 'Por favor espere...',
         allowOutsideClick: false,
         allowEnterKey: false,
         allowEscapeKey: false,
@@ -91,7 +91,7 @@ export const noticetStartUpdated = (notice) => {
       const resp = await fetchAsync(
         `noticies/editNotice/${notice.id}`,
         modNotice,
-        "PUT"
+        'PUT'
       );
       const body = await resp.json();
 
@@ -99,10 +99,10 @@ export const noticetStartUpdated = (notice) => {
         dispatch(noticetUpdated(body.noticies));
         dispatch(noticeClearActive());
         Swal.close();
-        Swal.fire("Historia Actualizado", notice.title, "success");
+        Swal.fire('Historia Actualizado', notice.title, 'success');
       } else {
         Swal.close();
-        Swal.fire("Error", body.msg, "error");
+        Swal.fire('Error', body.msg, 'error');
       }
 
       console.log(body.ok);
@@ -125,35 +125,32 @@ export const startnoticeDeleted = () => {
     const { id } = getState().notice.activeNotice;
     try {
       Swal.fire({
-        title: "Eliminando...",
-        text: "Por favor espere...",
-        allowOutsideClick: false,
-        allowEnterKey: false,
-        allowEscapeKey: false,
-        showConfirmButton: false,
-        onBeforeOpen: () => {
-          Swal.showLoading();
-        },
+        title: 'Estas seguro?',
+        text: ' No podrás revertir esto!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetchAsync(`noticies/deleteNotice/${id}`, {}, 'DELETE').then((resp) =>
+            resp.json().then((resp) => {
+              if (resp.ok) {
+                dispatch(noticeDeleted());
+                dispatch(noticeStartLoading({}));
+
+                Swal.fire('Noticia  Eliminada', '', 'success');
+              } else {
+                Swal.fire('Error', resp.msg, 'error');
+              }
+            })
+          );
+        }
       });
-
-      const resp = await fetchAsync(
-        `noticies/deleteNotice/${id}`,
-        {},
-        "DELETE"
-      );
-      const body = await resp.json();
-
-      if (body.ok) {
-        dispatch(noticeDeleted());
-        dispatch(noticeStartLoading({}));
-        Swal.close();
-        Swal.fire("Noticia  Eliminada", "", "success");
-      } else {
-        Swal.close();
-        Swal.fire("Error", body.msg, "error");
-      }
     } catch (error) {
       Swal.close();
+      Swal.fire('Error', error, 'error');
       console.log(error);
     }
   };

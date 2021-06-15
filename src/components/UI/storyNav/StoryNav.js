@@ -39,7 +39,7 @@ export const StoryNav = () => {
   }, [dispatch, pageNext]);
 
   return !!storyArr ? (
-    <>
+    <div className='container'>
       <nav aria-label='Page navigation example mb-3'>
         <ul className='pagination justify-content-end animate__animated   animate__fadeIn'>
           <li
@@ -70,7 +70,7 @@ export const StoryNav = () => {
           <StoryNavItem key={story.id} {...story} />
         ))}
       </div>
-    </>
+    </div>
   ) : (
     <div className='d-flex justify-content-center'>
       <strong>Cargando...</strong>

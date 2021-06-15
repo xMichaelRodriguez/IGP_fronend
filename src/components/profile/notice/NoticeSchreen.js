@@ -51,7 +51,7 @@ export const NoticeSchreen = () => {
     history.push('/profile/manage-notice');
   };
   return (
-    <>
+    <div className='container '>
       <button
         className='btn btn-info mb-3  animate__animated animate__fadeIn'
         onClick={handleNewNotice}
@@ -98,6 +98,6 @@ export const NoticeSchreen = () => {
       )}
 
       {!!activeNotice && <DeleteButtonFab />}
-    </>
+    </div>
   );
 };

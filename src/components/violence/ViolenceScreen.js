@@ -2,7 +2,7 @@ import React from 'react';
 
 export const ViolenceScreen = () => {
   return (
-    <div className=''>
+    <div className='container'>
       <section
         style={{
           backgroundColor: '#fff',
@@ -72,8 +72,10 @@ export const ViolenceScreen = () => {
         </div>
       </section>
 
-      <section className='mb-3 animate__animated   animate__fadeIn'>
-        <h2 className='text-center'>Historietas</h2>
+      <section className='mb-5 animate__animated   animate__fadeIn'>
+        <h2 className='text-center'>
+          <ins>Historietas</ins>
+        </h2>
         <div className=' w-100 d-flex justify-content-center'>
           <img
             src='https://i.imgur.com/6qqDtWo.jpg'
@@ -81,6 +83,19 @@ export const ViolenceScreen = () => {
             alt='historieta'
             style={{ height: '600px' }}
           />
+        </div>
+      </section>
+
+      <section className=' w-100 animate__animated   animate__fadeIn'>
+        <h2 className='text-center'>
+          <ins>Cuentos</ins>
+        </h2>
+        <div className='embed-responsive embed-responsive-16by9'>
+          <iframe
+            className='embed-responsive-item h-50'
+            src='https://www.youtube.com/embed/eqA-rVwSZk8'
+            title='Cuento'
+          ></iframe>
         </div>
       </section>
     </div>

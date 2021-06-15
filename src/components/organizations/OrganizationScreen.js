@@ -1,5 +1,4 @@
 import React from 'react';
-import { Fragment } from 'react';
 import { useLocation } from 'react-router';
 import { useOrganizations } from '../../hooks/useOrganizations';
 import { OrganizationItem } from './OrganizationItem';
@@ -9,7 +8,7 @@ export const OrganizationScreen = () => {
 
   const { data: organizations, loading } = useOrganizations();
   return (
-    <Fragment>
+    <div className='container'>
       {loading && (
         <h1>
           <div className='d-flex justify-content-center'>
@@ -42,6 +41,6 @@ export const OrganizationScreen = () => {
                 )
             )}
       </div>
-    </Fragment>
+    </div>
   );
 };

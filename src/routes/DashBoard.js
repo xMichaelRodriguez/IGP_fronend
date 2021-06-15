@@ -36,7 +36,7 @@ export const DashBoard = () => {
   return (
     <>
       <NavbarScreen />
-      <div className='container-fluid px-3 mb-3 animate__animated   animate__fadeIn'>
+      <div className='container-fluid px-3 mb-3 '>
         <Switch>
           <Route exact path='/noticies/:noticeId' component={NoticeCard} />
           <Route path='/noticies' component={NoticeList} />

@@ -4,11 +4,10 @@ import { Link } from 'react-router-dom';
 import { StoryScreen } from '../stories/StoryScreen';
 import { BsArrowRight } from 'react-icons/bs';
 import { NoticeScreen } from '../noticies/NoticeScreen';
-import { Fragment } from 'react';
 import { OrganizationScreen } from '../organizations/OrganizationScreen';
 export const HomeScreen = () => {
   return (
-    <Fragment>
+    <div className='container'>
       <section
         style={{
           backgroundColor: '#fff',
@@ -161,6 +160,6 @@ export const HomeScreen = () => {
 
         <OrganizationScreen />
       </section>
-    </Fragment>
+    </div>
   );
 };
