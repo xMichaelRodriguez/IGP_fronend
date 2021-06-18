@@ -51,6 +51,9 @@
   filter: drop-shadow(0 0 0.1rem #282828);
 }
 
+.text-primary {
+  color: #6a1576 !important;
+}
 @media (max-width: 512px) {
   .react-chatbot-kit-chat-inner-container {
     width: 250px;
@@ -58,5 +61,4 @@
   .positions {
     width: 100px;
   }
-  
 }

@@ -1,20 +1,72 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import logo from '../UVS-APP.svg';
 import { StoryScreen } from '../stories/StoryScreen';
 import { BsArrowRight } from 'react-icons/bs';
 import { NoticeScreen } from '../noticies/NoticeScreen';
 import { OrganizationScreen } from '../organizations/OrganizationScreen';
 export const HomeScreen = () => {
   return (
-    <div className='container'>
-      <section
-        style={{
-          backgroundColor: '#fff',
-        }}
-        className='p-3 mb-3    d-flex justify-content-center animate__animated   animate__fadeIn'
-      >
-        <div
+    <div className='uk-container'>
+      <section className=' uk-margin uk-card uk-card-default uk-card-body animate__animated   animate__fadeIn '>
+        <div uk-slideshow='animation: push'>
+          <div
+            className='uk-position-relative uk-visible-toggle uk-dark '
+            tabIndex='-1'
+            uk-slideshow='finite: true, min-height: 400; max-height:450'
+          >
+            <ul className='uk-slideshow-items uk-margin'>
+              <li>
+                <img
+                  className='uk-width-1-1'
+                  data-src='https://www.cetys.mx/noticias/wp-content/uploads/2020/11/No-Violencia-Contra-las-Mujeres-Comunicado.png'
+                  width=''
+                  height='400px'
+                  style={{ height: '400px' }}
+                  alt=''
+                  uk-img=''
+                />
+              </li>
+              <li>
+                <img
+                  className='uk-width-1-1'
+                  data-src='https://rtvc-assets-radionica3.s3.amazonaws.com/s3fs-public/styles/image_750x424/public/field/image/article/front-cpva.jpg?itok=X0zWlaLz'
+                  width=''
+                  height='400px'
+                  style={{ height: '400px' }}
+                  alt=''
+                  uk-img=''
+                />
+              </li>
+              <li>
+                <img
+                  className='uk-width-1-1 '
+                  data-src='https://www.elpaisdelosjovenes.com/wp-content/uploads/2020/03/violencia1.jpg'
+                  width=''
+                  height='400px'
+                  style={{ height: '400px' }}
+                  alt=''
+                  uk-img=''
+                />
+              </li>
+            </ul>
+
+            <Link
+              to='#'
+              className='uk-position-center-left uk-position-small uk-hidden-hover'
+              uk-slidenav-previous=''
+              uk-slideshow-item='previous'
+            ></Link>
+            <Link
+              to='#'
+              className='uk-position-center-right uk-position-small uk-hidden-hover'
+              uk-slidenav-next=''
+              uk-slideshow-item='next'
+            ></Link>
+          </div>
+        </div>
+
+        {/* <div
           id='carouselExampleIndicators'
           className='carousel slide w-100'
           data-ride='carousel'
@@ -33,7 +85,6 @@ export const HomeScreen = () => {
               <img
                 className='d-block img-fluid w-100'
                 style={{ height: '300px' }}
-                src='https://www.cetys.mx/noticias/wp-content/uploads/2020/11/No-Violencia-Contra-las-Mujeres-Comunicado.png'
                 alt=''
               />
             </div>
@@ -42,7 +93,6 @@ export const HomeScreen = () => {
               <img
                 className='d-block w-100'
                 style={{ height: '300px' }}
-                src='https://rtvc-assets-radionica3.s3.amazonaws.com/s3fs-public/styles/image_750x424/public/field/image/article/front-cpva.jpg?itok=X0zWlaLz'
                 alt=''
               />
             </div>
@@ -51,7 +101,6 @@ export const HomeScreen = () => {
               <img
                 className='d-block w-100'
                 style={{ height: '300px' }}
-                src='https://www.elpaisdelosjovenes.com/wp-content/uploads/2020/03/violencia1.jpg'
                 alt=''
               />
             </div>
@@ -74,15 +123,12 @@ export const HomeScreen = () => {
             <span className='carousel-control-next-icon' aria-hidden='true' />
             <span className='sr-only'>Next</span>
           </a>
-        </div>
+        </div> */}
       </section>
 
-      <section
-        style={{ backgroundColor: '#fff' }}
-        className='animate__animated   animate__fadeIn'
-      >
-        <div className='row'>
-          <div className='col-md-6 mt-auto mb-auto  text-center'>
+      <section className=' uk-margin uk-card uk-card-default uk-card-body animate__animated   animate__fadeIn'>
+        <div className='uk-child-width-expand@s uk-text-center' uk-grid=''>
+          <div className=''>
             <h1 className='font-italic'>Una Vida De Seguridad UVS</h1>
             <p className='text-justify px-2' style={{ fontSize: '20px' }}>
               Es una Web App y App Móvil educativa que surge, para dar respuesta
@@ -95,68 +141,72 @@ export const HomeScreen = () => {
               podrían salir de ello.
             </p>
           </div>
-          <div className='col-md-6 m-auto'>
+          <div className='uk-text-middle'>
             <img
-              src='https://i.imgur.com/WNKowqR.jpg'
+              data-src={logo}
+              className='uk-text-middle'
+              width=''
+              height=''
               alt=''
-              className='img-fluid '
+              uk-img=''
             />
           </div>
         </div>
       </section>
 
-      <section
-        style={{ backgroundColor: '#fff' }}
-        className='p-3 mb-3  animate__animated   animate__fadeIn'
-      >
-        <div className='row animate__animated   animate__fadeIn'>
-          <div className='col-md-6'>
-            <h4>Nuevas Historias</h4>
+      <section className=' uk-margin uk-card uk-card-default uk-card-body '>
+        <div className='uk-grid-column-small uk-grid-row-large' uk-grid=''>
+          <div className='uk-padding-small'>
+            <h4 className='uk-position-left uk-padding'>Nuevas Historias</h4>
           </div>
-          <div className='col-md-6'>
-            <Link to='/stories' className='float-right'>
+          <div className='uk-position-right uk-padding'>
+            <Link className='uk-link-muted' to='/stories'>
               <h4>
-                Todas las historias <BsArrowRight />
+                Ver Mas... <BsArrowRight />
               </h4>
             </Link>
           </div>
         </div>
-
+        <hr class='uk-divider-icon' />
         <StoryScreen />
       </section>
-      <section style={{ backgroundColor: '#fff' }} className='p-3 mb-5   '>
-        <div className='row animate__animated   animate__fadeIn '>
-          <div className='col-md-6'>
-            <h4>Nuevas Noticias</h4>
+
+      <section className='uk-margin uk-card uk-card-default uk-card-body  animate__animated   animate__fadeIn '>
+        <div className='uk-grid-column-small uk-grid-row-large' uk-grid=''>
+          <div className='uk-padding-small'>
+            <h4 className='uk-position-left uk-padding'>Nuevas Noticias</h4>
           </div>
-          <div className='col-md-6'>
-            <Link to='/noticies' className='float-right'>
-              <h4 className=''>
-                Todas las noticias <BsArrowRight />
+          <div className='uk-position-right uk-padding'>
+            <Link className='uk-link-muted' to='/noticies'>
+              <h4>
+                Ver Mas... <BsArrowRight />
               </h4>
             </Link>
           </div>
         </div>
+        <hr class='uk-divider-icon' />
 
         <NoticeScreen />
       </section>
 
-      <section
-        style={{ backgroundColor: '#fff' }}
-        className='p-3 mb-5 animate__animated   animate__fadeIn'
-      >
-        <div className='row  '>
-          <div className='col-md-6'>
-            <h4>Organizaciones</h4>
+      <section className='uk-margin uk-card uk-card-default uk-card-body animate__animated   animate__fadeIn'>
+        <div
+          className='uk-grid-column-small uk-grid-row-large animate__animated   animate__fadeIn'
+          uk-grid=''
+        >
+          <div className='uk-padding-small'>
+            <h4 className='uk-position-left uk-padding'>Organizaciones</h4>
           </div>
-          <div className='col-md-6'>
-            <Link to='/organizations' className='float-right'>
-              <h4 className=''>
-                Todas las Organizaciones <BsArrowRight />
+          <div className='uk-position-right uk-padding'>
+            <Link className='uk-link-muted' to='/organizations'>
+              <h4>
+                Ver Mas...
+                <BsArrowRight />
               </h4>
             </Link>
           </div>
         </div>
+        <hr class='uk-divider-icon' />
 
         <OrganizationScreen />
       </section>

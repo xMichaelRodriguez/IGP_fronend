@@ -17,190 +17,172 @@ export const OrganizationCard = () => {
     organizations.find((or) => or.acronym === organization_acronym);
 
   return (
-    <>
+    <div style={{ margin: '50px', display: 'flex', justifyContent: 'center' }}>
       {loading ? (
         <h1>
-          <div className='d-flex justify-content-center'>
-            <strong>Cargando...</strong>
-            <div className='spinner-grow' role='status'>
-              <span className='sr-only'>Loading...</span>
-            </div>
-          </div>
+          <span>Cargando...</span>
+          <span uk-spinner='ratio: 4.5'></span>
         </h1>
       ) : (
-        <div className='card px-1 mb-5 container animate__animated   animate__fadeIn'>
-          <div className='d-flex justify-content-center'>
-            <img
-              className='card-img-top img-thumbnail text-center'
-              style={{ height: '400px', width: '450px' }}
-              src={
-                !newOrganization.avatar_file_url.includes('missing')
-                  ? `https://www.transparencia.gob.sv/${newOrganization.avatar_file_url}`
-                  : 'https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg'
-              }
-              alt={newOrganization.avatar_file_name}
-            />
-          </div>
-          <div className='card-body'>
-            <div className='card-title'>
-              <h1>{newOrganization.name}</h1>
+        <div className=' uk-card uk-card-default uk-card-body uk-width-1-2@m animate__animated   animate__fadeIn'>
+          <div className='uk-padding-small'>
+            <div class='uk-card-media-top uk-text-center'>
+              <img
+                style={{ height: 'auto', width: '450px' }}
+                src={
+                  !newOrganization.avatar_file_url.includes('missing')
+                    ? `https://www.transparencia.gob.sv/${newOrganization.avatar_file_url}`
+                    : 'https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg'
+                }
+                alt={newOrganization.avatar_file_name}
+              />
             </div>
-            <div className='card-subtitle'>
-              <p className='font-weight-bolder'>{newOrganization.acronym}</p>
-            </div>
-            <div className='card-text'>
-              <h4>
+            <h3 class='uk-card-title'>{newOrganization.name}</h3>
+            <span>{newOrganization.acronym}</span>
+
+            <div className='uk-column-1-2'>
+              <div>
                 <BsInfoCircleFill className='text-info' /> Oficial de
                 información: {newOrganization.officer_name}
-              </h4>
-              <h4 className='text-muted mt-2 mb-3'>
+              </div>
+              <div>
                 <BsEnvelopeFill className='text-info' />{' '}
                 {newOrganization.officer_email}
-              </h4>
-              {newOrganization.website_url && (
-                <h4 className='text-muted mt-2 mb-3'>
-                  <FaFileAlt className='text-info' />{' '}
-                  {newOrganization.website_url}
-                </h4>
-              )}
+              </div>
+              <div>
+                {newOrganization.website_url && (
+                  <div className='text-muted mt-2 mb-3'>
+                    <FaFileAlt className='text-info' />
+                    {newOrganization.website_url}
+                  </div>
+                )}
+              </div>
             </div>
-            <div className='row'>
-              <div className='col-md-6 mb-3'>
-                <div className='card-text'>
-                  <ul className='list-group' style={{ listStyle: 'none' }}>
-                    <li>
-                      <ul className='list-group' style={{ listStyle: 'none' }}>
-                        {newOrganization.twitter_url.includes(',') ? (
-                          newOrganization.twitter_url
-                            .split(',')
-                            .map((twitter) => (
-                              <li
-                                className='btn-link mb-2'
-                                style={{ cursor: 'pointer' }}
-                                onClick={() => {
-                                  window.open(twitter);
-                                }}
-                              >
-                                <strong>
-                                  <FaTwitter /> {twitter}
-                                </strong>
-                              </li>
-                            ))
-                        ) : (
-                          <li>
-                            <p
-                              className='font-weight-bolder btn-link'
-                              style={{ cursor: 'pointer', fontSize: '15px' }}
-                              onClick={() =>
-                                newOrganization.twitter_url !== '' &&
-                                window.open(newOrganization.twitter_url)
-                              }
-                            >
-                              {newOrganization.twitter_username !== '' ? (
-                                <p>
-                                  <FaTwitter className='text-primary' />{' '}
-                                  {newOrganization.twitter_username}
-                                </p>
-                              ) : (
-                                <p>Sin Twitter</p>
-                              )}
+            <div className='uk-margin'>
+              <h4>Contacto</h4>
+              <hr className='uk-divider-icon' />
+              <div className='uk-column-1-2'>
+                <div className='twittr uk-text-break'>
+                  <ul class='uk-list'>
+                    {newOrganization.twitter_url.includes(',') ? (
+                      newOrganization.twitter_url.split(',').map((twitter) => (
+                        <li
+                          className='uk-link-muted'
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => {
+                            window.open(twitter);
+                          }}
+                        >
+                          <strong>
+                            <FaTwitter /> {twitter}
+                          </strong>
+                        </li>
+                      ))
+                    ) : (
+                      <li className='uk-link-muted'>
+                        <p
+                          className='uk-link-muted'
+                          style={{ cursor: 'pointer', fontSize: '15px' }}
+                          onClick={() =>
+                            newOrganization.twitter_url !== '' &&
+                            window.open(newOrganization.twitter_url)
+                          }
+                        >
+                          {newOrganization.twitter_username !== '' ? (
+                            <p className='uk-link-muted'>
+                              <FaTwitter className='text-primary' />{' '}
+                              {newOrganization.twitter_username}
                             </p>
-                          </li>
-                        )}
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className='col-md-6 mb-3'>
-                <div className='card-text'>
-                  <ul className='list-group' style={{ listStyle: 'none' }}>
-                    <li>
-                      <ul className='list-group' style={{ listStyle: 'none' }}>
-                        {newOrganization.facebook_url.includes(',') ? (
-                          newOrganization.facebook_url
-                            .split(',')
-                            .map((facebook) => (
-                              <li
-                                className='btn-link mb-2'
-                                style={{ cursor: 'pointer' }}
-                                onClick={() => {
-                                  window.open(facebook);
-                                }}
-                              >
-                                <strong>
-                                  <FaFacebook /> {facebook}
-                                </strong>
-                              </li>
-                            ))
-                        ) : (
-                          <li>
-                            <p
-                              className='font-weight-bolder btn-link'
-                              style={{ cursor: 'pointer', fontSize: '15px' }}
-                              onClick={() =>
-                                newOrganization.facebook_url !== '' &&
-                                window.open(newOrganization.facebook_url)
-                              }
-                            >
-                              {newOrganization.facebook_username !== '' ? (
-                                <p>
-                                  <FaFacebook className='text-primary' />{' '}
-                                  {newOrganization.facebook_username}
-                                </p>
-                              ) : (
-                                <p>Sin Facebook</p>
-                              )}
-                            </p>
-                          </li>
-                        )}
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className='col-md-6'>
-                <ul className='list-group' style={{ listStyle: 'none' }}>
-                  {newOrganization.youtube_url.includes(',') ? (
-                    newOrganization.youtube_url.split(',').map((youtube) => (
-                      <li
-                        className='btn-link mb-2'
-                        style={{ cursor: 'pointer' }}
-                        onClick={() => {
-                          window.open(youtube);
-                        }}
-                      >
-                        <strong>
-                          <FaYoutube className='text-danger' /> {youtube}
-                        </strong>
+                          ) : (
+                            <p>Sin Twitter</p>
+                          )}
+                        </p>
                       </li>
-                    ))
-                  ) : (
-                    <li>
-                      <p
-                        className='font-weight-bolder btn-link'
-                        style={{ cursor: 'pointer', fontSize: '15px' }}
-                        onClick={() =>
-                          newOrganization.youtube_url !== '' &&
-                          window.open(newOrganization.youtube_url)
-                        }
-                      >
-                        {newOrganization.youtube_username !== '' ? (
-                          <p>
-                            <FaYoutube className='text-danger' />{' '}
-                            {newOrganization.youtube_username}
-                          </p>
-                        ) : (
-                          <p>Sin Youtube</p>
-                        )}
-                      </p>
-                    </li>
-                  )}
-                </ul>
-              </div>
-              <div className='col-md-6'>
+                    )}
+                  </ul>
+                </div>
+
+                <div className='face uk-text-break'>
+                  <ul className='uk-list'>
+                    {newOrganization.facebook_url.includes(',') ? (
+                      newOrganization.facebook_url
+                        .split(',')
+                        .map((facebook) => (
+                          <li
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => {
+                              window.open(facebook);
+                            }}
+                          >
+                            <strong>
+                              <FaFacebook /> {facebook}
+                            </strong>
+                          </li>
+                        ))
+                    ) : (
+                      <li className='uk-link-muted'>
+                        <p
+                          style={{ cursor: 'pointer', fontSize: '15px' }}
+                          onClick={() =>
+                            newOrganization.facebook_url !== '' &&
+                            window.open(newOrganization.facebook_url)
+                          }
+                        >
+                          {newOrganization.facebook_username !== '' ? (
+                            <p>
+                              <FaFacebook className='text-primary' />{' '}
+                              {newOrganization.facebook_username}
+                            </p>
+                          ) : (
+                            <p>Sin Facebook</p>
+                          )}
+                        </p>
+                      </li>
+                    )}
+                  </ul>
+                </div>
+
+                <div className='youtube uk-text-break'>
+                  <ul className='uk-list'>
+                    {newOrganization.youtube_url.includes(',') ? (
+                      newOrganization.youtube_url.split(',').map((youtube) => (
+                        <li
+                          className='uk-link-muted'
+                          style={{ cursor: 'pointer' }}
+                          onClick={() => {
+                            window.open(youtube);
+                          }}
+                        >
+                          <strong>
+                            <FaYoutube className='text-danger' /> {youtube}
+                          </strong>
+                        </li>
+                      ))
+                    ) : (
+                      <li className='uk-link-muted'>
+                        <p
+                          style={{ cursor: 'pointer', fontSize: '15px' }}
+                          onClick={() =>
+                            newOrganization.youtube_url !== '' &&
+                            window.open(newOrganization.youtube_url)
+                          }
+                        >
+                          {newOrganization.youtube_username !== '' ? (
+                            <p>
+                              <FaYoutube className='text-danger' />{' '}
+                              {newOrganization.youtube_username}
+                            </p>
+                          ) : (
+                            <p>Sin Youtube</p>
+                          )}
+                        </p>
+                      </li>
+                    )}
+                  </ul>
+                </div>
+
                 <p
-                  className='font-weight-bolder btn-link'
+                  className='uk-link-muted'
                   style={{ cursor: 'pointer', fontSize: '15px' }}
                   onClick={() => {
                     window.open(
@@ -213,19 +195,15 @@ export const OrganizationCard = () => {
                 </p>
               </div>
             </div>
-
-            <div className='card-link mt-3'>
-              <button
-                className='btn btn-outline-info'
-                onClick={() => history.goBack()}
-              >
-                <BsArrowReturnLeft />
-                <span>Volver</span>
-              </button>
-            </div>
+            <button
+              class='uk-button uk-button-default primary'
+              onClick={() => history.goBack()}
+            >
+              <BsArrowReturnLeft size='1.5rem' /> Volver
+            </button>
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };

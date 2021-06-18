@@ -1,6 +1,7 @@
 import React from 'react';
 import { BsCaretRightFill, BsEnvelope } from 'react-icons/bs';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 export const OrganizationItem = ({
   name,
   acronym,
@@ -14,48 +15,37 @@ export const OrganizationItem = ({
 }) => {
   const history = useHistory();
   return (
-    <div className='col-md-4 mb-3'>
-      <div className='card mt-2 animate__animated   animate__fadeIn'>
-        <div className='card-body'>
-          <div className='card-title'>
-            <h3
-              className='text-info btn-link'
-              style={{ cursor: 'pointer' }}
-              onClick={() => history.push(`/organizations/${acronym}`)}
+    <div className='uk-width-1-3@s'>
+      <div class='uk-card uk-card-default uk-card-body uk-padding-remove'>
+        <div class='uk-card-media-left uk-cover-container'>
+          <img
+            src={
+              !avatar_file_url.includes('missing')
+                ? `https://www.transparencia.gob.sv/${avatar_file_url}`
+                : 'https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg'
+            }
+            alt={avatar_file_name}
+            uk-cover=''
+          />
+          <canvas width='600' height='400'></canvas>
+        </div>
+        <div className='uk-card-body'>
+          <h3 className='uk-card-title '>
+            <Link
+              className='uk-link text-primary'
+              to={`/organizations/${acronym}`}
             >
               {acronym}
-            </h3>
-          </div>
-          <div className='card-subtitle mb-2'>
-            <span>{name}</span>
-          </div>
-          <div className='card-text' style={{ fontSize: '14px' }}>
-            <ul className='list-group' style={{ listStyle: 'none' }}>
-              <li className='mb-2'>
-                <BsCaretRightFill className='text-info' />{' '}
-                <span className='font-weight-bolder'>
-                  Oficial de información:
-                  {officer_name}
-                </span>
-              </li>
-              <li className='mb-2'>
-                <BsEnvelope className='text-info' />{' '}
-                <span className='font-weight-bolder'>{officer_email}</span>
-              </li>
-            </ul>
-          </div>
+            </Link>
+          </h3>
+          <small className='uk-text-muted'>{name}</small>
+          <dl className='uk-description-list '>
+            <dt className='uk-text-capitalize'>Oficial de información:</dt>
+            <dd>{officer_name}</dd>
+            <dt className='uk-text-capitalize'>Correo:</dt>
+            <dd>{officer_email}</dd>
+          </dl>
         </div>
-
-        <img
-          className='card-img-bottom '
-          style={{ height: '180px' }}
-          src={
-            !avatar_file_url.includes('missing')
-              ? `https://www.transparencia.gob.sv/${avatar_file_url}`
-              : 'https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg'
-          }
-          alt={avatar_file_name}
-        />
       </div>
     </div>
   );

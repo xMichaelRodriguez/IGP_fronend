@@ -1,115 +1,257 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import './styles.css';
 
 import { FaSignOutAlt, FaUserCircle } from 'react-icons/fa';
 import { startLogout } from '../../actions/authActios';
+import logo from '../UVS-APP.svg';
+
 export const NavbarScreen = () => {
   const dispatch = useDispatch();
 
   const { name } = useSelector((state) => state.auth);
   return (
     <>
-      <nav className='navbar navbar-expand-md navbar-dark primary mb-3 '>
-        <div className='container'>
-          <Link className='navbar-brand' to='/'>
-            <img
-              src='https://i.imgur.com/WNKowqR.jpg'
-              className='rounded'
-              width='70'
-              height='70'
-              alt='UVS'
-            />
-          </Link>
-          <button
-            className='navbar-toggler'
-            type='button'
-            data-toggle='collapse'
-            data-target='#navbarColor03'
-            aria-controls='navbarColor03'
-            aria-expanded='false'
-            aria-label='Toggle navigation'
-          >
-            <span className='navbar-toggler-icon'></span>
-          </button>
-
-          <div className='collapse navbar-collapse' id='navbarColor03'>
-            <ul className='navbar-nav mr-auto ml-md'>
-              <li className='nav-item active'>
-                <h3>
-                  <Link className='nav-link' to='/'>
-                    Home
-                  </Link>
-                </h3>
-              </li>
-              <li className='nav-item'>
-                <h3>
-                  <Link className='nav-link' to='/noticies'>
-                    Noticias
-                  </Link>
-                </h3>
-              </li>
-              <li className='nav-item'>
-                <h3>
-                  <Link className='nav-link' to='/stories'>
-                    Historias de vida
-                  </Link>
-                </h3>
-              </li>
-              <li className='nav-item'>
-                <h3>
-                  <Link className='nav-link' to='/organizations'>
-                    Organizaciones
-                  </Link>
-                </h3>
-              </li>
-              <li className='nav-item'>
-                <h3>
-                  <Link className='nav-link' to='learning-about-violence'>
-                    Aprendiendo sobre la violencia
-                  </Link>
-                </h3>
+      <header>
+        <nav
+          className='uk-navbar uk-navbar-container primary'
+          style={{ height: '100px' }}
+          uk-navbar=''
+        >
+          <div className='uk-navbar-left'>
+            <ul className='uk-navbar-nav'>
+              <li className=''>
+                <Link to='#' style={{ height: '100px' }}>
+                  <img src={logo} className='uk-height-small ' alt='UVS' />
+                </Link>
               </li>
             </ul>
-            <ul className='navbar-nav ml-auto '>
+          </div>
+          <div className='uk-navbar-left'>
+            <ul className='uk-navbar-nav uk-visible@s'>
+              <li className='uk-text-large '>
+                <NavLink
+                  activeClassName='active'
+                  className=' uk-text-capitalize'
+                  to='/'
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li className='uk-text-large'>
+                <NavLink
+                  activeClassName='active'
+                  className=' uk-text-capitalize'
+                  to='/noticies'
+                >
+                  Noticias
+                </NavLink>
+              </li>
+              <li className='uk-text-large'>
+                <NavLink
+                  activeClassName='active'
+                  className=' uk-text-capitalize'
+                  to='/stories'
+                >
+                  Historias
+                </NavLink>
+              </li>
+              <li className='uk-text-large'>
+                <NavLink
+                  activeClassName='active'
+                  className=' uk-text-capitalize'
+                  to='/organizations'
+                >
+                  Organizaciones
+                </NavLink>
+              </li>
+              <li className='uk-text-large'>
+                <NavLink
+                  activeClassName='active'
+                  className=' uk-text-capitalize'
+                  to='learning-about-violence'
+                >
+                  Aprendizaje
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+
+          <div className='uk-nav uk-navbar-right'>
+            <ul className='uk-navbar-nav uk-visible@s'>
               {!name ? (
-                <li className='nav-item '>
-                  <Link to='/auth/login' className='btn btn-secondary btn-lg'>
-                    Login
-                  </Link>
+                <li className='uk-text-large '>
+                  <NavLink
+                    activeClassName='active'
+                    to='/auth/login'
+                    className=' uk-text-capitalize uk-text-large'
+                  >
+                    Iniciar Sesion
+                  </NavLink>
                 </li>
               ) : (
-                <li className='nav-item dropleft'>
-                  <button
-                    className='btn btn-secondary btn-lg dropdown-toggle ml-2 mb-2'
-                    id='navbarDropdownMenuLink'
-                    data-toggle='dropdown'
-                    aria-haspopup='true'
-                    aria-expanded='false'
+                <li>
+                  <NavLink
+                    activeClassName='active'
+                    to='#'
+                    className='uk-text-large'
                   >
                     {name}
-                  </button>
+                  </NavLink>
+
                   <div
-                    className='dropdown-menu'
-                    aria-labelledby='navbarDropdownMenuLink'
+                    className='uk-navbar-dropdown uk-shadow'
+                    uk-drop='mode: click'
                   >
-                    <Link className='dropdown-item' to='/profile'>
-                      <FaUserCircle /> Perfil
-                    </Link>
-                    <button
-                      className='dropdown-item'
-                      onClick={() => dispatch(startLogout())}
-                    >
-                      <FaSignOutAlt /> Cerrar sesión
-                    </button>
+                    <ul className='uk-nav uk-navbar-dropdown-nav'>
+                      <li className='uk-active'>
+                        <NavLink
+                          activeClassName='active'
+                          className='uk-nav-header'
+                          to='/profile'
+                        >
+                          <FaUserCircle /> Perfil
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink
+                          activeClassName='active'
+                          to='#'
+                          onClick={() => dispatch(startLogout())}
+                          className='uk-nav-header'
+                        >
+                          <FaSignOutAlt />
+                          Cerrar Sesion
+                        </NavLink>
+                      </li>
+                    </ul>
                   </div>
                 </li>
               )}
             </ul>
+            <div className='uk-navbar-right'>
+              <NavLink
+                activeClassName='active'
+                to='#'
+                className='uk-navbar-toggle uk-hidden@s'
+                uk-navbar-toggle-icon=''
+                uk-toggle='target: #sidenav'
+              ></NavLink>
+            </div>
           </div>
+        </nav>
+      </header>
+
+      <div id='sidenav' uk-offcanvas='flip: true' className='uk-offcanvas'>
+        <div className='uk-offcanvas-bar'>
+          <ul className='uk-nav'>
+            <li className='uk-text-large'>
+              <NavLink
+                activeClassName='active'
+                className=' uk-text-capitalize'
+                to='/'
+              >
+                Home
+              </NavLink>
+            </li>
+            <li className='uk-text-large'>
+              <NavLink
+                activeClassName='active'
+                className=' uk-text-capitalize'
+                to='/noticies'
+              >
+                Noticias
+              </NavLink>
+            </li>
+            <li className='uk-text-large'>
+              <NavLink
+                activeClassName='active'
+                className=' uk-text-capitalize'
+                to='/stories'
+              >
+                Historias
+              </NavLink>
+            </li>
+            <li className='uk-text-large'>
+              <NavLink
+                activeClassName='active'
+                className=' uk-text-capitalize'
+                to='/organizations'
+              >
+                Organizaciones
+              </NavLink>
+            </li>
+            <li className='uk-text-large'>
+              <NavLink
+                activeClassName='active'
+                className=' uk-text-capitalize'
+                to='learning-about-violence'
+              >
+                Aprendizaje
+              </NavLink>
+            </li>
+            <li className='uk-text-large'>
+              <NavLink
+                activeClassName='active'
+                className=' uk-text-capitalize'
+                to='learning-about-violence'
+              >
+                Aprendizaje
+              </NavLink>
+            </li>
+            {!name ? (
+              <li className='uk-text-large '>
+                <NavLink
+                  activeClassName='active'
+                  to='/auth/login'
+                  className=' uk-text-capitalize uk-text-large'
+                >
+                  Iniciar Sesion
+                </NavLink>
+              </li>
+            ) : (
+              <li>
+                <NavLink
+                  activeClassName='active'
+                  to='#'
+                  className='uk-text-large'
+                >
+                  {name}
+                </NavLink>
+
+                <div
+                  className='uk-navbar-dropdown uk-shadow'
+                  uk-drop='mode: click'
+                >
+                  <ul className='uk-nav uk-navbar-dropdown-nav'>
+                    <li className='uk-active'>
+                      <NavLink
+                        activeClassName='active'
+                        className='uk-nav-header'
+                        to='/profile'
+                      >
+                        <FaUserCircle /> Perfil
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        activeClassName='active'
+                        to='#'
+                        onClick={() => dispatch(startLogout())}
+                        className='uk-nav-header'
+                      >
+                        <FaSignOutAlt />
+                        Cerrar Sesion
+                      </NavLink>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            )}
+          </ul>
         </div>
-      </nav>
+      </div>
     </>
   );
 };

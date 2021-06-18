@@ -8,18 +8,17 @@ export const OrganizationScreen = () => {
 
   const { data: organizations, loading } = useOrganizations();
   return (
-    <div className='container'>
+    <div className='uk-container'>
       {loading && (
         <h1>
-          <div className='d-flex justify-content-center'>
-            <strong>Cargando...</strong>
-            <div className='spinner-grow' role='status'>
-              <span className='sr-only'>Loading...</span>
-            </div>
-          </div>
+          <span>Cargando...</span>
+          <span uk-spinner='ratio: 4.5'></span>
         </h1>
       )}
-      <div className='row animate__animated   animate__fadeIn'>
+      <div
+        className='uk-grid-small uk-child-width-1-3@s uk-flex-center animate__animated   animate__fadeIn'
+        uk-grid=''
+      >
         {!location.pathname.includes('/organizations')
           ? organizations.map(
               (organization) =>

@@ -13,24 +13,36 @@ export const NoticeScreen = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <>
       {!!noticeArr && (
-        <div className='list-group animate__animated   animate__fadeIn'>
+        <ul className='uk-list uk-list-divider animate__animated   animate__fadeIn'>
           {noticeArr.map((notice) => (
-            <span
+            <li
               className='list-group-item  flex-column align-items-start '
               key={notice.id}
             >
-              <div className='d-flex w-100 justify-content-between'>
-                <h5 className='mb-1'>{notice.title}</h5>
-                <small>{moment(notice.date).calendar()}</small>
+              <div
+                className='uk-grid-column-small uk-grid-row-large '
+                uk-grid=''
+              >
+                <div className='uk-padding-remove-bottom'>
+                  <h5 className='uk-text-bold uk-text-large'>{`${notice.title.substr(
+                    0,
+                    70
+                  )} ...`}</h5>
+                </div>
+                <div className='uk-text-left uk-text-emphasis'>
+                  <small>{moment(notice.date).calendar()}</small>
+                </div>
               </div>
-              <p className='mb-1'>{`${notice.body.substr(0, 100)} ...`}</p>
-              <small>Donec id elit non mi porta.</small>
-            </span>
+              <p className='uk-text-break uk-text-muted'>{`${notice.body.substr(
+                0,
+                150
+              )} ...`}</p>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
-    </div>
+    </>
   );
 };

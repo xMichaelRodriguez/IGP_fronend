@@ -13,23 +13,28 @@ export const StoryScreen = () => {
   }, [dispatch]);
 
   return (
-    <div className='list-group animate__animated   animate__fadeIn'>
+    <ul className='uk-list uk-list-divider animate__animated   animate__fadeIn'>
       {storyArr.length !== 0 &&
         storyArr.map((story) => (
-          <span
-            key={story.id}
-            className='list-group-item flex-column align-items-start '
-          >
-            <div className='d-flex w-100 justify-content-between'>
-              <h5 className='mb-1'>{story.title}</h5>
-              <small>{moment(story.date).calendar()}</small>
+          <li key={story.id}>
+            <div className='uk-grid-column-small uk-grid-row-large ' uk-grid=''>
+              <div className='uk-padding-remove-bottom'>
+                <h5 className='uk-text-bold uk-text-large'>{`${story.title.substr(
+                  0,
+                  70
+                )} ...`}</h5>
+              </div>
+              <div className='uk-text-left uk-text-emphasis'>
+                <small>{moment(story.date).calendar()}</small>
+              </div>
             </div>
-            <p className='mb-1 px-1 text-break'>{`${story.body.substr(
+
+            <p className='uk-text-break uk-text-muted'>{`${story.body.substr(
               0,
-              100
+              150
             )} ...`}</p>
-          </span>
+          </li>
         ))}
-    </div>
+    </ul>
   );
 };
