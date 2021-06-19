@@ -1,103 +1,125 @@
-import React from 'react';
+import React, { useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+} from 'react-router-dom';
+import { CuentosView } from './CuentosView';
+import { historietasView } from './historietasView';
+import { RightSection } from './RightSection';
 
 export const ViolenceScreen = () => {
+  const [active, setActive] = useState(0);
+  // The `path` lets us build <Route> paths that are
+  // relative to the parent route, while the `url` lets
+  // us build relative links.
+  let { path, url } = useRouteMatch();
+
   return (
-    <div className='container'>
-      <section
-        style={{
-          backgroundColor: '#fff',
-        }}
-        className='p-3 mb-5   d-flex justify-content-center animate__animated   animate__fadeIn'
-      >
-        <div
-          id='carouselExampleIndicators'
-          className='carousel slide w-100'
-          data-ride='carousel'
-        >
-          <ol className='carousel-indicators'>
+    <div className='uk-container'>
+      <Router>
+        <div>
+          <ul className='uk-tab'>
             <li
-              data-target='#carouselExampleIndicators'
-              data-slide-to='0'
-              className='active'
-            />
-            <li data-target='#carouselExampleIndicators' data-slide-to='1' />
-            <li data-target='#carouselExampleIndicators' data-slide-to='2' />
-          </ol>
-          <div className='carousel-inner'>
-            <div className='carousel-item active'>
-              <img
-                className='d-block img-fluid w-100'
-                style={{ height: '300px' }}
-                src='https://www.unicef.org/argentina/sites/unicef.org.argentina/files/styles/hero_mobile/public/CVS-teaser_3.jpg?itok=2djE02Cw'
-                alt='slider of data'
-              />
-            </div>
+              className={`${active === 0 ? 'uk-active' : ''}`}
+              onClick={() => setActive(0)}
+            >
+              <Link to={`${url}`}>Principal</Link>
+            </li>
+            <li
+              className={`${active === 1 ? 'uk-active' : ''}`}
+              onClick={() => setActive(1)}
+            >
+              <Link to={`${url}/derechos`}>Derechos</Link>
+            </li>
+            <li
+              className={`${active === 2 ? 'uk-active' : ''}`}
+              onClick={() => setActive(2)}
+            >
+              <Link to={`${url}/cuentos`}>Cuentos</Link>
+            </li>
+            <li
+              className={`${active === 3 ? 'uk-active' : ''}`}
+              onClick={() => setActive(3)}
+            >
+              <Link to={`${url}/historietas`}>Historietas</Link>
+            </li>
+          </ul>
 
-            <div className='carousel-item'>
-              <img
-                className='d-block w-100'
-                style={{ height: '300px' }}
-                src='https://www.entrerios.gov.ar/copnaf/userfiles/images/crianzasinviolencia/CSV_Redes_FB_ER-05.jpg'
-                alt='slider of data'
-              />
-            </div>
+          <Switch>
+            <Route path={`${path}/derechos`} component={RightSection} />
+            <Route path={`${path}/cuentos`} component={CuentosView} />
+            <Route path={`${path}/historietas`} component={historietasView} />
+            <Route path={`${path}`}>
+              <div className='uk-card uk-card-default'>
+                <section className='uk-margin animate__animated   animate__fadeIn'>
+                  <div uk-slider=''>
+                    <ul className='uk-slider-items uk-child-width-1-2@s uk-child-width-1-3@m uk-grid'>
+                      <li>
+                        <img
+                          className='d-block img-fluid w-100'
+                          style={{ height: '300px' }}
+                          src='https://www.unicef.org/argentina/sites/unicef.org.argentina/files/styles/hero_mobile/public/CVS-teaser_3.jpg?itok=2djE02Cw'
+                          alt='slider of data'
+                        />
+                      </li>
+                      <li>
+                        <img
+                          className='d-block w-100'
+                          style={{ height: '300px' }}
+                          src='https://www.entrerios.gov.ar/copnaf/userfiles/images/crianzasinviolencia/CSV_Redes_FB_ER-05.jpg'
+                          alt='slider of data'
+                        />
+                      </li>
+                      <li>
+                        <img
+                          className='d-block w-100'
+                          style={{ height: '300px' }}
+                          src='https://www.entrerios.gov.ar/copnaf/userfiles/images/crianzasinviolencia/CSV_Redes_FB_ER-02.jpg'
+                          alt='slider of data'
+                        />
+                      </li>
+                    </ul>
+                  </div>
+                </section>
 
-            <div className='carousel-item'>
-              <img
-                className='d-block w-100'
-                style={{ height: '300px' }}
-                src='https://www.entrerios.gov.ar/copnaf/userfiles/images/crianzasinviolencia/CSV_Redes_FB_ER-02.jpg'
-                alt='slider of data'
-              />
-            </div>
-          </div>
-          <a
-            className='carousel-control-prev'
-            href='#carouselExampleIndicators'
-            role='button'
-            data-slide='prev'
-          >
-            <span className='carousel-control-prev-icon' aria-hidden='true' />
-            <span className='sr-only'>Previous</span>
-          </a>
-          <a
-            className='carousel-control-next'
-            href='#carouselExampleIndicators'
-            role='button'
-            data-slide='next'
-          >
-            <span className='carousel-control-next-icon' aria-hidden='true' />
-            <span className='sr-only'>Next</span>
-          </a>
+                <section className='animate__animated   animate__fadeIn'>
+                  <h2 className='uk-text-center'>
+                    <dfn>Historietas</dfn>
+                  </h2>
+                  <div className='uk-text-center'>
+                    <img
+                      src='https://i.imgur.com/6qqDtWo.jpg'
+                      className='img-thumbnail w-100 '
+                      alt='historieta'
+                      style={{ height: '600px' }}
+                    />
+                  </div>
+                </section>
+
+                <section className='uk-margin animate__animated   animate__fadeIn mb-5'>
+                  <h2 className='uk-text-center'>
+                    <dfn>Cuentos</dfn>
+                  </h2>
+                  <div className='uk-column-1-1 uk-padding uk-text-center'>
+                    <iframe
+                      title='cuentto'
+                      src='https://www.youtube.com/embed/eqA-rVwSZk8'
+                      width='600'
+                      height='400'
+                      frameBorder='0'
+                      allowFullScreen=''
+                      uk-responsive=''
+                    ></iframe>
+                  </div>
+                </section>
+              </div>
+            </Route>
+          </Switch>
         </div>
-      </section>
-
-      <section className='mb-5 animate__animated   animate__fadeIn'>
-        <h2 className='text-center'>
-          <ins>Historietas</ins>
-        </h2>
-        <div className=' w-100 d-flex justify-content-center'>
-          <img
-            src='https://i.imgur.com/6qqDtWo.jpg'
-            className='img-thumbnail w-100 '
-            alt='historieta'
-            style={{ height: '600px' }}
-          />
-        </div>
-      </section>
-
-      <section className=' w-100 animate__animated   animate__fadeIn mb-5'>
-        <h2 className='text-center'>
-          <ins>Cuentos</ins>
-        </h2>
-        <div className='embed-responsive embed-responsive-16by9'>
-          <iframe
-            className='embed-responsive-item h-100'
-            src='https://www.youtube.com/embed/eqA-rVwSZk8'
-            title='Cuento'
-          ></iframe>
-        </div>
-      </section>
+      </Router>
     </div>
   );
 };

@@ -1,15 +1,15 @@
-import React from "react";
-import { FaChevronRight } from "react-icons/fa";
+import React from 'react';
+import { FaChevronRight } from 'react-icons/fa';
 
 export const LearningOptions = (props) => {
   const options = [
     {
-      text: "¿Quieres saber cuáles son tus derechos fundamentales?",
+      text: '¿Quieres saber cuáles son tus derechos fundamentales?',
       handler: props.actionProvider.handleDerechos,
       id: 1,
     },
     {
-      text: "¿Quieres saber que organizaciones protegen tus derechos?",
+      text: '¿Quieres saber que organizaciones protegen tus derechos?',
       handler: props.actionProvider.handleOrganizations,
       id: 2,
     },
@@ -18,11 +18,11 @@ export const LearningOptions = (props) => {
   const optionsMarkup = options.map((option) => (
     <blockquote
       key={option.id}
-      className="blockquote primary rounded p-2 cursor shadow-sm"
+      className='uk-padding-small primary cursor'
+      style={{ borderRadius: '10px' }}
       onClick={option.handler}
     >
-      <p className="m-auto">
-     
+      <p className='uk-margin'>
         <FaChevronRight /> {option.text}
       </p>
     </blockquote>
@@ -30,8 +30,8 @@ export const LearningOptions = (props) => {
 
   return (
     <div
-      className="d-flex  align-items-start flex-wrap container-sm"
-      style={{ marginRight: "auto", padding: 5 }}
+      className='uk-container-small '
+      style={{ marginRight: 'auto', padding: 5 }}
     >
       {optionsMarkup}
     </div>

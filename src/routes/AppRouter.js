@@ -12,6 +12,7 @@ import { ProfileRoute } from './ProfileRoute';
 import { PublicRoutes } from './PublicRoutes';
 import { startChecking } from '../actions/authActios';
 import { WaitScreen } from '../components/wait/WaitScreen';
+
 export const AppRouter = () => {
   const { checking, uid } = useSelector((state) => state.auth);
   const dispatch = useDispatch();

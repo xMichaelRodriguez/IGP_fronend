@@ -32,24 +32,31 @@ export const StoryCard = ({ history }) => {
     );
   }
   return (
-    <div className='card p-3 mb-5   animate__animated   animate__fadeIn'>
-      <div className='card-body'>
-        <div className='card-title d-block justify-content-between   animate__animated   animate__fadeIn'>
+    <div
+      className='animate__animated animate__fadeInDown '
+      style={{
+        margin: '20px',
+        padding: '10px',
+        width: 'auto',
+        display: 'flex',
+        justifyContent: 'center',
+      }}
+    >
+      <div className=' uk-card uk-card-default uk-card-body uk-width-1-2@m  '>
+        <div className='uk-card-title'>
           <h1>{story.title}</h1>
           <h6 className='text-muted'>{moment(story.date).calendar()}</h6>
         </div>
 
-        <p
-          className='card-text text-justify  animate__animated   animate__fadeIn'
-          style={{ fontSize: '20px' }}
-        >
+        <p className='uk-text-justify' style={{ fontSize: '20px' }}>
           {story.body}
         </p>
-      </div>
-      <div className='card-footer  animate__animated   animate__fadeIn'>
-        <Link className='btn btn-info btn-lg' to='/stories'>
-          <BsArrowReturnLeft size='1.5rem' /> Volver
-        </Link>
+
+        <div className=''>
+          <Link className='uk-button uk-button-text' to='/noticies'>
+            <BsArrowReturnLeft size='1.5rem' /> Volver
+          </Link>
+        </div>
       </div>
     </div>
   );

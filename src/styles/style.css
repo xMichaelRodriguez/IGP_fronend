@@ -15,8 +15,6 @@ body {
   color: white;
 }
 
-
-
 .centered {
   display: flex;
   align-items: center;
@@ -25,4 +23,8 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.uk-tab > .uk-active > a {
+  border-color: #6a1576;
 }

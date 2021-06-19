@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "../../hooks/useForm";
-import "./style.css";
-import validator from "validator";
-import { startLogin } from "../../actions/authActios";
-import { useHistory } from "react-router";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from '../../hooks/useForm';
+import './style.css';
+import validator from 'validator';
+import { startLogin } from '../../actions/authActios';
+import { useHistory } from 'react-router';
 export const LoginScreen = () => {
   const { msgError } = useSelector((state) => state.error);
   const { uid } = useSelector((state) => state.auth);
@@ -16,14 +16,14 @@ export const LoginScreen = () => {
   const [ErrorP, setErrorP] = useState(true);
 
   const [formValue, handleInputChange] = useForm({
-    email: "admin@gmail.com",
-    password: "thePassword123",
+    email: 'admin@gmail.com',
+    password: 'thePassword123',
   });
   const { email, password } = formValue;
 
   useEffect(() => {
     if (uid) {
-      return history.push("/");
+      return history.push('/');
     }
   }, [uid, history]);
 
@@ -49,48 +49,48 @@ export const LoginScreen = () => {
   };
 
   return (
-    <div className="container   login">
-      <div className="form-row shadow login__box">
-        <div className="col-md-12 mb-3 mt-1">
+    <div className='uk-container   login '>
+      <div className='uk-grid login__box uk-card uk-card-default' uk-grid=''>
+        <div className='uk-width-1-1'>
           <h2>login</h2>
         </div>
-        <div className="col-md-12 mb-3">
-          <div className={`form-group ${!ErrorE && "has-danger"}  `}>
+        <div className='uk-width-1-1'>
+          <div>
             <input
-              type="text"
-              className={`form-control ${!ErrorE && "is-invalid"} `}
-              name="email"
+              type='text'
+              className={`uk-input  ${!ErrorE && 'uk-form-danger'} `}
+              name='email'
               value={email}
               onChange={handleInputChange}
-              placeholder="email"
+              placeholder='email'
             />
-            {!ErrorE && <div className="invalid-feedback">Invalid Email</div>}
+            {!ErrorE && (
+              <span class='uk-label uk-label-danger'>Correo invalido</span>
+            )}
           </div>
         </div>
-        <div className="col-md-12 mb-3">
-          <div className={`form-group ${!ErrorP && "has-danger"}  `}>
+        <div className='uk-width-1-1'>
+          <div>
             <input
-              type="password"
-              name="password"
+              type='password'
+              name='password'
               value={password}
               onChange={handleInputChange}
-              className={`form-control ${!ErrorP && "is-invalid"} `}
-              placeholder="password"
+              className={`uk-input ${!ErrorP && 'uk-form-danger'} `}
+              placeholder='password'
             />
             {!ErrorP && (
-              <div className="invalid-feedback">Invalid Password</div>
+              <span class='uk-label uk-label-danger'>Contraseña invalida</span>
             )}
           </div>
         </div>
         {!!msgError && (
           <h3>
-            <span className="badge badge-danger font-weight-normal">
-              {msgError}
-            </span>
+            <span className='uk-label uk-label-danger'>{msgError}</span>
           </h3>
         )}
-        <div className="col-md-12 mb-3 ">
-          <button className="btn btn-info btn-block" onClick={handleLogin}>
+        <div className='uk-width-1-1 '>
+          <button className='uk-button primary' onClick={handleLogin}>
             Iniciar Sesión
           </button>
         </div>

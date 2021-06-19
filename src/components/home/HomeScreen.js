@@ -65,65 +65,6 @@ export const HomeScreen = () => {
             ></Link>
           </div>
         </div>
-
-        {/* <div
-          id='carouselExampleIndicators'
-          className='carousel slide w-100'
-          data-ride='carousel'
-        >
-          <ol className='carousel-indicators'>
-            <li
-              data-target='#carouselExampleIndicators'
-              data-slide-to='0'
-              className='active'
-            />
-            <li data-target='#carouselExampleIndicators' data-slide-to='1' />
-            <li data-target='#carouselExampleIndicators' data-slide-to='2' />
-          </ol>
-          <div className='carousel-inner'>
-            <div className='carousel-item active'>
-              <img
-                className='d-block img-fluid w-100'
-                style={{ height: '300px' }}
-                alt=''
-              />
-            </div>
-
-            <div className='carousel-item'>
-              <img
-                className='d-block w-100'
-                style={{ height: '300px' }}
-                alt=''
-              />
-            </div>
-
-            <div className='carousel-item'>
-              <img
-                className='d-block w-100'
-                style={{ height: '300px' }}
-                alt=''
-              />
-            </div>
-          </div>
-          <a
-            className='carousel-control-prev'
-            href='#carouselExampleIndicators'
-            role='button'
-            data-slide='prev'
-          >
-            <span className='carousel-control-prev-icon' aria-hidden='true' />
-            <span className='sr-only'>Previous</span>
-          </a>
-          <a
-            className='carousel-control-next'
-            href='#carouselExampleIndicators'
-            role='button'
-            data-slide='next'
-          >
-            <span className='carousel-control-next-icon' aria-hidden='true' />
-            <span className='sr-only'>Next</span>
-          </a>
-        </div> */}
       </section>
 
       <section className=' uk-margin uk-card uk-card-default uk-card-body animate__animated   animate__fadeIn'>
@@ -167,7 +108,7 @@ export const HomeScreen = () => {
             </Link>
           </div>
         </div>
-        <hr class='uk-divider-icon' />
+        <hr className='uk-divider-icon' />
         <StoryScreen />
       </section>
 
@@ -184,12 +125,12 @@ export const HomeScreen = () => {
             </Link>
           </div>
         </div>
-        <hr class='uk-divider-icon' />
+        <hr className='uk-divider-icon' />
 
         <NoticeScreen />
       </section>
 
-      <section className='uk-margin uk-card uk-card-default uk-card-body animate__animated   animate__fadeIn'>
+      <section className='uk-margin-bottom uk-card uk-card-default uk-card-body animate__animated   animate__fadeIn'>
         <div
           className='uk-grid-column-small uk-grid-row-large animate__animated   animate__fadeIn'
           uk-grid=''
@@ -206,7 +147,7 @@ export const HomeScreen = () => {
             </Link>
           </div>
         </div>
-        <hr class='uk-divider-icon' />
+        <hr className='uk-divider-icon' />
 
         <OrganizationScreen />
       </section>

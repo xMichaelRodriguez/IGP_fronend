@@ -39,43 +39,39 @@ export const NoticeList = () => {
   }, [dispatch, pageNext]);
 
   return (
-    <div className='container'>
-      {!!noticeArr ? (
-        <>
-          <nav aria-label='Page navigation example'>
-            <ul className='pagination justify-content-end animate__animated   animate__fadeIn'>
-              <li
-                className={`page-item ${
-                  pageNext === INITIAL_PAGE ? 'disabled hand' : 'active'
-                }`}
-                onClick={handlePrevpage}
-              >
-                <span className='page-link' style={{ cursor: 'pointer' }}>
-                  Anterior
-                </span>
-              </li>
+    !!noticeArr && (
+      <div className='uk-container uk-padding-small'>
+        <ul className='uk-pagination animate__animated   animate__fadeIn'>
+          <li
+            className={`uk-text-bold ${
+              pageNext === INITIAL_PAGE ? 'uk-disabled hand' : ''
+            }`}
+            style={{ cursor: 'pointer' }}
+          >
+            <span onClick={handlePrevpage}>
+              <span uk-pagination-previous=''></span> Anterior
+            </span>
+          </li>
+          <li
+            className={`uk-text-bold ${
+              pageNext === total_page ? 'uk-disabled hand' : ''
+            }`}
+            style={{ cursor: 'pointer' }}
+          >
+            <span onClick={handleNextPage}>
+              Siguiente <span uk-pagination-next=''></span>
+            </span>
+          </li>
+        </ul>
 
-              <li
-                className={`page-item ${
-                  pageNext === total_page ? 'disabled hand' : 'active'
-                }`}
-                onClick={handleNextPage}
-              >
-                <span className='page-link ' style={{ cursor: 'pointer' }}>
-                  Siguiente
-                </span>
-              </li>
-            </ul>
-          </nav>
-          <div className='card-columns mb-5'>
-            {noticeArr.map((notice) => (
-              <NoticeNavItem key={notice.id} {...notice} />
-            ))}
-          </div>
-        </>
-      ) : (
-        <h1>hola</h1>
-      )}
-    </div>
+        <div className='uk-child-width-expand@s uk-grid-small ' uk-grid=''>
+          {noticeArr.map((story) => (
+            <div className='uk-width-1-3@m' key={story.id}>
+              <NoticeNavItem {...story} />
+            </div>
+          ))}
+        </div>
+      </div>
+    )
   );
 };

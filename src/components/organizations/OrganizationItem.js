@@ -1,6 +1,5 @@
 import React from 'react';
-import { BsCaretRightFill, BsEnvelope } from 'react-icons/bs';
-import { useHistory } from 'react-router';
+
 import { Link } from 'react-router-dom';
 export const OrganizationItem = ({
   name,
@@ -13,11 +12,10 @@ export const OrganizationItem = ({
   avatar_file_url,
   website_url,
 }) => {
-  const history = useHistory();
   return (
     <div className='uk-width-1-3@s'>
-      <div class='uk-card uk-card-default uk-card-body uk-padding-remove'>
-        <div class='uk-card-media-left uk-cover-container'>
+      <div className='uk-card uk-card-hover uk-card-default uk-card-body uk-padding-remove'>
+        <div className='uk-card-media-left uk-cover-container'>
           <img
             src={
               !avatar_file_url.includes('missing')

@@ -51,20 +51,28 @@ export const DeleteButtonFab = () => {
 
   return (
     <div
-      className='btn-group animate__animated   animate__fadeIn'
+      className='uk-button-group animate__animated animate__fadeInUp'
       style={{ position: 'fixed', left: '20px', bottom: '80px' }}
       role='group'
       aria-label='Basic example'
     >
-      <button type='button' className='btn btn-danger' onClick={handleDelete}>
+      <button
+        type='button'
+        className='uk-button uk-button-danger'
+        onClick={handleDelete}
+      >
         <FaTrash />
         <span> Borrar</span>
       </button>
-      <button type='button' className='btn btn-secondary' onClick={handleEdit}>
+      <button
+        type='button'
+        className='uk-button uk-button-sencundary'
+        onClick={handleEdit}
+      >
         <span>Editar </span>
         <FaEdit />
       </button>
-      <button type='button' className='btn btn-info' onClick={handleClear}>
+      <button type='button' className='uk-button primary' onClick={handleClear}>
         <span>Cancelar </span>
         <FaTimes />
       </button>

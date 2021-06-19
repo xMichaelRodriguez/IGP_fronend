@@ -53,13 +53,13 @@ export const DashBoard = () => {
 
           <Route path='/learning-about-violence' component={ViolenceScreen} />
 
-          <Route exact path='/' component={HomeScreen} />
+          <Route path='/' component={HomeScreen} />
         </Switch>
 
         <div className='positions'>
           {ChatOpen && (
             <div
-              className={`mb-5 animate__animated ${
+              className={`uk-margin-medium-bottom animate__animated ${
                 ChatOpen === false
                   ? 'animate__fadeInDown'
                   : ' animate__fadeInUp'
@@ -75,7 +75,8 @@ export const DashBoard = () => {
         </div>
       </div>
       <button
-        className='btn primary mt-2 rounded-circle cursor chat shadow animate__animated animate__rubberBand mb-3'
+        className='uk-button primary cursor chat shadow animate__animated animate__rubberBand uk-margin-medium'
+        style={{ borderRadius: '100%' }}
         onClick={handlerDisplayChat}
       >
         <BsFillChatSquareFill size='2rem' />

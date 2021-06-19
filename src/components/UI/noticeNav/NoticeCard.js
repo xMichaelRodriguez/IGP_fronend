@@ -21,33 +21,34 @@ export const NoticeCard = () => {
       }
     })();
   }, [noticeId]);
-  return notice !== {} ? (
-    <div className='card animate__animated   animate__fadeIn '>
-      <div className='card-body'>
-        <div className='card-title titulo_card d-block justify-content-between  animate__animated   animate__fadeIn'>
-          <h1>{notice.title}</h1>
-          <h6 className='text-muted'>{moment(notice.date).calendar()}</h6>
-        </div>
+  return (
+    notice !== {} && (
+      <div
+        style={{
+          margin: '20px',
+          padding: '10px',
+          width: 'auto',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <div className=' uk-card uk-card-default uk-card-body uk-width-1-2@m animate__animated   animate__fadeIn '>
+          <div className='uk-card-title'>
+            <h1>{notice.title}</h1>
+            <h6 className='text-muted'>{moment(notice.date).calendar()}</h6>
+          </div>
 
-        <p
-          className='card-text text-justify animate__animated   animate__fadeIn'
-          style={{ fontSize: '20px' }}
-        >
-          {notice.body}
-        </p>
+          <p className='uk-text-justify' style={{ fontSize: '20px' }}>
+            {notice.body}
+          </p>
+
+          <div className=''>
+            <Link className='uk-button uk-button-text' to='/noticies'>
+              <BsArrowReturnLeft size='1.5rem' /> Volver
+            </Link>
+          </div>
+        </div>
       </div>
-      <div className='card-footer animate__animated   animate__fadeIn'>
-        <Link className='btn btn-info btn-lg' to='/noticies'>
-          <BsArrowReturnLeft size='1.5rem' /> Volver
-        </Link>
-      </div>
-    </div>
-  ) : (
-    <div className='d-flex justify-content-center'>
-      <strong>Cargando...</strong>
-      <div className='spinner-grow' role='status'>
-        <span className='sr-only'>Loading...</span>
-      </div>
-    </div>
+    )
   );
 };

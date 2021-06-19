@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../story/storyStyles.css';
-import { FaSave } from 'react-icons/fa';
+import { FaChevronLeft, FaSave } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import validator from 'validator';
 import { setError, uiRemoveError } from '../../../actions/authActios';
@@ -85,7 +85,7 @@ export const NewNotice = () => {
     <>
       <button
         type='button'
-        className='btn btn-link font-weight-bolder animate__animated animate__fadeIn'
+        className='uk-button uk-button-text uk-text-bold animate__animated animate__fadeIn'
         style={{ fontSize: '15px' }}
         onClick={() => {
           dispatch(noticeClearActive());
@@ -93,82 +93,68 @@ export const NewNotice = () => {
           history.push('/profile/noticies');
         }}
       >
-        &#x2039; Volver
+        <FaChevronLeft /> Volver
       </button>
 
       <form
-        className='mb-3 shadow-p p-4 mb-5 animate__animated animate__fadeIn'
+        className='uk-card uk-card-default uk-margin uk-padding animate__animated animate__fadeIn'
         onSubmit={handleSavedNotice}
       >
-        <fieldset>
-          <legend className='font-weight-bold'>
-            {activeNotice ? 'Editar Notica' : 'Nueva Noticia'}
-          </legend>
+        <legend className='uk-text-bold'>
+          {activeNotice ? 'Editar Notica' : 'Nueva Noticia'}
+        </legend>
 
-          <div
-            className={`form-group ${
+        <div className='uk-margin'>
+          <label htmlFor='title' className='uk-form-label'>
+            Title
+          </label>
+          <input
+            type='text'
+            className={`uk-input ${
               (msgError.includes('Titulo') || msgError.includes('Minimo')) &&
-              'has-danger'
+              'uk-form-danger'
             }`}
-          >
-            <label htmlFor='title' className='form-label mt-4 font-weight-bold'>
-              Title
-            </label>
-            <input
-              type='text'
-              className={`form-control ${
-                (msgError.includes('Titulo') || msgError.includes('Minimo')) &&
-                'is-invalid'
-              }`}
-              id='title'
-              value={title}
-              name='title'
-              onChange={handleInputChange}
-              aria-describedby='emailHelp'
-              placeholder='Enter email'
-            />
-            <span className='invalid-feedback'>
-              {(msgError.includes('Titulo') || msgError.includes('Minimo')) &&
-                msgError}
-            </span>
-          </div>
-          <div
-            className={`form-group ${
+            id='title'
+            value={title}
+            name='title'
+            onChange={handleInputChange}
+            aria-describedby='emailHelp'
+            placeholder='Enter email'
+          />
+          <span className='uk-label uk-label-danger'>
+            {(msgError.includes('Titulo') || msgError.includes('Minimo')) &&
+              msgError}
+          </span>
+        </div>
+
+        <div className='uk-margin'>
+          <label htmlFor='noticebody' className='uk-form-label'>
+            Cuerpo de la noticia
+          </label>
+          <textarea
+            type='text'
+            className={`uk-textarea ${
               (msgError.includes('Cuerpo') || msgError.includes('almenos')) &&
-              'has-danger'
+              'uk-form-danger'
             }`}
-          >
-            <label
-              htmlFor='noticebody'
-              className='form-label mt-4 font-weight-bold'
-            >
-              Cuerpo de la noticia
-            </label>
-            <textarea
-              type='text'
-              className={`form-control ${
-                (msgError.includes('Cuerpo') || msgError.includes('almenos')) &&
-                'is-invalid'
-              }`}
-              id='noticebody'
-              value={body}
-              name='body'
-              onChange={handleInputChange}
-              placeholder='notica...'
-              rows='5'
-            ></textarea>
-            <span className='invalid-feedback'>
-              {(msgError.includes('Cuerpo') || msgError.includes('almenos')) &&
-                msgError}
-            </span>
-          </div>
-          <div className='mb-3'>
-            <button type='submit' className='btn btn-info btn-lg  '>
-              <FaSave size='1.5rem' className='mr-1' />{' '}
-              {activeNotice ? 'publicar cambios' : 'publicar'}
-            </button>
-          </div>
-        </fieldset>
+            id='noticebody'
+            value={body}
+            name='body'
+            onChange={handleInputChange}
+            placeholder='notica...'
+            rows='5'
+          ></textarea>
+          <span className='uk-label uk-label-danger'>
+            {(msgError.includes('Cuerpo') || msgError.includes('almenos')) &&
+              msgError}
+          </span>
+        </div>
+        <div className='uk-margin'>
+          <button type='submit' className='uk-button primary uk-width-1-1 '>
+            <FaSave size='1.5rem' className='mr-1' />{' '}
+            {activeNotice ? 'publicar cambios' : 'publicar'}
+          </button>
+        </div>
       </form>
     </>
   );

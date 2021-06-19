@@ -5,7 +5,7 @@ import { storyStartLoading, storyClearActive } from '../../../actions/events';
 import { DeleteButtonFab } from '../../UI/DeleteButtonFab';
 import { StoryNavItem } from '../../UI/storyNav/StoryNavItem';
 // icons
-import { BsPlus, BsChevronRight, BsChevronLeft } from 'react-icons/bs';
+import { BsPlus } from 'react-icons/bs';
 
 const INITIAL_PAGE = 1;
 export const StoryScreen = () => {
@@ -56,55 +56,44 @@ export const StoryScreen = () => {
   return (
     <>
       <button
-        className='btn btn-info mb-3  animate__animated animate__fadeIn'
+        className='uk-button primary mb-3  animate__animated animate__fadeIn'
         onClick={handleNewStory}
       >
         <BsPlus size='1.5rem' /> &nbsp; Nueva historia
       </button>
-      <hr />
+      <hr className='uk-divider-icon' />
 
-      {storyArr && storyArr.length !== 0 ? (
+      {storyArr && storyArr.length !== 0 && (
         <>
-          <nav aria-label='Page navigation example'>
-            <ul className='pagination justify-content-end animate__animated animate__fadeIn'>
-              <li
-                className={`page-item ${
-                  pageNext === INITIAL_PAGE ? 'disabled hand' : 'active'
-                }`}
-                onClick={handlePrevpage}
-              >
-                <span className='page-link' style={{ cursor: 'pointer' }}>
-                  <BsChevronLeft />
-                  Anterior
-                </span>
-              </li>
+          <ul className='uk-pagination animate__animated   animate__fadeIn'>
+            <li
+              className={`uk-text-bold ${
+                pageNext === INITIAL_PAGE ? 'uk-disabled hand' : ''
+              }`}
+              style={{ cursor: 'pointer' }}
+            >
+              <span onClick={handlePrevpage}>
+                <span uk-pagination-previous=''></span> Anterior
+              </span>
+            </li>
+            <li
+              className={`uk-text-bold ${
+                pageNext === total_page ? 'uk-disabled hand' : ''
+              }`}
+              style={{ cursor: 'pointer' }}
+            >
+              <span onClick={handleNextPage}>
+                Siguiente <span uk-pagination-next=''></span>
+              </span>
+            </li>
+          </ul>
 
-              <li
-                className={`page-item ${
-                  pageNext === total_page ? 'disabled hand ' : 'active'
-                }`}
-                onClick={handleNextPage}
-              >
-                <span className='page-link ' style={{ cursor: 'pointer' }}>
-                  Siguiente <BsChevronRight />
-                </span>
-              </li>
-            </ul>
-          </nav>
-
-          <div className='card-columns mb-5'>
+          <div className='uk-child-width-expand@s uk-grid-small ' uk-grid=''>
             {storyArr.map((story) => (
-              <StoryNavItem {...story} key={story.id} />
+              <div className='uk-width-1-3@m' key={story.id}>
+                <StoryNavItem {...story} key={story.id} />
+              </div>
             ))}
-          </div>
-        </>
-      ) : (
-        <>
-          <strong>Cargando...</strong>
-          <div className='d-flex justify-content-center'>
-            <div className='spinner-border' role='status'>
-              <span className='sr-only'>Loading...</span>
-            </div>
           </div>
         </>
       )}

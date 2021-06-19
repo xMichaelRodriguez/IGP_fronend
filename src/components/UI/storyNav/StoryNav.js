@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { storyStartLoading } from '../../../actions/events';
+
 import { StoryNavItem } from './StoryNavItem';
 
 const INITIAL_PAGE = 1;
@@ -38,45 +39,40 @@ export const StoryNav = () => {
     dispatch(storyStartLoading({ page: pageNext }));
   }, [dispatch, pageNext]);
 
-  return !!storyArr ? (
-    <div className='container'>
-      <nav aria-label='Page navigation example mb-3'>
-        <ul className='pagination justify-content-end animate__animated   animate__fadeIn'>
+  return (
+    !!storyArr && (
+      <div className='uk-container uk-padding-small'>
+        <ul className='uk-pagination animate__animated   animate__fadeIn'>
           <li
-            className={`page-item ${
-              pageNext === INITIAL_PAGE ? 'disabled hand' : 'active'
+            className={`uk-text-bold ${
+              pageNext === INITIAL_PAGE ? 'uk-disabled hand' : ''
             }`}
-            onClick={handlePrevpage}
+            style={{ cursor: 'pointer' }}
           >
-            <span className='page-link' style={{ cursor: 'pointer' }}>
-              Anterior
+            <span onClick={handlePrevpage}>
+              <span uk-pagination-previous=''></span> Anterior
             </span>
           </li>
-
           <li
-            className={`page-item ${
-              pageNext === total_page ? 'disabled hand' : 'active'
+            className={`uk-text-bold ${
+              pageNext === total_page ? 'uk-disabled hand' : ''
             }`}
-            onClick={handleNextPage}
+            style={{ cursor: 'pointer' }}
           >
-            <span className='page-link ' style={{ cursor: 'pointer' }}>
-              Siguiente
+            <span onClick={handleNextPage}>
+              Siguiente <span uk-pagination-next=''></span>
             </span>
           </li>
         </ul>
-      </nav>
-      <div className='card-columns mt-1 mb-5'>
-        {storyArr.map((story) => (
-          <StoryNavItem key={story.id} {...story} />
-        ))}
+
+        <div className='uk-child-width-expand@s uk-grid-small ' uk-grid=''>
+          {storyArr.map((story) => (
+            <div className='uk-width-1-3@m' key={story.id}>
+              <StoryNavItem {...story} />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  ) : (
-    <div className='d-flex justify-content-center'>
-      <strong>Cargando...</strong>
-      <div className='spinner-border' role='status'>
-        <span className='sr-only'>Loading...</span>
-      </div>
-    </div>
+    )
   );
 };

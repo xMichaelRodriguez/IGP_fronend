@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useHistory } from 'react-router-dom';
 import './styles.css';
 
 import { FaSignOutAlt, FaUserCircle } from 'react-icons/fa';
@@ -9,6 +9,7 @@ import logo from '../UVS-APP.svg';
 
 export const NavbarScreen = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const { name } = useSelector((state) => state.auth);
   return (
@@ -32,7 +33,7 @@ export const NavbarScreen = () => {
             <ul className='uk-navbar-nav uk-visible@s'>
               <li className='uk-text-large '>
                 <NavLink
-                  activeClassName='active'
+                  activeClassName='uk-active'
                   className=' uk-text-capitalize'
                   to='/'
                 >
@@ -41,7 +42,7 @@ export const NavbarScreen = () => {
               </li>
               <li className='uk-text-large'>
                 <NavLink
-                  activeClassName='active'
+                  activeClassName='uk-active'
                   className=' uk-text-capitalize'
                   to='/noticies'
                 >
@@ -50,7 +51,7 @@ export const NavbarScreen = () => {
               </li>
               <li className='uk-text-large'>
                 <NavLink
-                  activeClassName='active'
+                  activeClassName='uk-active'
                   className=' uk-text-capitalize'
                   to='/stories'
                 >
@@ -59,7 +60,7 @@ export const NavbarScreen = () => {
               </li>
               <li className='uk-text-large'>
                 <NavLink
-                  activeClassName='active'
+                  activeClassName='uk-active'
                   className=' uk-text-capitalize'
                   to='/organizations'
                 >
@@ -68,7 +69,7 @@ export const NavbarScreen = () => {
               </li>
               <li className='uk-text-large'>
                 <NavLink
-                  activeClassName='active'
+                  activeClassName='uk-active'
                   className=' uk-text-capitalize'
                   to='learning-about-violence'
                 >
@@ -83,8 +84,9 @@ export const NavbarScreen = () => {
               {!name ? (
                 <li className='uk-text-large '>
                   <NavLink
-                    activeClassName='active'
+                    activeClassName='uk-active'
                     to='/auth/login'
+                    onClick={() => history.push('/auth/login')}
                     className=' uk-text-capitalize uk-text-large'
                   >
                     Iniciar Sesion
@@ -93,7 +95,7 @@ export const NavbarScreen = () => {
               ) : (
                 <li>
                   <NavLink
-                    activeClassName='active'
+                    activeClassName='uk-active'
                     to='#'
                     className='uk-text-large'
                   >
@@ -107,7 +109,7 @@ export const NavbarScreen = () => {
                     <ul className='uk-nav uk-navbar-dropdown-nav'>
                       <li className='uk-active'>
                         <NavLink
-                          activeClassName='active'
+                          activeClassName='uk-active'
                           className='uk-nav-header'
                           to='/profile'
                         >
@@ -116,7 +118,7 @@ export const NavbarScreen = () => {
                       </li>
                       <li>
                         <NavLink
-                          activeClassName='active'
+                          activeClassName='uk-active'
                           to='#'
                           onClick={() => dispatch(startLogout())}
                           className='uk-nav-header'
@@ -132,7 +134,7 @@ export const NavbarScreen = () => {
             </ul>
             <div className='uk-navbar-right'>
               <NavLink
-                activeClassName='active'
+                activeClassName='uk-active'
                 to='#'
                 className='uk-navbar-toggle uk-hidden@s'
                 uk-navbar-toggle-icon=''
@@ -148,7 +150,7 @@ export const NavbarScreen = () => {
           <ul className='uk-nav'>
             <li className='uk-text-large'>
               <NavLink
-                activeClassName='active'
+                activeClassName='uk-active'
                 className=' uk-text-capitalize'
                 to='/'
               >
@@ -157,7 +159,7 @@ export const NavbarScreen = () => {
             </li>
             <li className='uk-text-large'>
               <NavLink
-                activeClassName='active'
+                activeClassName='uk-active'
                 className=' uk-text-capitalize'
                 to='/noticies'
               >
@@ -166,7 +168,7 @@ export const NavbarScreen = () => {
             </li>
             <li className='uk-text-large'>
               <NavLink
-                activeClassName='active'
+                activeClassName='uk-active'
                 className=' uk-text-capitalize'
                 to='/stories'
               >
@@ -175,7 +177,7 @@ export const NavbarScreen = () => {
             </li>
             <li className='uk-text-large'>
               <NavLink
-                activeClassName='active'
+                activeClassName='uk-active'
                 className=' uk-text-capitalize'
                 to='/organizations'
               >
@@ -184,7 +186,7 @@ export const NavbarScreen = () => {
             </li>
             <li className='uk-text-large'>
               <NavLink
-                activeClassName='active'
+                activeClassName='uk-active'
                 className=' uk-text-capitalize'
                 to='learning-about-violence'
               >
@@ -193,7 +195,7 @@ export const NavbarScreen = () => {
             </li>
             <li className='uk-text-large'>
               <NavLink
-                activeClassName='active'
+                activeClassName='uk-active'
                 className=' uk-text-capitalize'
                 to='learning-about-violence'
               >
@@ -203,8 +205,9 @@ export const NavbarScreen = () => {
             {!name ? (
               <li className='uk-text-large '>
                 <NavLink
-                  activeClassName='active'
+                  activeClassName='uk-active'
                   to='/auth/login'
+                  onClick={() => history.push('/auth/login')}
                   className=' uk-text-capitalize uk-text-large'
                 >
                   Iniciar Sesion
@@ -213,7 +216,7 @@ export const NavbarScreen = () => {
             ) : (
               <li>
                 <NavLink
-                  activeClassName='active'
+                  activeClassName='uk-active'
                   to='#'
                   className='uk-text-large'
                 >
@@ -227,7 +230,7 @@ export const NavbarScreen = () => {
                   <ul className='uk-nav uk-navbar-dropdown-nav'>
                     <li className='uk-active'>
                       <NavLink
-                        activeClassName='active'
+                        activeClassName='uk-active'
                         className='uk-nav-header'
                         to='/profile'
                       >
@@ -236,7 +239,7 @@ export const NavbarScreen = () => {
                     </li>
                     <li>
                       <NavLink
-                        activeClassName='active'
+                        activeClassName='uk-active'
                         to='#'
                         onClick={() => dispatch(startLogout())}
                         className='uk-nav-header'

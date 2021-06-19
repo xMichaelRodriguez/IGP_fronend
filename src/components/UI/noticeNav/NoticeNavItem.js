@@ -21,20 +21,14 @@ export const NoticeNavItem = ({ title, body, date, id }) => {
     }
   };
   return (
-    <div className='card mt-2  animate__animated   animate__fadeIn'>
-      <div className='card-body' onDoubleClick={handleNoticeActive}>
-        <div className='card-title'>
-          <h3>{`${body.substr(0, 50)}`}</h3>
-        </div>
-        <div className='card-subtitle text-muted mt-2'>
-          <h6>{moment(date).calendar()}</h6>
-        </div>
-        <div className='card-text'>
-          <p>{`${body.substr(0, 150)}...`}</p>
-        </div>
+    <div className=' uk-card uk-card-default uk-card-body uk-card-hover animate__animated   animate__fadeIn'>
+      <div onDoubleClick={handleNoticeActive}>
+        <h3 className='uk-card-title'>{title}</h3>
+        <span>{moment(date).calendar()}</span>
+        <p>{`${body.substr(0, 100)}...`}</p>
         {!location.pathname.includes('/profile') && (
-          <div className='card-link mt-2'>
-            <Link className='btn btn-link' to={`/noticies/${id}`}>
+          <div className=''>
+            <Link className='uk-button uk-button-text' to={`/noticies/${id}`}>
               Leer Mas...
             </Link>
           </div>

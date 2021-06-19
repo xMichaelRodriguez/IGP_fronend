@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BsChevronLeft, BsChevronRight, BsPlus } from 'react-icons/bs';
+import { BsPlus } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import {
@@ -53,43 +53,41 @@ export const NoticeSchreen = () => {
   return (
     <div className='container '>
       <button
-        className='btn btn-info mb-3  animate__animated animate__fadeIn'
+        className='uk-button primary animate__animated animate__fadeIn'
         onClick={handleNewNotice}
       >
         <BsPlus size='1.5rem' /> &nbsp; Nueva Noticia
       </button>
-      <hr />
+      <hr className='uk-divider-icon' />
       {!!noticeArr ? (
         <>
-          <nav aria-label='Page navigation example '>
-            <ul className='pagination justify-content-end animate__animated animate__fadeIn'>
-              <li
-                className={`page-item ${
-                  pageNext === INITIAL_PAGE ? 'disabled hand' : 'active'
-                }`}
-                onClick={handlePrevpage}
-              >
-                <span className='page-link' style={{ cursor: 'pointer' }}>
-                  <BsChevronLeft />
-                  Anterior
-                </span>
-              </li>
-
-              <li
-                className={`page-item ${
-                  pageNext === total_page ? 'disabled hand ' : 'active'
-                }`}
-                onClick={handleNextPage}
-              >
-                <span className='page-link ' style={{ cursor: 'pointer' }}>
-                  Siguiente <BsChevronRight />
-                </span>
-              </li>
-            </ul>
-          </nav>
-          <div className='card-columns mb-5'>
+          <ul className='uk-pagination animate__animated   animate__fadeIn'>
+            <li
+              className={`uk-text-bold ${
+                pageNext === INITIAL_PAGE ? 'uk-disabled hand' : ''
+              }`}
+              style={{ cursor: 'pointer' }}
+            >
+              <span onClick={handlePrevpage}>
+                <span uk-pagination-previous=''></span> Anterior
+              </span>
+            </li>
+            <li
+              className={`uk-text-bold ${
+                pageNext === total_page ? 'uk-disabled hand' : ''
+              }`}
+              style={{ cursor: 'pointer' }}
+            >
+              <span onClick={handleNextPage}>
+                Siguiente <span uk-pagination-next=''></span>
+              </span>
+            </li>
+          </ul>
+          <div className='uk-child-width-expand@s uk-grid-small ' uk-grid=''>
             {noticeArr.map((notice) => (
-              <NoticeNavItem key={notice.id} {...notice} />
+              <div className='uk-width-1-3@m' key={notice.id}>
+                <NoticeNavItem {...notice} />
+              </div>
             ))}
           </div>
         </>
