@@ -104,7 +104,7 @@ export const NavbarProfile = () => {
       <div id='sidenav' uk-offcanvas='flip: true' className='uk-offcanvas'>
         <div className='uk-offcanvas-bar'>
           <ul className='uk-nav'>
-            <li className='uk-text-large'>
+            <li className='uk-text-large '>
               <NavLink
                 activeClassName='uk-active'
                 className=' uk-text-capitalize'
@@ -117,7 +117,7 @@ export const NavbarProfile = () => {
               <NavLink
                 activeClassName='uk-active'
                 className=' uk-text-capitalize'
-                to='/noticies'
+                to='/profile/noticies'
               >
                 Noticias
               </NavLink>
@@ -126,48 +126,37 @@ export const NavbarProfile = () => {
               <NavLink
                 activeClassName='uk-active'
                 className=' uk-text-capitalize'
-                to='/stories'
+                to='/profile/stories'
               >
                 Historias
               </NavLink>
             </li>
-            <li className='uk-text-large'>
+            <li>
               <NavLink
                 activeClassName='uk-active'
-                className=' uk-text-capitalize'
-                to='/organizations'
+                to='#'
+                className='uk-text-large'
               >
-                Organizaciones
+                {name}
               </NavLink>
-            </li>
-            <li className='uk-text-large'>
-              <NavLink
-                activeClassName='uk-active'
-                className=' uk-text-capitalize'
-                to='learning-about-violence'
-              >
-                Aprendizaje
-              </NavLink>
-            </li>
-            <li className='uk-text-large'>
-              <NavLink
-                activeClassName='uk-active'
-                className=' uk-text-capitalize'
-                to='learning-about-violence'
-              >
-                Aprendizaje
-              </NavLink>
-            </li>
 
-            <li className='uk-text-large '>
-              <NavLink
-                activeClassName='uk-active'
-                to='/auth/login'
-                onClick={() => history.push('/auth/login')}
-                className=' uk-text-capitalize uk-text-large'
+              <div
+                className='uk-navbar-dropdown uk-shadow'
+                uk-drop='mode: click'
               >
-                Iniciar Sesion
-              </NavLink>
+                <ul className='uk-nav uk-navbar-dropdown-nav'>
+                  <li>
+                    <NavLink
+                      activeClassName='uk-active'
+                      to='#'
+                      onClick={() => dispatch(startLogout())}
+                      className='uk-nav-header'
+                    >
+                      <FaSignOutAlt /> Cerrar Sesion
+                    </NavLink>
+                  </li>
+                </ul>
+              </div>
             </li>
           </ul>
         </div>

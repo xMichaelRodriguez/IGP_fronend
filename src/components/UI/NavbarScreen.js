@@ -193,15 +193,7 @@ export const NavbarScreen = () => {
                 Aprendizaje
               </NavLink>
             </li>
-            <li className='uk-text-large'>
-              <NavLink
-                activeClassName='uk-active'
-                className=' uk-text-capitalize'
-                to='learning-about-violence'
-              >
-                Aprendizaje
-              </NavLink>
-            </li>
+
             {!name ? (
               <li className='uk-text-large '>
                 <NavLink
