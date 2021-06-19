@@ -36,11 +36,13 @@ export const OrganizationItem = ({
               {acronym}
             </Link>
           </h3>
-          <small className='uk-text-muted'>{name}</small>
+          <small className='uk-text-muted uk-text-break'>{name}</small>
           <dl className='uk-description-list '>
-            <dt className='uk-text-capitalize'>Oficial de información:</dt>
+            <dt className='uk-text-capitalize uk-text-break'>
+              Oficial de información:
+            </dt>
             <dd>{officer_name}</dd>
-            <dt className='uk-text-capitalize'>Correo:</dt>
+            <dt className='uk-text-capitalize uk-text-break'>Correo:</dt>
             <dd>{officer_email}</dd>
           </dl>
         </div>
