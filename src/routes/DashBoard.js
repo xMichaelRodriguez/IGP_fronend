@@ -21,6 +21,8 @@ import { BsFillChatSquareFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseChat, uiOpenChat } from '../actions/uiActions';
 import { OrganizationCard } from '../components/organizations/OrganizationCard';
+import { NavbarContentScreen } from '../components/UI/NavbarContentScreen';
+import { NoticeScreen } from '../components/noticies/NoticeScreen';
 
 export const DashBoard = () => {
   const { ChatOpen } = useSelector((state) => state.UI);
@@ -37,32 +39,33 @@ export const DashBoard = () => {
     <>
       <div className='wrapper'>
         <NavbarScreen />
-        <Switch>
-          <Route exact path='/noticies/:noticeId' component={NoticeCard} />
-          <Route path='/noticies' component={NoticeList} />
+        <div id='content'>
+          <NavbarContentScreen />
+          <Switch>
+            <Route exact path='/noticias/:noticeId' component={NoticeCard} />
+            <Route path='/noticias' component={NoticeScreen} />
 
-          <Route exact path='/stories/:storyId' component={StoryCard} />
-          <Route path='/stories' component={StoryNav} />
+            <Route exact path='/historias/:storyId' component={StoryCard} />
+            <Route path='/historias' component={StoryNav} />
 
-          <Route
-            exact
-            path='/organizations/:organization_acronym'
-            component={OrganizationCard}
-          />
-          <Route path='/organizations' component={OrganizationScreen} />
+            <Route
+              exact
+              path='/organizaciones/:organization_acronym'
+              component={OrganizationCard}
+            />
+            <Route path='/organizaciones' component={OrganizationScreen} />
 
-          <Route path='/learning-about-violence' component={ViolenceScreen} />
+            <Route path='/aprendizaje' component={ViolenceScreen} />
 
-          <Route path='/' component={HomeScreen} />
-        </Switch>
+            <Route path='/' component={HomeScreen} />
+          </Switch>
+        </div>
 
         <div className='positions'>
           {ChatOpen && (
             <div
               className={`m-auto animate__animated ${
-                !ChatOpen
-                  ? 'animate__fadeInDown'
-                  : ' animate__fadeInUp'
+                !ChatOpen ? 'animate__fadeInDown' : ' animate__fadeInUp'
               }`}
             >
               <Chatbot
@@ -75,11 +78,10 @@ export const DashBoard = () => {
         </div>
       </div>
       <button
-        className='uk-button primary cursor chat shadow animate__animated animate__rubberBand uk-margin-medium'
-        style={{ borderRadius: '100%' }}
+        className='btn btn-primary cursor chat  rounded-circle animate__animated animate__rubberBand m-auto'
         onClick={handlerDisplayChat}
       >
-        <BsFillChatSquareFill size='2rem' />
+        <BsFillChatSquareFill size='1.8rem' />
       </button>
 
       <FooterScreen />

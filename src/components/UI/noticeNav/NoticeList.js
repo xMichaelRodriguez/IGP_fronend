@@ -18,8 +18,10 @@ export const NoticeList = () => {
   //next Page
   const handleNextPage = () => {
     if (pageNext < total_page) {
+     
       setPageNext(pageNext + 1);
     } else {
+     
       setPageNext(total_page);
     }
   };
@@ -27,8 +29,10 @@ export const NoticeList = () => {
   //previus page
   const handlePrevpage = () => {
     if (pageNext > total_page) {
+     
       setPageNext(pageNext - 1);
     } else {
+     
       setPageNext(INITIAL_PAGE);
     }
   };

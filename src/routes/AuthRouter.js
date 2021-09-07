@@ -4,7 +4,7 @@ import { LoginScreen } from '../components/auth/LoginScreen';
 
 export const AuthRouter = () => {
   return (
-    <div>
+    <div className='d-flex justify-content-center'>
       <div className=''>
         <div className=''>
           <Switch>

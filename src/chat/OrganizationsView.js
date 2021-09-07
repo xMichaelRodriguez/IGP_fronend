@@ -10,129 +10,149 @@ export const OrganizationsView = () => {
   return (
     <Fragment>
       {loading && (
-        <h1>
-          <span uk-spinner='ratio: 4.5'></span>
-        </h1>
+        <div className='d-flex justify-content-center'>
+          <div className='spinner-border' role='status'>
+            <span className='sr-only'>Loading...</span>
+          </div>
+        </div>
       )}
 
-      <ul className='uk-list uk-margin-bottom' style={{ listStyle: 'none' }}>
+      <ul className='list-group mb-auto'>
         {organization.map((org) => (
           <Fragment>
             {(org.acronym.includes('CONNA') ||
               org.acronym.includes('ISNA')) && (
-              <li
-                key={org.id}
-                className='uk-card uk-card-default uk-card-body uk-width-1-1@m'
-              >
-                <blockquote className=' uk-text-justify highlight uk-text-break'>
-                  <div className='mb-1'>
-                    <div className='uk-text-bold'>
-                      {!org.avatar_file_url.includes('missing') ? (
-                        <img
-                          className='img-fluid w-50 h-50'
-                          src={`https://www.transparencia.gob.sv/${org.avatar_file_url}`}
-                          alt={`${org.avatar_file_name}`}
-                        />
-                      ) : (
-                        <img
-                          className='img-fluid w-50 h-50'
-                          alt='not found'
-                          src='https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg'
-                        />
-                      )}
-                    </div>
-                    <hr />
-                    <ul
-                      className='uk-list uk-list-divider'
-                      style={{ listStyle: 'none' }}
-                    >
-                      <li className=''>
-                        <span>
-                          <BsFillCaretRightFill />
-                          <span className='font-weight-bold'>
-                            Encargado/a:{' '}
-                          </span>
-                          {org.officer_name}
-                        </span>
-                      </li>
+              <li key={org.id} className='card'>
+                <div className='card-body'>
+                  <div className='text-break'>
+                    <div className='mb-1'>
+                      <div className='font-weigth-bold'>
+                        {!org.avatar_file_url.includes('missing') ? (
+                          <img
+                            className='img-thumbnail'
+                            src={`https://www.transparencia.gob.sv/${org.avatar_file_url}`}
+                            alt={`${org.avatar_file_name}`}
+                          />
+                        ) : (
+                          <img
+                            className='img-thumbnail'
+                            alt='not found'
+                            src='https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg'
+                          />
+                        )}
+                      </div>
+                      <div className='line'></div>
+                      <ul className='list-group'>
+                        <li className='list-group-item'>
+                          <p
+                            className='card-title'
+                            style={{ fontSize: '1rem' }}
+                          >
+                            Encargado/a: {org.officer_name}
+                          </p>
+                        </li>
 
-                      <li>
-                        <BsFillCaretRightFill />
-                        <span className='font-weight-bold'> Sitio web: </span>
-                        <a
-                          href={org.website_url}
-                          target='_blank'
-                          rel='noopener noreferrer'
-                        >
-                          {org.website_url}
-                        </a>
-                      </li>
-                      <li className='mb-2 text-center'>
-                        <BsFillCaretRightFill />{' '}
-                        <span className='font-weight-bold'>Redes</span>
-                        <div className='uk-column-1-2'>
-                          <div className=''>
+                        {org.website_url ? (
+                          <li className='list-group-item bg-light'>
+                            <a
+                              href={org.website_url}
+                              target='_blank'
+                              rel='noopener noreferrer'
+                              className='text-brak '
+                            >
+                              <p
+                                className='card-link'
+                                style={{ fontSize: '0.9rem' }}
+                              >
+                                {' '}
+                                {org.website_url}
+                              </p>
+                            </a>
+                          </li>
+                        ) : null}
+                        <li className=' list-group-item mb-2 text-center'>
+                          <div className='row '>
                             {org.twitter_url &&
                             !org.twitter_url.includes(',') ? (
-                              <Fragment>
+                              <div className='col-md-3'>
                                 <a
                                   href={org.twitter_url}
                                   target='_blank'
                                   rel='noopener noreferrer'
                                 >
-                                  <FaTwitterSquare size='1.5rem' />
+                                  <FaTwitterSquare
+                                    size='1.5rem'
+                                    color='#00acee'
+                                  />
                                 </a>
-                              </Fragment>
+                              </div>
                             ) : (
-                              <span className='uk-text-primary'>
-                                Sin Twitter
-                              </span>
+                              <div className='col-md-12'>
+                                <small
+                                  className='text-primary'
+                                  style={{ fontSize: '1rem' }}
+                                >
+                                  Sin Twitter
+                                </small>
+                              </div>
                             )}
-                          </div>
-                          <div className=''>
+
                             {org.facebook_url &&
                             !org.facebook_url.includes(',') ? (
-                              <a
-                                href={org.facebook_url}
-                                target='_blank'
-                                rel='noopener noreferrer'
-                              >
-                                <FaFacebookSquare size='1.5rem' />
-                              </a>
+                              <div className='col-md-3'>
+                                <a
+                                  href={org.facebook_url}
+                                  target='_blank'
+                                  rel='noopener noreferrer'
+                                >
+                                  <FaFacebookSquare
+                                    size='1.5rem'
+                                    color='blue'
+                                  />
+                                </a>
+                              </div>
                             ) : (
-                              <span className='uk-text-primary'>
-                                Sin Facebook
-                              </span>
+                              <div className='col-md-12'>
+                                <small
+                                  className='text-primary'
+                                  style={{ fontSize: '0.9rem' }}
+                                >
+                                  Sin Facebook
+                                </small>
+                              </div>
                             )}
-                          </div>
-                          <div className=''>
+
                             {org.youtube_url &&
                             !org.youtube_url.includes(',') ? (
-                              <a
-                                href={org.youtube_url}
-                                className='uk-text-danger'
-                                target='_blank'
-                                rel='noopener noreferrer'
-                              >
-                                <FaYoutube
-                                  size='1.5rem'
+                              <div className='col-md-3'>
+                                <a
+                                  href={org.youtube_url}
                                   className='text-danger'
-                                />
-                              </a>
+                                  target='_blank'
+                                  rel='noopener noreferrer'
+                                >
+                                  <FaYoutube size='1.5rem' color='red' />
+                                </a>
+                              </div>
                             ) : (
-                              <span className='uk-text-danger'>
-                                Sin Youtube
-                              </span>
+                              <div className='col-md-12'>
+                                <small
+                                  className='text-danger'
+                                  style={{ fontSize: '0.9rem' }}
+                                >
+                                  Sin Youtube
+                                </small>
+                              </div>
                             )}
                           </div>
-                        </div>
-                      </li>
-                    </ul>
+                        </li>
+                      </ul>
+                      <small className='card-link' style={{ fontSize: '1rem' }}>
+                        {org.officer_email}
+                      </small>
+                    </div>
                   </div>
-                  <footer className='uk-text-primary'>
-                    {org.officer_email}
-                  </footer>
-                </blockquote>
+                </div>
               </li>
             )}
           </Fragment>

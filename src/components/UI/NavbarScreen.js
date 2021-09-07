@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Link, useHistory } from 'react-router-dom';
 import './styles.css';
@@ -10,21 +10,30 @@ import {
   BiBook,
 } from 'react-icons/bi';
 import { startLogout } from '../../actions/authActios';
-import logo from '../UVS-APP.svg';
+
+import logo from '../../UVS-APP.svg';
 
 export const NavbarScreen = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { name } = useSelector((state) => state.auth);
   const { sidebarOpen } = useSelector((state) => state.UI);
+  const [isActiveClass, setIsActiveClass] = useState(null);
+
+  const handleIsActive = (num) => {
+    console.log(num);
+    setIsActiveClass(num);
+  };
 
   return (
     <nav id='sidebar' className={`${sidebarOpen ? 'active' : ''}`}>
       <div className='sidebar-header'>
         <h3>
-         Una Vida Segura
+          <img src={logo} className=' mx-auto d-block' />
         </h3>
-        <strong>UVS</strong>
+        <strong>
+          <img src={logo} width='56rem' />
+        </strong>
       </div>
 
       <ul className='list-unstyled components'>
@@ -50,36 +59,39 @@ export const NavbarScreen = () => {
             </li>
           </ul>
         </li> */}
-        <li className='active'>
-          <a href='/#'>
+        <li className={isActiveClass === 0 ? 'active' : ''}>
+          <NavLink to='/' onClick={() => handleIsActive(0)}>
             <BiHomeAlt size='1.3rem' />
             &nbsp; <span>Inicio</span>
-          </a>
+          </NavLink>
         </li>
-        <li className=''>
-          <a href='/#'>
+        <li className={isActiveClass === 1 ? 'active' : ''}>
+          <NavLink onClick={() => handleIsActive(1)} to='/historias'>
             <BiUserVoice size='1.3rem' />
             &nbsp;<span>Historias de vida</span>
-          </a>
+          </NavLink>
         </li>
 
-        <li>
-          <a href='/#'>
+        <li className={isActiveClass === 2 ? 'active' : ''}>
+          <NavLink onClick={() => handleIsActive(2)} to='/noticias'>
             <BiNews size='1.3rem' />
             &nbsp;<span>Noticias</span>
-          </a>
+          </NavLink>
         </li>
-        <li className='text-break'>
-          <a href='/#'>
+        <li className={isActiveClass === 3 ? 'active' : ''}>
+          <NavLink onClick={() => handleIsActive(3)} to='/organizaciones'>
             <BiGroup size='1.3rem' />
             &nbsp;<span>Organizaciones</span>
-          </a>
+          </NavLink>
         </li>
-        <li>
-          <a href='/#'>
+        <li className={isActiveClass === 4 ? 'active' : ''}>
+          <NavLink
+            onClick={(location) => handleIsActive(4, location)}
+            to='/aprendizaje'
+          >
             <BiBook size='1.3rem' />
             &nbsp;<span>Aprendizaje</span>
-          </a>
+          </NavLink>
         </li>
       </ul>
     </nav>
