@@ -35,8 +35,8 @@ export const DashBoard = () => {
   };
   return (
     <>
-      <NavbarScreen />
-      <div className='container-fluid px-3 mb-3 '>
+      <div className='wrapper'>
+        <NavbarScreen />
         <Switch>
           <Route exact path='/noticies/:noticeId' component={NoticeCard} />
           <Route path='/noticies' component={NoticeList} />
@@ -59,8 +59,8 @@ export const DashBoard = () => {
         <div className='positions'>
           {ChatOpen && (
             <div
-              className={`uk-margin-medium-bottom animate__animated ${
-                ChatOpen === false
+              className={`m-auto animate__animated ${
+                !ChatOpen
                   ? 'animate__fadeInDown'
                   : ' animate__fadeInUp'
               }`}

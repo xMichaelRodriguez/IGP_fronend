@@ -2,6 +2,8 @@ export const types = {
   //ui
   uiOpenChat: "[UI] Open Chat",
   uiCloseChat: "[UI] Close Chat",
+  uiOpenSide:"[UI] Open Sidebar",
+  uiCloseSide: "[UI] Close Sidebars",
   //auth
   authFinishChecking: "[AUTH] Finish Checking Login State",
   authStartLogin: "[AUTH] Start Login",

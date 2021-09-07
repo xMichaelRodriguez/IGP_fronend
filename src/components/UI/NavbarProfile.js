@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory, NavLink } from 'react-router-dom';
+import { Link,  NavLink } from 'react-router-dom';
 import { startLogout } from '../../actions/authActios';
 import './styles.css';
 import logo from '../UVS-APP.svg';
 import { FaSignOutAlt } from 'react-icons/fa';
 export const NavbarProfile = () => {
-  const history = useHistory();
+  // const history = useHistory();
   const dispatch = useDispatch();
   const { name } = useSelector((state) => state.auth);
   return (
