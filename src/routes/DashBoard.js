@@ -1,14 +1,17 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+// Screens
 import { HomeScreen } from '../components/home/HomeScreen';
-import { NoticeList } from '../components/UI/noticeNav/NoticeList';
-import { NoticeCard } from '../components/UI/noticeNav/NoticeCard';
+import { CardReadScreen } from '../components/UI/CardRead/CardReadScreen';
 import { OrganizationScreen } from '../components/organizations/OrganizationScreen';
 import { NavbarScreen } from '../components/UI/NavbarScreen';
 import { ViolenceScreen } from '../components/violence/ViolenceScreen';
-import { StoryNav } from '../components/UI/storyNav/StoryNav';
-import { StoryCard } from '../components/UI/storyNav/StoryCard';
 import { FooterScreen } from '../components/footer/FooterScreen';
+import { OrganizationCard } from '../components/organizations/OrganizationCard';
+import { NavbarContentScreen } from '../components/UI/NavbarContentScreen';
+import { NoticeScreen } from '../components/noticies/NoticeScreen';
+import { StoryScreen } from '../components/stories/StoryScreen';
 
 //chatbot
 import Chatbot from 'react-chatbot-kit';
@@ -18,11 +21,7 @@ import ActionProvider from '../chat/ActionProvider';
 
 //icons
 import { BsFillChatSquareFill } from 'react-icons/bs';
-import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseChat, uiOpenChat } from '../actions/uiActions';
-import { OrganizationCard } from '../components/organizations/OrganizationCard';
-import { NavbarContentScreen } from '../components/UI/NavbarContentScreen';
-import { NoticeScreen } from '../components/noticies/NoticeScreen';
 
 export const DashBoard = () => {
   const { ChatOpen } = useSelector((state) => state.UI);
@@ -42,11 +41,11 @@ export const DashBoard = () => {
         <div id='content'>
           <NavbarContentScreen />
           <Switch>
-            <Route exact path='/noticias/:noticeId' component={NoticeCard} />
+            <Route exact path='/noticias/:Id' component={CardReadScreen} />
             <Route path='/noticias' component={NoticeScreen} />
 
-            <Route exact path='/historias/:storyId' component={StoryCard} />
-            <Route path='/historias' component={StoryNav} />
+            <Route exact path='/historias/:Id' component={CardReadScreen} />
+            <Route path='/historias' component={StoryScreen} />
 
             <Route
               exact
@@ -57,7 +56,8 @@ export const DashBoard = () => {
 
             <Route path='/aprendizaje' component={ViolenceScreen} />
 
-            <Route path='/' component={HomeScreen} />
+            <Route path='/home' component={HomeScreen} />
+            <Redirect to='/home' />
           </Switch>
         </div>
 

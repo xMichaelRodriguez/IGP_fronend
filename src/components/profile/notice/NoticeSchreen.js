@@ -8,7 +8,7 @@ import {
 } from '../../../actions/noticesActions';
 import { NotFiles } from '../../../helpers/NotFiles';
 import { DeleteButtonFab } from '../../UI/DeleteButtonFab';
-import { NoticeNavItem } from '../../UI/noticeNav/NoticeNavItem';
+// import { NoticeNavItem } from '../../UI/noticeNav/NoticeNavItem';
 const INITIAL_PAGE = 1;
 export const NoticeSchreen = () => {
   const history = useHistory();
@@ -86,7 +86,7 @@ export const NoticeSchreen = () => {
           <div className='uk-child-width-expand@s uk-grid-small ' uk-grid=''>
             {noticeArr.map((notice) => (
               <div className='uk-width-1-3@m' key={notice.id}>
-                <NoticeNavItem {...notice} />
+                {/* <NoticeNavItem {...notice} /> */}
               </div>
             ))}
           </div>

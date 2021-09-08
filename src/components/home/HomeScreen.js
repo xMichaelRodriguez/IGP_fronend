@@ -1,12 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../UVS-APP.svg';
+import React from 'react';
 
-import { BiMenuAltLeft } from 'react-icons/bi';
-import { StoryScreen } from '../stories/StoryScreen';
-import { BsArrowRight } from 'react-icons/bs';
-import { NoticeScreen } from '../noticies/NoticeScreen';
-import { OrganizationScreen } from '../organizations/OrganizationScreen';
 import { useSelector } from 'react-redux';
 
 import { CardScreen } from '../cards/CardScreen';

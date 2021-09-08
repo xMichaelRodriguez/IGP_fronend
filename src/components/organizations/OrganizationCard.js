@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  BsArrowReturnLeft,
+  
   BsEnvelopeFill,
   BsInfoCircleFill,
 } from 'react-icons/bs';
@@ -17,67 +17,61 @@ export const OrganizationCard = () => {
     organizations.find((or) => or.acronym === organization_acronym);
 
   return (
-    <div style={{ margin: '50px', display: 'flex', justifyContent: 'center' }}>
+    <>
       {loading ? (
-        <h1>
-          <span>Cargando...</span>
-          <span uk-spinner='ratio: 4.5'></span>
-        </h1>
+        <h1 className='text-center'>Cargando...</h1>
       ) : (
-        <div className=' uk-card uk-card-default uk-card-body uk-width-1-2@m animate__animated   animate__fadeIn'>
-          <div className='uk-padding-small'>
-            <div class='uk-card-media-top uk-text-center'>
-              <img
-                style={{ height: 'auto', width: '450px' }}
-                src={
-                  !newOrganization.avatar_file_url.includes('missing')
-                    ? `https://www.transparencia.gob.sv/${newOrganization.avatar_file_url}`
-                    : 'https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg'
-                }
-                alt={newOrganization.avatar_file_name}
-              />
-            </div>
-            <h3 class='uk-card-title'>{newOrganization.name}</h3>
+        <div className='text-break card  animate__animated   animate__fadeIn'>
+          <div className='card-body'>
+            <h3 className='card-title'>{newOrganization.name}</h3>
             <span>{newOrganization.acronym}</span>
 
-            <div className='uk-column-1-2'>
-              <div>
+            <div className='card-text'>
+              <div className='py-1'>
                 <BsInfoCircleFill className='text-info' /> Oficial de
                 información: {newOrganization.officer_name}
               </div>
-              <div>
+              <div className='py-1'>
                 <BsEnvelopeFill className='text-info' />{' '}
                 {newOrganization.officer_email}
               </div>
-              <div>
+              <div className='py-1'>
                 {newOrganization.website_url && (
-                  <div className='text-muted mt-2 mb-3'>
-                    <FaFileAlt className='text-info' />
+                  <a
+                    className='text-muted '
+                    href={newOrganization.website_url}
+                    target='_blank'
+                    rel="noreferrer"
+                  >
+                    <FaFileAlt className='text-info' />{' '}
                     {newOrganization.website_url}
-                  </div>
+                  </a>
                 )}
               </div>
             </div>
+
             <div className='uk-margin'>
-              <h4>Contacto</h4>
-              <hr className='uk-divider-icon' />
+              <div className='line'></div>
               <div className='uk-column-1-2'>
-                <div className='twittr uk-text-break'>
-                  <ul class='uk-list'>
+                <div className='twittr'>
+                  <ul className='uk-list'>
                     {newOrganization.twitter_url.includes(',') ? (
-                      newOrganization.twitter_url.split(',').map((twitter) => (
-                        <li
-                          className='uk-link-muted'
-                          style={{ cursor: 'pointer' }}
-                          onClick={() => {
-                            window.open(twitter);
-                          }}
-                        >
-                          <strong>
-                            <FaTwitter /> {twitter}
-                          </strong>
-                        </li>
-                      ))
+                      newOrganization.twitter_url
+                        .split(',')
+                        .map((twitter, index) => (
+                          <li
+                            className='text-muted'
+                            key={index}
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => {
+                              window.open(twitter);
+                            }}
+                          >
+                            <strong>
+                              <FaTwitter color='#00acee ' /> {twitter}
+                            </strong>
+                          </li>
+                        ))
                     ) : (
                       <li className='uk-link-muted'>
                         <p
@@ -94,7 +88,7 @@ export const OrganizationCard = () => {
                               {newOrganization.twitter_username}
                             </p>
                           ) : (
-                            <p>Sin Twitter</p>
+                            <p className='text-info'>Sin Twitter</p>
                           )}
                         </p>
                       </li>
@@ -102,27 +96,29 @@ export const OrganizationCard = () => {
                   </ul>
                 </div>
 
-                <div className='face uk-text-break'>
-                  <ul className='uk-list'>
+                <div className='face'>
+                  <ul className=''>
                     {newOrganization.facebook_url.includes(',') ? (
                       newOrganization.facebook_url
                         .split(',')
-                        .map((facebook) => (
+                        .map((facebook,index) => (
                           <li
+                          key={index}
                             style={{ cursor: 'pointer' }}
                             onClick={() => {
                               window.open(facebook);
                             }}
                           >
                             <strong>
-                              <FaFacebook /> {facebook}
+                              <FaFacebook color='blue' /> {facebook}
                             </strong>
                           </li>
                         ))
                     ) : (
-                      <li className='uk-link-muted'>
+                      <li className='text-muted'>
                         <p
                           style={{ cursor: 'pointer', fontSize: '15px' }}
+                          className='text-muted'
                           onClick={() =>
                             newOrganization.facebook_url !== '' &&
                             window.open(newOrganization.facebook_url)
@@ -130,11 +126,11 @@ export const OrganizationCard = () => {
                         >
                           {newOrganization.facebook_username !== '' ? (
                             <p>
-                              <FaFacebook className='text-primary' />{' '}
+                              <FaFacebook color='blue' />{' '}
                               {newOrganization.facebook_username}
                             </p>
                           ) : (
-                            <p>Sin Facebook</p>
+                            <p className='text-primary'>Sin Facebook</p>
                           )}
                         </p>
                       </li>
@@ -142,13 +138,14 @@ export const OrganizationCard = () => {
                   </ul>
                 </div>
 
-                <div className='youtube uk-text-break'>
-                  <ul className='uk-list'>
+                <div className='youtube'>
+                  <ul className=''>
                     {newOrganization.youtube_url.includes(',') ? (
-                      newOrganization.youtube_url.split(',').map((youtube) => (
+                      newOrganization.youtube_url.split(',').map((youtube,index) => (
                         <li
-                          className='uk-link-muted'
+                          className='text-muted'
                           style={{ cursor: 'pointer' }}
+                          key={index}
                           onClick={() => {
                             window.open(youtube);
                           }}
@@ -173,7 +170,7 @@ export const OrganizationCard = () => {
                               {newOrganization.youtube_username}
                             </p>
                           ) : (
-                            <p>Sin Youtube</p>
+                            <p className='text-danger'>Sin Youtube</p>
                           )}
                         </p>
                       </li>
@@ -196,14 +193,23 @@ export const OrganizationCard = () => {
               </div>
             </div>
             <button
-              class='uk-button uk-button-default primary'
+              className='btn primary--button'
               onClick={() => history.goBack()}
             >
-              <BsArrowReturnLeft size='1.5rem' /> Volver
+              Volver
             </button>
           </div>
+          <img
+            src={
+              !newOrganization.avatar_file_url.includes('missing')
+                ? `https://www.transparencia.gob.sv/${newOrganization.avatar_file_url}`
+                : 'https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg'
+            }
+            alt={newOrganization.avatar_file_name}
+            className='card-img-bottom'
+          />
         </div>
       )}
-    </div>
+    </>
   );
 };

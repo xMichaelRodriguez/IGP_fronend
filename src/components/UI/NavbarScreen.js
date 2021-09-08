@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Link, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import {  useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import './styles.css';
 import {
   BiNews,
@@ -9,19 +9,18 @@ import {
   BiGroup,
   BiBook,
 } from 'react-icons/bi';
-import { startLogout } from '../../actions/authActios';
+// import { startLogout } from '../../actions/authActios';
 
 import logo from '../../UVS-APP.svg';
 
 export const NavbarScreen = () => {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  const { name } = useSelector((state) => state.auth);
+  // const dispatch = useDispatch();
+  
+  // const { name } = useSelector((state) => state.auth);
   const { sidebarOpen } = useSelector((state) => state.UI);
   const [isActiveClass, setIsActiveClass] = useState(null);
 
   const handleIsActive = (num) => {
-    console.log(num);
     setIsActiveClass(num);
   };
 
@@ -29,10 +28,10 @@ export const NavbarScreen = () => {
     <nav id='sidebar' className={`${sidebarOpen ? 'active' : ''}`}>
       <div className='sidebar-header'>
         <h3>
-          <img src={logo} className=' mx-auto d-block' />
+          <img src={logo} className=' mx-auto d-block' alt="logo" />
         </h3>
         <strong>
-          <img src={logo} width='56rem' />
+          <img src={logo} width='56rem' alt="logo"/>
         </strong>
       </div>
 
