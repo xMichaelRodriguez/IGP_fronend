@@ -13,26 +13,18 @@ export const OrganizationScreen = () => {
         <h1 className='d-flex justify-content-center'>Cargando...</h1>
       )}
 
-      {!location.pathname.includes('/organizations')
-        ? organizations.map(
-            (organization) =>
-              (organization.acronym.includes('CONNA') ||
-                organization.acronym.includes('MINEDUCYT') ||
-                organization.acronym.includes('PDDH')) && (
-                <OrganizationItem key={organization.id} {...organization} />
-              )
-          )
-        : organizations.map(
-            (organization) =>
-              (organization.acronym.includes('CONNA') ||
-                organization.acronym.includes('MINEDUCYT') ||
-                organization.acronym.includes('ISNA') ||
-                organization.acronym.includes('PNC') ||
-                organization.acronym.includes('FGR') ||
-                organization.acronym.includes('PDDH')) && (
-                <OrganizationItem key={organization.id} {...organization} />
-              )
-          )}
+      {!location.pathname.includes('/organizations') &&
+        organizations.map(
+          (organization) =>
+            (organization.acronym.includes('CONNA') ||
+              organization.acronym.includes('MINEDUCYT') ||
+              organization.acronym.includes('ISNA') ||
+              organization.acronym.includes('PNC') ||
+              organization.acronym.includes('FGR') ||
+              organization.acronym.includes('PDDH')) && (
+              <OrganizationItem key={organization.id} {...organization} />
+            )
+        )}
     </div>
   );
 };

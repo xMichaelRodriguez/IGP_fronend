@@ -9,17 +9,17 @@ export const OrganizationsView = () => {
 
   return (
     <>
-      {loading && (
-        <h3 className='d-flex justify-content-center'>
-        Cargando
-        </h3>
-      )}
+      {loading && <h1 className='text-center'>Cargando...</h1>}
 
       <ul className='list-group mb-auto'>
         {organization.map((org) => (
           <>
-            {(org.acronym.includes('CONNA') ||
-              org.acronym.includes('ISNA')) && (
+            {(organization.acronym.includes('CONNA') ||
+              organization.acronym.includes('MINEDUCYT') ||
+              organization.acronym.includes('ISNA') ||
+              organization.acronym.includes('PNC') ||
+              organization.acronym.includes('FGR') ||
+              organization.acronym.includes('PDDH')) && (
               <li key={org.id} className='card'>
                 <div className='card-body'>
                   <div className='font-weigth-bold'>

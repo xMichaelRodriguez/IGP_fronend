@@ -17,7 +17,7 @@ export const CardScreen = ({ data, route }) => {
         Object.entries(data).length !== 0 &&
         data.map((d) => (
           <div className='col-md-4' key={d.id}>
-            <div className='card mb-3'>
+            <div className='card mb-3 shadow-sm'>
               {/* <img src='...' className='card-img-top' alt='...' /> */}
               <div className='card-body'>
                 <h5 className='card-title'>{d.title}</h5>

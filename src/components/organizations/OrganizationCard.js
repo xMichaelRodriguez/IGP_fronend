@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  
-  BsEnvelopeFill,
-  BsInfoCircleFill,
-} from 'react-icons/bs';
+import { BsEnvelopeFill, BsInfoCircleFill } from 'react-icons/bs';
 import { FaFacebook, FaFileAlt, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
@@ -16,15 +12,135 @@ export const OrganizationCard = () => {
     organizations &&
     organizations.find((or) => or.acronym === organization_acronym);
 
+  const TwitterList = () => {
+    if (newOrganization.twitter_url.includes(',')) {
+      return newOrganization.twitter_url.split(',').map((twitter, index) => (
+        <li
+          className='text-muted'
+          key={index}
+          style={{ cursor: 'pointer' }}
+          onClick={() => {
+            window.open(twitter);
+          }}
+        >
+          <strong>
+            <FaTwitter color='#00acee ' /> {twitter}
+          </strong>
+        </li>
+      ));
+    } else {
+      return (
+        <li className='text-muted'>
+          <p
+            className=''
+            style={{ cursor: 'pointer', fontSize: '15px' }}
+            onClick={() =>
+              newOrganization.twitter_url !== '' &&
+              window.open(newOrganization.twitter_url)
+            }
+          >
+            {newOrganization.twitter_username !== '' ? (
+              <p className='uk-link-muted'>
+                <FaTwitter className='text-primary' />{' '}
+                {newOrganization.twitter_username}
+              </p>
+            ) : (
+              <p className='text-info'>Sin Twitter</p>
+            )}
+          </p>
+        </li>
+      );
+    }
+  };
+  const FacebookList = () => {
+    if (newOrganization.facebook_url.includes(',')) {
+      return newOrganization.facebook_url.split(',').map((facebook, index) => (
+        <li
+          key={index}
+          style={{ cursor: 'pointer' }}
+          onClick={() => {
+            window.open(facebook);
+          }}
+        >
+          <strong>
+            <FaFacebook color='blue' /> {facebook}
+          </strong>
+        </li>
+      ));
+    } else {
+      return (
+        <li className='text-muted'>
+          <p
+            style={{ cursor: 'pointer', fontSize: '15px' }}
+            className='text-muted'
+            onClick={() =>
+              newOrganization.facebook_url !== '' &&
+              window.open(newOrganization.facebook_url)
+            }
+          >
+            {newOrganization.facebook_username !== '' ? (
+              <p>
+                <FaFacebook color='blue' /> {newOrganization.facebook_username}
+              </p>
+            ) : (
+              <p className='text-primary'>Sin Facebook</p>
+            )}
+          </p>
+        </li>
+      );
+    }
+  };
+
+  const YoutueList = () => {
+    if (newOrganization.youtube_url.includes(',')) {
+      return newOrganization.youtube_url.split(',').map((youtube, index) => (
+        <li
+          className='text-muted'
+          style={{ cursor: 'pointer' }}
+          key={index}
+          onClick={() => {
+            window.open(youtube);
+          }}
+        >
+          <strong>
+            <FaYoutube className='text-danger' /> {youtube}
+          </strong>
+        </li>
+      ));
+    } else {
+      return (
+        <li className='uk-link-muted'>
+          <p
+            style={{ cursor: 'pointer', fontSize: '15px' }}
+            onClick={() =>
+              newOrganization.youtube_url !== '' &&
+              window.open(newOrganization.youtube_url)
+            }
+          >
+            {newOrganization.youtube_username !== '' ? (
+              <p>
+                <FaYoutube className='text-danger' />{' '}
+                {newOrganization.youtube_username}
+              </p>
+            ) : (
+              <p className='text-danger'>Sin Youtube</p>
+            )}
+          </p>
+        </li>
+      );
+    }
+  };
   return (
     <>
       {loading ? (
         <h1 className='text-center'>Cargando...</h1>
       ) : (
-        <div className='text-break card  animate__animated   animate__fadeIn'>
+        <div className='card text-break card  animate__animated   animate__fadeIn'>
           <div className='card-body'>
             <h3 className='card-title'>{newOrganization.name}</h3>
-            <span>{newOrganization.acronym}</span>
+            <span className='card-subtitle text-muted'>
+              {newOrganization.acronym}
+            </span>
 
             <div className='card-text'>
               <div className='py-1'>
@@ -41,7 +157,7 @@ export const OrganizationCard = () => {
                     className='text-muted '
                     href={newOrganization.website_url}
                     target='_blank'
-                    rel="noreferrer"
+                    rel='noreferrer'
                   >
                     <FaFileAlt className='text-info' />{' '}
                     {newOrganization.website_url}
@@ -50,146 +166,45 @@ export const OrganizationCard = () => {
               </div>
             </div>
 
-            <div className='uk-margin'>
-              <div className='line'></div>
-              <div className='uk-column-1-2'>
-                <div className='twittr'>
-                  <ul className='uk-list'>
-                    {newOrganization.twitter_url.includes(',') ? (
-                      newOrganization.twitter_url
-                        .split(',')
-                        .map((twitter, index) => (
-                          <li
-                            className='text-muted'
-                            key={index}
-                            style={{ cursor: 'pointer' }}
-                            onClick={() => {
-                              window.open(twitter);
-                            }}
-                          >
-                            <strong>
-                              <FaTwitter color='#00acee ' /> {twitter}
-                            </strong>
-                          </li>
-                        ))
-                    ) : (
-                      <li className='uk-link-muted'>
-                        <p
-                          className='uk-link-muted'
-                          style={{ cursor: 'pointer', fontSize: '15px' }}
-                          onClick={() =>
-                            newOrganization.twitter_url !== '' &&
-                            window.open(newOrganization.twitter_url)
-                          }
-                        >
-                          {newOrganization.twitter_username !== '' ? (
-                            <p className='uk-link-muted'>
-                              <FaTwitter className='text-primary' />{' '}
-                              {newOrganization.twitter_username}
-                            </p>
-                          ) : (
-                            <p className='text-info'>Sin Twitter</p>
-                          )}
-                        </p>
-                      </li>
-                    )}
+            <div className='line'></div>
+            <div className='container'>
+              <div className='row container'>
+                <div className='col-md-12'>
+                  <h3>Puedes Encontrarlo En:</h3>
+                </div>
+                <div className='col-md-6 mb-3'>
+                  <ul className='list-group font-weight-bold'>
+                    Twitter: <TwitterList />
                   </ul>
                 </div>
 
-                <div className='face'>
-                  <ul className=''>
-                    {newOrganization.facebook_url.includes(',') ? (
-                      newOrganization.facebook_url
-                        .split(',')
-                        .map((facebook,index) => (
-                          <li
-                          key={index}
-                            style={{ cursor: 'pointer' }}
-                            onClick={() => {
-                              window.open(facebook);
-                            }}
-                          >
-                            <strong>
-                              <FaFacebook color='blue' /> {facebook}
-                            </strong>
-                          </li>
-                        ))
-                    ) : (
-                      <li className='text-muted'>
-                        <p
-                          style={{ cursor: 'pointer', fontSize: '15px' }}
-                          className='text-muted'
-                          onClick={() =>
-                            newOrganization.facebook_url !== '' &&
-                            window.open(newOrganization.facebook_url)
-                          }
-                        >
-                          {newOrganization.facebook_username !== '' ? (
-                            <p>
-                              <FaFacebook color='blue' />{' '}
-                              {newOrganization.facebook_username}
-                            </p>
-                          ) : (
-                            <p className='text-primary'>Sin Facebook</p>
-                          )}
-                        </p>
-                      </li>
-                    )}
+                <div className='col-md-6 mb-3'>
+                  <ul className='list-group font-weight-bold'>
+                    Facebook: <FacebookList />
                   </ul>
                 </div>
 
-                <div className='youtube'>
-                  <ul className=''>
-                    {newOrganization.youtube_url.includes(',') ? (
-                      newOrganization.youtube_url.split(',').map((youtube,index) => (
-                        <li
-                          className='text-muted'
-                          style={{ cursor: 'pointer' }}
-                          key={index}
-                          onClick={() => {
-                            window.open(youtube);
-                          }}
-                        >
-                          <strong>
-                            <FaYoutube className='text-danger' /> {youtube}
-                          </strong>
-                        </li>
-                      ))
-                    ) : (
-                      <li className='uk-link-muted'>
-                        <p
-                          style={{ cursor: 'pointer', fontSize: '15px' }}
-                          onClick={() =>
-                            newOrganization.youtube_url !== '' &&
-                            window.open(newOrganization.youtube_url)
-                          }
-                        >
-                          {newOrganization.youtube_username !== '' ? (
-                            <p>
-                              <FaYoutube className='text-danger' />{' '}
-                              {newOrganization.youtube_username}
-                            </p>
-                          ) : (
-                            <p className='text-danger'>Sin Youtube</p>
-                          )}
-                        </p>
-                      </li>
-                    )}
+                <div className='col-md-6 mb-3'>
+                  <ul className='list-group font-weight-bold'>
+                    Youtube: <YoutueList />
                   </ul>
                 </div>
 
-                <p
-                  className='uk-link-muted'
-                  style={{ cursor: 'pointer', fontSize: '15px' }}
-                  onClick={() => {
-                    window.open(
-                      `https://www.transparencia.gob.sv${newOrganization.administrative_document_file_url}`
-                    );
-                  }}
-                >
-                  <BsInfoCircleFill className='text-info' />{' '}
-                  <span>URL del archivo del documento administrativo</span>
-                </p>
+                <div className='col-md-6 mb-3 font-weight-bold'>
+                  Documento Administrativo:
+                  <p
+                    className='uk-link-muted'
+                    style={{ cursor: 'pointer', fontSize: '15px' }}
+                    onClick={() => {
+                      window.open(
+                        `https://www.transparencia.gob.sv${newOrganization.administrative_document_file_url}`
+                      );
+                    }}
+                  >
+                    <BsInfoCircleFill className='text-info' />{' '}
+                    <span>URL del archivo del documento administrativo</span>
+                  </p>
+                </div>
               </div>
             </div>
             <button
@@ -206,7 +221,7 @@ export const OrganizationCard = () => {
                 : 'https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg'
             }
             alt={newOrganization.avatar_file_name}
-            className='card-img-bottom'
+            className='card-img-bottom img-thumbnail'
           />
         </div>
       )}
