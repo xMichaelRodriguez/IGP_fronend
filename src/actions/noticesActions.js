@@ -120,9 +120,9 @@ const noticetUpdated = (notice) => ({
 });
 
 // export const noticeLogout = () => ({ type: types.noticeLogout });
-export const startnoticeDeleted = () => {
-  return async (dispatch, getState) => {
-    const { id } = getState().notice.activeNotice;
+export const startnoticeDeleted = (id) => {
+  return async (dispatch) => {
+    
     try {
       Swal.fire({
         title: 'Estas seguro?',
@@ -131,9 +131,10 @@ export const startnoticeDeleted = () => {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!',
+        confirmButtonText: 'Si, estoy seguro!',
       }).then((result) => {
         if (result.isConfirmed) {
+
           fetchAsync(`noticies/deleteNotice/${id}`, {}, 'DELETE').then((resp) =>
             resp.json().then((resp) => {
               if (resp.ok) {

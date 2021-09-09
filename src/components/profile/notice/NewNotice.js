@@ -85,32 +85,31 @@ export const NewNotice = () => {
     <>
       <button
         type='button'
-        className='uk-button uk-button-text uk-text-bold animate__animated animate__fadeIn'
-        style={{ fontSize: '15px' }}
+        className='btn btn-link  animate__animated animate__fadeIn'
         onClick={() => {
           dispatch(noticeClearActive());
           dispatch(uiRemoveError());
-          history.push('/profile/noticies');
+          history.goBack();
         }}
       >
         <FaChevronLeft /> Volver
       </button>
 
       <form
-        className='uk-card uk-card-default uk-margin uk-padding animate__animated animate__fadeIn'
+        className='card  shadow-sm animate__animated animate__fadeIn'
         onSubmit={handleSavedNotice}
       >
-        <legend className='uk-text-bold'>
+        <legend className='font-weight-bold'>
           {activeNotice ? 'Editar Notica' : 'Nueva Noticia'}
         </legend>
 
-        <div className='uk-margin'>
+        <div className='m-auto'>
           <label htmlFor='title' className='uk-form-label'>
             Title
           </label>
           <input
             type='text'
-            className={`uk-input ${
+            className={`form-control ${
               (msgError.includes('Titulo') || msgError.includes('Minimo')) &&
               'uk-form-danger'
             }`}

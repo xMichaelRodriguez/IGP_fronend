@@ -2,7 +2,30 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Proptypes from 'prop-types';
 import moment from 'moment';
-export const CardScreen = ({ data, route }) => {
+import { useDispatch } from 'react-redux';
+import {
+  noticeSetActive,
+  startnoticeDeleted,
+} from '../../actions/noticesActions';
+import { startstoryDeleted, StorySetActive } from '../../actions/events';
+export const CardScreen = ({ data, route, mode }) => {
+  const dispatch = useDispatch();
+
+  const handleEdit = (data, route) => {
+    if (route === 'noticias') {
+      dispatch(noticeSetActive(data));
+    } else {
+      dispatch(StorySetActive(data));
+    }
+  };
+  const handleDelete = (data, route) => {
+    if (route === 'noticias') {
+      dispatch(startnoticeDeleted(data));
+    } else {
+      dispatch(startstoryDeleted(data));
+    }
+  };
+
   const ComponentLoadingData = () => {
     if (Object.entries(data).length === 0) {
       return (
@@ -27,9 +50,39 @@ export const CardScreen = ({ data, route }) => {
                 <p className='card-text text-justify'>
                   {d.body.substr(0, 140)}...
                 </p>
-                <Link to={`/${route}/${d.id}`} className='btn btn-link'>
-                  Leer Ahora
-                </Link>
+                {mode === 'profile' ? (
+                  <>
+                    <button
+                      className='btn btn-primary btn-sm dropdown-toggle'
+                      type='button'
+                      data-toggle='dropdown'
+                      aria-haspopup='true'
+                      aria-expanded='false'
+                    >
+                      Opciones
+                    </button>
+                    <div className='dropdown-menu'>
+                      <button
+                        className='btn btn-secondary dropdown-item'
+                        type='button'
+                        onClick={() => handleEdit(d, route)}
+                      >
+                        Modificar
+                      </button>
+                      <button
+                        className='btn btn-danger dropdown-item'
+                        type='button'
+                        onClick={() => handleDelete(d.id, route)}
+                      >
+                        Eliminar
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <Link to={`/${route}/${d.id}`} className='btn btn-link'>
+                    Leer Ahora
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -43,4 +96,5 @@ export const CardScreen = ({ data, route }) => {
 CardScreen.propTypes = {
   data: Proptypes.array.isRequired,
   route: Proptypes.string.isRequired,
+  mode: Proptypes.string.isRequired,
 };

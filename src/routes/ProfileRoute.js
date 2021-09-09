@@ -1,29 +1,52 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { FooterScreen } from '../components/footer/FooterScreen';
+import { ManageScreen } from '../components/manage/ManageScreen';
+import { NoticeScreen } from '../components/noticies/NoticeScreen';
 import { HomeProfile } from '../components/profile/HomeProfile';
 
-import { NewNotice } from '../components/profile/notice/NewNotice';
-import { NoticeSchreen } from '../components/profile/notice/NoticeSchreen';
-import { NewStory } from '../components/profile/story/NewStory';
 import { StoryScreen } from '../components/profile/story/StoryScreen';
-import { NavbarProfile } from '../components/UI/NavbarProfile';
+import { NavbarContentScreen } from '../components/UI/NavbarContentScreen';
+import { NavbarScreen } from '../components/UI/NavbarScreen';
 
 export const ProfileRoute = () => {
+  const routes = [
+    {
+      route: '/profile/home',
+      title: 'Inicio',
+      id: 1,
+    },
+    {
+      route: '/profile/noticias',
+      title: 'Noticias',
+      id: 2,
+    },
+    {
+      route: '/profile/historias',
+      title: 'Historias de vida',
+      id: 3,
+    },
+  ];
   return (
     <>
-      <NavbarProfile />
-      <div className='uk-container  uk-padding uk-margin'>
-        <Switch>
-          <Route exact path='/profile' component={HomeProfile} />
-          <Route exact path='/profile/noticies' component={NoticeSchreen} />
-          <Route exact path='/profile/manage-notice' component={NewNotice} />
+      <div className='wrapper'>
+        <NavbarScreen routes={routes} />
+        <div id='content'>
+          <NavbarContentScreen />
+          <Switch>
+            <Route path='/profile/noticias' component={NoticeScreen} />
+            <Route path='/profile/historias' component={StoryScreen} />
+            <Route
+              exact
+              path='/profile/mantenimiento'
+              component={ManageScreen}
+            />
 
-          <Route exact path='/profile/stories' component={StoryScreen} />
-          <Route exact path='/profile/manage-story' component={NewStory} />
+            <Route path='/profile/home' component={HomeProfile} />
 
-          <Redirect exact to='/profile' />
-        </Switch>
+            <Redirect to='/profile/home' />
+          </Switch>
+        </div>
       </div>
       <FooterScreen />
     </>

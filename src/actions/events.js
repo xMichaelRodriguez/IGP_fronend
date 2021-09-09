@@ -117,9 +117,8 @@ const storyUpdated = (story) => ({
 });
 
 // export const storyLogout = () => ({ type: types.storyLogout });
-export const startstoryDeleted = () => {
-  return async (dispatch, getState) => {
-    const { id } = getState().story.activeStory;
+export const startstoryDeleted = (id) => {
+  return async (dispatch) => {
     try {
       Swal.fire({
         title: 'Estas seguro?',
@@ -128,7 +127,7 @@ export const startstoryDeleted = () => {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!',
+        confirmButtonText: 'Si,estoy seguro!',
       }).then((result) => {
         if (result.isConfirmed) {
           fetchAsync(`stories/${id}`, {}, 'DELETE').then((resp) =>

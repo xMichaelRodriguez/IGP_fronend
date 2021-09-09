@@ -34,10 +34,30 @@ export const DashBoard = () => {
       dispatch(uiOpenChat());
     }
   };
+
+  const routes = [
+    {
+      route: '/home',
+      title: 'Inicio',
+      id: 1,
+    },
+    { route: '/noticias', title: 'Noticias', id: 2 },
+    { route: '/historias', title: 'Historias de vida', id: 3 },
+    {
+      route: '/organizaciones',
+      title: 'Organizaci ones',
+      id: 4,
+    },
+    {
+      route: '/aprendizaje',
+      title: 'Aprendiza je',
+      id: 5,
+    },
+  ];
   return (
     <>
       <div className='wrapper'>
-        <NavbarScreen />
+        <NavbarScreen routes={routes} />
         <div id='content'>
           <NavbarContentScreen />
           <Switch>
@@ -59,8 +79,14 @@ export const DashBoard = () => {
             <Route path='/home' component={HomeScreen} />
             <Redirect to='/home' />
           </Switch>
-        </div>
 
+          <button
+            className='btn btn-primary cursor chat  rounded-circle animate__animated animate__rubberBand m-auto'
+            onClick={handlerDisplayChat}
+          >
+            <BsFillChatSquareFill size='1em' />
+          </button>
+        </div>
         <div className='positions'>
           {ChatOpen && (
             <div
@@ -77,13 +103,6 @@ export const DashBoard = () => {
           )}
         </div>
       </div>
-      <button
-        className='btn btn-primary cursor chat  rounded-circle animate__animated animate__rubberBand m-auto'
-        onClick={handlerDisplayChat}
-      >
-        <BsFillChatSquareFill size='1.8rem' />
-      </button>
-
       <FooterScreen />
     </>
   );

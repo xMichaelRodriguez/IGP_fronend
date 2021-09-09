@@ -141,28 +141,14 @@ export const ViolenceScreen = () => {
                     <dfn>Historietas</dfn>
                   </h2>
                   <div className='text-center '>
-                    <img
-                      src='https://i.imgur.com/6qqDtWo.jpg'
-                      className='img-thumbnail w-100 '
-                      alt='historieta'
-                      style={{ height: '600px' }}
-                    />
+                    <historietasView />
                   </div>
                 </section>
 
                 <section className=' animate__animated   animate__fadeIn mb-5'>
-                  <h2 className='text-center'>
-                    <dfn>Cuentos</dfn>
-                  </h2>
+                  <h2 className='text-center'>Cuentos</h2>
                   <div className='container'>
-                    <div className='embed-responsive embed-responsive-21by9'>
-                      <iframe
-                      title="cuento1"
-                        className='embed-responsive-item w-100 h-75'
-                        src='https://www.youtube.com/embed/eqA-rVwSZk8'
-                        allowFullScreen=''
-                      ></iframe>
-                    </div>
+                    <CuentosView />
                   </div>
                 </section>
               </div>
