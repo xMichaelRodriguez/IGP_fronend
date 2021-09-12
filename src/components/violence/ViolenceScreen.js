@@ -7,7 +7,7 @@ import {
   useRouteMatch,
 } from 'react-router-dom';
 import { CuentosView } from './CuentosView';
-import { historietasView } from './historietasView';
+import { HistorietasView } from './HistorietasView';
 import { RightSection } from './RightSection';
 
 export const ViolenceScreen = () => {
@@ -59,7 +59,7 @@ export const ViolenceScreen = () => {
           <Switch>
             <Route path={`${path}/derechos`} component={RightSection} />
             <Route path={`${path}/cuentos`} component={CuentosView} />
-            <Route path={`${path}/historietas`} component={historietasView} />
+            <Route path={`${path}/historietas`} component={HistorietasView} />
             <Route path={`${path}`}>
               <div className=''>
                 <section className='container py-2 animate__animated   animate__fadeIn'>
@@ -141,7 +141,7 @@ export const ViolenceScreen = () => {
                     <dfn>Historietas</dfn>
                   </h2>
                   <div className='text-center '>
-                    <historietasView />
+                    <HistorietasView />
                   </div>
                 </section>
 

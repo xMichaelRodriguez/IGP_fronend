@@ -4,8 +4,8 @@ import { FooterScreen } from '../components/footer/FooterScreen';
 import { ManageScreen } from '../components/manage/ManageScreen';
 import { NoticeScreen } from '../components/noticies/NoticeScreen';
 import { HomeProfile } from '../components/profile/HomeProfile';
+import { StoryScreen } from '../components/stories/StoryScreen';
 
-import { StoryScreen } from '../components/profile/story/StoryScreen';
 import { NavbarContentScreen } from '../components/UI/NavbarContentScreen';
 import { NavbarScreen } from '../components/UI/NavbarScreen';
 
@@ -34,13 +34,13 @@ export const ProfileRoute = () => {
         <div id='content'>
           <NavbarContentScreen />
           <Switch>
-            <Route path='/profile/noticias' component={NoticeScreen} />
-            <Route path='/profile/historias' component={StoryScreen} />
             <Route
               exact
-              path='/profile/mantenimiento'
+              path='/profile/mantenimiento/:token'
               component={ManageScreen}
             />
+            <Route path='/profile/noticias' component={NoticeScreen} />
+            <Route path='/profile/historias' component={StoryScreen} />
 
             <Route path='/profile/home' component={HomeProfile} />
 

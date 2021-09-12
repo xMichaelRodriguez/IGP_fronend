@@ -221,7 +221,10 @@ export const OrganizationCard = () => {
                 : 'https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg'
             }
             alt={newOrganization.avatar_file_name}
-            className='card-img-bottom img-thumbnail'
+            className='card-img-bottom'
+            style={{height:"28rem"}}
+           
+            
           />
         </div>
       )}

@@ -2,20 +2,46 @@ import 'moment/locale/es';
 import React from 'react';
 
 import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import { CardScreen } from '../cards/CardScreen';
 import { Pagination } from '../cards/Pagination';
 export const StoryScreen = () => {
   const location = useLocation();
   const param = location.pathname.split('/')[1];
-
+  const history = useHistory();
   const { storyArr } = useSelector((state) => state.story.stories);
   return (
     <section className='row'>
-      <div className='col-md-12'>
-        <Pagination selector={'story'} subSelector='stories' />
-      </div>
-      <CardScreen data={storyArr} route='historias' mode={param} />
+      {param === 'profile' ? (
+        ((
+          <div className='col-md-6'>
+            <Pagination selector={'story'} subSelector='stories' />
+          </div>
+        ),
+        (
+          <div className='col-md-6'>
+            <button
+              className='btn primary--button btn-block mb-3'
+              type='button'
+              onClick={() => {
+                history.push('/profile/mantenimiento/historias');
+              }}
+            >
+              Nueva Historia
+            </button>
+          </div>
+        ))
+      ) : (
+        <div className='col-md-12'>
+          <Pagination selector={'story'} subSelector='stories' />
+        </div>
+      )}
+      <CardScreen
+        data={storyArr !== [] && storyArr}
+        route='historias'
+        mode={param}
+        history={history}
+      />
     </section>
   );
 };

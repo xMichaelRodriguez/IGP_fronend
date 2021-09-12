@@ -36,9 +36,11 @@ export const noticiesReducer = (state = initialState, action) => {
     case types.noticeDeleted:
       return {
         ...state,
-        noticies: state.noticies.noticeArr.filter(
-          (e) => e.id !== state.activeNotice.id
-        ),
+        noticies: {
+          noticeArr: state.noticies.noticeArr.filter(
+            (e) => e.id !== action.payload
+          ),
+        },
         activeNotice: null,
       };
 

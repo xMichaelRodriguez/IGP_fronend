@@ -8,23 +8,23 @@ export const OrganizationScreen = () => {
 
   const { data: organizations, loading } = useOrganizations();
   return (
-    <div className='row'>
-      {loading && (
-        <h1 className='d-flex justify-content-center'>Cargando...</h1>
-      )}
+    <>
+      {loading && <h1 className='text-center'>Cargando...</h1>}
 
-      {!location.pathname.includes('/organizations') &&
-        organizations.map(
-          (organization) =>
-            (organization.acronym.includes('CONNA') ||
-              organization.acronym.includes('MINEDUCYT') ||
-              organization.acronym.includes('ISNA') ||
-              organization.acronym.includes('PNC') ||
-              organization.acronym.includes('FGR') ||
-              organization.acronym.includes('PDDH')) && (
-              <OrganizationItem key={organization.id} {...organization} />
-            )
-        )}
-    </div>
+      <div className='row'>
+        {!location.pathname.includes('/organizations') &&
+          organizations.map(
+            (organization) =>
+              (organization.acronym.includes('CONNA') ||
+                organization.acronym.includes('MINEDUCYT') ||
+                organization.acronym.includes('ISNA') ||
+                organization.acronym.includes('PNC') ||
+                organization.acronym.includes('FGR') ||
+                organization.acronym.includes('PDDH')) && (
+                <OrganizationItem {...organization} />
+              )
+          )}
+      </div>
+    </>
   );
 };

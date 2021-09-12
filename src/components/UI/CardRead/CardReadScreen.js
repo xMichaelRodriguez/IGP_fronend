@@ -10,7 +10,7 @@ export const CardReadScreen = () => {
   const location = useLocation().pathname.split('/');
   const history = useHistory();
   let path = location[1].includes('noticias') ? 'noticies' : 'stories';
-  console.log(path);
+
   const [dataToRead, setDataToRead] = useState({});
   useEffect(() => {
     (async function () {
@@ -33,7 +33,7 @@ export const CardReadScreen = () => {
     <div className='card animate__animated   animate__fadeIn '>
       <div className='card-body'>
         <h1 className='card-title '>{dataToRead.title}</h1>
-        <h6 class='card-subtitle mb-2 text-muted'>
+        <h6 className='card-subtitle mb-2 text-muted'>
           {moment(dataToRead.date).calendar()}
         </h6>
 

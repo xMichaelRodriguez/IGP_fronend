@@ -8,33 +8,29 @@ import {
   startnoticeDeleted,
 } from '../../actions/noticesActions';
 import { startstoryDeleted, StorySetActive } from '../../actions/events';
-export const CardScreen = ({ data, route, mode }) => {
+export const CardScreen = ({ data, route, mode, history }) => {
   const dispatch = useDispatch();
 
   const handleEdit = (data, route) => {
     if (route === 'noticias') {
       dispatch(noticeSetActive(data));
-    } else {
+      history.push(`/profile/mantenimiento/${route}`);
+    } else if (route === 'historias') {
       dispatch(StorySetActive(data));
+      history.push(`/profile/mantenimiento/${route}`);
     }
   };
   const handleDelete = (data, route) => {
     if (route === 'noticias') {
       dispatch(startnoticeDeleted(data));
-    } else {
+    } else if (route === 'historias') {
       dispatch(startstoryDeleted(data));
     }
   };
 
   const ComponentLoadingData = () => {
-    if (Object.entries(data).length === 0) {
-      return (
-        <div className='text-center'>
-          <div className='spinner-grow' role='status'>
-            <span className='sr-only'>Cargando...</span>
-          </div>
-        </div>
-      );
+    if (data === [] || data === undefined || data === null) {
+      return <h1 className='text-center'>Cargando...</h1>;
     } else {
       return (
         Object.entries(data).length !== 0 &&

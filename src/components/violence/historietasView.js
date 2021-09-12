@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const historietasView = () => {
+export const HistorietasView = () => {
   return (
     <div className='animate__animated   animate__fadeIn'>
       <img
@@ -8,7 +8,7 @@ export const historietasView = () => {
         className='img-thumbnail w-100 '
         alt='historieta'
         style={{ height: '600px' }}
-      />
+    />
     </div>
   );
 };

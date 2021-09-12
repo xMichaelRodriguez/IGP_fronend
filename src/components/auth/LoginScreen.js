@@ -56,8 +56,8 @@ export const LoginScreen = () => {
           <h2>login</h2>
         </div>
         <div className='col-md-12 mb-3'>
-          <div class='form-group'>
-            <label for='exampleFormControlInput1'>Email address</label>
+          <div className='form-group'>
+            <label htmlFor='exampleFormControlInput1'>Email address</label>
             <input
               type='email'
               className={`form-control  ${!ErrorE && 'is-invalid'} `}
@@ -68,7 +68,7 @@ export const LoginScreen = () => {
               onChange={handleInputChange}
               autoComplete='off'
             />
-            {!ErrorE && <div class='invalid-feedback'>Correo invalido</div>}
+            {!ErrorE && <div className='invalid-feedback'>Correo invalido</div>}
           </div>
         </div>
         <div className='col-md-12 mb-3'>
@@ -82,12 +82,12 @@ export const LoginScreen = () => {
               placeholder='password'
             />
             {!ErrorP && (
-              <span class='invalid-feedback'>Contraseña invalida</span>
+              <span className='invalid-feedback'>Contraseña invalida</span>
             )}
           </div>
         </div>
         {!!msgError && (
-          <div class='alert alert-danger mt-2' role='alert'>
+          <div className='alert alert-danger mt-2' role='alert'>
             {msgError}
           </div>
         )}

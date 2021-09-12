@@ -28,7 +28,7 @@ export const HomeScreen = () => {
 
       <h3 className='d-flex justify-content-center'>Ultimas Noticias</h3>
       <section className='row'>
-        <CardScreen data={noticies.noticeArr} route='noticias' />
+        <CardScreen data={noticies.noticeArr} route='noticias' mode='inicio' />
       </section>
 
       <div className='line'></div>
@@ -37,7 +37,7 @@ export const HomeScreen = () => {
         Ultimas Historias de vida
       </h3>
       <section className='row'>
-        <CardScreen data={stories.storyArr} route='historias' />
+        <CardScreen data={stories.storyArr} route='historias' mode="inicio" />
       </section>
 
       <div className='line'></div>
