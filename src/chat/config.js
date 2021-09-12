@@ -67,7 +67,7 @@ const config = {
     // Replaces the default header
     header: () => (
       <div
-        className=' title-break'
+        className=' text-breack'
         style={{
           backgroundColor: '#6a1576',
           padding: '5px',
@@ -77,11 +77,8 @@ const config = {
           height: 70,
         }}
       >
-        <div className='uk-margin'>
-          <FaUserAstronaut
-            className='uk-margin-left uk-margin-right'
-            size='1.5rem'
-          />
+        <div className='mx-auto'>
+          <FaUserAstronaut className='mx-auto ' size='1.5rem' />
 
           <span className='font-weight-bold '>Conversando con UvsBot</span>
         </div>
@@ -95,18 +92,18 @@ const config = {
     // Replaces the default bot avatar
     botAvatar: (props) => (
       <div
-        className='uk-background-primary'
+        className='bg-primary'
         style={{
           height: 50,
           width: 40,
           color: '#fbfbfb',
-          marginRight: 10,
-          borderRadius: '50px',
+          marginRight: 0,
+          borderRadius: '10px',
         }}
       >
         <FaUserAstronaut
-          className='uk-margin-small '
-          style={{ marginLeft: '5px' }}
+          className='my-auto mt-3 '
+          style={{ marginLeft: '7px' }}
         />
       </div>
     ),
@@ -116,7 +113,7 @@ const config = {
     // Replaces the default user icon
     userAvatar: (props) => (
       <div>
-        <FaUserCircle className='px-1 ml-2' size='2.3rem' />
+        <FaUserCircle className='px-auto ml-2' size='2.3rem' />
       </div>
     ),
     // // Replaces the default user chat message

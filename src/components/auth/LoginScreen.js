@@ -27,7 +27,8 @@ export const LoginScreen = () => {
     }
   }, [uid, history]);
 
-  const handleLogin = () => {
+  const handleLogin = (e) => {
+    e.preventDefault();
     if (isFormValid()) {
       dispatch(startLogin(email, password));
     }
@@ -49,52 +50,57 @@ export const LoginScreen = () => {
   };
 
   return (
-    <div className='uk-container   login '>
-      <div className='uk-grid login__box uk-card uk-card-default' uk-grid=''>
-        <div className='uk-width-1-1'>
+    <form className='container  login '>
+      <div className='row login__box card '>
+        <div className='col-md-12 mb-3'>
           <h2>login</h2>
         </div>
-        <div className='uk-width-1-1'>
-          <div>
+        <div className='col-md-12 mb-3'>
+          <div className='form-group'>
+            <label htmlFor='exampleFormControlInput1'>Email address</label>
             <input
-              type='text'
-              className={`uk-input  ${!ErrorE && 'uk-form-danger'} `}
+              type='email'
+              className={`form-control  ${!ErrorE && 'is-invalid'} `}
+              id='exampleFormControlInput1'
+              placeholder='name@example.com'
               name='email'
               value={email}
               onChange={handleInputChange}
-              placeholder='email'
+              autoComplete='off'
             />
-            {!ErrorE && (
-              <span class='uk-label uk-label-danger'>Correo invalido</span>
-            )}
+            {!ErrorE && <div className='invalid-feedback'>Correo invalido</div>}
           </div>
         </div>
-        <div className='uk-width-1-1'>
+        <div className='col-md-12 mb-3'>
           <div>
             <input
               type='password'
               name='password'
               value={password}
               onChange={handleInputChange}
-              className={`uk-input ${!ErrorP && 'uk-form-danger'} `}
+              className={`form-control ${!ErrorP && 'is-invalid'} `}
               placeholder='password'
             />
             {!ErrorP && (
-              <span class='uk-label uk-label-danger'>Contraseña invalida</span>
+              <span className='invalid-feedback'>Contraseña invalida</span>
             )}
           </div>
         </div>
         {!!msgError && (
-          <h3>
-            <span className='uk-label uk-label-danger'>{msgError}</span>
-          </h3>
+          <div className='alert alert-danger mt-2' role='alert'>
+            {msgError}
+          </div>
         )}
-        <div className='uk-width-1-1 '>
-          <button className='uk-button primary' onClick={handleLogin}>
+        <div className='col-md-12 mb-3 d-flex justify-content-center '>
+          <button
+            type='submit'
+            className='btn primary--button'
+            onClick={handleLogin}
+          >
             Iniciar Sesión
           </button>
         </div>
       </div>
-    </div>
+    </form>
   );
 };

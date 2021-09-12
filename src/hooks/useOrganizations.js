@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { getOrganizations } from "../helpers/getOrganizations";
+import { useEffect, useState } from 'react';
+import { getOrganizations } from '../helpers/getOrganizations';
 
 export const useOrganizations = (categories) => {
   const [state, SetState] = useState({ data: [], loading: true });
@@ -12,5 +12,6 @@ export const useOrganizations = (categories) => {
       });
     });
   }, [categories]);
+
   return state;
 };

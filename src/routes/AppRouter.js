@@ -12,12 +12,16 @@ import { ProfileRoute } from './ProfileRoute';
 import { PublicRoutes } from './PublicRoutes';
 import { startChecking } from '../actions/authActios';
 import { WaitScreen } from '../components/wait/WaitScreen';
+import { noticeStartLoading } from '../actions/noticesActions';
+import { storyStartLoading } from '../actions/events';
 
 export const AppRouter = () => {
   const { checking, uid } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(startChecking());
+    dispatch(noticeStartLoading({}));
+    dispatch(storyStartLoading({}));
   }, [dispatch]);
 
   if (checking) {

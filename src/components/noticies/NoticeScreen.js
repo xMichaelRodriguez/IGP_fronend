@@ -1,48 +1,48 @@
-import moment from 'moment';
 import 'moment/locale/es';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { noticeStartLoading } from '../../actions/noticesActions';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useHistory, useLocation } from 'react-router';
+import { CardScreen } from '../cards/CardScreen';
+import { Pagination } from '../cards/Pagination';
 
 export const NoticeScreen = () => {
   const { noticeArr } = useSelector((state) => state.notice.noticies);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(noticeStartLoading({}));
-  }, [dispatch]);
+  const location = useLocation();
+  const history = useHistory();
+  const param = location.pathname.split('/')[1];
 
   return (
-    <>
-      {!!noticeArr && (
-        <ul className='uk-list uk-list-divider animate__animated   animate__fadeIn'>
-          {noticeArr.map((notice) => (
-            <li
-              className='list-group-item  flex-column align-items-start '
-              key={notice.id}
+    <section className='row'>
+      {param === 'profile' ? (
+        ((
+          <div className='col-md-6'>
+            <Pagination selector={'notice'} subSelector='noticies' />
+          </div>
+        ),
+        (
+          <div className='col-md-6'>
+            <button
+              className='btn primary--button btn-block mb-3'
+              type='button'
+              onClick={() => {
+                history.push('/profile/mantenimiento/noticias');
+              }}
             >
-              <div
-                className='uk-grid-column-small uk-grid-row-large '
-                uk-grid=''
-              >
-                <div className='uk-padding-remove-bottom'>
-                  <h5 className='uk-text-bold uk-text-large'>{`${notice.title.substr(
-                    0,
-                    70
-                  )} ...`}</h5>
-                </div>
-                <div className='uk-text-left uk-text-emphasis'>
-                  <small>{moment(notice.date).calendar()}</small>
-                </div>
-              </div>
-              <p className='uk-text-break uk-text-muted'>{`${notice.body.substr(
-                0,
-                150
-              )} ...`}</p>
-            </li>
-          ))}
-        </ul>
+              Nueva Noticia
+            </button>
+          </div>
+        ))
+      ) : (
+        <div className='col-md-12'>
+          <Pagination selector={'story'} subSelector='stories' />
+        </div>
       )}
-    </>
+      <CardScreen
+        data={noticeArr !== [] && noticeArr}
+        route='noticias'
+        mode={param}
+        history={history}
+      />
+    </section>
   );
 };

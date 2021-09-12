@@ -1,6 +1,6 @@
 import React from 'react';
 import { Fragment } from 'react';
-import { BsFillCaretRightFill } from 'react-icons/bs';
+
 import { FaFacebookSquare, FaTwitterSquare, FaYoutube } from 'react-icons/fa';
 import { useOrganizations } from '../hooks/useOrganizations';
 
@@ -8,136 +8,145 @@ export const OrganizationsView = () => {
   const { data: organization, loading } = useOrganizations();
 
   return (
-    <Fragment>
-      {loading && (
-        <h1>
-          <span uk-spinner='ratio: 4.5'></span>
-        </h1>
-      )}
+    <>
+      {loading && <h1 className='text-center'>Cargando...</h1>}
 
-      <ul className='uk-list uk-margin-bottom' style={{ listStyle: 'none' }}>
+      <ul className='list-group mb-auto'>
         {organization.map((org) => (
-          <Fragment>
-            {(org.acronym.includes('CONNA') ||
-              org.acronym.includes('ISNA')) && (
-              <li
-                key={org.id}
-                className='uk-card uk-card-default uk-card-body uk-width-1-1@m'
-              >
-                <blockquote className=' uk-text-justify highlight uk-text-break'>
-                  <div className='mb-1'>
-                    <div className='uk-text-bold'>
-                      {!org.avatar_file_url.includes('missing') ? (
-                        <img
-                          className='img-fluid w-50 h-50'
-                          src={`https://www.transparencia.gob.sv/${org.avatar_file_url}`}
-                          alt={`${org.avatar_file_name}`}
-                        />
-                      ) : (
-                        <img
-                          className='img-fluid w-50 h-50'
-                          alt='not found'
-                          src='https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg'
-                        />
-                      )}
-                    </div>
-                    <hr />
-                    <ul
-                      className='uk-list uk-list-divider'
-                      style={{ listStyle: 'none' }}
-                    >
-                      <li className=''>
-                        <span>
-                          <BsFillCaretRightFill />
-                          <span className='font-weight-bold'>
-                            Encargado/a:{' '}
-                          </span>
+          <>
+            {(organization.acronym.includes('CONNA') ||
+              organization.acronym.includes('MINEDUCYT') ||
+              organization.acronym.includes('ISNA') ||
+              organization.acronym.includes('PNC') ||
+              organization.acronym.includes('FGR') ||
+              organization.acronym.includes('PDDH')) && (
+              <li key={org.id} className='card'>
+                <div className='card-body'>
+                  <div className='font-weigth-bold'>
+                    {!org.avatar_file_url.includes('missing') ? (
+                      <img
+                        className='img-thumbnail'
+                        src={`https://www.transparencia.gob.sv/${org.avatar_file_url}`}
+                        alt={`${org.avatar_file_name}`}
+                      />
+                    ) : (
+                      <img
+                        className='img-thumbnail'
+                        alt='not found'
+                        src='https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg'
+                      />
+                    )}
+                  </div>
+                  <div className='line'></div>
+                  <ul className='list-group'>
+                    <li className='list-group-item'>
+                      <p
+                        className='card-title text-dark'
+                        style={{ fontSize: '1rem' }}
+                      >
+                        Encargado/a:
+                        <small className='font-wight-bold'>
+                          {' '}
                           {org.officer_name}
-                        </span>
-                      </li>
+                        </small>
+                      </p>
+                    </li>
 
-                      <li>
-                        <BsFillCaretRightFill />
-                        <span className='font-weight-bold'> Sitio web: </span>
+                    {org.website_url && (
+                      <li className='list-group-item bg-light'>
                         <a
                           href={org.website_url}
                           target='_blank'
                           rel='noopener noreferrer'
+                          className=' btn-link'
                         >
-                          {org.website_url}
+                          <small style={{ fontSize: '1rem' }}>
+                            {' '}
+                            {org.website_url}
+                          </small>
                         </a>
                       </li>
-                      <li className='mb-2 text-center'>
-                        <BsFillCaretRightFill />{' '}
-                        <span className='font-weight-bold'>Redes</span>
-                        <div className='uk-column-1-2'>
-                          <div className=''>
-                            {org.twitter_url &&
-                            !org.twitter_url.includes(',') ? (
-                              <Fragment>
-                                <a
-                                  href={org.twitter_url}
-                                  target='_blank'
-                                  rel='noopener noreferrer'
-                                >
-                                  <FaTwitterSquare size='1.5rem' />
-                                </a>
-                              </Fragment>
-                            ) : (
-                              <span className='uk-text-primary'>
-                                Sin Twitter
-                              </span>
-                            )}
+                    )}
+                    <li className=' list-group-item mb-2 text-center'>
+                      <div className='row '>
+                        {org.twitter_url && !org.twitter_url.includes(',') ? (
+                          <div className='col-md-3'>
+                            <a
+                              href={org.twitter_url}
+                              target='_blank'
+                              rel='noopener noreferrer'
+                              className='btn-link'
+                            >
+                              <FaTwitterSquare size='1.5rem' color='#00acee' />
+                            </a>
                           </div>
-                          <div className=''>
-                            {org.facebook_url &&
-                            !org.facebook_url.includes(',') ? (
-                              <a
-                                href={org.facebook_url}
-                                target='_blank'
-                                rel='noopener noreferrer'
-                              >
-                                <FaFacebookSquare size='1.5rem' />
-                              </a>
-                            ) : (
-                              <span className='uk-text-primary'>
-                                Sin Facebook
-                              </span>
-                            )}
+                        ) : (
+                          <div className='col-md-12'>
+                            <small
+                              className='text-primary'
+                              style={{ fontSize: '1rem' }}
+                            >
+                              Sin Twitter
+                            </small>
                           </div>
-                          <div className=''>
-                            {org.youtube_url &&
-                            !org.youtube_url.includes(',') ? (
-                              <a
-                                href={org.youtube_url}
-                                className='uk-text-danger'
-                                target='_blank'
-                                rel='noopener noreferrer'
-                              >
-                                <FaYoutube
-                                  size='1.5rem'
-                                  className='text-danger'
-                                />
-                              </a>
-                            ) : (
-                              <span className='uk-text-danger'>
-                                Sin Youtube
-                              </span>
-                            )}
+                        )}
+
+                        {org.facebook_url && !org.facebook_url.includes(',') ? (
+                          <div className='col-md-3'>
+                            <a
+                              href={org.facebook_url}
+                              target='_blank'
+                              rel='noopener noreferrer'
+                              className='btn-link'
+                            >
+                              <FaFacebookSquare size='1.5rem' color='blue' />
+                            </a>
                           </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                  <footer className='uk-text-primary'>
+                        ) : (
+                          <div className='col-md-12'>
+                            <small
+                              className='text-primary'
+                              style={{ fontSize: '0.9rem' }}
+                            >
+                              Sin Facebook
+                            </small>
+                          </div>
+                        )}
+
+                        {org.youtube_url && !org.youtube_url.includes(',') ? (
+                          <div className='col-md-3'>
+                            <a
+                              href={org.youtube_url}
+                              className='text-danger'
+                              target='_blank'
+                              rel='noopener noreferrer'
+                              className='btn-link'
+                            >
+                              <FaYoutube size='1.5rem' color='red' />
+                            </a>
+                          </div>
+                        ) : (
+                          <div className='col-md-12'>
+                            <small
+                              className='text-danger'
+                              style={{ fontSize: '0.9rem' }}
+                            >
+                              Sin Youtube
+                            </small>
+                          </div>
+                        )}
+                      </div>
+                    </li>
+                  </ul>
+                  <small className='card-link' style={{ fontSize: '1rem' }}>
                     {org.officer_email}
-                  </footer>
-                </blockquote>
+                  </small>
+                </div>
               </li>
             )}
-          </Fragment>
+          </>
         ))}
       </ul>
-    </Fragment>
+    </>
   );
 };

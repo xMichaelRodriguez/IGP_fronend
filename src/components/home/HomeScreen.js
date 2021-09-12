@@ -1,156 +1,65 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../UVS-APP.svg';
-import { StoryScreen } from '../stories/StoryScreen';
-import { BsArrowRight } from 'react-icons/bs';
-import { NoticeScreen } from '../noticies/NoticeScreen';
-import { OrganizationScreen } from '../organizations/OrganizationScreen';
+
+import { useSelector } from 'react-redux';
+
+import { CardScreen } from '../cards/CardScreen';
 export const HomeScreen = () => {
+  const { noticies } = useSelector((state) => state.notice);
+  const { stories } = useSelector((state) => state.story);
+
   return (
-    <div className='uk-container'>
-      <section className=' uk-margin uk-card uk-card-default uk-card-body animate__animated   animate__fadeIn '>
-        <div uk-slideshow='animation: push'>
-          <div
-            className='uk-position-relative uk-visible-toggle uk-dark '
-            tabIndex='-1'
-            uk-slideshow='finite: true, min-height: 400; max-height:450'
-          >
-            <ul className='uk-slideshow-items uk-margin'>
-              <li>
-                <img
-                  className='uk-width-1-1'
-                  data-src='https://www.cetys.mx/noticias/wp-content/uploads/2020/11/No-Violencia-Contra-las-Mujeres-Comunicado.png'
-                  width=''
-                  height='400px'
-                  style={{ height: '400px' }}
-                  alt=''
-                  uk-img=''
-                />
-              </li>
-              <li>
-                <img
-                  className='uk-width-1-1'
-                  data-src='https://rtvc-assets-radionica3.s3.amazonaws.com/s3fs-public/styles/image_750x424/public/field/image/article/front-cpva.jpg?itok=X0zWlaLz'
-                  width=''
-                  height='400px'
-                  style={{ height: '400px' }}
-                  alt=''
-                  uk-img=''
-                />
-              </li>
-              <li>
-                <img
-                  className='uk-width-1-1 '
-                  data-src='https://www.elpaisdelosjovenes.com/wp-content/uploads/2020/03/violencia1.jpg'
-                  width=''
-                  height='400px'
-                  style={{ height: '400px' }}
-                  alt=''
-                  uk-img=''
-                />
-              </li>
-            </ul>
-
-            <Link
-              to='#'
-              className='uk-position-center-left uk-position-small uk-hidden-hover'
-              uk-slidenav-previous=''
-              uk-slideshow-item='previous'
-            ></Link>
-            <Link
-              to='#'
-              className='uk-position-center-right uk-position-small uk-hidden-hover'
-              uk-slidenav-next=''
-              uk-slideshow-item='next'
-            ></Link>
-          </div>
+    <>
+      <section className='row'>
+        <div className='col-md-12 my-auto'>
+          <h2>Una Vida Segura (UVS)</h2>
+          <p className='text-justify text-dark '>
+            Es una Web App y App Móvil educativa que surge, para dar respuesta
+            de forma organizada a la realidad salvadoreña de violencia en los
+            niños, niñas y adolescentes, y la necesidad de trabajar de la mano
+            con MINEDUCYT, CONNA para llevar información sobre la violencia a la
+            vida de los niños, niñas y adolescentes, buscando así poder ayudar
+            en la vida de ellos con el acceso a la información importante de los
+            casos de violencia que podrían vivir y como podrían salir de ello.
+          </p>
         </div>
       </section>
 
-      <section className=' uk-margin uk-card uk-card-default uk-card-body animate__animated   animate__fadeIn'>
-        <div className='uk-child-width-expand@s uk-text-center' uk-grid=''>
-          <div className=''>
-            <h1 className='font-italic'>Una Vida De Seguridad UVS</h1>
-            <p className='text-justify px-2' style={{ fontSize: '20px' }}>
-              Es una Web App y App Móvil educativa que surge, para dar respuesta
-              de forma organizada a la realidad salvadoreña de violencia en los
-              niños, niñas y adolescentes, y la necesidad de trabajar de la mano
-              con MINEDUCYT, CONNA para llevar información sobre la violencia a
-              la vida de los niños, niñas y adolescentes, buscando así poder
-              ayudar en la vida de ellos con el acceso a la información
-              importante de los casos de violencia que podrían vivir y como
-              podrían salir de ello.
-            </p>
-          </div>
-          <div className='uk-text-middle'>
-            <img
-              data-src={logo}
-              className='uk-text-middle'
-              width=''
-              height=''
-              alt=''
-              uk-img=''
-            />
-          </div>
-        </div>
+      <div className='line'></div>
+
+      <h3 className='d-flex justify-content-center'>Ultimas Noticias</h3>
+      <section className='row'>
+        <CardScreen data={noticies.noticeArr} route='noticias' mode='inicio' />
       </section>
 
-      <section className=' uk-margin uk-card uk-card-default uk-card-body '>
-        <div className='uk-grid-column-small uk-grid-row-large' uk-grid=''>
-          <div className='uk-padding-small'>
-            <h4 className='uk-position-left uk-padding'>Nuevas Historias</h4>
-          </div>
-          <div className='uk-position-right uk-padding'>
-            <Link className='uk-link-muted' to='/stories'>
-              <h4>
-                Ver Mas... <BsArrowRight />
-              </h4>
-            </Link>
-          </div>
-        </div>
-        <hr className='uk-divider-icon' />
-        <StoryScreen />
+      <div className='line'></div>
+
+      <h3 className='d-flex justify-content-center'>
+        Ultimas Historias de vida
+      </h3>
+      <section className='row'>
+        <CardScreen data={stories.storyArr} route='historias' mode="inicio" />
       </section>
 
-      <section className='uk-margin uk-card uk-card-default uk-card-body  animate__animated   animate__fadeIn '>
-        <div className='uk-grid-column-small uk-grid-row-large' uk-grid=''>
-          <div className='uk-padding-small'>
-            <h4 className='uk-position-left uk-padding'>Nuevas Noticias</h4>
-          </div>
-          <div className='uk-position-right uk-padding'>
-            <Link className='uk-link-muted' to='/noticies'>
-              <h4>
-                Ver Mas... <BsArrowRight />
-              </h4>
-            </Link>
-          </div>
-        </div>
-        <hr className='uk-divider-icon' />
+      <div className='line'></div>
 
-        <NoticeScreen />
-      </section>
-
-      <section className='uk-margin-bottom uk-card uk-card-default uk-card-body animate__animated   animate__fadeIn'>
-        <div
-          className='uk-grid-column-small uk-grid-row-large animate__animated   animate__fadeIn'
-          uk-grid=''
-        >
-          <div className='uk-padding-small'>
-            <h4 className='uk-position-left uk-padding'>Organizaciones</h4>
-          </div>
-          <div className='uk-position-right uk-padding'>
-            <Link className='uk-link-muted' to='/organizations'>
-              <h4>
-                Ver Mas...
-                <BsArrowRight />
-              </h4>
-            </Link>
-          </div>
-        </div>
-        <hr className='uk-divider-icon' />
-
-        <OrganizationScreen />
-      </section>
-    </div>
+      <h2>Los Derechos</h2>
+      <p className='text-justify text-dark'>
+        Los Derechos Humanos son el conjunto de prerrogativas sustentadas en la
+        dignidad humana, cuya realización efectiva resulta indispensable para el
+        desarrollo integral de la persona. Este conjunto de prerrogativas se
+        encuentra establecido dentro del orden jurídico nacional, en nuestra
+        Constitución Política, tratados internacionales y las leyes.Los Derechos
+        Humanos son el conjunto de prerrogativas sustentadas en la dignidad
+        humana, cuya realización efectiva resulta indispensable para el
+        desarrollo integral de la persona. Este conjunto de prerrogativas se
+        encuentra establecido dentro del orden jurídico nacional, en nuestra
+        Constitución Política, tratados internacionales y las leyes.Los Derechos
+        Humanos son el conjunto de prerrogativas sustentadas en la dignidad
+        humana, cuya realización efectiva resulta indispensable para el
+        desarrollo integral de la persona. Este conjunto de prerrogativas se
+        encuentra establecido dentro del orden jurídico nacional, en nuestra
+        Constitución Política, tratados internacionales y las leyes.
+      </p>
+    </>
   );
 };

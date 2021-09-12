@@ -18,11 +18,11 @@ export const LearningOptions = (props) => {
   const optionsMarkup = options.map((option) => (
     <blockquote
       key={option.id}
-      className='uk-padding-small primary cursor'
-      style={{ borderRadius: '10px' }}
+      className='p-3 primary  cursor text-break'
+     
       onClick={option.handler}
     >
-      <p className='uk-margin'>
+      <p className='m-auto text-break text-light' style={{fontSize:"1rem"}}>
         <FaChevronRight /> {option.text}
       </p>
     </blockquote>
@@ -30,8 +30,8 @@ export const LearningOptions = (props) => {
 
   return (
     <div
-      className='uk-container-small '
-      style={{ marginRight: 'auto', padding: 5 }}
+      className='container p-3 text-break'
+    
     >
       {optionsMarkup}
     </div>

@@ -1,4 +1,4 @@
-import { types } from "../types/types";
+import { types } from '../types/types';
 
 const initialState = {
   noticies: {
@@ -16,8 +16,6 @@ export const noticiesReducer = (state = initialState, action) => {
         ...state,
         activeNotice: action.payload,
       };
-
-   
 
     case types.noticeClearActive:
       return {
@@ -38,10 +36,12 @@ export const noticiesReducer = (state = initialState, action) => {
     case types.noticeDeleted:
       return {
         ...state,
-        noticies: state.noticies.noticeArr.filter(
-          (e) => e.id !== state.activeNotice.id
-        ),
-      activeNotice: null,
+        noticies: {
+          noticeArr: state.noticies.noticeArr.filter(
+            (e) => e.id !== action.payload
+          ),
+        },
+        activeNotice: null,
       };
 
     case types.noticeLoaded:
