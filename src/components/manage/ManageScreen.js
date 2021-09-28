@@ -106,7 +106,7 @@ export const ManageScreen = () => {
     <form className='card shadow-sm p-3 ' onSubmit={handleSaveOrModifiedItem}>
       <div className='form-group'>
         <button
-          className='btn primary--button'
+          className='btn primary'
           type='button'
           onClick={handleClearMessagesInputs}
         >
@@ -151,7 +151,7 @@ export const ManageScreen = () => {
       </div>
 
       <div className='form-group'>
-        <button className='btn primary--button' type='submit'>
+        <button className='btn primary' type='submit'>
           {activeNotice || activeStory ? 'Modificar' : 'Guardar'}
         </button>
       </div>

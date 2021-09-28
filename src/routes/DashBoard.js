@@ -24,7 +24,8 @@ import { BsFillChatSquareFill } from 'react-icons/bs';
 import { uiCloseChat, uiOpenChat } from '../actions/uiActions';
 
 export const DashBoard = () => {
-  const { ChatOpen } = useSelector((state) => state.UI);
+  const { ChatOpen, sidebarOpen } = useSelector((state) => state.UI);
+
   const dispatch = useDispatch();
 
   const handlerDisplayChat = () => {
@@ -54,11 +55,15 @@ export const DashBoard = () => {
       id: 5,
     },
   ];
+
   return (
     <>
       <div className='wrapper'>
+        {/* SIDEBAR */}
         <NavbarScreen routes={routes} />
-        <div id='content'>
+
+        {/* PAGE CONTENT */}
+        <div id='content' className={`${sidebarOpen ? 'active' : ''}  container-config`}>
           <NavbarContentScreen />
           <Switch>
             <Route exact path='/noticias/:Id' component={CardReadScreen} />
@@ -79,6 +84,7 @@ export const DashBoard = () => {
             <Route path='/home' component={HomeScreen} />
             <Redirect to='/home' />
           </Switch>
+          <div className="positiionn"><FooterScreen /></div>
 
           <button
             className='btn btn-primary cursor chat  rounded-circle animate__animated animate__rubberBand m-auto'
@@ -86,13 +92,12 @@ export const DashBoard = () => {
           >
             <BsFillChatSquareFill size='1em' />
           </button>
-        </div>
-        <div className='positions'>
-          {ChatOpen && (
+          
+         {ChatOpen && (
+         <div className="positions">
             <div
-              className={` animate__animated ${
-                !ChatOpen ? 'animate__fadeInDown' : ' animate__fadeInUp'
-              }`}
+              className={` animate__animated ${!ChatOpen ? 'animate__fadeInDown' : ' animate__fadeInUp'
+                }`}
             >
               <Chatbot
                 config={config}
@@ -100,10 +105,12 @@ export const DashBoard = () => {
                 messageParser={MessageParser}
               />
             </div>
+         </div>
           )}
+        
         </div>
       </div>
-      <FooterScreen />
+
     </>
   );
 };

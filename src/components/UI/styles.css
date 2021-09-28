@@ -17,10 +17,9 @@
 }
 
 .positions {
-  bottom: 1rem;
   font-size: 1.5rem;
-  
-  padding: 25px;
+  height: auto;
+  bottom: 5rem;
   position: fixed;
   right: 50px;
   width: 250px;

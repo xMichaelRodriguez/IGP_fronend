@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { FooterScreen } from '../components/footer/FooterScreen';
 import { ManageScreen } from '../components/manage/ManageScreen';
@@ -10,6 +11,7 @@ import { NavbarContentScreen } from '../components/UI/NavbarContentScreen';
 import { NavbarScreen } from '../components/UI/NavbarScreen';
 
 export const ProfileRoute = () => {
+  const {sidebarOpen } = useSelector((state) => state.UI);
   const routes = [
     {
       route: '/profile/home',
@@ -31,7 +33,7 @@ export const ProfileRoute = () => {
     <>
       <div className='wrapper'>
         <NavbarScreen routes={routes} />
-        <div id='content'>
+        <div id='content' className={`${sidebarOpen ? 'active' : ''}  container-config`}>
           <NavbarContentScreen />
           <Switch>
             <Route
@@ -46,9 +48,9 @@ export const ProfileRoute = () => {
 
             <Redirect to='/profile/home' />
           </Switch>
+      <FooterScreen />
         </div>
       </div>
-      <FooterScreen />
     </>
   );
 };

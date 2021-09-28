@@ -22,7 +22,7 @@ export const NoticeScreen = () => {
 
             <div className='col-md-6'>
               <button
-                className='btn primary--button btn-block mb-3'
+                className='btn primary btn-block mb-3'
                 type='button'
                 onClick={() => {
                   history.push('/profile/mantenimiento/noticias');

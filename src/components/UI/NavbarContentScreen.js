@@ -26,19 +26,18 @@ export const NavbarContentScreen = () => {
   };
 
   return (
-    <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-      <div className='container-fluid'>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
         <button
           type='button'
           id='sidebarCollapse'
-          className='btn primary--button'
+          className='btn primary'
           onClick={handleToggleSideBar}
         >
           <ToggleMenu />
         </button>
-
         <AuthButton />
       </div>
-    </nav>
+    </nav >
   );
 };
