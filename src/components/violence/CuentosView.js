@@ -2,7 +2,7 @@ import React from 'react'
 
 export const CuentosView = () => {
   return (
-    <div className='container card animate__animated   animate__fadeIn'>
+    <div className='container mt-5 mb-4card animate__animated   animate__fadeIn'>
       <div className=''>
         <div className='embed-responsive embed-responsive-21by9'>
           <iframe

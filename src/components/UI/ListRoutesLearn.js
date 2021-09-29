@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-export const ListRoutesLearn = ({ title, id }) => {
+export const ListRoutesLearn = ({ title }) => {
   return (
-    <li className='nav-item dropdown px-2' key={id}>
+    <li className='nav-item dropdown px-2'>
       <span
         data-toggle='collapse'
         aria-expanded='false'
@@ -47,5 +47,4 @@ export const ListRoutesLearn = ({ title, id }) => {
 
 ListRoutesLearn.propTypes = {
   title: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
 }

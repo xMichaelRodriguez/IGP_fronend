@@ -2,6 +2,9 @@
 * {
   font-family: 'Montserrat', sans-serif !important;
 }
+html {
+  scroll-behavior: smooth;
+}
 body {
   font-family: 'Montserrat', sans-serif !important;
   background: #eff3f5fa;

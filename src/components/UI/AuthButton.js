@@ -11,36 +11,37 @@ export const AuthButton = () => {
   }
   if (name) {
     return (
-      <>
-        <li class='nav-item dropdown'>
-          <spam
-            class='nav-link dropdown-toggle'
-            style={{ cursor: 'pointer' }}
-            role='button'
-            data-toggle='dropdown'
-            aria-haspopup='true'
-            aria-expanded='false'
-          >
-            Administrador
-          </spam>
-          <div
-            class='dropdown-menu'
-            aria-labelledby='navbarDropdownMenuLink'
-          >
-            <Link class='dropdown-item' to='/profile/home'>
-              Perfil
-            </Link>
+      <li class='nav-item dropdown'>
+        <spam
+          class='nav-link dropdown-toggle'
+          style={{ cursor: 'pointer' }}
+          role='button'
+          data-toggle='dropdown'
+          aria-haspopup='true'
+          aria-expanded='false'
+        >
+          Administrador
+        </spam>
+        <div
+          class='dropdown-menu'
+          aria-labelledby='navbarDropdownMenuLink'
+        >
+          <Link class='dropdown-item' to='/profile/home'>
+            Perfil
+          </Link>
+          <Link class='dropdown-item' to='/'>
+            volver al inicio
+          </Link>
 
-            <Link
-              class=' btn btn-sm btn-secondary d-flex justify-content-center m-2'
-              to='/'
-              onClick={handleLogout}
-            >
-              cerrar Sesion
-            </Link>
-          </div>
-        </li>
-      </>
+          <Link
+            class=' btn btn-sm primary d-flex justify-content-center m-2'
+            to='/'
+            onClick={handleLogout}
+          >
+            cerrar Sesion
+          </Link>
+        </div>
+      </li>
     )
   } else {
     return ''

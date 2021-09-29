@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 export const ListRoutes = ({ title, id, route }) => {
   const [isActiveClass, setIsActiveClass] = useState(null)
@@ -10,7 +11,7 @@ export const ListRoutes = ({ title, id, route }) => {
   return (
     <li
       className={
-        'nav-item ' + isActiveClass === id
+        'nav-item ' + isActiveClass === route
           ? 'activeNav '
           : ''
       }
@@ -24,4 +25,9 @@ export const ListRoutes = ({ title, id, route }) => {
       </NavLink>
     </li>
   )
+}
+ListRoutes.propTypes = {
+  title: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  route: PropTypes.string.isRequired,
 }

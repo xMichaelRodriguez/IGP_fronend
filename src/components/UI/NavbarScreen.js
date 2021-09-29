@@ -44,16 +44,26 @@ export const NavbarScreen = ({ routes }) => {
           id='navbarText'
         >
           <ul className='navbar-nav ml-auto'>
-            {routes.map((r, index) => (
+            {routes.map((r) => (
               <>
                 {r.route.includes('aprendizaje') ? (
-                  <ListRoutesLearn key={index} {...r} />
+                  <ListRoutesLearn
+                    key={r.id}
+                    title={r.title}
+                  />
                 ) : (
-                  <ListRoutes key={index} {...r} />
+                  <ListRoutes
+                    key={r.id}
+                    title={r.title}
+                    id={r.id}
+                    route={r.route}
+                  />
                 )}
               </>
             ))}
-            {name !== undefined && <AuthButton />}
+            {name !== undefined && (
+              <AuthButton key='/administrator' />
+            )}
           </ul>
         </div>
       </div>
