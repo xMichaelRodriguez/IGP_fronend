@@ -29,10 +29,7 @@ export const ProfileRoute = () => {
   return (
     <>
       <NavbarScreen routes={routes} />
-      <div
-        className='container '
-        style={{ marginTop: '100px' }}
-      >
+      <div className='container '>
         <Switch>
           <div className='config'>
             <Route

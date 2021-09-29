@@ -2,10 +2,10 @@ import React from 'react'
 
 export const RightSection = () => {
   return (
-    <div className='container-fluid animate__animated   animate__fadeIn'>
-      <div>
-        <h3 className='font-weight-bold'>
-          <dfn>Los Derechos Humanos </dfn>
+    <div className='container mt-3 animate__animated   animate__fadeIn'>
+      <div className='container py-5'>
+        <h3 className='font-weight-bold display-4'>
+          Los Derechos Humanos
         </h3>
         <p className='text-justify text-dark'>
           Los Derechos Humanos son el conjunto de

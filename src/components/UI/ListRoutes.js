@@ -10,7 +10,9 @@ export const ListRoutes = ({ title, id, route }) => {
   return (
     <li
       className={
-        'nav-item ' + isActiveClass === id ? 'active ' : ''
+        'nav-item ' + isActiveClass === id
+          ? 'activeNav '
+          : ''
       }
     >
       <NavLink

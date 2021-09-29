@@ -1,22 +1,26 @@
-import React from 'react';
-import { useLocation } from 'react-router';
-import { useOrganizations } from '../../hooks/useOrganizations';
-import { OrganizationItem } from './OrganizationItem';
+import React from 'react'
+import { useLocation } from 'react-router'
+import { useOrganizations } from '../../hooks/useOrganizations'
+import { WaitScreen } from '../wait/WaitScreen'
+import { OrganizationItem } from './OrganizationItem'
 
 export const OrganizationScreen = () => {
-  const location = useLocation();
+  const location = useLocation()
 
-  const { data: organizations, loading } = useOrganizations();
+  const { data: organizations, loading } =
+    useOrganizations()
   return (
-    <>
-      {loading && <h1 className='text-center'>Cargando...</h1>}
+    <div className='container mt-3'>
+      {loading && <WaitScreen />}
 
       <div className='row'>
         {!location.pathname.includes('/organizations') &&
           organizations.map(
             (organization) =>
               (organization.acronym.includes('CONNA') ||
-                organization.acronym.includes('MINEDUCYT') ||
+                organization.acronym.includes(
+                  'MINEDUCYT'
+                ) ||
                 organization.acronym.includes('ISNA') ||
                 organization.acronym.includes('PNC') ||
                 organization.acronym.includes('FGR') ||
@@ -25,6 +29,6 @@ export const OrganizationScreen = () => {
               )
           )}
       </div>
-    </>
-  );
-};
+    </div>
+  )
+}

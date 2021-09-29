@@ -4,19 +4,19 @@ import PropTypes from 'prop-types'
 export const ListRoutesLearn = ({ title, id }) => {
   return (
     <li className='nav-item dropdown px-2' key={id}>
-      <Link
-        to='/#'
+      <span
         data-toggle='collapse'
         aria-expanded='false'
         id='navbarDropdownMenuLink'
         role='button'
         className='nav-link dropdown-toggle'
+        style={{ cursor: 'pointer' }}
         data-toggle='dropdown'
         aria-haspopup='true'
         aria-expanded='false'
       >
         {title}
-      </Link>
+      </span>
       <div
         className='dropdown-menu'
         aria-labelledby='navbarDropdownMenuLink'
