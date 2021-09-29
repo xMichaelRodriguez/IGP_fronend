@@ -1,10 +1,13 @@
 // Config starter code
-import { createChatBotMessage } from 'react-chatbot-kit';
-import { LearningOptions } from './LearningOptions';
-import { LinkList } from './LinkList';
+import { createChatBotMessage } from 'react-chatbot-kit'
+import { LearningOptions } from './LearningOptions'
+import { LinkList } from './LinkList'
 
-import { FaUserAstronaut, FaUserCircle } from 'react-icons/fa';
-import { OrganizationsView } from './OrganizationsView';
+import {
+  FaUserAstronaut,
+  FaUserCircle,
+} from 'react-icons/fa'
+import { OrganizationsView } from './OrganizationsView'
 
 const config = {
   botName: 'UvsBot',
@@ -69,7 +72,7 @@ const config = {
       <div
         className=' text-breack'
         style={{
-          backgroundColor: '#6a1576',
+          backgroundColor: '#8f77f2',
           padding: '5px',
           borderRadius: '3px',
           color: 'white',
@@ -78,9 +81,14 @@ const config = {
         }}
       >
         <div className='mx-auto'>
-          <FaUserAstronaut className='mx-auto ' size='1.5rem' />
+          <FaUserAstronaut
+            className='mx-auto '
+            size='1.5rem'
+          />
 
-          <span className='font-weight-bold '>Conversando con UvsBot</span>
+          <span className='font-weight-bold '>
+            Conversando con UvsBot
+          </span>
         </div>
       </div>
     ),
@@ -113,7 +121,10 @@ const config = {
     // Replaces the default user icon
     userAvatar: (props) => (
       <div>
-        <FaUserCircle className='px-auto ml-2' size='2.3rem' />
+        <FaUserCircle
+          className='px-auto ml-2'
+          size='2.3rem'
+        />
       </div>
     ),
     // // Replaces the default user chat message
@@ -122,14 +133,14 @@ const config = {
 
   customStyles: {
     botMessageBox: {
-      backgroundColor: '#6a1576',
+      backgroundColor: '#8f77f2',
       borderRadius: '10px',
     },
     chatButton: {
-      backgroundColor: '#6a1576',
+      backgroundColor: '#8f77f2',
       borderRadius: '10px',
     },
   },
-};
+}
 
-export default config;
+export default config

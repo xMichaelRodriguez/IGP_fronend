@@ -1,43 +1,55 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Proptypes from 'prop-types';
-import moment from 'moment';
-import { useDispatch } from 'react-redux';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import Proptypes from 'prop-types'
+import moment from 'moment'
+import { useDispatch } from 'react-redux'
 
 import {
   noticeSetActive,
   startnoticeDeleted,
-} from '../../actions/noticesActions';
-import { startstoryDeleted, StorySetActive } from '../../actions/events';
-export const CardScreen = ({ data, route, mode, history }) => {
-  const dispatch = useDispatch();
+} from '../../actions/noticesActions'
+import {
+  startstoryDeleted,
+  StorySetActive,
+} from '../../actions/events'
+export const CardScreen = ({
+  data,
+  route,
+  mode,
+  history,
+}) => {
+  const dispatch = useDispatch()
 
   const handleEdit = (data, route) => {
     if (route === 'noticias') {
-      dispatch(noticeSetActive(data));
-      history.push(`/profile/mantenimiento/${route}`);
+      dispatch(noticeSetActive(data))
+      history.push(`/profile/mantenimiento/${route}`)
     } else if (route === 'historias') {
-      dispatch(StorySetActive(data));
-      history.push(`/profile/mantenimiento/${route}`);
+      dispatch(StorySetActive(data))
+      history.push(`/profile/mantenimiento/${route}`)
     }
-  };
+  }
   const handleDelete = (data, route) => {
     if (route === 'noticias') {
-      dispatch(startnoticeDeleted(data));
+      dispatch(startnoticeDeleted(data))
     } else if (route === 'historias') {
-      dispatch(startstoryDeleted(data));
+      dispatch(startstoryDeleted(data))
     }
-  };
+  }
 
   const ComponentLoadingData = () => {
-    if (data === [] || data === undefined || data === null) {
-      return <h1 className='text-center'>Cargando...</h1>;
+    if (
+      data === [] ||
+      data === undefined ||
+      data === null
+    ) {
+      return <h1 className='text-center'>Cargando...</h1>
     } else {
       return (
         Object.entries(data).length !== 0 &&
         data.map((d) => (
           <div className='col-md-4  ' key={d.id}>
-            <div className='card mb-3 shadow-sm'>
+            <div className='card mb-3 shadow'>
               {/* <img src='...' className='card-img-top' alt='...' /> */}
               <div className='card-body'>
                 <h5 className='card-title'>{d.title}</h5>
@@ -69,14 +81,19 @@ export const CardScreen = ({ data, route, mode, history }) => {
                       <button
                         className='btn btn-danger dropdown-item'
                         type='button'
-                        onClick={() => handleDelete(d.id, route)}
+                        onClick={() =>
+                          handleDelete(d.id, route)
+                        }
                       >
                         Eliminar
                       </button>
                     </div>
                   </>
                 ) : (
-                  <Link to={`/${route}/${d.id}`} className='btn btn-link'>
+                  <Link
+                    to={`/${route}/${d.id}`}
+                    className='btn btn-link'
+                  >
                     Leer Ahora
                   </Link>
                 )}
@@ -84,14 +101,14 @@ export const CardScreen = ({ data, route, mode, history }) => {
             </div>
           </div>
         ))
-      );
+      )
     }
-  };
-  return <ComponentLoadingData />;
-};
+  }
+  return <ComponentLoadingData />
+}
 
 CardScreen.propTypes = {
   data: Proptypes.array.isRequired,
   route: Proptypes.string.isRequired,
   mode: Proptypes.string.isRequired,
-};
+}

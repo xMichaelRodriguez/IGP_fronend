@@ -1,6 +1,19 @@
 .primary {
-  background-color: #6a1576 !important;
+  background-color: #8f77f2 !important;
   color: #fff !important;
+}
+.active {
+  background-color: #6f69ac !important;
+  color: #fff !important;
+  border-radius: 0.4em;
+}
+
+.btn:hover {
+  filter: brightness(0.8);
+}
+
+.btn:focus {
+  box-shadow: 0px 0px 6px #8f77f2;
 }
 
 .secondary {
@@ -26,7 +39,7 @@
 }
 
 .chat {
-  bottom: 10px;
+  bottom: 20px;
   font-size: 30px;
   padding: 15px;
   position: fixed;
@@ -34,7 +47,7 @@
 }
 
 .react-chatbot-kit-chat-btn-send:hover {
-  background-color: #440552 !important;
+  background-color: #8f77f2 !important;
   transition: all 0.5s;
 }
 .react-chatbot-kit-chat-container {
@@ -80,4 +93,12 @@
   .positions {
     width: 90px;
   }
+}
+
+.returnTop {
+  bottom: 25px;
+  padding: 1em;
+
+  position: fixed;
+  left: 25px;
 }
