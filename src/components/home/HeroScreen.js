@@ -11,7 +11,7 @@ export const HeroScreen = () => {
             <h3 className='font-weight-bold display-4'>
               Una Vida Segura Enseña
             </h3>
-            <p className='text-justify lead mb-3'>
+            <p className=' lead mb-3'>
               Enriqueze el proceso de enseñanza sobre temas
               de violencia y abuso de niños, niñas y
               adolescentes atravez del uso de una web app

@@ -39,8 +39,8 @@
 }
 
 .chat {
+  padding-top: 15px;
   bottom: 20px;
-  padding: 15px;
   position: fixed;
   right: 25px;
 }
@@ -96,8 +96,7 @@
 
 .returnTop {
   bottom: 25px;
-  padding: 1em;
-
+  padding: 0.5em;
   position: fixed;
   left: 25px;
 }
