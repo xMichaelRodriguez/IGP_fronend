@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Chatbot from 'react-chatbot-kit'
 
 //icons
-import { BsFillChatSquareFill } from 'react-icons/bs'
+import { BsFillChatSquareDotsFill } from 'react-icons/bs'
 // views
 import ActionProvider from '../../chat/ActionProvider'
 import MessageParser from '../../chat/MessageParser'
@@ -28,10 +28,10 @@ export const ChatBotButton = () => {
   return (
     <>
       <button
-        className='btn primary cursor chat  rounded animate__animated animate__rubberBand'
+        className='btn primary rounded-circle chat '
         onClick={handlerDisplayChat}
       >
-        <BsFillChatSquareFill size='1em' />
+        <BsFillChatSquareDotsFill size='2.5rem' />
       </button>
 
       {ChatOpen && (

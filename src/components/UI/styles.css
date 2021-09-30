@@ -15,7 +15,9 @@
 }
 
 .secondary {
-  background-color: #440552;
+  background-color: #fbfbfb !important;
+  outline: 1px solid #8f77f2 !important;
+  color: #282828;
 }
 
 .cursor {
@@ -38,7 +40,6 @@
 
 .chat {
   bottom: 20px;
-  font-size: 30px;
   padding: 15px;
   position: fixed;
   right: 25px;

@@ -13,7 +13,7 @@ const config = {
   botName: 'UvsBot',
   initialMessages: [
     createChatBotMessage(
-      'Hola soy UvsBot, estoy aqui para ayudar. Que quieres aprender?',
+      'Hola soy UvsBot, estoy aquí para ayudar. Que quieres aprender?',
       {
         widget: 'LearningOptions',
       }
@@ -100,17 +100,17 @@ const config = {
     // Replaces the default bot avatar
     botAvatar: (props) => (
       <div
-        className='bg-primary'
+        className='primary'
         style={{
           height: 50,
           width: 40,
           color: '#fbfbfb',
           marginRight: 0,
-          borderRadius: '10px',
+          borderRadius: '50%',
         }}
       >
         <FaUserAstronaut
-          className='my-auto mt-3 '
+          className='my-2 '
           style={{ marginLeft: '7px' }}
         />
       </div>

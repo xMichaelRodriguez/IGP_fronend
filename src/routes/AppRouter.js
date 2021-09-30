@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   BrowserRouter as Router,
-  Redirect,
+  Route,
   Switch,
 } from 'react-router-dom'
 
@@ -45,13 +45,7 @@ export const AppRouter = () => {
             render={AuthRouter}
           />
 
-          <PublicRoutes
-            isAuthenticated={!!uid}
-            path='/'
-            render={DashBoard}
-          />
-
-          <Redirect to='/' />
+          <Route path='/' component={DashBoard} />
         </Switch>
       </div>
     </Router>

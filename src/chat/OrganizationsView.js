@@ -1,14 +1,19 @@
-import React from 'react';
+import React from 'react'
 
-import { FaFacebookSquare, FaTwitterSquare, FaYoutube } from 'react-icons/fa';
-import { useOrganizations } from '../hooks/useOrganizations';
+import {
+  FaFacebookSquare,
+  FaTwitterSquare,
+  FaYoutube,
+} from 'react-icons/fa'
+import { WaitScreen } from '../components/wait/WaitScreen'
+import { useOrganizations } from '../hooks/useOrganizations'
 
 export const OrganizationsView = () => {
-  const { data: organization, loading } = useOrganizations();
+  const { data: organization, loading } = useOrganizations()
 
   return (
     <>
-      {loading && <h1 className='text-center'>Cargando...</h1>}
+      {loading && <WaitScreen />}
 
       <ul className='list-group mb-auto'>
         {organization.map((org) => (
@@ -22,7 +27,9 @@ export const OrganizationsView = () => {
               <li key={org.id} className='card'>
                 <div className='card-body'>
                   <div className='font-weigth-bold'>
-                    {!org.avatar_file_url.includes('missing') ? (
+                    {!org.avatar_file_url.includes(
+                      'missing'
+                    ) ? (
                       <img
                         className='img-thumbnail'
                         src={`https://www.transparencia.gob.sv/${org.avatar_file_url}`}
@@ -59,7 +66,9 @@ export const OrganizationsView = () => {
                           rel='noopener noreferrer'
                           className=' btn-link'
                         >
-                          <small style={{ fontSize: '1rem' }}>
+                          <small
+                            style={{ fontSize: '1rem' }}
+                          >
                             {' '}
                             {org.website_url}
                           </small>
@@ -68,7 +77,8 @@ export const OrganizationsView = () => {
                     )}
                     <li className=' list-group-item mb-2 text-center'>
                       <div className='row '>
-                        {org.twitter_url && !org.twitter_url.includes(',') ? (
+                        {org.twitter_url &&
+                        !org.twitter_url.includes(',') ? (
                           <div className='col-md-3'>
                             <a
                               href={org.twitter_url}
@@ -76,7 +86,10 @@ export const OrganizationsView = () => {
                               rel='noopener noreferrer'
                               className='btn-link'
                             >
-                              <FaTwitterSquare size='1.5rem' color='#00acee' />
+                              <FaTwitterSquare
+                                size='1.5rem'
+                                color='#00acee'
+                              />
                             </a>
                           </div>
                         ) : (
@@ -90,7 +103,8 @@ export const OrganizationsView = () => {
                           </div>
                         )}
 
-                        {org.facebook_url && !org.facebook_url.includes(',') ? (
+                        {org.facebook_url &&
+                        !org.facebook_url.includes(',') ? (
                           <div className='col-md-3'>
                             <a
                               href={org.facebook_url}
@@ -98,7 +112,10 @@ export const OrganizationsView = () => {
                               rel='noopener noreferrer'
                               className='btn-link'
                             >
-                              <FaFacebookSquare size='1.5rem' color='blue' />
+                              <FaFacebookSquare
+                                size='1.5rem'
+                                color='blue'
+                              />
                             </a>
                           </div>
                         ) : (
@@ -112,7 +129,8 @@ export const OrganizationsView = () => {
                           </div>
                         )}
 
-                        {org.youtube_url && !org.youtube_url.includes(',') ? (
+                        {org.youtube_url &&
+                        !org.youtube_url.includes(',') ? (
                           <div className='col-md-3'>
                             <a
                               href={org.youtube_url}
@@ -121,7 +139,10 @@ export const OrganizationsView = () => {
                               rel='noopener noreferrer'
                               className='btn-link'
                             >
-                              <FaYoutube size='1.5rem' color='red' />
+                              <FaYoutube
+                                size='1.5rem'
+                                color='red'
+                              />
                             </a>
                           </div>
                         ) : (
@@ -137,7 +158,10 @@ export const OrganizationsView = () => {
                       </div>
                     </li>
                   </ul>
-                  <small className='card-link' style={{ fontSize: '1rem' }}>
+                  <small
+                    className='card-link'
+                    style={{ fontSize: '1rem' }}
+                  >
                     {org.officer_email}
                   </small>
                 </div>
@@ -147,5 +171,5 @@ export const OrganizationsView = () => {
         ))}
       </ul>
     </>
-  );
-};
+  )
+}

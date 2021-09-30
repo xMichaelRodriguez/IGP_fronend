@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useForm } from '../../hooks/useForm'
+
 import './style.css'
+import logoApp from '../../UVS-APP.svg'
+import { useForm } from '../../hooks/useForm'
 import validator from 'validator'
 import { startLogin } from '../../actions/authActios'
 import { useHistory } from 'react-router'
+
 export const LoginScreen = () => {
   const { msgError } = useSelector((state) => state.error)
   const { uid } = useSelector((state) => state.auth)
@@ -16,8 +19,8 @@ export const LoginScreen = () => {
   const [ErrorP, setErrorP] = useState(true)
 
   const [formValue, handleInputChange] = useForm({
-    email: 'admin@gmail.com',
-    password: 'thePassword123',
+    email: '',
+    password: '',
   })
   const { email, password } = formValue
 
@@ -50,75 +53,80 @@ export const LoginScreen = () => {
   }
 
   return (
-    <form className='container  login '>
-      <div className='row login__box card shadow'>
-        <div className='col-md-12 mb-3'>
-          <h2 className='display-5 font-weight-bold'>
+    <div className='container login__box px-5'>
+      <div className='row  bg-light shadow  mt-5 mb-5'>
+        <div className='col-md-8   py-3'>
+          <h3 className='display-4 font-weight-bolder'>
             Inicio de Sesion
-          </h2>
-        </div>
-        <div className='col-md-12 mb-3'>
-          <div className='form-group'>
-            <label htmlFor='exampleFormControlInput1'>
-              Correo
-            </label>
-            <input
-              type='email'
-              className={`form-control  ${
-                !ErrorE && 'is-invalid'
-              } `}
-              id='exampleFormControlInput1'
-              placeholder='name@example.com'
-              name='email'
-              value={email}
-              onChange={handleInputChange}
-              autoComplete='off'
-            />
-            {!ErrorE && (
-              <div className='invalid-feedback'>
-                Correo invalido
+          </h3>
+          <form className='w-100 d-block mt-5 '>
+            <div class='form-group'>
+              <label htmlFor='correo'>Correo</label>
+              <input
+                id='correo'
+                className={`form-control  ${
+                  !ErrorE && 'is-invalid'
+                } `}
+                placeholder='name@example.com'
+                name='email'
+                value={email}
+                onChange={handleInputChange}
+                autoComplete='off'
+              />
+              {!ErrorE && (
+                <small className='invalid-feedback'>
+                  Correo invalido
+                </small>
+              )}
+            </div>
+            <div class='form-group'>
+              <label htmlFor='password'>Contraseña</label>
+              <input
+                type='password'
+                name='password'
+                value={password}
+                onChange={handleInputChange}
+                className={`form-control ${
+                  !ErrorP && 'is-invalid'
+                } `}
+                placeholder='password'
+              />
+              {!ErrorP && (
+                <span className='invalid-feedback'>
+                  Contraseña invalida
+                </span>
+              )}
+            </div>
+            {!!msgError && (
+              <div
+                className='alert alert-danger mt-2'
+                role='alert'
+              >
+                {msgError}
               </div>
             )}
-          </div>
+            <button
+              type='submit'
+              className='btn primary'
+              onClick={handleLogin}
+            >
+              Iniciar Sesión
+            </button>
+          </form>
         </div>
-        <div className='col-md-12 mb-3'>
-          <div className='form-group'>
-            <label htmlFor='password'>Contraseña</label>
-            <input
-              type='password'
-              name='password'
-              value={password}
-              onChange={handleInputChange}
-              className={`form-control ${
-                !ErrorP && 'is-invalid'
-              } `}
-              placeholder='password'
-            />
-            {!ErrorP && (
-              <span className='invalid-feedback'>
-                Contraseña invalida
-              </span>
-            )}
-          </div>
-        </div>
-        {!!msgError && (
-          <div
-            className='alert alert-danger mt-2'
-            role='alert'
-          >
-            {msgError}
-          </div>
-        )}
-        <div className='col-md-12 mb-3 d-flex justify-content-center '>
-          <button
-            type='submit'
-            className='btn primary'
-            onClick={handleLogin}
-          >
-            Iniciar Sesión
-          </button>
+        <div className='col-md-4 py-3 primary '>
+          <img
+            className=' mx-auto d-block img-fluid  image-content'
+            src={logoApp}
+            width='300rem'
+            height='300rem'
+            alt='uvs logo'
+          />
+          <p className='py-3'>
+            Aprendamos y Avancemos Juntos
+          </p>
         </div>
       </div>
-    </form>
+    </div>
   )
 }
