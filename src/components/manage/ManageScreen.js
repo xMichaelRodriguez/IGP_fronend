@@ -119,67 +119,73 @@ export const ManageScreen = () => {
   }
 
   return (
-    <form
-      className='card shadow-sm p-3 mt-3'
-      onSubmit={handleSaveOrModifiedItem}
-    >
-      <div className='form-group'>
-        <button
-          className='btn primary'
-          type='button'
-          onClick={handleClearMessagesInputs}
-        >
-          Volver
-        </button>
-      </div>
-      <div className='form-group '>
-        <label htmlFor='title'>Titulo</label>
-        <input
-          type='text'
-          className={`form-control ${
-            msgError.includes('Titulo') ||
-            msgError.includes('Minimo')
-              ? 'is-invalid'
-              : ''
-          }`}
-          name='title'
-          value={formValue.title}
-          onChange={handleInputChange}
-          placeholder='titulo'
-          autoComplete='off'
-        />
-        {msgError.includes('Titulo') ||
-        msgError.includes('Minimo') ? (
-          <div className='invalid-feedback'>{msgError}</div>
-        ) : null}
-      </div>
-      <div className='form-group'>
-        <label htmlFor='cuerpo'>Cuerpo</label>
-        <textarea
-          className={`form-control ${
-            msgError.includes('Cuerpo') ||
-            msgError.includes('debe')
-              ? 'is-invalid'
-              : ''
-          }`}
-          name='body'
-          rows='5'
-          value={formValue.body}
-          onChange={handleInputChange}
-        ></textarea>
-        {msgError.includes('Cuerpo') ||
-        msgError.includes('debe') ? (
-          <div className='invalid-feedback'>{msgError}</div>
-        ) : null}
-      </div>
+    <div className='container'>
+      <form
+        className='card shadow-sm p-3 mt-3'
+        onSubmit={handleSaveOrModifiedItem}
+      >
+        <div className='form-group'>
+          <button
+            className='btn primary'
+            type='button'
+            onClick={handleClearMessagesInputs}
+          >
+            Volver
+          </button>
+        </div>
+        <div className='form-group '>
+          <label htmlFor='title'>Titulo</label>
+          <input
+            type='text'
+            className={`form-control ${
+              msgError.includes('Titulo') ||
+              msgError.includes('Minimo')
+                ? 'is-invalid'
+                : ''
+            }`}
+            name='title'
+            value={formValue.title}
+            onChange={handleInputChange}
+            placeholder='titulo'
+            autoComplete='off'
+          />
+          {msgError.includes('Titulo') ||
+          msgError.includes('Minimo') ? (
+            <div className='invalid-feedback'>
+              {msgError}
+            </div>
+          ) : null}
+        </div>
+        <div className='form-group'>
+          <label htmlFor='cuerpo'>Cuerpo</label>
+          <textarea
+            className={`form-control ${
+              msgError.includes('Cuerpo') ||
+              msgError.includes('debe')
+                ? 'is-invalid'
+                : ''
+            }`}
+            name='body'
+            rows='5'
+            value={formValue.body}
+            onChange={handleInputChange}
+          ></textarea>
+          {msgError.includes('Cuerpo') ||
+          msgError.includes('debe') ? (
+            <div className='invalid-feedback'>
+              {msgError}
+            </div>
+          ) : null}
+        </div>
 
-      <div className='form-group'>
-        <button className='btn primary' type='submit'>
-          {activeNotice || activeStory
-            ? 'Modificar'
-            : 'Guardar'}
-        </button>
-      </div>
-    </form>
+        <div className='form-group'>
+          <button className='btn primary' type='submit'>
+            {activeNotice || activeStory
+              ? 'Modificar'
+              : 'Guardar'}
+          </button>
+        </div>
+      </form>
+    </div>
   )
 }

@@ -28,34 +28,35 @@ export const ProfileRoute = () => {
   ]
   return (
     <>
-      <NavbarScreen routes={routes} />
-      <div className='container '>
+      <header>
+        {' '}
+        <NavbarScreen routes={routes} />
+      </header>
+      <div className='config '>
         <Switch>
-          <div className='config'>
-            <Route
-              exact
-              path='/profile/mantenimiento/:token'
-              component={ManageScreen}
-            />
-            <Route
-              path='/profile/noticias'
-              component={NoticeScreen}
-            />
-            <Route
-              path='/profile/historias'
-              component={StoryScreen}
-            />
+          <Route
+            exact
+            path='/profile/mantenimiento/:token'
+            component={ManageScreen}
+          />
+          <Route
+            path='/profile/noticias'
+            component={NoticeScreen}
+          />
+          <Route
+            path='/profile/historias'
+            component={StoryScreen}
+          />
 
-            <Route
-              path='/profile/home'
-              component={HomeProfile}
-            />
+          <Route
+            path='/profile/home'
+            component={HomeProfile}
+          />
 
-            <Redirect to='/profile/home' />
-          </div>
+          <Redirect to='/profile/home' />
         </Switch>
-        <FooterScreen className=' fixed-bottom' />
       </div>
+      <FooterScreen className=' fixed-bottom' />
     </>
   )
 }
