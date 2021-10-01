@@ -1,0 +1,22 @@
+@import 'https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700';
+* {
+  font-family: 'Montserrat', sans-serif !important;
+}
+h1,
+h2,
+h3 {
+  font-weight: 600 !important;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: 'Montserrat', sans-serif !important;
+  background: #eff3f5fa;
+}
+
+.config {
+  min-height: 100vh !important;
+  display: grid !important;
+  grid-template-rows: auto 1fr auto !important;
+}
