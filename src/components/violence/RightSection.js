@@ -20,261 +20,161 @@ export const RightSection = () => {
           cuya realización efectiva resulta indispensable
           para el desarrollo integral de la persona.
         </p>
-      </div>
 
-      <div class='row'>
-        <div class='col-md-4 mb-3'>
-          <div
-            class='list-group'
-            id='list-tab'
-            role='tablist'
-          >
-            <a
-              class='list-group-item list-group-item-action active'
-              id='list-home-list'
-              data-toggle='list'
-              href='#listPosesiones'
-              role='tab'
-              aria-controls='home'
-            >
-              El Derecho a tus Propias Posesiones
-            </a>
-            <a
-              class='list-group-item list-group-item-action'
-              id='list-profile-list'
-              data-toggle='list'
-              href='#listPensamientos'
-              role='tab'
-              aria-controls='profile'
-            >
-              Libertad de Pensamiento
-            </a>
-            <a
-              class='list-group-item list-group-item-action'
-              id='list-messages-list'
-              data-toggle='list'
-              href='#listExpres'
-              role='tab'
-              aria-controls='messages'
-            >
-              Libertad de Expresión
-            </a>
-            <a
-              class='list-group-item list-group-item-action'
-              id='list-settings-list'
-              data-toggle='list'
-              href='#listreunion'
-              role='tab'
-              aria-controls='settings'
-            >
-              El Derecho a Reunirse en Público.
-            </a>
-            <a
-              class='list-group-item list-group-item-action'
-              id='list-democracia-list'
-              data-toggle='list'
-              href='#listDemo'
-              role='tab'
-              aria-controls='demo'
-            >
-              El Derecho a la Democracia.
-            </a>
-            <a
-              class='list-group-item list-group-item-action'
-              id='list-seguridad-list'
-              data-toggle='list'
-              href='#listseguridad'
-              role='tab'
-              aria-controls='listseguridad'
-            >
-              Derecho a seguridad social
-            </a>
-            <a
-              class='list-group-item list-group-item-action'
-              id='list-seguridad-list'
-              data-toggle='list'
-              href='#listVida'
-              role='tab'
-              aria-controls='listVida'
-            >
-              Derecho a la vida
-            </a>
-          </div>
-        </div>
-        <div class='col-md-8 mb-3'>
-          <div class='tab-content' id='nav-tabContent'>
+        <div class=' row'>
+          <div class='col-md-4 mb-3'>
             <div
-              class='container tab-pane fade show active'
-              id='listPosesiones'
-              role='tabpanel'
-              aria-labelledby='list-home-list'
+              class='list-group'
+              id='list-tab'
+              role='tablist'
             >
-              Todo el mundo tiene derecho a tener sus
-              propias cosas o a compartirlas. Nadie debería
-              tomar nuestras cosas sin una buena razón
-            </div>
-            <div
-              class='container tab-pane fade'
-              id='listPensamientos'
-              role='tabpanel'
-              aria-labelledby='list-profile-list'
-            >
-              Todos tenemos el derecho de creer en lo que
-              queramos creer, de tener una religión o de
-              cambiarla si así lo queremos.
-            </div>
-            <div
-              class='container tab-pane fade'
-              id='listExpres'
-              role='tabpanel'
-              aria-labelledby='list-messages-list'
-            >
-              Todos tenemos el derecho de pensar por
-              nosotros mismos, de pensar lo que nos gusta,
-              de decir lo que pensamos y de compartir
-              nuestras ideas con otra gente.
-            </div>
-            <div
-              class='container tab-pane fade'
-              id='listreunion'
-              role='tabpanel'
-              aria-labelledby='list-settings-list'
-            >
-              Todos tenemos el derecho de reunirnos con
-              nuestros amigos y de trabajar juntos en paz
-              para defender nuestros derechos. Nadie nos
-              puede obligar a unirnos a un grupo al que no
-              queremos unirnos.
-            </div>
-            <div
-              class='container tab-pane fade'
-              id='listDemo'
-              role='tabpanel'
-              aria-labelledby='list-demo-list'
-            >
-              Todos tenemos derecho a tomar parte en el
-              gobierno de nuestro país. A todo adulto se le
-              debe permitir elegir a sus propios líderes.
-            </div>
-            <div
-              class='container tab-pane fade'
-              id='listseguridad'
-              role='tabpanel'
-              aria-labelledby='list-segu-list'
-            >
-              Todos tenemos el derecho a una vivienda
-              decente, a cuidados médicos, educación,
-              guardería infantil, suficiente dinero para
-              vivir y atención médica si estamos enfermos o
-              somos mayores.
-            </div>
-            <div
-              class='container tab-pane fade'
-              id='listVida'
-              role='tabpanel'
-              aria-labelledby='list-vida-list'
-            >
-              El derecho a la vida es un derecho universal,
-              es decir que le corresponde a todo ser humano.
-              Es un derecho necesario para poder concretizar
-              todos los demás derechos universales. El
-              derecho a la vida significa tener la
-              oportunidad de vivir nuestra propia vida.
+              <a
+                class='list-group-item list-group-item-action active'
+                id='list-home-list'
+                data-toggle='list'
+                href='#listPosesiones'
+                role='tab'
+                aria-controls='home'
+              >
+                El Derecho a tus Propias Posesiones
+              </a>
+              <a
+                class='list-group-item list-group-item-action'
+                id='list-profile-list'
+                data-toggle='list'
+                href='#listPensamientos'
+                role='tab'
+                aria-controls='profile'
+              >
+                Libertad de Pensamiento
+              </a>
+              <a
+                class='list-group-item list-group-item-action'
+                id='list-messages-list'
+                data-toggle='list'
+                href='#listExpres'
+                role='tab'
+                aria-controls='messages'
+              >
+                Libertad de Expresión
+              </a>
+              <a
+                class='list-group-item list-group-item-action'
+                id='list-settings-list'
+                data-toggle='list'
+                href='#listreunion'
+                role='tab'
+                aria-controls='settings'
+              >
+                El Derecho a Reunirse en Público.
+              </a>
+              <a
+                class='list-group-item list-group-item-action'
+                id='list-democracia-list'
+                data-toggle='list'
+                href='#listDemo'
+                role='tab'
+                aria-controls='demo'
+              >
+                El Derecho a la Democracia.
+              </a>
+              <a
+                class='list-group-item list-group-item-action'
+                id='list-seguridad-list'
+                data-toggle='list'
+                href='#listseguridad'
+                role='tab'
+                aria-controls='listseguridad'
+              >
+                Derecho a seguridad social
+              </a>
+              <a
+                class='list-group-item list-group-item-action'
+                id='list-seguridad-list'
+                data-toggle='list'
+                href='#listVida'
+                role='tab'
+                aria-controls='listVida'
+              >
+                Derecho a la vida
+              </a>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* <div>
-        <ul className='accordion ' id='accordionExample'>
-         
-
-       
-
-
-          <div>
-            <div className='card-header' id='headingFive'>
-              <h2 className='mb-0'>
-                <button
-                  className='btn btn-link btn-block text-left col-md-m mb-3dlapsed'
-                  type='button'
-                  data-toggle='col-md-m mb-3dlapse'
-                  data-target='#col-md-m mb-3dlapseFive'
-                  aria-expanded='false'
-                  aria-controls='col-md-m mb-3dlapseFive'
-                >
-                  El Derecho a la Democracia.
-                </button>
-              </h2>
-            </div>
-            <div
-              id='col-md-m mb-3dlapseFive'
-              className='col-md-m mb-3dlapse'
-              aria-labelledby='headingFive'
-              data-parent='#accordionExample'
-            >
-              <div className='card-body'>
+          <div class='col-md-8 mb-3'>
+            <div class='tab-content' id='nav-tabContent'>
+              <div
+                class='container tab-pane fade show active'
+                id='listPosesiones'
+                role='tabpanel'
+                aria-labelledby='list-home-list'
+              >
+                Todo el mundo tiene derecho a tener sus
+                propias cosas o a compartirlas. Nadie
+                debería tomar nuestras cosas sin una buena
+                razón
+              </div>
+              <div
+                class='container tab-pane fade'
+                id='listPensamientos'
+                role='tabpanel'
+                aria-labelledby='list-profile-list'
+              >
+                Todos tenemos el derecho de creer en lo que
+                queramos creer, de tener una religión o de
+                cambiarla si así lo queremos.
+              </div>
+              <div
+                class='container tab-pane fade'
+                id='listExpres'
+                role='tabpanel'
+                aria-labelledby='list-messages-list'
+              >
+                Todos tenemos el derecho de pensar por
+                nosotros mismos, de pensar lo que nos gusta,
+                de decir lo que pensamos y de compartir
+                nuestras ideas con otra gente.
+              </div>
+              <div
+                class='container tab-pane fade'
+                id='listreunion'
+                role='tabpanel'
+                aria-labelledby='list-settings-list'
+              >
+                Todos tenemos el derecho de reunirnos con
+                nuestros amigos y de trabajar juntos en paz
+                para defender nuestros derechos. Nadie nos
+                puede obligar a unirnos a un grupo al que no
+                queremos unirnos.
+              </div>
+              <div
+                class='container tab-pane fade'
+                id='listDemo'
+                role='tabpanel'
+                aria-labelledby='list-demo-list'
+              >
                 Todos tenemos derecho a tomar parte en el
                 gobierno de nuestro país. A todo adulto se
                 le debe permitir elegir a sus propios
                 líderes.
               </div>
-            </div>
-          </div>
-
-          <div>
-            <div className='card-header' id='headingSix'>
-              <h2 className='mb-0'>
-                <button
-                  className='btn btn-link btn-block text-left col-md-m mb-3dlapsed'
-                  type='button'
-                  data-toggle='col-md-m mb-3dlapse'
-                  data-target='#col-md-m mb-3dlapseSix'
-                  aria-expanded='false'
-                  aria-controls='col-md-m mb-3dlapseSix'
-                >
-                  Seguridad Social
-                </button>
-              </h2>
-            </div>
-            <div
-              id='col-md-m mb-3dlapseSix'
-              className='col-md-m mb-3dlapse'
-              aria-labelledby='headingSix'
-              data-parent='#accordionExample'
-            >
-              <div className='card-body'>
+              <div
+                class='container tab-pane fade'
+                id='listseguridad'
+                role='tabpanel'
+                aria-labelledby='list-segu-list'
+              >
                 Todos tenemos el derecho a una vivienda
                 decente, a cuidados médicos, educación,
                 guardería infantil, suficiente dinero para
                 vivir y atención médica si estamos enfermos
                 o somos mayores.
               </div>
-            </div>
-          </div>
-
-          <div>
-            <div className='card-header' id='headingSeven'>
-              <h2 className='mb-0'>
-                <button
-                  className='btn btn-link btn-block text-left col-md-m mb-3dlapsed'
-                  type='button'
-                  data-toggle='col-md-m mb-3dlapse'
-                  data-target='#col-md-m mb-3dlapseSeven'
-                  aria-expanded='false'
-                  aria-controls='col-md-m mb-3dlapseSeven'
-                >
-                  Derecho a la vida
-                </button>
-              </h2>
-            </div>
-            <div
-              id='col-md-m mb-3dlapseSeven'
-              className='col-md-m mb-3dlapse'
-              aria-labelledby='headingSeven'
-              data-parent='#accordionExample'
-            >
-              <div className='card-body'>
+              <div
+                class='container tab-pane fade'
+                id='listVida'
+                role='tabpanel'
+                aria-labelledby='list-vida-list'
+              >
                 El derecho a la vida es un derecho
                 universal, es decir que le corresponde a
                 todo ser humano. Es un derecho necesario
@@ -285,8 +185,8 @@ export const RightSection = () => {
               </div>
             </div>
           </div>
-        </ul>
-      </div> */}
+        </div>
+      </div>
     </div>
   )
 }
