@@ -19,8 +19,6 @@ const isLocalhost = Boolean(
       /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
     )
 )
-// Initialize deferredPrompt for use later to show browser install prompt.
-let deferredPrompt
 
 export function register(config) {
   if (

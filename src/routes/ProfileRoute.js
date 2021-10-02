@@ -6,7 +6,7 @@ import { ManageScreen } from '../components/manage/ManageScreen'
 import { NoticeScreen } from '../components/noticies/NoticeScreen'
 import { HomeProfile } from '../components/profile/HomeProfile'
 import { StoryScreen } from '../components/stories/StoryScreen'
-import { NavbarScreen } from '../components/UI/NavbarScreen'
+import { NavbarScreen } from '../components/UI/navbar/NavbarScreen'
 
 export const ProfileRoute = () => {
   const routes = [

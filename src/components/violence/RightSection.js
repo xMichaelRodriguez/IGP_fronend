@@ -21,15 +21,15 @@ export const RightSection = () => {
           para el desarrollo integral de la persona.
         </p>
 
-        <div class=' row'>
-          <div class='col-md-4 mb-3'>
+        <div className=' row'>
+          <div className='col-md-4 mb-3'>
             <div
-              class='list-group'
+              className='list-group'
               id='list-tab'
               role='tablist'
             >
               <a
-                class='list-group-item list-group-item-action active'
+                className='list-group-item list-group-item-action active'
                 id='list-home-list'
                 data-toggle='list'
                 href='#listPosesiones'
@@ -39,7 +39,7 @@ export const RightSection = () => {
                 El Derecho a tus Propias Posesiones
               </a>
               <a
-                class='list-group-item list-group-item-action'
+                className='list-group-item list-group-item-action'
                 id='list-profile-list'
                 data-toggle='list'
                 href='#listPensamientos'
@@ -49,7 +49,7 @@ export const RightSection = () => {
                 Libertad de Pensamiento
               </a>
               <a
-                class='list-group-item list-group-item-action'
+                className='list-group-item list-group-item-action'
                 id='list-messages-list'
                 data-toggle='list'
                 href='#listExpres'
@@ -59,7 +59,7 @@ export const RightSection = () => {
                 Libertad de Expresión
               </a>
               <a
-                class='list-group-item list-group-item-action'
+                className='list-group-item list-group-item-action'
                 id='list-settings-list'
                 data-toggle='list'
                 href='#listreunion'
@@ -69,7 +69,7 @@ export const RightSection = () => {
                 El Derecho a Reunirse en Público.
               </a>
               <a
-                class='list-group-item list-group-item-action'
+                className='list-group-item list-group-item-action'
                 id='list-democracia-list'
                 data-toggle='list'
                 href='#listDemo'
@@ -79,7 +79,7 @@ export const RightSection = () => {
                 El Derecho a la Democracia.
               </a>
               <a
-                class='list-group-item list-group-item-action'
+                className='list-group-item list-group-item-action'
                 id='list-seguridad-list'
                 data-toggle='list'
                 href='#listseguridad'
@@ -89,7 +89,7 @@ export const RightSection = () => {
                 Derecho a seguridad social
               </a>
               <a
-                class='list-group-item list-group-item-action'
+                className='list-group-item list-group-item-action'
                 id='list-seguridad-list'
                 data-toggle='list'
                 href='#listVida'
@@ -100,10 +100,13 @@ export const RightSection = () => {
               </a>
             </div>
           </div>
-          <div class='col-md-8 mb-3'>
-            <div class='tab-content' id='nav-tabContent'>
+          <div className='col-md-8 mb-3'>
+            <div
+              className='tab-content'
+              id='nav-tabContent'
+            >
               <div
-                class='container tab-pane fade show active'
+                className='container tab-pane fade show active'
                 id='listPosesiones'
                 role='tabpanel'
                 aria-labelledby='list-home-list'
@@ -114,7 +117,7 @@ export const RightSection = () => {
                 razón
               </div>
               <div
-                class='container tab-pane fade'
+                className='container tab-pane fade'
                 id='listPensamientos'
                 role='tabpanel'
                 aria-labelledby='list-profile-list'
@@ -124,7 +127,7 @@ export const RightSection = () => {
                 cambiarla si así lo queremos.
               </div>
               <div
-                class='container tab-pane fade'
+                className='container tab-pane fade'
                 id='listExpres'
                 role='tabpanel'
                 aria-labelledby='list-messages-list'
@@ -135,7 +138,7 @@ export const RightSection = () => {
                 nuestras ideas con otra gente.
               </div>
               <div
-                class='container tab-pane fade'
+                className='container tab-pane fade'
                 id='listreunion'
                 role='tabpanel'
                 aria-labelledby='list-settings-list'
@@ -147,7 +150,7 @@ export const RightSection = () => {
                 queremos unirnos.
               </div>
               <div
-                class='container tab-pane fade'
+                className='container tab-pane fade'
                 id='listDemo'
                 role='tabpanel'
                 aria-labelledby='list-demo-list'
@@ -158,7 +161,7 @@ export const RightSection = () => {
                 líderes.
               </div>
               <div
-                class='container tab-pane fade'
+                className='container tab-pane fade'
                 id='listseguridad'
                 role='tabpanel'
                 aria-labelledby='list-segu-list'
@@ -170,7 +173,7 @@ export const RightSection = () => {
                 o somos mayores.
               </div>
               <div
-                class='container tab-pane fade'
+                className='container tab-pane fade'
                 id='listVida'
                 role='tabpanel'
                 aria-labelledby='list-vida-list'

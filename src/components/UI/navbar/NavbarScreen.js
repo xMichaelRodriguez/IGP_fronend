@@ -1,14 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 
-import './styles.css'
+import '../styles.css'
 
-import logo from '../../UVS-APP.svg'
-import { ListRoutesLearn } from './ListRoutesLearn'
-import { ListRoutes } from './ListRoutes'
-import { AuthButton } from './AuthButton'
+import { ListRoutesLearn } from '../ListRoutesLearn'
+import { ListRoutes } from '../ListRoutes'
+import { AuthButton } from '../AuthButton'
+import { LogoButton } from './LogoButton'
+import { ToggleButton } from './ToggleButton'
 
 export const NavbarScreen = ({ routes }) => {
   const { name } = useSelector((state) => state.auth)
@@ -16,25 +16,8 @@ export const NavbarScreen = ({ routes }) => {
   return (
     <nav className='shadow-sm  navbar navbar-expand-lg navbar-dark primary '>
       <div className='container'>
-        <Link className='navbar-brand  rounded ' to='/'>
-          <img
-            src={logo}
-            width='80'
-            height='60'
-            alt='logo'
-          />
-        </Link>
-        <button
-          className='navbar-toggler btn'
-          type='button'
-          data-toggle='collapse'
-          data-target='#navbarText'
-          aria-controls='navbarText'
-          aria-expanded='false'
-          aria-label='Toggle navigation'
-        >
-          <span className='navbar-toggler-icon'></span>
-        </button>
+        <LogoButton />
+        <ToggleButton />
 
         <div
           className='collapse navbar-collapse'
@@ -47,6 +30,7 @@ export const NavbarScreen = ({ routes }) => {
                   <ListRoutesLearn
                     key={r.id}
                     title={r.title}
+                    route={r.route}
                   />
                 ) : (
                   <ListRoutes
