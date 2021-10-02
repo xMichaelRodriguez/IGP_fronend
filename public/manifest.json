@@ -19,7 +19,7 @@
       "purpose": "any"
     }
   ],
-  "start_url": "./",
+  "start_url": "https://uvs.netlify.app",
   "display": "standalone",
   "theme_color": "#282828",
   "background_color": "#282828"

@@ -35,9 +35,11 @@ export const CardReadScreen = () => {
       <WaitScreen />
     </div>
   ) : (
-    <div className='card animate__animated   animate__fadeIn '>
-      <div className='card-body'>
-        <h1 className='card-title '>{dataToRead.title}</h1>
+    <div className='container-fluid py-5 animate__animated   animate__fadeIn '>
+      <div className='container shadow card-body'>
+        <h1 className='card-title display-5'>
+          {dataToRead.title}
+        </h1>
         <h6 className='card-subtitle mb-2 text-muted'>
           {moment(dataToRead.date).calendar()}
         </h6>
@@ -50,7 +52,7 @@ export const CardReadScreen = () => {
         </p>
 
         <button
-          className='btn btn-link'
+          className='btn btn-link '
           onClick={() => history.goBack()}
         >
           Volver

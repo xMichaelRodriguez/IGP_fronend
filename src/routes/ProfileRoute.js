@@ -29,10 +29,9 @@ export const ProfileRoute = () => {
   return (
     <>
       <header>
-        {' '}
         <NavbarScreen routes={routes} />
       </header>
-      <div className='config '>
+      <div className='config'>
         <Switch>
           <Route
             exact

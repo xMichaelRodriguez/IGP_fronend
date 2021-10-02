@@ -12,6 +12,8 @@ export const SubHero = () => {
               src={childrens}
               alt='childrens'
               title='childrens'
+              width=''
+              height=''
             />
           </div>
           <div className='col-md-8 mb-3'>

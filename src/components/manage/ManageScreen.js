@@ -126,7 +126,7 @@ export const ManageScreen = () => {
       >
         <div className='form-group'>
           <button
-            className='btn primary'
+            className='btn btn-link'
             type='button'
             onClick={handleClearMessagesInputs}
           >

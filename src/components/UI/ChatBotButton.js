@@ -26,6 +26,7 @@ export const ChatBotButton = () => {
       dispatch(uiOpenChat())
     }
   }
+
   return (
     <>
       <button
@@ -46,6 +47,7 @@ export const ChatBotButton = () => {
               config={config}
               messageParser={MessageParser}
               actionProvider={ActionProvider}
+              validator={true}
               placeholderText='Escribe un mensaje'
             />
           </div>

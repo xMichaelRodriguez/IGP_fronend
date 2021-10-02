@@ -1,8 +1,8 @@
-import { fetchAsync } from '../helpers/fetching';
-import { types } from '../types/types';
-import Swal from 'sweetalert2';
-import { uiRemoveError } from './authActios';
-import moment from 'moment';
+import { fetchAsync } from '../helpers/fetching'
+import { types } from '../types/types'
+import Swal from 'sweetalert2'
+import { uiRemoveError } from './authActios'
+import moment from 'moment'
 export const startnoticeAddNew = (notice) => {
   return async (dispatch) => {
     try {
@@ -14,58 +14,64 @@ export const startnoticeAddNew = (notice) => {
         allowEscapeKey: false,
         showConfirmButton: false,
         onBeforeOpen: () => {
-          Swal.showLoading();
+          Swal.showLoading()
         },
-      });
+      })
       const modNotice = {
         ...notice,
         date: moment(),
-      };
-      const resp = await fetchAsync('noticies/newNotice', modNotice, 'POST');
-      const body = await resp.json();
+      }
+      const resp = await fetchAsync(
+        'noticies/newNotice',
+        modNotice,
+        'POST'
+      )
+      const body = await resp.json()
 
       if (body.ok) {
-        dispatch(noticeAddNew(modNotice));
-        Swal.close();
+        dispatch(noticeAddNew(modNotice))
+        Swal.close()
         Swal.fire(
           'Guardado!!',
           `La noticia:${notice.title} ha sido guardada`,
           'success'
-        );
+        )
       }
-      dispatch(uiRemoveError());
+      dispatch(uiRemoveError())
     } catch (error) {
-      console.log(error);
-      Swal.close();
+      console.log(error)
+      Swal.close()
     }
-  };
-};
+  }
+}
 
 const noticeAddNew = (notice) => ({
   type: types.noticeAddNew,
   payload: notice,
-});
+})
 
 export const noticeStartLoading = ({ page = 1 }) => {
   return async (dipatch) => {
     try {
-      const resp = await fetchAsync(`noticies/?page=${page}`);
-      const body = await resp.json();
+      const resp = await fetchAsync(
+        `noticies/?page=${page}`
+      )
+      const body = await resp.json()
 
       if (body.ok) {
-        delete body.ok;
-        dipatch(noticeLoaded(body));
+        delete body.ok
+        dipatch(noticeLoaded(body))
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
-};
+  }
+}
 
 const noticeLoaded = (noticies) => ({
   type: types.noticeLoaded,
   payload: noticies,
-});
+})
 
 export const noticetStartUpdated = (notice) => {
   return async (dispatch) => {
@@ -78,45 +84,49 @@ export const noticetStartUpdated = (notice) => {
         allowEscapeKey: false,
         showConfirmButton: false,
         onBeforeOpen: () => {
-          Swal.showLoading();
+          Swal.showLoading()
         },
-      });
+      })
 
       const modNotice = {
         ...notice,
         date: moment(),
-      };
+      }
 
       const resp = await fetchAsync(
         `noticies/editNotice/${notice.id}`,
         modNotice,
         'PUT'
-      );
-      const body = await resp.json();
+      )
+      const body = await resp.json()
 
       if (body.ok) {
-        dispatch(noticetUpdated(body.noticies));
-        dispatch(noticeClearActive());
-        Swal.close();
-        Swal.fire('Historia Actualizado', notice.title, 'success');
+        dispatch(noticetUpdated(body.noticies))
+        dispatch(noticeClearActive())
+        Swal.close()
+        Swal.fire(
+          'Historia Actualizado',
+          notice.title,
+          'success'
+        )
       } else {
-        Swal.close();
-        Swal.fire('Error', body.msg, 'error');
+        Swal.close()
+        Swal.fire('Error', body.msg, 'error')
       }
 
-      console.log(body.ok);
+      console.log(body.ok)
     } catch (error) {
-      Swal.close();
+      Swal.close()
 
-      console.error(error);
+      console.error(error)
     }
-  };
-};
+  }
+}
 
 const noticetUpdated = (notice) => ({
   type: types.noticeUpdated,
   payload: notice,
-});
+})
 
 // export const noticeLogout = () => ({ type: types.noticeLogout });
 export const startnoticeDeleted = (id) => {
@@ -127,40 +137,51 @@ export const startnoticeDeleted = (id) => {
         text: ' No podrás revertir esto!',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#6a1576',
+        confirmButtonColor: '#8f77f2',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Si, estoy seguro!',
         cancelButtonText: 'Cancelar',
       }).then((result) => {
         if (result.isConfirmed) {
-          fetchAsync(`noticies/deleteNotice/${id}`, {}, 'DELETE').then((resp) =>
+          fetchAsync(
+            `noticies/deleteNotice/${id}`,
+            {},
+            'DELETE'
+          ).then((resp) =>
             resp.json().then((resp) => {
               if (resp.ok) {
-                dispatch(noticeDeleted(id));
-                dispatch(noticeStartLoading({}));
-                Swal.fire('Noticia  Eliminada', '', 'success');
+                dispatch(noticeDeleted(id))
+                dispatch(noticeStartLoading({}))
+                Swal.fire(
+                  'Noticia  Eliminada',
+                  '',
+                  'success'
+                )
               } else {
-                Swal.fire('Error', resp.msg, 'error');
+                Swal.fire('Error', resp.msg, 'error')
               }
             })
-          );
+          )
         }
-      });
+      })
     } catch (error) {
-      Swal.close();
-      Swal.fire('Error', error, 'error');
-      console.log(error);
+      Swal.close()
+      Swal.fire('Error', error, 'error')
+      console.log(error)
     }
-  };
-};
+  }
+}
 
-const noticeDeleted = (id) => ({ type: types.noticeDeleted, payload: id });
+const noticeDeleted = (id) => ({
+  type: types.noticeDeleted,
+  payload: id,
+})
 
 export const noticeSetActive = (notice) => ({
   type: types.noticeSetActive,
   payload: notice,
-});
+})
 
 export const noticeClearActive = () => ({
   type: types.noticeClearActive,
-});
+})

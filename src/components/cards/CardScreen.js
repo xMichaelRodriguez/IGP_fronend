@@ -63,7 +63,7 @@ export const CardScreen = ({
                 {mode === 'profile' ? (
                   <>
                     <button
-                      className='btn btn-primary btn-sm dropdown-toggle'
+                      className='btn primary btn-sm dropdown-toggle'
                       type='button'
                       data-toggle='dropdown'
                       aria-haspopup='true'
