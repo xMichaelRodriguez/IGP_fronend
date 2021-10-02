@@ -22,6 +22,8 @@ export const HeroScreen = () => {
               className='img-fluid float-right
                animatioFloat'
               src={LearnImage}
+              width=''
+              height=''
               alt='learn svg'
               title='Learn svg'
             />

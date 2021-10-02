@@ -19,7 +19,7 @@ import { FooterScreen } from '../components/footer/FooterScreen'
 export const DashBoard = () => {
   const routes = [
     {
-      route: '/inicio',
+      route: '/',
       title: 'Inicio',
       id: 1,
     },
@@ -92,8 +92,8 @@ export const DashBoard = () => {
             component={RightSection}
           />
 
-          <Route path='/inicio' component={HomeScreen} />
-          <Redirect to='/inicio' />
+          <Route path='/' component={HomeScreen} />
+          <Redirect to='/' />
         </Switch>
       </div>
       <FooterScreen />
