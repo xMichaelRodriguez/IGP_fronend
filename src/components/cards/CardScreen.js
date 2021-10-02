@@ -12,6 +12,7 @@ import {
   startstoryDeleted,
   StorySetActive,
 } from '../../actions/events'
+import { WaitScreen } from '../wait/WaitScreen'
 export const CardScreen = ({
   data,
   route,
@@ -43,7 +44,7 @@ export const CardScreen = ({
       data === undefined ||
       data === null
     ) {
-      return <h1 className='text-center'>Cargando...</h1>
+      return <WaitScreen />
     } else {
       return (
         Object.entries(data).length !== 0 &&

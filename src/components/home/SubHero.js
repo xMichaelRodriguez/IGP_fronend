@@ -24,7 +24,9 @@ export const SubHero = () => {
               <b className='font-weight-bold'>
                 El Salvador
               </b>
-              . Aprende y enseña mediante el uso de la
+              . <br></br>
+              Aprende y enseña los deberes y derechos de los
+              niños, niñas t adikescebtes mediante la
               biblioteca virtual integrada en la applicación
             </p>
           </div>

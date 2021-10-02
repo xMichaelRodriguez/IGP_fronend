@@ -157,24 +157,24 @@ export const OrganizationCard = () => {
       ) : (
         <div className='container shadow mt-3 mb-5 card text-break card  animate__animated   animate__fadeIn'>
           <div className='card-body'>
-            <h3 className='card-title'>
+            <h1 className='card-title display-4 py-3'>
               {newOrganization.name}
-            </h3>
-            <span className='card-subtitle text-muted'>
+            </h1>
+            <span className='card-subtitle text-muted py-3'>
               {newOrganization.acronym}
             </span>
 
-            <div className='card-text'>
-              <div className='py-1'>
+            <div className='card-text py-2'>
+              <div className='py-2'>
                 <BsInfoCircleFill className='text-info' />{' '}
                 Oficial de información:{' '}
                 {newOrganization.officer_name}
               </div>
-              <div className='py-1'>
+              <div className='py-2'>
                 <BsEnvelopeFill className='text-info' />{' '}
                 {newOrganization.officer_email}
               </div>
-              <div className='py-1'>
+              <div className='py-2'>
                 {newOrganization.website_url && (
                   <a
                     className='text-muted '
@@ -189,31 +189,32 @@ export const OrganizationCard = () => {
               </div>
             </div>
 
-            <div className='line'></div>
             <div className='container'>
               <div className='row container'>
-                <div className='col-md-12'>
-                  <h3>Puedes Encontrarlo En:</h3>
+                <div className='col-md-12 text-center py-3 mb-3'>
+                  <h3 className='display-5'>
+                    Puedes Encontrarlo En:
+                  </h3>
                 </div>
-                <div className='col-md-6 mb-3'>
+                <div className='col-md-6 px-3 mb-3 '>
                   <ul className='list-group font-weight-bold'>
                     Twitter: <TwitterList />
                   </ul>
                 </div>
 
-                <div className='col-md-6 mb-3'>
+                <div className='col-md-6 px-3 mb-3'>
                   <ul className='list-group font-weight-bold'>
                     Facebook: <FacebookList />
                   </ul>
                 </div>
 
-                <div className='col-md-6 mb-3'>
+                <div className='col-md-6 px-3 mb-3'>
                   <ul className='list-group font-weight-bold'>
                     Youtube: <YoutueList />
                   </ul>
                 </div>
 
-                <div className='col-md-6 mb-3 font-weight-bold'>
+                <div className='col-md-6 px-3 mb-3 font-weight-bold'>
                   Documento Administrativo:
                   <p
                     className='uk-link-muted'
@@ -252,7 +253,8 @@ export const OrganizationCard = () => {
                 : 'https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg'
             }
             alt={newOrganization.avatar_file_name}
-            className='card-img-bottom'
+            className='card-img-bottom img-fluid p-5'
+            width='50%'
             style={{ height: '28rem' }}
           />
         </div>

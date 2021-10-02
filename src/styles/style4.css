@@ -17,6 +17,4 @@ body {
 
 .config {
   min-height: 100vh !important;
-  display: grid !important;
-  grid-template-rows: auto 1fr auto !important;
 }

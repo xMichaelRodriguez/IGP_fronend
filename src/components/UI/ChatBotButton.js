@@ -38,10 +38,8 @@ export const ChatBotButton = () => {
       {ChatOpen && (
         <div className='positions'>
           <div
-            className={` animate__animated ${
-              !ChatOpen
-                ? 'animate__fadeInDown'
-                : ' animate__fadeInUp'
+            className={`animate__animated ${
+              ChatOpen && 'animate__backInUp'
             }`}
           >
             <Chatbot

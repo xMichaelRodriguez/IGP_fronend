@@ -48,7 +48,7 @@ export const NoticeScreen = () => {
           </div>
         )}
       </div>
-      <div className='row animate__animated animate__fadeIn'>
+      <div className='animate__animated animate__fadeIn'>
         <CardScreen
           data={noticeArr !== [] && noticeArr}
           route='noticias'

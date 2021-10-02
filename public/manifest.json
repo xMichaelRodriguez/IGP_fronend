@@ -3,23 +3,24 @@
   "name": "Una Vida Segura",
   "icons": [
     {
-      "src": "UVS-APP.svg",
+      "src": "./UVS-APP.svg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/svg"
     },
     {
-      "src": "UVS-APP.svg",
+      "src": "./UVS-APP.svg",
       "type": "image/svg",
       "sizes": "192x192"
     },
     {
-      "src": "UVS-APP.svg",
+      "src": "./UVS-APP.svg",
       "type": "image/svg",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any"
     }
   ],
   "start_url": "./",
   "display": "standalone",
-  "theme_color": "#8f77f2",
+  "theme_color": "#282828",
   "background_color": "#282828"
 }

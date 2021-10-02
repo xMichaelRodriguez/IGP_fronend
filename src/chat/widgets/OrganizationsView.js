@@ -5,8 +5,8 @@ import {
   FaTwitterSquare,
   FaYoutube,
 } from 'react-icons/fa'
-import { WaitScreen } from '../components/wait/WaitScreen'
-import { useOrganizations } from '../hooks/useOrganizations'
+import { WaitScreen } from '../../components/wait/WaitScreen'
+import { useOrganizations } from '../../hooks/useOrganizations'
 
 export const OrganizationsView = () => {
   const { data: organization, loading } = useOrganizations()
@@ -24,7 +24,7 @@ export const OrganizationsView = () => {
               org.acronym.includes('PNC') ||
               org.acronym.includes('FGR') ||
               org.acronym.includes('PDDH')) && (
-              <li key={org.id} className='card'>
+              <li key={org.id} className='card mb-3 shadow'>
                 <div className='card-body'>
                   <div className='font-weigth-bold'>
                     {!org.avatar_file_url.includes(

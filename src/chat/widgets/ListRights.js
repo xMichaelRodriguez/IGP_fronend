@@ -4,7 +4,7 @@ import { BsChevronRight } from 'react-icons/bs'
 export const ListRights = (props) => {
   console.log(props)
   const linkMarkup = props.options.map((link) => (
-    <li key={link.id} className='card mb-3'>
+    <li key={link.id} className='card mb-3 shadow'>
       <div className='card-body'>
         <blockquote className=' blockquote'>
           <p className=''>

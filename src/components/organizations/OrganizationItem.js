@@ -13,7 +13,7 @@ export const OrganizationItem = ({
 }) => {
   return (
     <div className='col-md-4 '>
-      <div className='shadow card mb-3 animate__animated animate__fadeIn'>
+      <div className='shadow card  mb-3 animate__animated animate__fadeIn'>
         <img
           src={
             !avatar_file_url.includes('missing')

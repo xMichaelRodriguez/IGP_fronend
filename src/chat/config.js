@@ -4,7 +4,7 @@ import { GeneralOptions } from './widgets/GeneralOptions'
 import { ListRights } from './widgets/ListRights'
 
 import { FaUserAstronaut } from 'react-icons/fa'
-import { OrganizationsView } from './OrganizationsView'
+import { OrganizationsView } from './widgets/OrganizationsView'
 
 // const config = {
 //   botName: 'UvsBot',

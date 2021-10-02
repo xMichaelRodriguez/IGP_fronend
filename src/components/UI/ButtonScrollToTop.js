@@ -22,7 +22,7 @@ export const ButtonScrollToTop = () => {
   return (
     <button
       onClick={scrollToTop}
-      className='btn primary rounded-circle returnTop animate__animated animate__shakeY '
+      className='btn primary rounded-circle returnTop animate__animated animate__flash '
     >
       <BsChevronUp size='2.1rem' />
     </button>

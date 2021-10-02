@@ -16,14 +16,11 @@ export const NavbarScreen = ({ routes }) => {
   return (
     <nav className='shadow-sm  navbar navbar-expand-lg navbar-dark primary '>
       <div className='container'>
-        <Link
-          className='navbar-brand border border-dark rounded bg-dark'
-          to='/'
-        >
+        <Link className='navbar-brand  rounded ' to='/'>
           <img
             src={logo}
             width='80'
-            height='70'
+            height='60'
             alt='logo'
           />
         </Link>
