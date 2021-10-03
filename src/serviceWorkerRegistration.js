@@ -72,6 +72,13 @@ function registerValidSW(swUrl, config) {
         installingWorker.onstatechange = () => {
           if (installingWorker.state === 'installed') {
             console.log('service worked installed')
+            window.addEventListener(
+              'beforeinstallprompt',
+              function (e) {
+                // log the platforms provided as options in an install prompt
+                console.log(e.platforms) // e.g., ["web", "android", "windows"]
+              }
+            )
             if (navigator.serviceWorker.controller) {
               // At this point, the updated precached content has been fetched,
               // but the previous service worker will still serve the older
