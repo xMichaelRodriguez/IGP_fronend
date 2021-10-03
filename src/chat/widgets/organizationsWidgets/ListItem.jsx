@@ -14,7 +14,7 @@ export const ListItem = (org) => {
         <ul className='list-group'>
           <OfficerName officerName={org.officer_name} />
           {org.website_url && <Website websideURL={org.webside_url} />}
-
+          {console.log({ twitter: org.twitter_url, face: org.facebook_url, youtube: org.youtube_url })}
           <SocialNetworks
             twitterURL={org.twitter_url}
             facebookURL={org.facebook_url}

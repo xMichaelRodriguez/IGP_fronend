@@ -10,8 +10,7 @@ export const SocialNetworks = ({ twitterURL, facebookURL, youtubeURL }) => {
     <li className=' list-group-item mb-2 text-center'>
       <small>Redes</small>
       <div className='row '>
-        {twitterURL ||
-          !twitterURL.includes(',') ? (
+        {twitterURL || !twitterURL.includes("y") || !twitterURL.includes(",") ? (
           <div className='col-md-3'>
             <a
               href={twitterURL}
@@ -25,19 +24,17 @@ export const SocialNetworks = ({ twitterURL, facebookURL, youtubeURL }) => {
               />
             </a>
           </div>
-        ) : (
-          <div className='col-md-12'>
-            <small
-              className='text-primary'
-              style={{ fontSize: '1rem' }}
-            >
-              Sin Twitter
-            </small>
-          </div>
-        )}
+        ) : (<div className='col-md-12'>
+          <small
+            className='text-primary'
+            style={{ fontSize: '1rem' }}
+          >
+            Sin Twitter
+          </small>
+        </div>)}
 
-        {facebookURL ||
-          !facebookURL.includes(',') ? (
+
+        {facebookURL || !facebookURL.includes("y") || !facebookURL.includes(",") ? (
           <div className='col-md-3'>
             <a
               href={facebookURL}
@@ -62,8 +59,7 @@ export const SocialNetworks = ({ twitterURL, facebookURL, youtubeURL }) => {
           </div>
         )}
 
-        {youtubeURL ||
-          !youtubeURL.includes(',') ? (
+        {youtubeURL || !youtubeURL.includes("y") || !youtubeURL.includes(",") ? (
           <div className='col-md-3'>
             <a
               href={youtubeURL}
