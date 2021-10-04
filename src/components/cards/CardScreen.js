@@ -46,8 +46,7 @@ export const CardScreen = ({
     ) {
       return <WaitScreen />
     } else {
-      return (
-        Object.entries(data).length !== 0 &&
+      return Object.entries(data).length !== 0 ? (
         data.map((d) => (
           <div className='col-md-4  ' key={d.id}>
             <div className='card mb-3 shadow'>
@@ -102,6 +101,8 @@ export const CardScreen = ({
             </div>
           </div>
         ))
+      ) : (
+        <WaitScreen />
       )
     }
   }

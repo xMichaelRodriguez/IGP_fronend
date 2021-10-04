@@ -76,8 +76,13 @@ export const DatePickerScreen = ({ rute }) => {
     <div className='row'>
       <div className='col-md-12 mb-3'>
         <p>
-          <FaSearch /> Busqueda por fechas
+          <FaSearch />
+          Filtrado por fechas
         </p>
+        <small>
+          filtrar siempre con un día de más en la entrada:
+          hasta
+        </small>
       </div>
       {msgError.includes('mismo') && (
         <div className='col-md-12 mb-3'>
