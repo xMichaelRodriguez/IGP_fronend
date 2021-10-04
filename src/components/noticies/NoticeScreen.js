@@ -2,8 +2,10 @@ import 'moment/locale/es'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router'
+
 import { CardScreen } from '../cards/CardScreen'
 import { Pagination } from '../cards/Pagination'
+import { DatePickerScreen } from './DatePickerScreen.js'
 
 export const NoticeScreen = () => {
   const { noticeArr } = useSelector(
@@ -15,7 +17,7 @@ export const NoticeScreen = () => {
 
   return (
     <section className='container mt-3'>
-      <div className='row'>
+      <div className='container row '>
         {param === 'profile' ? (
           <>
             <div className='col-md-6'>
@@ -47,6 +49,9 @@ export const NoticeScreen = () => {
             />
           </div>
         )}
+        <div className='col-md-12 '>
+          <DatePickerScreen rute='notice' />
+        </div>
       </div>
       <div className='row animate__animated animate__fadeIn'>
         <CardScreen

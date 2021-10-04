@@ -50,12 +50,22 @@ const noticeAddNew = (notice) => ({
   payload: notice,
 })
 
-export const noticeStartLoading = ({ page = 1 }) => {
+export const noticeStartLoading = ({
+  page = 1,
+  startDate = null,
+  endDate = null,
+}) => {
   return async (dipatch) => {
     try {
-      const resp = await fetchAsync(
-        `noticies/?page=${page}`
-      )
+      let resp = null
+      if (startDate !== null && endDate !== null) {
+        resp = await fetchAsync(
+          `noticies/?page=${page}&startDate=${startDate}&endDate=${endDate}`
+        )
+      } else {
+        resp = await fetchAsync(`noticies/?page=${page}`)
+      }
+
       const body = await resp.json()
 
       if (body.ok) {

@@ -52,10 +52,21 @@ const storyAddNew = (story) => ({
   payload: story,
 })
 
-export const storyStartLoading = ({ page = 1 }) => {
+export const storyStartLoading = ({
+  page = 1,
+  startDate = null,
+  endDate = null,
+}) => {
   return async (dipatch) => {
     try {
-      const resp = await fetchAsync(`stories/?page=${page}`)
+      let resp = null
+      if (startDate !== null && endDate !== null) {
+        resp = await fetchAsync(
+          `stories/?page=${page}&startDate=${startDate}&endDate=${endDate}`
+        )
+      } else {
+        resp = await fetchAsync(`stories/?page=${page}`)
+      }
       const body = await resp.json()
 
       if (body.ok) {

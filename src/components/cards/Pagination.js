@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
 import { storyStartLoading } from '../../actions/events'
 import { noticeStartLoading } from '../../actions/noticesActions'
+
 const INITIAL_PAGE = 1
+
 export const Pagination = ({ selector, subSelector }) => {
   const node = useSelector((state) => state[selector])
 
@@ -67,29 +70,33 @@ export const Pagination = ({ selector, subSelector }) => {
     ))
   }
   return (
-    <nav aria-label='Page navigation example'>
-      <ul className='pagination'>
-        <li
-          className={`page-item ${
-            pageNext === INITIAL_PAGE ? 'disabled' : ''
-          }`}
-          onClick={handlePrevpage}
-        >
-          <p className='page-link'>Previous</p>
-        </li>
-        <PageLink />
+    <div className='row mb-4'>
+      <div className='col-md-12'>
+        <nav aria-label='Page navigation example'>
+          <ul className='pagination'>
+            <li
+              className={`page-item ${
+                pageNext === INITIAL_PAGE ? 'disabled' : ''
+              }`}
+              onClick={handlePrevpage}
+            >
+              <p className='page-link'>Previous</p>
+            </li>
+            <PageLink />
 
-        <li
-          className={`page-item ${
-            pageNext === node[subSelector].total_page
-              ? 'disabled'
-              : ''
-          }`}
-          onClick={handleNextPage}
-        >
-          <p className='page-link'>Next</p>
-        </li>
-      </ul>
-    </nav>
+            <li
+              className={`page-item ${
+                pageNext === node[subSelector].total_page
+                  ? 'disabled'
+                  : ''
+              }`}
+              onClick={handleNextPage}
+            >
+              <p className='page-link'>Next</p>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
   )
 }

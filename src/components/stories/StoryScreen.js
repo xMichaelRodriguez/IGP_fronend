@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router'
 import { CardScreen } from '../cards/CardScreen'
 import { Pagination } from '../cards/Pagination'
+import { DatePickerScreen } from '../noticies/DatePickerScreen'
 export const StoryScreen = () => {
   const location = useLocation()
   const param = location.pathname.split('/')[1]
@@ -46,6 +47,9 @@ export const StoryScreen = () => {
             />
           </div>
         )}
+        <div className='col-md-12 '>
+          <DatePickerScreen rute='story' />
+        </div>
       </div>
       <div className='row animate__animated animate__fadeIn row'>
         <CardScreen
