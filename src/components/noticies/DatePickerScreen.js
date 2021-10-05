@@ -73,79 +73,89 @@ export const DatePickerScreen = ({ rute }) => {
   }
 
   return (
-    <div className='row'>
-      <div className='col-md-12 mb-3'>
-        <p>
-          <FaSearch />
-          Filtrado por fechas
-        </p>
-        <small>
-          filtrar siempre con un día de más en la entrada:
-          hasta
-        </small>
-      </div>
-      {msgError.includes('mismo') && (
-        <div className='col-md-12 mb-3'>
-          <div class='alert alert-danger ' role='alert'>
-            <FaTimesCircle /> {msgError}
+    <div className='container-fluid py-5 '>
+      <div className='container rounded border border-dark p-3'>
+        <div className='row '>
+          <div className='col-md-12 mb-3'>
+            <h4 className='display-5'>
+              <FaSearch />
+              &nbsp; Filtrado por fechas
+            </h4>
+            <small>
+              filtrar siempre con un día de más en la
+              entrada: hasta
+            </small>
+          </div>
+          {msgError.includes('mismo') && (
+            <div className='col-md-12 mb-3'>
+              <div
+                className='alert alert-danger '
+                role='alert'
+              >
+                <FaTimesCircle /> {msgError}
+              </div>
+            </div>
+          )}
+          <div className='col-md-12 '>
+            <ul className='form-inline   nav justify-content-center '>
+              <li className=' nav-item px-4 py-1 '>
+                <div className='form-group  mb-2'>
+                  <label
+                    htmlFor='datepicker '
+                    className='py-1'
+                  >
+                    De: &nbsp;
+                    <FaCalendar color='#8f77f2' />
+                  </label>
+
+                  <DatePicker
+                    className={`form-control ${
+                      msgError.includes('inicio')
+                        ? 'is-invalid'
+                        : ''
+                    }`}
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    locale='es'
+                    popperClassName='pickerPosition '
+                  />
+                </div>
+              </li>
+              <li className=' nav-item px-4 py-1 '>
+                <div className='form-group mb-2 '>
+                  <label
+                    htmlFor='datepicker'
+                    className='py-1'
+                  >
+                    Hasta: &nbsp;
+                    <FaCalendar color='#8f77f2' />
+                  </label>
+
+                  <DatePicker
+                    className={`form-control ${
+                      msgError.includes('final')
+                        ? 'is-invalid'
+                        : ''
+                    }`}
+                    placeholderText='10/10/2021'
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                    locale='es'
+                  />
+                </div>
+              </li>
+              <li className='nav-item'>
+                <button
+                  className='btn primary '
+                  type='button'
+                  onClick={handleSearchForDate}
+                >
+                  <FaSearch /> Buscar
+                </button>
+              </li>
+            </ul>
           </div>
         </div>
-      )}
-      <div className='col-md-8'>
-        <ul
-          className='form-inline   nav justify-content-start needs-validation'
-          novalidate
-        >
-          <li className=' nav-item px-4 py-1 '>
-            <div className='form-group  mb-2'>
-              <label htmlFor='datepicker ' className='py-1'>
-                De: &nbsp;
-                <FaCalendar color='#8f77f2' />
-              </label>
-
-              <DatePicker
-                className={`form-control ${
-                  msgError.includes('inicio')
-                    ? 'is-invalid'
-                    : ''
-                }`}
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-                locale='es'
-                popperClassName='pickerPosition '
-              />
-            </div>
-          </li>
-          <li className=' nav-item px-4 py-1 '>
-            <div className='form-group mb-2 '>
-              <label htmlFor='datepicker' className='py-1'>
-                Hasta: &nbsp;
-                <FaCalendar color='#8f77f2' />
-              </label>
-
-              <DatePicker
-                className={`form-control ${
-                  msgError.includes('final')
-                    ? 'is-invalid'
-                    : ''
-                }`}
-                placeholderText='10/10/2021'
-                selected={endDate}
-                onChange={(date) => setEndDate(date)}
-                locale='es'
-              />
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div className='col-md-4 mb-3' mb-3>
-        <button
-          className='btn primary'
-          type='button'
-          onClick={handleSearchForDate}
-        >
-          <FaSearch /> Buscar
-        </button>
       </div>
     </div>
   )

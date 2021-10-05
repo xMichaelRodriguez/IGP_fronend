@@ -106,7 +106,15 @@ export const CardScreen = ({
       )
     }
   }
-  return <ComponentLoadingData />
+  return (
+    <div className='container-fluid'>
+      <div className='container'>
+        <div className='row'>
+          <ComponentLoadingData />
+        </div>
+      </div>
+    </div>
+  )
 }
 
 CardScreen.propTypes = {

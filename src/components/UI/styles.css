@@ -82,3 +82,12 @@
 .react-datepicker__year-text--keyboard-selected {
   background-color: #8f77f2 !important;
 }
+
+.slick-next,
+.slick-next:focus,
+.slick-next:hover,
+.slick-prev,
+.slick-prev:focus,
+.slick-prev:hover {
+  color: #8f77f2 !important;
+}

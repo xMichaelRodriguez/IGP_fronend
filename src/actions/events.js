@@ -85,6 +85,28 @@ const storyLoaded = (stories) => ({
   payload: stories,
 })
 
+export const storyForCarouselLoading = ({ page = 1 }) => {
+  return async (dipatch) => {
+    try {
+      const resp = await fetchAsync(`stories/?page=${page}`)
+
+      const body = await resp.json()
+
+      if (body.ok) {
+        delete body.ok
+        console.log(body, 'EFENTS')
+        dipatch(storyForCarouselLoaded(body))
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+const storyForCarouselLoaded = (stories) => ({
+  type: types.storyForCarouselLoaded,
+  payload: stories,
+})
 export const storyStartUpdated = (story) => {
   return async (dispatch) => {
     try {
