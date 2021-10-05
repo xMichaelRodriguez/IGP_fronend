@@ -21,6 +21,9 @@ export const NoticeScreen = () => {
       {noticeArr === [] && !noticeArr && <WaitScreen />}
       <section className='container mt-3'>
         <div className='container row '>
+          <div className='col-md-12 '>
+            <DatePickerScreen rute='notice' />
+          </div>
           {param === 'profile' ? (
             <>
               <div className='col-md-6'>
@@ -52,9 +55,6 @@ export const NoticeScreen = () => {
               />
             </div>
           )}
-          <div className='col-md-12 '>
-            <DatePickerScreen rute='notice' />
-          </div>
         </div>
         <div className='row animate__animated animate__fadeIn'>
           <CardScreen
