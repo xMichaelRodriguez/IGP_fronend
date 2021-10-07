@@ -40,9 +40,11 @@ export const CardReadScreen = () => {
   }, [Id, path])
 
   const handleSpeak = (d) => {
-    console.log('hola')
     speaker.voice = speechSynthesis.getVoices()[11]
     speaker.text = d.title
+    speaker.pitch = 1
+    speaker.volume = 0.5
+    speaker.rate = 1.1
     speechSynthesis.speak(speaker)
     speaker.text = d.body
     speechSynthesis.speak(speaker)
