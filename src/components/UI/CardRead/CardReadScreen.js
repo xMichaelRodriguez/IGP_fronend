@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router'
+import {
+  useHistory,
+  useLocation,
+  useParams,
+} from 'react-router'
 
 import 'moment/locale/es'
 import moment from 'moment'
@@ -13,10 +17,11 @@ import {
 import { BiReset } from 'react-icons/bi'
 const speaker = new SpeechSynthesisUtterance()
 const synth = window.speechSynthesis
+
 export const CardReadScreen = () => {
   const { Id } = useParams()
   const location = useLocation().pathname.split('/')
-
+  const history = useHistory()
   let path = location[1].includes('noticias')
     ? 'noticies'
     : 'stories'
@@ -58,6 +63,14 @@ export const CardReadScreen = () => {
   ) : (
     <div className='container-fluid py-5 animate__animated   animate__fadeIn '>
       <div className='container shadow card-body'>
+        <buton
+          className='btn btn-link'
+          onClick={() => {
+            history.goBack()
+          }}
+        >
+          Volver
+        </buton>
         <h1 className='card-title display-5'>
           {dataToRead.title}
         </h1>

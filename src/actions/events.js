@@ -94,7 +94,7 @@ export const storyForCarouselLoading = ({ page = 1 }) => {
 
       if (body.ok) {
         delete body.ok
-        console.log(body, 'EFENTS')
+
         dipatch(storyForCarouselLoaded(body))
       }
     } catch (error) {
