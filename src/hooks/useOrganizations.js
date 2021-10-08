@@ -8,9 +8,9 @@ export const useOrganizations = (categories) => {
   })
 
   useEffect(() => {
-    getOrganizations().then((organization) => {
+    getOrganizations(categories).then((organization) => {
       SetState({
-        data: organization,
+        data: organization[0],
         loading: false,
       })
     })

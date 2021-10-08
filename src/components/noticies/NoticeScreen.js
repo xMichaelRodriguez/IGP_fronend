@@ -5,7 +5,7 @@ import { useHistory, useLocation } from 'react-router'
 
 import { CardScreen } from '../cards/CardScreen'
 import { Pagination } from '../cards/Pagination'
-import { WaitScreen } from '../wait/WaitScreen'
+
 import { DatePickerScreen } from './DatePickerScreen.js'
 
 export const NoticeScreen = () => {
@@ -18,7 +18,9 @@ export const NoticeScreen = () => {
 
   return (
     <>
-      {noticeArr === [] && !noticeArr && <WaitScreen />}
+      {noticeArr === [] && !noticeArr && (
+        <h3 className='display-4'>No Hay Noticias</h3>
+      )}
       <section className='container mt-3'>
         <div className='container row '>
           <div className='col-md-12 '>

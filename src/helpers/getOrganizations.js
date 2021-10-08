@@ -1,14 +1,21 @@
-export const getOrganizations = async () => {
-  const url =
-    'https://uvsproxycors.herokuapp.com/https://www.transparencia.gob.sv/api/v1/institutions.json'
-  const resp = await fetch(url, {})
+const baseUrl = process.env.REACT_APP_API_URL
+export const getOrganizations = async (categories) => {
+  const url = baseUrl + '/organizations/' + categories
+  const resp = await fetch(url)
   const data = await resp.json()
+  if (!data.ok) {
+    return null
+  }
 
-  const organizations = data.map((organization) => {
-    return {
-      ...organization,
+  delete data.ok
+
+  const organizations = data.organizations.map(
+    (organization) => {
+      return {
+        ...organization,
+      }
     }
-  })
+  )
 
   return organizations
 }

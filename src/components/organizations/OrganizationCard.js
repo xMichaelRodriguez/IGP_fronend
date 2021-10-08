@@ -1,264 +1,183 @@
 import React from 'react'
-import {
-  BsEnvelopeFill,
-  BsInfoCircleFill,
-} from 'react-icons/bs'
+import { useParams } from 'react-router'
+
 import {
   FaFacebook,
-  FaFileAlt,
   FaTwitter,
   FaYoutube,
 } from 'react-icons/fa'
-import { useParams } from 'react-router'
-import { useHistory } from 'react-router-dom'
-import { useOrganizations } from '../../hooks/useOrganizations'
+import { BiMailSend } from 'react-icons/bi'
 import { WaitScreen } from '../wait/WaitScreen'
+import { useOrganizations } from '../../hooks/useOrganizations'
+
 export const OrganizationCard = () => {
-  const history = useHistory()
   const { organization_acronym } = useParams()
-  const { data: organizations, loading } =
-    useOrganizations()
-  const newOrganization =
-    organizations &&
-    organizations.find(
-      (or) => or.acronym === organization_acronym
-    )
 
-  const TwitterList = () => {
-    if (newOrganization.twitter_url.includes(',')) {
-      return newOrganization.twitter_url
-        .split(',')
-        .map((twitter, index) => (
-          <li
-            className='text-muted'
-            key={index}
-            style={{ cursor: 'pointer' }}
-            onClick={() => {
-              window.open(twitter)
-            }}
-          >
-            <strong>
-              <FaTwitter color='#00acee ' /> {twitter}
-            </strong>
-          </li>
-        ))
-    } else {
-      return (
-        <li className='text-muted'>
-          <p
-            className=''
-            style={{ cursor: 'pointer', fontSize: '15px' }}
-            onClick={() =>
-              newOrganization.twitter_url !== '' &&
-              window.open(newOrganization.twitter_url)
-            }
-          >
-            {newOrganization.twitter_username !== '' ? (
-              <p className='uk-link-muted'>
-                <FaTwitter className='text-primary' />{' '}
-                {newOrganization.twitter_username}
-              </p>
-            ) : (
-              <p className='text-info'>Sin Twitter</p>
-            )}
-          </p>
-        </li>
-      )
-    }
-  }
-  const FacebookList = () => {
-    if (newOrganization.facebook_url.includes(',')) {
-      return newOrganization.facebook_url
-        .split(',')
-        .map((facebook, index) => (
-          <li
-            key={index}
-            style={{ cursor: 'pointer' }}
-            onClick={() => {
-              window.open(facebook)
-            }}
-          >
-            <strong>
-              <FaFacebook color='blue' /> {facebook}
-            </strong>
-          </li>
-        ))
-    } else {
-      return (
-        <li className='text-muted'>
-          <p
-            style={{ cursor: 'pointer', fontSize: '15px' }}
-            className='text-muted'
-            onClick={() =>
-              newOrganization.facebook_url !== '' &&
-              window.open(newOrganization.facebook_url)
-            }
-          >
-            {newOrganization.facebook_username !== '' ? (
-              <p>
-                <FaFacebook color='blue' />{' '}
-                {newOrganization.facebook_username}
-              </p>
-            ) : (
-              <p className='text-primary'>Sin Facebook</p>
-            )}
-          </p>
-        </li>
-      )
-    }
-  }
+  const { data: organization, loading } = useOrganizations(
+    organization_acronym
+  )
 
-  const YoutueList = () => {
-    if (newOrganization.youtube_url.includes(',')) {
-      return newOrganization.youtube_url
-        .split(',')
-        .map((youtube, index) => (
-          <li
-            className='text-muted'
-            style={{ cursor: 'pointer' }}
-            key={index}
-            onClick={() => {
-              window.open(youtube)
-            }}
-          >
-            <strong>
-              <FaYoutube className='text-danger' />{' '}
-              {youtube}
-            </strong>
-          </li>
-        ))
-    } else {
-      return (
-        <li className='uk-link-muted'>
-          <p
-            style={{ cursor: 'pointer', fontSize: '15px' }}
-            onClick={() =>
-              newOrganization.youtube_url !== '' &&
-              window.open(newOrganization.youtube_url)
-            }
-          >
-            {newOrganization.youtube_username !== '' ? (
-              <p>
-                <FaYoutube className='text-danger' />{' '}
-                {newOrganization.youtube_username}
-              </p>
-            ) : (
-              <p className='text-danger'>Sin Youtube</p>
-            )}
-          </p>
-        </li>
-      )
-    }
-  }
   return (
-    <>
-      {loading ? (
-        <WaitScreen />
-      ) : (
-        <div className='container shadow mt-3 mb-5 card text-break card  animate__animated   animate__fadeIn'>
-          <div className='card-body'>
-            <h1 className='card-title display-4 py-3'>
-              {newOrganization.name}
-            </h1>
-            <span className='card-subtitle text-muted py-3'>
-              {newOrganization.acronym}
-            </span>
-
-            <div className='card-text py-2'>
-              <div className='py-2'>
-                <BsInfoCircleFill className='text-info' />{' '}
-                Oficial de información:{' '}
-                {newOrganization.officer_name}
+    <div className='container-fluid p-5 '>
+      <div className='container '>
+        {loading ? (
+          <WaitScreen />
+        ) : (
+          <div className='card p-4 shadow'>
+            <div className='row no-gutters'>
+              <div className='mb-2 col-md-4'>
+                <img
+                  src={organization.image_url}
+                  className='card-img'
+                  alt={organization.image_url}
+                />
               </div>
-              <div className='py-2'>
-                <BsEnvelopeFill className='text-info' />{' '}
-                {newOrganization.officer_email}
+              <div className='mb-2 col-md-8 px-3 '>
+                <h3 className='card-title font-weight-bold'>
+                  {organization.acronym}
+                </h3>
+                <h6 class='card-subtitle mb-2 text-muted'>
+                  {organization.name}
+                </h6>
+                <div className='row mt-2'>
+                  <div className='mb-2 col-md-6'>
+                    <p className='card-text font-weight-bold'>
+                      Dirección
+                    </p>
+                    {organization.direccion}
+                  </div>
+                  <div className='mb-2 col-md-6'>
+                    <p className='card-text font-weight-bold mb-1'>
+                      Telefono(s)
+                    </p>
+                    <ul className='list-group list-group-flush'>
+                      {organization.telefonos.map(
+                        (telefono, index) => (
+                          <li
+                            className='list-group-item '
+                            key={index}
+                          >
+                            {telefono}
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </div>
+                  <div className='mb-2 col-md-12'>
+                    <p className='card-text font-weight-bold mb-1'>
+                      Horarios
+                    </p>
+                    <ul className='list-group list-group-flush'>
+                      {organization.horarios.map(
+                        (horario, index) => (
+                          <li
+                            className='list-group-item '
+                            key={index}
+                          >
+                            {horario + '\n'}
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </div>
+                </div>
               </div>
-              <div className='py-2'>
-                {newOrganization.website_url && (
-                  <a
-                    className='text-muted '
-                    href={newOrganization.website_url}
-                    target='_blank'
-                    rel='noreferrer'
-                  >
-                    <FaFileAlt className='text-info' />{' '}
-                    {newOrganization.website_url}
-                  </a>
-                )}
-              </div>
-            </div>
-
-            <div className='container'>
-              <div className='row container'>
-                <div className='col-md-12 text-center py-3 mb-3'>
-                  <h3 className='display-5'>
-                    Puedes Encontrarlo En:
-                  </h3>
-                </div>
-                <div className='col-md-6 px-3 mb-3 '>
-                  <ul className='list-group font-weight-bold'>
-                    Twitter: <TwitterList />
-                  </ul>
-                </div>
-
-                <div className='col-md-6 px-3 mb-3'>
-                  <ul className='list-group font-weight-bold'>
-                    Facebook: <FacebookList />
-                  </ul>
-                </div>
-
-                <div className='col-md-6 px-3 mb-3'>
-                  <ul className='list-group font-weight-bold'>
-                    Youtube: <YoutueList />
-                  </ul>
-                </div>
-
-                <div className='col-md-6 px-3 mb-3 font-weight-bold'>
-                  Documento Administrativo:
-                  <p
-                    className='uk-link-muted'
-                    style={{
-                      cursor: 'pointer',
-                      fontSize: '15px',
-                    }}
-                    onClick={() => {
-                      window.open(
-                        `https://www.transparencia.gob.sv${newOrganization.administrative_document_file_url}`
-                      )
-                    }}
-                  >
-                    <BsInfoCircleFill className='text-info' />{' '}
-                    <span>
-                      URL del archivo del documento
-                      administrativo
-                    </span>
+              <div className='col-md-4 mb-2'>
+                <div className='card-text'>
+                  <p>Official de Información</p>
+                  <h4>{organization.officer_name}</h4>
+                  <p className='card-text'>
+                    <BiMailSend size='1.3rem' />{' '}
+                    {organization.officer_email}
                   </p>
+
+                  <a
+                    rel='noreferrer'
+                    href={organization.website_url}
+                    target='_blank'
+                    className='btn-link'
+                  >
+                    {organization.website_url}
+                  </a>
+                </div>
+              </div>
+              <div className='col-md-8 mb-2'>
+                <div className='row'>
+                  <div className='col-md-4'>
+                    <p className='text-primary'>Facebook</p>
+                    <ul className='list-group list-group-flush'>
+                      {organization.redes.facebook_url.map(
+                        (socialNetwork) => (
+                          <li className='list-group-item'>
+                            <a
+                              rel='noreferrer'
+                              key={socialNetwork}
+                              className='btn-link'
+                              href={socialNetwork}
+                              target='_blank'
+                            >
+                              <small>
+                                <FaFacebook color='blue' />{' '}
+                                {socialNetwork}
+                              </small>
+                            </a>
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </div>
+                  <div className='col-md-4'>
+                    <p className='text-primary'>Twitter</p>
+                    <ul className='list-group list-group-flush'>
+                      {organization.redes.twitter_url.map(
+                        (socialNetwork) => (
+                          <li className='list-group-item'>
+                            <a
+                              rel='noreferrer'
+                              key={socialNetwork}
+                              className='btn-link'
+                              href={socialNetwork}
+                              target='_blank'
+                            >
+                              <small>
+                                <FaTwitter />{' '}
+                                {socialNetwork}
+                              </small>
+                            </a>
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </div>
+                  <div className='col-md-4'>
+                    <p className='text-danger'>Youtube</p>
+                    <ul className='list-group list-group-flush'>
+                      {organization.redes.youtube_url.map(
+                        (socialNetwork) => (
+                          <li className='list-group-item'>
+                            <a
+                              rel='noreferrer'
+                              key={socialNetwork}
+                              className='btn-link'
+                              href={socialNetwork}
+                              target='_blank'
+                            >
+                              <small>
+                                <FaYoutube color='red' />{' '}
+                                {socialNetwork}
+                              </small>
+                            </a>
+                          </li>
+                        )
+                      )}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
-            <button
-              className='btn primary'
-              onClick={() => history.goBack()}
-            >
-              Volver
-            </button>
           </div>
-          <img
-            src={
-              !newOrganization.avatar_file_url.includes(
-                'missing'
-              )
-                ? `https://www.transparencia.gob.sv/${newOrganization.avatar_file_url}`
-                : 'https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg'
-            }
-            alt={newOrganization.avatar_file_name}
-            className='card-img-bottom img-fluid p-5'
-            width='50%'
-            style={{ height: '28rem' }}
-          />
-        </div>
-      )}
-    </>
+        )}
+      </div>
+    </div>
   )
 }

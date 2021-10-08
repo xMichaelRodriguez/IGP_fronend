@@ -34,4 +34,7 @@ export const types = {
   noticeUpdated: '[notice] notice Updated',
   noticeDeleted: '[notice] notice Deleted',
   noticeSetActive: '[notice] notice set active',
+
+  // ORGANIZATIONS
+  orgLoaded: '[ORG] Organization Loaded',
 }
