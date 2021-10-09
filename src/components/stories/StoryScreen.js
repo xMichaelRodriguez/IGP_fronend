@@ -2,11 +2,12 @@ import 'moment/locale/es'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router'
-import { CardScreen } from '../cards/CardScreen'
 
+import { CardScreen } from '../cards/CardScreen'
 import { SectionPaginate } from '../cards/SectionPaginate'
 import { DatePickerScreen } from '../noticies/DatePickerScreen'
 import { CarouselScreen } from './CarouselScreen'
+
 export const StoryScreen = () => {
   const location = useLocation()
   const param = location.pathname.split('/')[1]

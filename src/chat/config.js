@@ -4,7 +4,6 @@ import { GeneralOptions } from './widgets/GeneralOptions'
 import { ListRights } from './widgets/ListRights'
 
 import { FaUserAstronaut } from 'react-icons/fa'
-import { OrganizationsView } from './widgets/organizationsWidgets/OrganizationsView.jsx'
 
 const nameBot = 'Secury-bot'
 const config = {
@@ -76,13 +75,6 @@ const config = {
   },
 
   widgets: [
-    {
-      widgetName: 'organizationsList',
-      widgetFunc: (props) => (
-        <OrganizationsView {...props} />
-      ),
-    },
-
     {
       widgetName: 'GeneralOptions',
       widgetFunc: (props) => <GeneralOptions {...props} />,

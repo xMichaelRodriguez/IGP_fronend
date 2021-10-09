@@ -12,7 +12,6 @@ import {
   startstoryDeleted,
   StorySetActive,
 } from '../../actions/events'
-import { WaitScreen } from '../wait/WaitScreen'
 export const CardScreen = ({
   data,
   route,
@@ -44,7 +43,11 @@ export const CardScreen = ({
       data === undefined ||
       data === null
     ) {
-      return <WaitScreen />
+      return (
+        <h3 className='display-4'>
+          No se encontraron Historias
+        </h3>
+      )
     } else {
       return Object.entries(data).length !== 0 ? (
         data.map((d) => (
@@ -102,7 +105,9 @@ export const CardScreen = ({
           </div>
         ))
       ) : (
-        <WaitScreen />
+        <h3 className='display-4'>
+          No se encontraron Historias
+        </h3>
       )
     }
   }

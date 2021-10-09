@@ -1,16 +1,19 @@
 import React from 'react'
-import { useParams } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 
 import {
+  FaArrowLeft,
   FaFacebook,
   FaTwitter,
   FaYoutube,
 } from 'react-icons/fa'
+
 import { BiMailSend } from 'react-icons/bi'
 import { WaitScreen } from '../wait/WaitScreen'
 import { useOrganizations } from '../../hooks/useOrganizations'
 
 export const OrganizationCard = () => {
+  const history = useHistory()
   const { organization_acronym } = useParams()
 
   const { data: organization, loading } = useOrganizations(
@@ -18,7 +21,7 @@ export const OrganizationCard = () => {
   )
 
   return (
-    <div className='container-fluid p-5 '>
+    <div className='container-fluid py-4'>
       <div className='container '>
         {loading ? (
           <WaitScreen />
@@ -40,8 +43,8 @@ export const OrganizationCard = () => {
                   {organization.name}
                 </h6>
                 <div className='row mt-2'>
-                  <div className='mb-2 col-md-6'>
-                    <p className='card-text font-weight-bold'>
+                  <div className='mb-2 col-md-6 text-muted'>
+                    <p className='card-text font-weight-bold text-dark'>
                       Dirección
                     </p>
                     {organization.direccion}
@@ -54,7 +57,7 @@ export const OrganizationCard = () => {
                       {organization.telefonos.map(
                         (telefono, index) => (
                           <li
-                            className='list-group-item '
+                            className='list-group-item text-muted'
                             key={index}
                           >
                             {telefono}
@@ -71,7 +74,7 @@ export const OrganizationCard = () => {
                       {organization.horarios.map(
                         (horario, index) => (
                           <li
-                            className='list-group-item '
+                            className='list-group-item text-muted'
                             key={index}
                           >
                             {horario + '\n'}
@@ -86,7 +89,7 @@ export const OrganizationCard = () => {
                 <div className='card-text'>
                   <p>Official de Información</p>
                   <h4>{organization.officer_name}</h4>
-                  <p className='card-text'>
+                  <p className='card-text text-muted'>
                     <BiMailSend size='1.3rem' />{' '}
                     {organization.officer_email}
                   </p>
@@ -173,6 +176,14 @@ export const OrganizationCard = () => {
                     </ul>
                   </div>
                 </div>
+              </div>
+              <div className='col-md-4'>
+                <button
+                  className='btn btn-link'
+                  onClick={() => history.goBack()}
+                >
+                  <FaArrowLeft /> Volver
+                </button>
               </div>
             </div>
           </div>

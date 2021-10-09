@@ -84,11 +84,10 @@
   background-color: #8f77f2 !important;
 }
 
-.slick-next,
-.slick-next:focus,
-.slick-next:hover,
-.slick-prev,
-.slick-prev:focus,
-.slick-prev:hover {
+.slick-prev:before,
+.slick-next:before {
+  color: #8f77f2;
+}
+.slick-active {
   color: #8f77f2 !important;
 }

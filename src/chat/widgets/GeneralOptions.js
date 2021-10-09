@@ -9,11 +9,6 @@ export const GeneralOptions = (props) => {
       handler: props.actionProvider.handleHumanRights,
       id: 1,
     },
-    {
-      text: '¿Quieres saber que organizaciones?',
-      handler: props.actionProvider.handleOrganizations,
-      id: 2,
-    },
   ]
 
   return (

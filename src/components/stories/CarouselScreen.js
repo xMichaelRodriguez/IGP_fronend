@@ -14,7 +14,7 @@ export const CarouselScreen = () => {
   const settings = {
     dots: true,
     speed: 500,
-    Infinity: false,
+    infinite: false,
     slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,

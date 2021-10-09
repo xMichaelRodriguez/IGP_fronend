@@ -18,15 +18,6 @@ class MessageParser {
     ) {
       return this.actionProvider.handleHumanRights()
     }
-    if (
-      lowerCase.includes('organizaciones') ||
-      lowerCase.includes('org') ||
-      lowerCase.includes(
-        '¿Quieres saber que organizaciones?'
-      )
-    ) {
-      return this.actionProvider.handleOrganizations()
-    }
 
     return this.actionProvider.handleDefault()
   }
