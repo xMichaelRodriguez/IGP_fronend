@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import Slider from 'react-slick'
 import { useSelector } from 'react-redux'
 import { CardItem } from './CardItem'
-
+import './story.css'
 export const CarouselScreen = () => {
   const { storyForCarousel } = useSelector(
     (state) => state.story
