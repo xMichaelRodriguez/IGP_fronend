@@ -1,26 +1,35 @@
+import moment from 'moment'
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import { BiTime } from 'react-icons/bi'
 export const CardItem = ({
   route,
   title,
   date,
   body,
   id,
+  imageUrl,
 }) => {
   return (
-    <div className='card mx-3  shadow'>
-      {/* <img src='...' className='card-img-top' alt='...' /> */}
-      <div className='card-body'>
-        <h5 className='display-6 card-title text-dark'>
+    <div class='card mx-3 bg-dark text-white'>
+      <img
+        src={imageUrl}
+        class='card-img bg-card'
+        alt={imageUrl}
+      />
+      <div class='card-img-overlay'>
+        <p
+          class='card-text mb-0 font-weight-bold'
+          style={{ fontSize: '1rem' }}
+        >
           {title}
-        </h5>
-        {/* <p className=' card-text text-justify text-muted'>
-          {body.substr(0, 20)}...
-        </p> */}
+        </p>
+        <p class='card-text mb-1'>
+          <BiTime /> {moment(date).calendar()}
+        </p>
         <Link
           to={`/${route}/${id}`}
-          className='btn btn-link'
+          className='btn primary btn-link'
         >
           Leer Ahora
         </Link>

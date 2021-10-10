@@ -14,7 +14,7 @@ import {
   FaPlay,
   FaTimesCircle,
 } from 'react-icons/fa'
-import { BiReset } from 'react-icons/bi'
+import { BiReset, BiTime } from 'react-icons/bi'
 const speaker = new SpeechSynthesisUtterance()
 const synth = window.speechSynthesis
 
@@ -64,10 +64,11 @@ export const CardReadScreen = () => {
     </div>
   ) : (
     <div className='container-fluid py-5 animate__animated   animate__fadeIn '>
-      <div className='container shadow card-body'>
+      <div className='container  card-body'>
         <buton
           className='btn btn-link'
           onClick={() => {
+            synth.cancel()
             history.goBack()
           }}
         >
@@ -77,9 +78,18 @@ export const CardReadScreen = () => {
           {dataToRead.title}
         </h1>
         <h6 className='card-subtitle mb-2 text-muted'>
-          {moment(dataToRead.date).calendar()}
+          <BiTime /> {moment(dataToRead.date).calendar()}
         </h6>
 
+        {path !== 'noticias' && (
+          <div className='card-text text-center py-3'>
+            <img
+              className='img-fluid'
+              src={dataToRead.imageUrl}
+              alt={dataToRead.imageUrl}
+            />
+          </div>
+        )}
         <p
           className='text-justify card-text text-dark'
           style={{ fontSize: '20px' }}
@@ -87,37 +97,40 @@ export const CardReadScreen = () => {
           {dataToRead.body}
         </p>
 
-        <div className='row mbb-3'>
-          <button
-            className='btn primary mx-1'
-            onClick={() => handleSpeak(dataToRead)}
-            title='Narrar'
-          >
-            <FaPlay />
-          </button>
+        <div className='row mb-3 '>
+          <div className='p-3 border border-secondary rounded'>
+            <p>Controles de reproducción</p>
+            <button
+              className='btn primary mx-1'
+              onClick={() => handleSpeak(dataToRead)}
+              title='Narrar'
+            >
+              <FaPlay />
+            </button>
 
-          <button
-            className='btn btn-outline-secondary mx-1'
-            onClick={handleResume}
-            title='Reanudar'
-          >
-            <BiReset />
-          </button>
+            <button
+              className='btn btn-outline-secondary mx-1'
+              onClick={handleResume}
+              title='Reanudar'
+            >
+              <BiReset />
+            </button>
 
-          <button
-            className='btn btn-outline-secondary mx-1'
-            onClick={handlePause}
-            title='pausar'
-          >
-            <FaPauseCircle />
-          </button>
-          <button
-            className='btn btn-outline-danger mx-1'
-            onClick={handleCancel}
-            title='Cancelar'
-          >
-            <FaTimesCircle />
-          </button>
+            <button
+              className='btn btn-outline-secondary mx-1'
+              onClick={handlePause}
+              title='pausar'
+            >
+              <FaPauseCircle />
+            </button>
+            <button
+              className='btn btn-outline-danger mx-1'
+              onClick={handleCancel}
+              title='Cancelar'
+            >
+              <FaTimesCircle />
+            </button>
+          </div>
         </div>
       </div>
     </div>

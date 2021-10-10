@@ -48,10 +48,11 @@ export const CarouselScreen = () => {
   }
   return (
     <div className='container-fluid primary py-5'>
-      <div className='container '>
+      <div className='container py-3'>
         {Object.entries(storyForCarousel).length === 0 && (
           <h3>No Hay Historias</h3>
         )}
+
         <Slider {...settings}>
           {storyForCarousel.map((story) => (
             <CardItem route='historias' {...story} />

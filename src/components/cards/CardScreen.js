@@ -64,7 +64,7 @@ export const CardScreen = ({
                   {moment(d.date).calendar()}
                 </h6>
                 <p className='card-text text-justify'>
-                  {d.body.substr(0, 140)}...
+                  {d.body.substr(0, 100)}...
                 </p>
                 {mode === 'profile' ? (
                   <>
