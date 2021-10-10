@@ -53,7 +53,11 @@ export const CardScreen = ({
         data.map((d) => (
           <div className='col-md-4  ' key={d.id}>
             <div className='card mb-3 shadow'>
-              {/* <img src='...' className='card-img-top' alt='...' /> */}
+              <img
+                src={d.imageUrl}
+                className='card-img-top'
+                alt={d.imageUrl}
+              />
               <div className='card-body'>
                 <h5 className='card-title'>{d.title}</h5>
                 <h6 className='card-subtitle mb-2 text-muted'>

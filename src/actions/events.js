@@ -47,7 +47,7 @@ export const startstoryAddNew = (story) => {
   }
 }
 
-const storyAddNew = (story) => ({
+export const storyAddNew = (story) => ({
   type: types.storyAddNew,
   payload: story,
 })
@@ -156,7 +156,7 @@ export const storyStartUpdated = (story) => {
   }
 }
 
-const storyUpdated = (story) => ({
+export const storyUpdated = (story) => ({
   type: types.storyUpdated,
   payload: story,
 })

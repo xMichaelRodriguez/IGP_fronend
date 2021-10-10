@@ -36,28 +36,69 @@ export const fetchAsync = (
       },
     })
   } else {
-    if (data.image) {
+    if (data.imageUrl) {
+      const content = {
+        title: data.title,
+        body: data.body,
+        date: data.date,
+        imageUrl: data.imageUrl,
+      }
       const formData = new FormData()
-      formData.append('title', data.title)
-      formData.append('body', data.body)
-      formData.append('date', data.date)
-      formData.append('image', data.image)
-      return fetch(url, {
-        method,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Accept: 'application/json',
-          'x-token': token,
-        },
-        body: formData,
-      })
+      formData.append('title', content.title)
+      formData.append('body', content.body)
+      formData.append('date', content.date)
+      formData.append('image', content.imageUrl)
+
+      if (
+        method === 'PUT' &&
+        !content.imageUrl.includes('https')
+      ) {
+        const formDataPut = new FormData()
+        formDataPut.append('title', content.title)
+        formDataPut.append('body', content.body)
+        formDataPut.append('date', content.date)
+        formDataPut.append(
+          'publicImg_id',
+          data.publicImg_id
+        )
+        formDataPut.append('image', content.imageUrl)
+
+        return fetch(url, {
+          method,
+          headers: {
+            accept: 'application/json',
+            'x-token': token.toString(),
+          },
+          body: formDataPut,
+        })
+      } else if (
+        method === 'PUT' &&
+        content.imageUrl.includes('https')
+      ) {
+        return fetch(url, {
+          method,
+          headers: {
+            'Content-Type': 'application/json',
+            'x-token': token.toString(),
+          },
+          body: JSON.stringify(content),
+        })
+      } else {
+        return fetch(url, {
+          method,
+          headers: {
+            accept: 'application/json',
+            'x-token': token.toString(),
+          },
+          body: formData,
+        })
+      }
     }
     return fetch(url, {
       method,
       headers: {
         'Content-Type': 'application/json',
-
-        'x-token': token,
+        'x-token': token.toString(),
       },
       body: JSON.stringify(data),
     })

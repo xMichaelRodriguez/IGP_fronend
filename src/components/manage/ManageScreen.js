@@ -8,9 +8,8 @@ import {
 
 import validator from 'validator'
 import {
-  startstoryAddNew,
   storyClearActive,
-  storyStartUpdated,
+  storyUpdated,
 } from '../../actions/events'
 import {
   noticeClearActive,
@@ -18,11 +17,16 @@ import {
   startnoticeAddNew,
 } from '../../actions/noticesActions'
 import { FaCloudUploadAlt } from 'react-icons/fa'
+import { fetchAsync } from '../../helpers/fetching'
+import moment from 'moment'
+import Swal from 'sweetalert2'
 
 const initialForm = {
   title: '',
   body: '',
-  image: '',
+  imageUrl: '',
+  date: moment().toISOString(),
+  publicImg_id: '',
 }
 export const ManageScreen = () => {
   const dispatch = useDispatch()
@@ -62,7 +66,7 @@ export const ManageScreen = () => {
     if (image) {
       setFormValue({
         ...formValue,
-        image,
+        imageUrl: image,
       })
 
       readFile.readAsDataURL(image)
@@ -93,7 +97,7 @@ export const ManageScreen = () => {
       return false
     }
 
-    if (token === 'historias' && !formValue.image) {
+    if (token === 'historias' && !formValue.imageUrl) {
       dispatch(setError('imagen requerida'))
       return false
     }
@@ -121,20 +125,70 @@ export const ManageScreen = () => {
         if (!resp) return
         setFormValue(initialForm)
       } else if (token === 'historias' && activeStory) {
-        // agrega una historia
-        const resp = await dispatch(
-          storyStartUpdated(formValue)
-        )
-        if (!resp) return
-        setFormValue(initialForm)
-      } else if (token === 'historias' && !activeStory) {
-        // actualiza una historia
-        const resp = await dispatch(
-          startstoryAddNew(formValue)
+        // editar una historia
+        Swal.fire({
+          title: 'Actualizando...',
+          text: 'Por favor espere...',
+          allowOutsideClick: false,
+          allowEnterKey: false,
+          allowEscapeKey: false,
+          showConfirmButton: false,
+          onBeforeOpen: () => {
+            Swal.showLoading()
+          },
+        })
+
+        const date = moment().toISOString()
+        setFormValue({
+          ...formValue,
+          date: date,
+          publicImg_id: activeStory.publicImg_id,
+        })
+
+        const resp = await fetchAsync(
+          `stories/${activeStory.id}`,
+          formValue,
+          'PUT'
         )
 
-        if (!resp) return
-        setFormValue(initialForm)
+        const body = await resp.json()
+
+        if (body.ok) {
+          Swal.close()
+          Swal.fire('Historia Actualizada')
+          setFormValue(initialForm)
+          dispatch(storyUpdated(body))
+        } else {
+          Swal.fire('Algo Salio Mal Intentalo De Nuevo')
+        }
+      } else if (token === 'historias' && !activeStory) {
+        // agrega una historia
+        Swal.fire({
+          title: 'Guardando...',
+          text: 'Por favor espere...',
+          allowOutsideClick: false,
+          allowEnterKey: false,
+          allowEscapeKey: false,
+          showConfirmButton: false,
+          onBeforeOpen: () => {
+            Swal.showLoading()
+          },
+        })
+
+        const resp = await fetchAsync(
+          'stories/new',
+          formValue,
+          'POST'
+        )
+        const body = await resp.json()
+
+        if (body.ok) {
+          Swal.close()
+          Swal.fire('Historia Publicada')
+          setFormValue(initialForm)
+        } else {
+          Swal.fire('Algo Salio Mal Intentalo De Nuevo')
+        }
       }
     }
   }
@@ -153,6 +207,7 @@ export const ManageScreen = () => {
       <form
         className='card shadow-sm p-3 mt-3'
         onSubmit={handleSaveOrModifiedItem}
+        method='post'
       >
         <div className='form-group'>
           <button
@@ -214,6 +269,7 @@ export const ManageScreen = () => {
                 type='file'
                 style={{ display: 'none' }}
                 id='fileSelector'
+                name='fileSelector'
                 onChange={handleImage}
               />
               <button
@@ -238,7 +294,7 @@ export const ManageScreen = () => {
                 width: '50%',
                 height: '50%',
                 display: `${
-                  formValue.image ? 'block' : 'none'
+                  formValue.imageUrl ? 'block' : 'none'
                 }`,
               }}
             >
@@ -246,7 +302,7 @@ export const ManageScreen = () => {
                 <div className='text-center'>
                   <img
                     ref={refImage}
-                    src={formValue.image}
+                    src={formValue.imageUrl}
                     className='rounded img-thumbnail shadow-2-strong'
                     alt='+++o'
                   />

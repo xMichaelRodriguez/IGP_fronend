@@ -11,9 +11,9 @@ export const AuthButton = () => {
   }
   if (name) {
     return (
-      <li class='nav-item dropdown'>
-        <spam
-          class='nav-link dropdown-toggle'
+      <li className='nav-item dropdown'>
+        <span
+          className='nav-link dropdown-toggle'
           style={{ cursor: 'pointer' }}
           role='button'
           data-toggle='dropdown'
@@ -21,20 +21,23 @@ export const AuthButton = () => {
           aria-expanded='false'
         >
           Administrador
-        </spam>
+        </span>
         <div
-          class='dropdown-menu'
+          className='dropdown-menu'
           aria-labelledby='navbarDropdownMenuLink'
         >
-          <Link class='dropdown-item' to='/profile/home'>
+          <Link
+            className='dropdown-item'
+            to='/profile/home'
+          >
             Perfil
           </Link>
-          <Link class='dropdown-item' to='/'>
+          <Link className='dropdown-item' to='/'>
             volver al inicio
           </Link>
 
           <Link
-            class=' btn btn-sm primary d-flex justify-content-center m-2'
+            className=' btn btn-sm primary d-flex justify-content-center m-2'
             to='/'
             onClick={handleLogout}
           >
