@@ -1,28 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router'
 import {
   setError,
   uiRemoveError,
 } from '../../actions/authActios'
+
+import validator from 'validator'
 import {
   startstoryAddNew,
   storyClearActive,
   storyStartUpdated,
 } from '../../actions/events'
-import validator from 'validator'
 import {
   noticeClearActive,
   noticetStartUpdated,
   startnoticeAddNew,
 } from '../../actions/noticesActions'
+import { FaCloudUploadAlt } from 'react-icons/fa'
 
 const initialForm = {
   title: '',
   body: '',
+  image: '',
 }
 export const ManageScreen = () => {
   const dispatch = useDispatch()
+  const refImage = useRef(null)
   const { token } = useParams()
   const history = useHistory()
   const { msgError } = useSelector((state) => state.error)
@@ -49,6 +53,28 @@ export const ManageScreen = () => {
       [target.name]: target.value,
     })
   }
+  // maneja el cambio del input file
+  const handleImage = (e) => {
+    const image = e.target.files[0]
+    let readFile = new FileReader()
+    let img = refImage.current
+
+    if (image) {
+      setFormValue({
+        ...formValue,
+        image,
+      })
+
+      readFile.readAsDataURL(image)
+      readFile.onloadend = function () {
+        img.src = readFile.result
+      }
+    }
+  }
+
+  const handlePicture = () => {
+    document.getElementById('fileSelector').click()
+  }
   // validacion del formulario
   const isFormValid = () => {
     if (validator.isEmpty(formValue.title)) {
@@ -67,17 +93,8 @@ export const ManageScreen = () => {
       return false
     }
 
-    if (
-      !validator.isLength(formValue.body, {
-        min: 50,
-        max: 2000,
-      })
-    ) {
-      dispatch(
-        setError(
-          'Cuerpo debe conenter almenos 50 caracteres y maximo 2000'
-        )
-      )
+    if (token === 'historias' && !formValue.image) {
+      dispatch(setError('imagen requerida'))
       return false
     }
     dispatch(uiRemoveError())
@@ -85,25 +102,38 @@ export const ManageScreen = () => {
   }
 
   // agregar o modificar una historia o noticia
-  const handleSaveOrModifiedItem = (e) => {
+  const handleSaveOrModifiedItem = async (e) => {
     e.preventDefault()
 
     if (isFormValid()) {
       if (token === 'noticias' && activeNotice) {
         // agrega una noticia
-        dispatch(noticetStartUpdated(formValue))
+        const resp = await dispatch(
+          noticetStartUpdated(formValue)
+        )
+        if (!resp) return
         setFormValue(initialForm)
       } else if (token === 'noticias' && !activeNotice) {
         // actualiza unanoticia
-        dispatch(startnoticeAddNew(formValue))
+        const resp = await dispatch(
+          startnoticeAddNew(formValue)
+        )
+        if (!resp) return
         setFormValue(initialForm)
       } else if (token === 'historias' && activeStory) {
         // agrega una historia
-        dispatch(storyStartUpdated(formValue))
+        const resp = await dispatch(
+          storyStartUpdated(formValue)
+        )
+        if (!resp) return
         setFormValue(initialForm)
       } else if (token === 'historias' && !activeStory) {
         // actualiza una historia
-        dispatch(startstoryAddNew(formValue))
+        const resp = await dispatch(
+          startstoryAddNew(formValue)
+        )
+
+        if (!resp) return
         setFormValue(initialForm)
       }
     }
@@ -177,6 +207,54 @@ export const ManageScreen = () => {
             </div>
           ) : null}
         </div>
+        {token === 'historias' && (
+          <>
+            <div className='form-group'>
+              <input
+                type='file'
+                style={{ display: 'none' }}
+                id='fileSelector'
+                onChange={handleImage}
+              />
+              <button
+                className='btn  mb-3'
+                onClick={handlePicture}
+                type='button'
+              >
+                <FaCloudUploadAlt /> Subir Imagen
+              </button>
+              {msgError.includes('imagen') && (
+                <div
+                  className='alert alert-danger'
+                  role='alert'
+                >
+                  {msgError}
+                </div>
+              )}
+            </div>
+            <div
+              className='card p-0'
+              style={{
+                width: '50%',
+                height: '50%',
+                display: `${
+                  formValue.image ? 'block' : 'none'
+                }`,
+              }}
+            >
+              <div className='card-img-top'>
+                <div className='text-center'>
+                  <img
+                    ref={refImage}
+                    src={formValue.image}
+                    className='rounded img-thumbnail shadow-2-strong'
+                    alt='+++o'
+                  />
+                </div>
+              </div>
+            </div>
+          </>
+        )}
 
         <div className='form-group'>
           <button className='btn primary' type='submit'>
