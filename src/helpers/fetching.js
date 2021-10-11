@@ -36,65 +36,73 @@ export const fetchAsync = (
       },
     })
   } else {
+    const content = {
+      title: data.title,
+      body: data.body,
+      date: data.date,
+      imageUrl: data.imageUrl,
+    }
     if (data.imageUrl !== '') {
-      const content = {
-        title: data.title,
-        body: data.body,
-        date: data.date,
-        imageUrl: data.imageUrl ? data.imageUrl : '',
-      }
-      const formData = new FormData()
-      formData.append('title', content.title)
-      formData.append('body', content.body)
-      formData.append('date', content.date)
-      formData.append('image', content.imageUrl)
-
       if (method === 'PUT') {
-        if (data.imageUrl !== '') {
-          if (typeof data.imageUrl === 'object') {
-            const formDataPut = new FormData()
-            formDataPut.append('title', content.title)
-            formDataPut.append('body', content.body)
-            formDataPut.append('date', content.date)
-            formDataPut.append(
-              'publicImg_id',
-              data.publicImg_id
-            )
-            formDataPut.append('image', content.imageUrl)
-
-            return fetch(url, {
-              method,
-              headers: {
-                accept: 'application/json',
-                'x-token': token.toString(),
-              },
-              body: formDataPut,
-            })
-          } else if (
-            typeof data.imageUrl !== 'object' &&
-            data.imageUrl.includes('https')
-          ) {
-            return fetch(url, {
-              method,
-              headers: {
-                'Content-Type': 'application/json',
-                'x-token': token.toString(),
-              },
-              body: JSON.stringify(content),
-            })
-          }
-        } else {
+        if (typeof content.imageUrl === 'object') {
+          const formDataPut = new FormData()
+          formDataPut.append('title', content.title)
+          formDataPut.append('body', content.body)
+          formDataPut.append('date', content.date)
+          formDataPut.append(
+            'publicImg_id',
+            data.publicImg_id
+          )
+          formDataPut.append('image', content.imageUrl)
+          console.log(formDataPut.get('image'))
           return fetch(url, {
             method,
+            mode: 'cors',
             headers: {
+              'Access-Control-Allow-Origin': '*',
               accept: 'application/json',
               'x-token': token.toString(),
             },
-            body: formData,
+            body: formDataPut,
+          })
+        }
+
+        if (content.imageUrl.includes('https')) {
+          return fetch(url, {
+            method,
+            mode: 'cors',
+
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json',
+              'x-token': token.toString(),
+            },
+            body: JSON.stringify(content),
           })
         }
       }
     }
+
+    if (method === 'POST') {
+      const formDataPost = new FormData()
+      formDataPost.append('title', content.title)
+      formDataPost.append('body', content.body)
+      formDataPost.append('date', content.date)
+      formDataPost.append('publicImg_id', data.publicImg_id)
+      formDataPost.append('image', content.imageUrl)
+
+      return fetch(url, {
+        method,
+        mode: 'cors',
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          accept: 'application/json',
+          'x-token': token.toString(),
+        },
+        body: formDataPost,
+      })
+    }
+
     return fetch(url, {
       method,
       headers: {

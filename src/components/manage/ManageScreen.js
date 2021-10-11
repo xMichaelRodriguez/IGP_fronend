@@ -159,7 +159,7 @@ export const ManageScreen = () => {
           setFormValue(initialForm)
           dispatch(storyUpdated(body))
         } else {
-          Swal.fire('Algo Salio Mal Intentalo De Nuevo')
+          Swal.fire(body.msg)
         }
       } else if (token === 'historias' && !activeStory) {
         // agrega una historia
@@ -187,7 +187,7 @@ export const ManageScreen = () => {
           Swal.fire('Historia Publicada')
           setFormValue(initialForm)
         } else {
-          Swal.fire('Algo Salio Mal Intentalo De Nuevo')
+          Swal.fire(body.msg)
         }
       }
     }
