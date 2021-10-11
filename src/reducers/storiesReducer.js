@@ -1,33 +1,31 @@
-import { types } from '../types/types';
+import { types } from '../types/types'
 
 const initialState = {
+  storyForCarousel: [],
   stories: {
     storyArr: [],
     total_docs: null,
     total_page: null,
   },
   activeStory: null,
-};
+}
 
-export const storiesReducer = (state = initialState, action) => {
+export const storiesReducer = (
+  state = initialState,
+  action
+) => {
   switch (action.type) {
     case types.storySetActive:
       return {
         ...state,
         activeStory: action.payload,
-      };
-
-    // case types.StoryactiveStoryAddNew:
-    //   return {
-    //     ...state,
-    //     StoryactiveStorys: [...state.StoryactiveStorys, action.payload],
-    //   };
+      }
 
     case types.storyClearActive:
       return {
         ...state,
         activeStory: null,
-      };
+      }
 
     case types.storyUpdated:
       return {
@@ -37,16 +35,23 @@ export const storiesReducer = (state = initialState, action) => {
             e.id === action.payload.id ? action.payload : e
           ),
         },
-      };
+      }
+    case types.storyForCarouselLoaded:
+      return {
+        ...state,
+        storyForCarousel: [...action.payload.stories],
+      }
 
     case types.storyDeleted:
       return {
         ...state,
         stories: {
-          storyArr: state.stories.storyArr.map((e) => e.id !== action.payload),
+          storyArr: state.stories.storyArr.map(
+            (e) => e.id !== action.payload
+          ),
         },
         activeStory: null,
-      };
+      }
 
     case types.storyLoaded:
       return {
@@ -56,13 +61,13 @@ export const storiesReducer = (state = initialState, action) => {
           total_docs: action.payload.total_docs,
           total_page: action.payload.total_page,
         },
-      };
+      }
 
     // case types.StoryactiveStoryLogout:
     //   return {
     //     ...initialState,
     //   };
     default:
-      return state;
+      return state
   }
-};
+}

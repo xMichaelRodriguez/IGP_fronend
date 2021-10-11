@@ -1,10 +1,13 @@
 import 'moment/locale/es'
 import React from 'react'
-
 import { useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router'
+
 import { CardScreen } from '../cards/CardScreen'
-import { Pagination } from '../cards/Pagination'
+import { SectionPaginate } from '../cards/SectionPaginate'
+import { DatePickerScreen } from '../noticies/DatePickerScreen'
+import { CarouselScreen } from './CarouselScreen'
+
 export const StoryScreen = () => {
   const location = useLocation()
   const param = location.pathname.split('/')[1]
@@ -12,49 +15,19 @@ export const StoryScreen = () => {
   const { storyArr } = useSelector(
     (state) => state.story.stories
   )
-  return (
-    <section className='container mt-3'>
-      <div className='row'>
-        {param === 'profile' ? (
-          <>
-            <div className='col-md-6'>
-              <Pagination
-                selector={'story'}
-                subSelector='stories'
-              />
-            </div>
 
-            <div className='col-md-6'>
-              <button
-                className='btn primary btn-block mb-3'
-                type='button'
-                onClick={() => {
-                  history.push(
-                    '/profile/mantenimiento/historias'
-                  )
-                }}
-              >
-                Nueva Historia
-              </button>
-            </div>
-          </>
-        ) : (
-          <div className='col-md-12 animate__animated animate__fadeIn'>
-            <Pagination
-              selector={'story'}
-              subSelector='stories'
-            />
-          </div>
-        )}
-      </div>
-      <div className='row animate__animated animate__fadeIn row'>
-        <CardScreen
-          data={storyArr !== [] && storyArr}
-          route='historias'
-          mode={param}
-          history={history}
-        />
-      </div>
-    </section>
+  return (
+    <div className='animate__animated animate__fadeIn'>
+      {param !== 'profile' && <CarouselScreen />}
+
+      <DatePickerScreen rute='story' />
+      <SectionPaginate />
+      <CardScreen
+        data={storyArr !== [] && storyArr}
+        route='historias'
+        mode={param}
+        history={history}
+      />
+    </div>
   )
 }

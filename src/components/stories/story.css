@@ -1,0 +1,16 @@
+.slick-prev:before,
+.slick-next:before {
+  color: #000 !important;
+}
+.slick-active {
+  color: #000 !important;
+}
+
+.slick-dots li button {
+  width: 60px !important;
+  color: #878787;
+}
+
+.bg-card {
+  filter: brightness(0.4);
+}

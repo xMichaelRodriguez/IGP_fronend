@@ -1,23 +1,18 @@
 import { types } from '../types/types'
 
 const initialState = {
-  msgError: '',
+  organizaciones: [],
 }
-export const errorReducer = (
+
+export const orgReducer = (
   state = initialState,
   action
 ) => {
   switch (action.type) {
-    case types.setError:
+    case types.orgLoaded:
       return {
         ...state,
-        msgError: action.payload,
-      }
-
-    case types.removeError:
-      return {
-        ...state,
-        msgError: '',
+        organizaciones: [...action.payload.organizations],
       }
 
     default:

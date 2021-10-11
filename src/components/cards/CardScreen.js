@@ -12,7 +12,6 @@ import {
   startstoryDeleted,
   StorySetActive,
 } from '../../actions/events'
-import { WaitScreen } from '../wait/WaitScreen'
 export const CardScreen = ({
   data,
   route,
@@ -44,21 +43,28 @@ export const CardScreen = ({
       data === undefined ||
       data === null
     ) {
-      return <WaitScreen />
-    } else {
       return (
-        Object.entries(data).length !== 0 &&
+        <h3 className='display-4'>
+          No se encontraron Historias
+        </h3>
+      )
+    } else {
+      return Object.entries(data).length !== 0 ? (
         data.map((d) => (
           <div className='col-md-4  ' key={d.id}>
             <div className='card mb-3 shadow'>
-              {/* <img src='...' className='card-img-top' alt='...' /> */}
+              <img
+                src={d.imageUrl}
+                className='card-img-top'
+                alt={d.imageUrl}
+              />
               <div className='card-body'>
                 <h5 className='card-title'>{d.title}</h5>
                 <h6 className='card-subtitle mb-2 text-muted'>
                   {moment(d.date).calendar()}
                 </h6>
                 <p className='card-text text-justify'>
-                  {d.body.substr(0, 140)}...
+                  {d.body.substr(0, 100)}...
                 </p>
                 {mode === 'profile' ? (
                   <>
@@ -95,17 +101,29 @@ export const CardScreen = ({
                     to={`/${route}/${d.id}`}
                     className='btn btn-link'
                   >
-                    Leer Ahora
+                    Leer Más
                   </Link>
                 )}
               </div>
             </div>
           </div>
         ))
+      ) : (
+        <h3 className='display-4'>
+          No se encontraron Historias
+        </h3>
       )
     }
   }
-  return <ComponentLoadingData />
+  return (
+    <div className='container-fluid'>
+      <div className='container'>
+        <div className='row'>
+          <ComponentLoadingData />
+        </div>
+      </div>
+    </div>
+  )
 }
 
 CardScreen.propTypes = {

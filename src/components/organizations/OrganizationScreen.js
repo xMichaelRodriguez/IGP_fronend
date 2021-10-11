@@ -1,38 +1,32 @@
-import React from 'react'
-import { useLocation } from 'react-router'
-import { useOrganizations } from '../../hooks/useOrganizations'
-import { WaitScreen } from '../wait/WaitScreen'
-import { OrganizationItem } from './OrganizationItem'
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router';
+
+import { WaitScreen } from '../wait/WaitScreen';
+import { OrganizationItem } from './OrganizationItem';
 
 export const OrganizationScreen = () => {
-  const location = useLocation()
+  const location = useLocation();
+  const { organizaciones } = useSelector(
+    (state) => state.org
+  );
 
-  const { data: organizations, loading } =
-    useOrganizations()
   return (
-    <div className='container-fluid mt-3'>
+    <div className='container-fluid mt-3 animate__animated animate__fadeIn'>
       <div className='container'>
-        {loading && <WaitScreen />}
+        {Object.entries(organizaciones).length === 0 && (
+          <WaitScreen />
+        )}
 
-        <div className='row'>
+        <div className='card-columns'>
           {!location.pathname.includes('/organizations') &&
-            organizations.map(
-              (organization) =>
-                (organization.acronym.includes('CONNA') ||
-                  organization.acronym.includes(
-                    'MINEDUCYT'
-                  ) ||
-                  organization.acronym.includes('ISNA') ||
-                  organization.acronym.includes('PNC') ||
-                  organization.acronym.includes('FGR') ||
-                  organization.acronym.includes(
-                    'PDDH'
-                  )) && (
-                  <OrganizationItem {...organization} />
-                )
-            )}
+            organizaciones.map((org) => (
+              <div key={org.id}>
+                <OrganizationItem {...org} />
+              </div>
+            ))}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

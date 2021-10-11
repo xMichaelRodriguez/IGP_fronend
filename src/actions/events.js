@@ -47,15 +47,26 @@ export const startstoryAddNew = (story) => {
   }
 }
 
-const storyAddNew = (story) => ({
+export const storyAddNew = (story) => ({
   type: types.storyAddNew,
   payload: story,
 })
 
-export const storyStartLoading = ({ page = 1 }) => {
+export const storyStartLoading = ({
+  page = 1,
+  startDate = null,
+  endDate = null,
+}) => {
   return async (dipatch) => {
     try {
-      const resp = await fetchAsync(`stories/?page=${page}`)
+      let resp = null
+      if (startDate !== null && endDate !== null) {
+        resp = await fetchAsync(
+          `stories/?page=${page}&startDate=${startDate}&endDate=${endDate}`
+        )
+      } else {
+        resp = await fetchAsync(`stories/?page=${page}`)
+      }
       const body = await resp.json()
 
       if (body.ok) {
@@ -74,6 +85,28 @@ const storyLoaded = (stories) => ({
   payload: stories,
 })
 
+export const storyForCarouselLoading = ({ page = 1 }) => {
+  return async (dipatch) => {
+    try {
+      const resp = await fetchAsync(`stories/?page=${page}`)
+
+      const body = await resp.json()
+
+      if (body.ok) {
+        delete body.ok
+
+        dipatch(storyForCarouselLoaded(body))
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+const storyForCarouselLoaded = (stories) => ({
+  type: types.storyForCarouselLoaded,
+  payload: stories,
+})
 export const storyStartUpdated = (story) => {
   return async (dispatch) => {
     try {
@@ -123,7 +156,7 @@ export const storyStartUpdated = (story) => {
   }
 }
 
-const storyUpdated = (story) => ({
+export const storyUpdated = (story) => ({
   type: types.storyUpdated,
   payload: story,
 })

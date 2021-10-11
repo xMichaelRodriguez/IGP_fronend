@@ -1,28 +1,36 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router'
 import {
   setError,
   uiRemoveError,
 } from '../../actions/authActios'
-import {
-  startstoryAddNew,
-  storyClearActive,
-  storyStartUpdated,
-} from '../../actions/events'
+
 import validator from 'validator'
+import {
+  storyClearActive,
+  storyUpdated,
+} from '../../actions/events'
 import {
   noticeClearActive,
   noticetStartUpdated,
   startnoticeAddNew,
 } from '../../actions/noticesActions'
+import { FaCloudUploadAlt } from 'react-icons/fa'
+import { fetchAsync } from '../../helpers/fetching'
+import moment from 'moment'
+import Swal from 'sweetalert2'
 
 const initialForm = {
   title: '',
   body: '',
+  imageUrl: '',
+  date: moment().toISOString(),
+  publicImg_id: '',
 }
 export const ManageScreen = () => {
   const dispatch = useDispatch()
+  const refImage = useRef(null)
   const { token } = useParams()
   const history = useHistory()
   const { msgError } = useSelector((state) => state.error)
@@ -49,6 +57,28 @@ export const ManageScreen = () => {
       [target.name]: target.value,
     })
   }
+  // maneja el cambio del input file
+  const handleImage = (e) => {
+    const image = e.target.files[0]
+    let readFile = new FileReader()
+    let img = refImage.current
+
+    if (image) {
+      setFormValue({
+        ...formValue,
+        imageUrl: image,
+      })
+
+      readFile.readAsDataURL(image)
+      readFile.onloadend = function () {
+        img.src = readFile.result
+      }
+    }
+  }
+
+  const handlePicture = () => {
+    document.getElementById('fileSelector').click()
+  }
   // validacion del formulario
   const isFormValid = () => {
     if (validator.isEmpty(formValue.title)) {
@@ -67,17 +97,8 @@ export const ManageScreen = () => {
       return false
     }
 
-    if (
-      !validator.isLength(formValue.body, {
-        min: 50,
-        max: 2000,
-      })
-    ) {
-      dispatch(
-        setError(
-          'Cuerpo debe conenter almenos 50 caracteres y maximo 2000'
-        )
-      )
+    if (token === 'historias' && !formValue.imageUrl) {
+      dispatch(setError('imagen requerida'))
       return false
     }
     dispatch(uiRemoveError())
@@ -85,26 +106,92 @@ export const ManageScreen = () => {
   }
 
   // agregar o modificar una historia o noticia
-  const handleSaveOrModifiedItem = (e) => {
+  const handleSaveOrModifiedItem = async (e) => {
     e.preventDefault()
 
     if (isFormValid()) {
       if (token === 'noticias' && activeNotice) {
         // agrega una noticia
-        dispatch(noticetStartUpdated(formValue))
+        const resp = await dispatch(
+          noticetStartUpdated(formValue)
+        )
+        if (!resp) return
         setFormValue(initialForm)
       } else if (token === 'noticias' && !activeNotice) {
         // actualiza unanoticia
-        dispatch(startnoticeAddNew(formValue))
+        const resp = await dispatch(
+          startnoticeAddNew(formValue)
+        )
+        if (!resp) return
         setFormValue(initialForm)
       } else if (token === 'historias' && activeStory) {
-        // agrega una historia
-        dispatch(storyStartUpdated(formValue))
-        setFormValue(initialForm)
+        // editar una historia
+        Swal.fire({
+          title: 'Actualizando...',
+          text: 'Por favor espere...',
+          allowOutsideClick: false,
+          allowEnterKey: false,
+          allowEscapeKey: false,
+          showConfirmButton: false,
+          onBeforeOpen: () => {
+            Swal.showLoading()
+          },
+        })
+
+        const date = moment().toISOString()
+        setFormValue({
+          ...formValue,
+          date: date,
+          publicImg_id: activeStory.publicImg_id,
+        })
+
+        const resp = await fetchAsync(
+          `stories/${activeStory.id}`,
+          formValue,
+          'PUT'
+        )
+
+        const body = await resp.json()
+
+        if (body.ok) {
+          Swal.close()
+          Swal.fire('Historia Actualizada')
+          setFormValue(initialForm)
+          dispatch(storyUpdated(body))
+        } else {
+          Swal.fire(body.msg)
+        }
       } else if (token === 'historias' && !activeStory) {
-        // actualiza una historia
-        dispatch(startstoryAddNew(formValue))
-        setFormValue(initialForm)
+        // agrega una historia
+        Swal.fire({
+          title: 'Guardando...',
+          text: 'Por favor espere...',
+          allowOutsideClick: false,
+          allowEnterKey: false,
+          allowEscapeKey: false,
+          showConfirmButton: false,
+          onBeforeOpen: () => {
+            Swal.showLoading()
+          },
+        })
+
+        const resp = await fetchAsync(
+          'stories/new',
+          formValue,
+          'POST'
+        )
+        const body = await resp.json()
+
+        if (body.ok) {
+          Swal.close()
+          Swal.fire('Historia Publicada')
+          setFormValue(initialForm)
+        } else {
+          if (body?.msg) {
+            Swal.fire(body.msg)
+          }
+          Swal.fire('Algo Salio Mal :(')
+        }
       }
     }
   }
@@ -123,6 +210,7 @@ export const ManageScreen = () => {
       <form
         className='card shadow-sm p-3 mt-3'
         onSubmit={handleSaveOrModifiedItem}
+        method='post'
       >
         <div className='form-group'>
           <button
@@ -177,6 +265,55 @@ export const ManageScreen = () => {
             </div>
           ) : null}
         </div>
+        {token === 'historias' && (
+          <>
+            <div className='form-group'>
+              <input
+                type='file'
+                style={{ display: 'none' }}
+                id='fileSelector'
+                name='fileSelector'
+                onChange={handleImage}
+              />
+              <button
+                className='btn  mb-3'
+                onClick={handlePicture}
+                type='button'
+              >
+                <FaCloudUploadAlt /> Subir Imagen
+              </button>
+              {msgError.includes('imagen') && (
+                <div
+                  className='alert alert-danger'
+                  role='alert'
+                >
+                  {msgError}
+                </div>
+              )}
+            </div>
+            <div
+              className='card p-0'
+              style={{
+                width: '50%',
+                height: '50%',
+                display: `${
+                  formValue.imageUrl ? 'block' : 'none'
+                }`,
+              }}
+            >
+              <div className='card-img-top'>
+                <div className='text-center'>
+                  <img
+                    ref={refImage}
+                    src={formValue.imageUrl}
+                    className='rounded img-thumbnail shadow-2-strong'
+                    alt='+++o'
+                  />
+                </div>
+              </div>
+            </div>
+          </>
+        )}
 
         <div className='form-group'>
           <button className='btn primary' type='submit'>

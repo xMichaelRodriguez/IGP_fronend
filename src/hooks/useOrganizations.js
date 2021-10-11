@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react'
 import { getOrganizations } from '../helpers/getOrganizations'
 
-export const useOrganizations = (categories) => {
+export const useOrganizations = (categories = '') => {
   const [state, SetState] = useState({
     data: [],
     loading: true,
   })
 
   useEffect(() => {
-    getOrganizations().then((organization) => {
+    getOrganizations(categories).then((organization) => {
       SetState({
-        data: organization,
+        data: organization[0],
         loading: false,
       })
     })
