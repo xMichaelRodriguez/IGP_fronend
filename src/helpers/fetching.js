@@ -91,8 +91,7 @@ export const fetchAsync = (
 
     if (
       method === 'POST' &&
-      data.imageUrl !== '' &&
-      data.publicImg_id !== ''
+      typeof data.imageUrl === 'object'
     ) {
       const formDataPost = new FormData();
       formDataPost.append('title', content.title);
