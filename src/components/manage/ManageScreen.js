@@ -85,12 +85,18 @@ export const ManageScreen = () => {
       dispatch(setError('Titulo requiredo'));
       return false;
     }
-    if (!validator.isLength(formValue.title, { min: 6 })) {
+    if (!validator.isLength(formValue.title, { min: 20 })) {
       dispatch(setError('Minimo 6 caracteres'));
       return false;
     }
 
-    if (validator.isEmpty(formValue.body)) {
+    if (
+      validator.isEmpty(formValue.body) &&
+      validator.isLength(formValue.body, {
+        min: 50,
+        max: 2000,
+      })
+    ) {
       dispatch(
         setError('Cuerpo de la publicacion requerido')
       );
@@ -153,10 +159,15 @@ export const ManageScreen = () => {
         const body = await resp.json();
 
         if (body.ok) {
-          Swal.close();
-          Swal.fire('Historia Actualizada', '', 'success');
-          setFormValue(initialForm);
           dispatch(storyUpdated(body));
+          dispatch(storyClearActive());
+          Swal.close();
+          Swal.fire(
+            'Historia Actualizada',
+            formValue.title,
+            'success'
+          );
+          setFormValue(initialForm);
         } else {
           Swal.fire('Error', body.msg, 'danger');
         }
@@ -183,8 +194,13 @@ export const ManageScreen = () => {
 
         if (body.ok) {
           Swal.close();
-          Swal.fire('Historia Publicada');
+          Swal.fire(
+            'Historia Publicada',
+            formValue.title,
+            'success'
+          );
           setFormValue(initialForm);
+          dispatch(storyClearActive());
         } else {
           if (body?.msg) {
             Swal.fire(body.msg);
