@@ -1,25 +1,25 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useParams } from 'react-router'
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router';
 import {
   setError,
   uiRemoveError,
-} from '../../actions/authActios'
+} from '../../actions/authActios';
 
-import validator from 'validator'
+import validator from 'validator';
 import {
   storyClearActive,
   storyUpdated,
-} from '../../actions/events'
+} from '../../actions/events';
 import {
   noticeClearActive,
   noticetStartUpdated,
   startnoticeAddNew,
-} from '../../actions/noticesActions'
-import { FaCloudUploadAlt } from 'react-icons/fa'
-import { fetchAsync } from '../../helpers/fetching'
-import moment from 'moment'
-import Swal from 'sweetalert2'
+} from '../../actions/noticesActions';
+import { FaCloudUploadAlt } from 'react-icons/fa';
+import { fetchAsync } from '../../helpers/fetching';
+import moment from 'moment';
+import Swal from 'sweetalert2';
 
 const initialForm = {
   title: '',
@@ -27,103 +27,103 @@ const initialForm = {
   imageUrl: '',
   date: moment().toISOString(),
   publicImg_id: '',
-}
+};
 export const ManageScreen = () => {
-  const dispatch = useDispatch()
-  const refImage = useRef(null)
-  const { token } = useParams()
-  const history = useHistory()
-  const { msgError } = useSelector((state) => state.error)
+  const dispatch = useDispatch();
+  const refImage = useRef(null);
+  const { token } = useParams();
+  const history = useHistory();
+  const { msgError } = useSelector((state) => state.error);
   const { activeNotice } = useSelector(
     (state) => state.notice
-  )
+  );
   const { activeStory } = useSelector(
     (state) => state.story
-  )
-  const [formValue, setFormValue] = useState(initialForm)
+  );
+  const [formValue, setFormValue] = useState(initialForm);
 
   useEffect(() => {
     if (token === 'noticias' && activeNotice) {
-      setFormValue(activeNotice)
+      setFormValue(activeNotice);
     } else if (token === 'historias' && activeStory) {
-      setFormValue(activeStory)
+      setFormValue(activeStory);
     }
-  }, [token, activeNotice, activeStory])
+  }, [token, activeNotice, activeStory]);
 
   // Manejo de los cambios en el valor de los inputs
   const handleInputChange = ({ target }) => {
     setFormValue({
       ...formValue,
       [target.name]: target.value,
-    })
-  }
+    });
+  };
   // maneja el cambio del input file
   const handleImage = (e) => {
-    const image = e.target.files[0]
-    let readFile = new FileReader()
-    let img = refImage.current
+    const image = e.target.files[0];
+    let readFile = new FileReader();
+    let img = refImage.current;
 
     if (image) {
       setFormValue({
         ...formValue,
         imageUrl: image,
-      })
+      });
 
-      readFile.readAsDataURL(image)
+      readFile.readAsDataURL(image);
       readFile.onloadend = function () {
-        img.src = readFile.result
-      }
+        img.src = readFile.result;
+      };
     }
-  }
+  };
 
   const handlePicture = () => {
-    document.getElementById('fileSelector').click()
-  }
+    document.getElementById('fileSelector').click();
+  };
   // validacion del formulario
   const isFormValid = () => {
     if (validator.isEmpty(formValue.title)) {
-      dispatch(setError('Titulo requiredo'))
-      return false
+      dispatch(setError('Titulo requiredo'));
+      return false;
     }
     if (!validator.isLength(formValue.title, { min: 6 })) {
-      dispatch(setError('Minimo 6 caracteres'))
-      return false
+      dispatch(setError('Minimo 6 caracteres'));
+      return false;
     }
 
     if (validator.isEmpty(formValue.body)) {
       dispatch(
         setError('Cuerpo de la publicacion requerido')
-      )
-      return false
+      );
+      return false;
     }
 
     if (token === 'historias' && !formValue.imageUrl) {
-      dispatch(setError('imagen requerida'))
-      return false
+      dispatch(setError('imagen requerida'));
+      return false;
     }
-    dispatch(uiRemoveError())
-    return true
-  }
+    dispatch(uiRemoveError());
+    return true;
+  };
 
   // agregar o modificar una historia o noticia
   const handleSaveOrModifiedItem = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (isFormValid()) {
       if (token === 'noticias' && activeNotice) {
-        // agrega una noticia
+        // actualiza una noticia
         const resp = await dispatch(
           noticetStartUpdated(formValue)
-        )
-        if (!resp) return
-        setFormValue(initialForm)
+        );
+        if (!resp) return;
+        setFormValue(initialForm);
       } else if (token === 'noticias' && !activeNotice) {
-        // actualiza unanoticia
+        // agrega unanoticia
         const resp = await dispatch(
           startnoticeAddNew(formValue)
-        )
-        if (!resp) return
-        setFormValue(initialForm)
+        );
+        if (!resp) return;
+        setFormValue(initialForm);
       } else if (token === 'historias' && activeStory) {
         // editar una historia
         Swal.fire({
@@ -134,32 +134,31 @@ export const ManageScreen = () => {
           allowEscapeKey: false,
           showConfirmButton: false,
           onBeforeOpen: () => {
-            Swal.showLoading()
+            Swal.showLoading();
           },
-        })
+        });
 
-        const date = moment().toISOString()
         setFormValue({
           ...formValue,
-          date: date,
+
           publicImg_id: activeStory.publicImg_id,
-        })
+        });
 
         const resp = await fetchAsync(
           `stories/${activeStory.id}`,
           formValue,
           'PUT'
-        )
+        );
 
-        const body = await resp.json()
+        const body = await resp.json();
 
         if (body.ok) {
-          Swal.close()
-          Swal.fire('Historia Actualizada')
-          setFormValue(initialForm)
-          dispatch(storyUpdated(body))
+          Swal.close();
+          Swal.fire('Historia Actualizada', '', 'success');
+          setFormValue(initialForm);
+          dispatch(storyUpdated(body));
         } else {
-          Swal.fire(body.msg)
+          Swal.fire('Error', body.msg, 'danger');
         }
       } else if (token === 'historias' && !activeStory) {
         // agrega una historia
@@ -171,39 +170,39 @@ export const ManageScreen = () => {
           allowEscapeKey: false,
           showConfirmButton: false,
           onBeforeOpen: () => {
-            Swal.showLoading()
+            Swal.showLoading();
           },
-        })
+        });
 
         const resp = await fetchAsync(
           'stories/new',
           formValue,
           'POST'
-        )
-        const body = await resp.json()
+        );
+        const body = await resp.json();
 
         if (body.ok) {
-          Swal.close()
-          Swal.fire('Historia Publicada')
-          setFormValue(initialForm)
+          Swal.close();
+          Swal.fire('Historia Publicada');
+          setFormValue(initialForm);
         } else {
           if (body?.msg) {
-            Swal.fire(body.msg)
+            Swal.fire(body.msg);
           }
-          Swal.fire('Algo Salio Mal :(')
+          Swal.fire('Algo Salio Mal :(');
         }
       }
     }
-  }
+  };
 
   // limpieza de inputs al salir del formulario
   const handleClearMessagesInputs = () => {
-    dispatch(storyClearActive())
-    dispatch(noticeClearActive())
-    dispatch(uiRemoveError())
-    setFormValue(initialForm)
-    history.goBack()
-  }
+    dispatch(storyClearActive());
+    dispatch(noticeClearActive());
+    dispatch(uiRemoveError());
+    setFormValue(initialForm);
+    history.goBack();
+  };
 
   return (
     <div className='container'>
@@ -324,5 +323,5 @@ export const ManageScreen = () => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};

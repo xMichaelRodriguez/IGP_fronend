@@ -1,56 +1,56 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import './style.css'
-import logoApp from '../../UVS-APP.svg'
-import { useForm } from '../../hooks/useForm'
-import validator from 'validator'
-import { startLogin } from '../../actions/authActios'
-import { useHistory } from 'react-router'
+import './style.css';
+import logoApp from '../../UVS-APP.svg';
+import { useForm } from '../../hooks/useForm';
+import validator from 'validator';
+import { startLogin } from '../../actions/authActios';
+import { useHistory } from 'react-router';
 
 export const LoginScreen = () => {
-  const { msgError } = useSelector((state) => state.error)
-  const { uid } = useSelector((state) => state.auth)
-  const dispatch = useDispatch()
+  const { msgError } = useSelector((state) => state.error);
+  const { uid } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-  const history = useHistory()
+  const history = useHistory();
 
-  const [ErrorE, setErrorE] = useState(true)
-  const [ErrorP, setErrorP] = useState(true)
+  const [ErrorE, setErrorE] = useState(true);
+  const [ErrorP, setErrorP] = useState(true);
 
   const [formValue, handleInputChange] = useForm({
     email: '',
     password: '',
-  })
-  const { email, password } = formValue
+  });
+  const { email, password } = formValue;
 
   useEffect(() => {
     if (uid) {
-      return history.push('/')
+      return history.push('/');
     }
-  }, [uid, history])
+  }, [uid, history]);
 
   const handleLogin = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (isFormValid()) {
-      dispatch(startLogin(email, password))
+      dispatch(startLogin(email, password));
     }
-  }
+  };
 
   const isFormValid = () => {
     if (!validator.isEmail(email)) {
-      setErrorE(false)
-      return false
+      setErrorE(false);
+      return false;
     }
 
     if (password.length < 5) {
-      setErrorP(false)
-      return false
+      setErrorP(false);
+      return false;
     }
-    setErrorE(true)
-    setErrorP(true)
-    return true
-  }
+    setErrorE(true);
+    setErrorP(true);
+    return true;
+  };
 
   return (
     <div className='container login__box px-5'>
@@ -60,7 +60,7 @@ export const LoginScreen = () => {
             Inicio de Sesion
           </h3>
           <form className='w-100 d-block mt-5 '>
-            <div class='form-group'>
+            <div className='form-group'>
               <label htmlFor='correo'>Correo</label>
               <input
                 id='correo'
@@ -79,7 +79,7 @@ export const LoginScreen = () => {
                 </small>
               )}
             </div>
-            <div class='form-group'>
+            <div className='form-group'>
               <label htmlFor='password'>Contraseña</label>
               <input
                 type='password'
@@ -128,5 +128,5 @@ export const LoginScreen = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
