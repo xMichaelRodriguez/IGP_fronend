@@ -11,7 +11,10 @@ export const CardItem = ({
   imageUrl,
 }) => {
   return (
-    <div class='card mx-3 bg-dark text-white'>
+    <div
+      class='card mx-3 bg-dark text-white'
+      style={{ height: '220px' }}
+    >
       <img
         src={imageUrl}
         class='card-img bg-card'
@@ -20,7 +23,7 @@ export const CardItem = ({
       <div class='card-img-overlay'>
         <p
           class='card-text mb-0 font-weight-bold'
-          style={{ fontSize: '1rem' }}
+          style={{ fontSize: '0.9rem' }}
         >
           {title}
         </p>
@@ -31,7 +34,7 @@ export const CardItem = ({
           to={`/${route}/${id}`}
           className='btn primary btn-link'
         >
-          Leer Ahora
+          Leer Más
         </Link>
       </div>
     </div>

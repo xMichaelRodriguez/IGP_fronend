@@ -17,7 +17,7 @@ export const StoryScreen = () => {
   )
 
   return (
-    <>
+    <div className='animate__animated animate__fadeIn'>
       {param !== 'profile' && <CarouselScreen />}
 
       <DatePickerScreen rute='story' />
@@ -28,6 +28,6 @@ export const StoryScreen = () => {
         mode={param}
         history={history}
       />
-    </>
+    </div>
   )
 }

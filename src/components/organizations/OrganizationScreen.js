@@ -1,18 +1,18 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { useLocation } from 'react-router'
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router';
 
-import { WaitScreen } from '../wait/WaitScreen'
-import { OrganizationItem } from './OrganizationItem'
+import { WaitScreen } from '../wait/WaitScreen';
+import { OrganizationItem } from './OrganizationItem';
 
 export const OrganizationScreen = () => {
-  const location = useLocation()
+  const location = useLocation();
   const { organizaciones } = useSelector(
     (state) => state.org
-  )
+  );
 
   return (
-    <div className='container-fluid mt-3'>
+    <div className='container-fluid mt-3 animate__animated animate__fadeIn'>
       <div className='container'>
         {Object.entries(organizaciones).length === 0 && (
           <WaitScreen />
@@ -28,5 +28,5 @@ export const OrganizationScreen = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

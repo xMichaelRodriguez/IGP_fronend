@@ -101,7 +101,7 @@ export const CardScreen = ({
                     to={`/${route}/${d.id}`}
                     className='btn btn-link'
                   >
-                    Leer Ahora
+                    Leer Más
                   </Link>
                 )}
               </div>

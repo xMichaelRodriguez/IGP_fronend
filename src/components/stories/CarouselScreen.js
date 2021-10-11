@@ -15,8 +15,8 @@ export const CarouselScreen = () => {
     dots: true,
     speed: 500,
     infinite: false,
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 3,
+    slidesToScroll: 3,
     initialSlide: 0,
     adaptiveHeight: true,
     responsive: [
@@ -47,7 +47,7 @@ export const CarouselScreen = () => {
     ],
   }
   return (
-    <div className='container-fluid primary py-5'>
+    <div className='container-fluid primary py-5 animate__animated animate__fadeIn'>
       <div className='container py-3'>
         {Object.entries(storyForCarousel).length === 0 && (
           <h3>No Hay Historias</h3>

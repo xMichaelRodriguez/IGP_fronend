@@ -11,7 +11,6 @@ export const SectionPaginate = () => {
             <div className="container">
                 <div className="row">
 
-
                     {param === 'profile' ? (
                         <>
                             <div className='col-md-6'>

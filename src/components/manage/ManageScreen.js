@@ -187,7 +187,10 @@ export const ManageScreen = () => {
           Swal.fire('Historia Publicada')
           setFormValue(initialForm)
         } else {
-          Swal.fire(body.msg)
+          if (body?.msg) {
+            Swal.fire(body.msg)
+          }
+          Swal.fire('Algo Salio Mal :(')
         }
       }
     }

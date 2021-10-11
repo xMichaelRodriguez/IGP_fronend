@@ -1,9 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 export const OrganizationItem = (props) => {
   return (
-    <div className='card shadow-sm   text-dark mb-3'>
+    <div className='card shadow-sm   text-dark mb-3 animate__animated animate__fadeIn'>
       <img
         src={props.image_url}
         alt={props.image_url}
@@ -27,8 +27,8 @@ export const OrganizationItem = (props) => {
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
 OrganizationItem.propTypes = {
   image_url: PropTypes.string.isRequired,
@@ -41,4 +41,4 @@ OrganizationItem.propTypes = {
   direccion: PropTypes.string.isRequired,
   horarios: PropTypes.array.isRequired,
   telefonos: PropTypes.array.isRequired,
-}
+};
