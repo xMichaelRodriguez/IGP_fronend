@@ -123,8 +123,6 @@ export const noticetStartUpdated = (notice) => {
         Swal.close();
         Swal.fire('Error', body.msg, 'error');
       }
-
-      console.log(body.ok);
     } catch (error) {
       Swal.close();
 
