@@ -124,12 +124,12 @@ export const ManageScreen = () => {
         if (!resp) return;
         setFormValue(initialForm);
       } else if (token === 'noticias' && !activeNotice) {
-        // agrega unanoticia
+        // agrega una noticia
         const resp = await dispatch(
           startnoticeAddNew(formValue)
         );
-        if (!resp) return;
         setFormValue(initialForm);
+        if (!resp) return;
       } else if (token === 'historias' && activeStory) {
         // editar una historia
         Swal.fire({
@@ -199,8 +199,8 @@ export const ManageScreen = () => {
             formValue.title,
             'success'
           );
-          setFormValue(initialForm);
           dispatch(storyClearActive());
+          setFormValue(initialForm);
         } else {
           if (body?.msg) {
             Swal.fire(body.msg);
@@ -307,7 +307,7 @@ export const ManageScreen = () => {
               )}
             </div>
             <div
-              className='card p-0'
+              className='card p-0 mb-3'
               style={{
                 width: '50%',
                 height: '50%',
@@ -316,7 +316,7 @@ export const ManageScreen = () => {
                 }`,
               }}
             >
-              <div className='card-img-top'>
+              <div className='card-img-top '>
                 <div className='text-center'>
                   <img
                     ref={refImage}

@@ -39,9 +39,10 @@ export const fetchAsync = (
     const content = {
       title: data.title,
       body: data.body,
-      date: data.date,
+      date: new Date(),
       imageUrl: data.imageUrl,
     };
+
     if (
       data.imageUrl !== '' &&
       data.publicImage_id === ''
