@@ -68,18 +68,35 @@ export const commicStartDelted = (id) => {
         confirmButtonText: 'Eliminar',
       }).then(async (result) => {
         if (result.isConfirmed) {
+          Swal.fire({
+            title: 'Eliiminando...',
+            text: 'Por favor espere...',
+            allowOutsideClick: false,
+            allowEnterKey: false,
+            allowEscapeKey: false,
+            showConfirmButton: false,
+            onBeforeOpen: () => {
+              Swal.showLoading()
+            },
+          })
           const response = await fetchAsync(
             `commics/${id}`,
+            '',
             'DELETE'
           )
           const content = await response.json()
 
           if (content.ok) {
+            Swal.close()
             Swal.fire(
               'Eliminado!',
-              content.msg + ' ha sido eliminado!',
+              `${content.msg}  ha sido eliminado!`,
               'success'
             )
+            dispatch(commicDelted(id))
+          } else {
+            Swal.close()
+            Swal.fire('Ups!', content.msg, 'error')
           }
         }
       })
@@ -88,7 +105,10 @@ export const commicStartDelted = (id) => {
     }
   }
 }
-
+const commicDelted = (commicId) => ({
+  type: types.commicDeleted,
+  payload: commicId,
+})
 export const commicStartAddNew = ({ commic = {} }) => {
   return async (dispatch) => {
     Swal.fire({
@@ -102,6 +122,7 @@ export const commicStartAddNew = ({ commic = {} }) => {
         Swal.showLoading()
       },
     })
+
     const response = await fetchAsyncToCommics(
       'commics/new',
       commic,
@@ -113,6 +134,7 @@ export const commicStartAddNew = ({ commic = {} }) => {
       delete content.delete
       dispatch(commicsAddNew(content.commics))
       dispatch(uiRemoveError())
+      dispatch(commicStartLoading({}))
       Swal.close()
       Swal.fire(
         'Guardado!!',

@@ -1,6 +1,7 @@
 import React from 'react'
-import { FaSave } from 'react-icons/fa'
+import { FaArrowCircleLeft, FaSave } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router'
 import {
   setError,
   uiRemoveError,
@@ -19,14 +20,16 @@ const initialState = {
   image5: '',
 }
 export const CreateCommic = () => {
-  const [formValue, handleInputChangeFile] =
+  const [formValue, handleInputChangeFile, resetFile] =
     useFormFile(initialState)
+  const history = useHistory()
+
   const { msgError } = useSelector((state) => state.error)
   const dispatch = useDispatch()
-  const [formvalue, handleInputChange] = useForm({
-    title: 'Commic #4',
+  const [formTitle, handleInputChange, reset] = useForm({
+    title: '',
   })
-  initialState.title = formvalue.title
+  initialState.title = formTitle.title
 
   const formValid = () => {
     if (formValue.coverPage.length <= 0) {
@@ -60,6 +63,8 @@ export const CreateCommic = () => {
   const handleSave = () => {
     if (formValid()) {
       dispatch(commicStartAddNew({ commic: formValue }))
+      resetFile()
+      reset()
     }
   }
   return (
@@ -71,6 +76,16 @@ export const CreateCommic = () => {
         <p className='text-muted'>
           Los Commics deben de ser solamente de 5 imagenes
         </p>
+
+        <button
+          className='btn btn-link w-25'
+          type='button'
+          onClick={() => {
+            history.goBack()
+          }}
+        >
+          <FaArrowCircleLeft /> Volver
+        </button>
         <div className='row p-3'>
           <div className='col-md-12'>
             <label htmlFor='commiictitle'>
@@ -80,7 +95,7 @@ export const CreateCommic = () => {
               type='text'
               className='form-control'
               id='commiictitle'
-              value={formvalue.title}
+              value={formTitle.title}
               onChange={handleInputChange}
               name='title'
             />

@@ -113,14 +113,16 @@ export const fetchAsync = (
       })
     }
 
-    return fetch(url, {
-      method,
-      headers: {
-        'Content-Type': 'application/json',
-        'x-token': token.toString(),
-      },
-      body: JSON.stringify(data),
-    })
+    if (method === 'DELETE') {
+      return fetch(url, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'x-token': token.toString(),
+        },
+      })
+    }
   }
 }
 
@@ -131,31 +133,28 @@ export const fetchAsyncToCommics = (
 ) => {
   const url = `${baseUrl}/${endPoint}` //localhost:4000/api/...
   const token = localStorage.getItem('token') || ''
-  if (method === 'POST') {
-    let gallery = new Array()
 
-    gallery.push(data.image1)
-    gallery.push(data.image2)
-    gallery.push(data.image3)
-    gallery.push(data.image4)
-    gallery.push(data.image5)
+  console.log(url)
+  if (method === 'POST') {
     const formData = new FormData()
 
     formData.append('title', data.title)
     formData.append('coverPage', data.coverPage)
-    formData.append('gallery')
+    formData.append('gallery', data.image1)
+    formData.append('gallery', data.image2)
+    formData.append('gallery', data.image3)
+    formData.append('gallery', data.image4)
+    formData.append('gallery', data.image5)
 
-    console.log({ form: formData.get('gallery') })
-
-    // return fetch(url, {
-    //   method,
-    //   mode: 'cors',
-    //   headers: {
-    //     'Access-Control-Allow-Origin': '*',
-    //     accept: 'application/json',
-    //     'x-token': token.toString(),
-    //   },
-    //   body: formData,
-    // })
+    return fetch(url, {
+      method,
+      mode: 'cors',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        accept: 'application/json',
+        'x-token': token.toString(),
+      },
+      body: formData,
+    })
   }
 }

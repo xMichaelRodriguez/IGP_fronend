@@ -4,7 +4,7 @@ import { useState } from 'react'
 export const useFormFile = (initialState = {}) => {
   const [value, setValue] = useState(initialState)
 
-  const reset = () => {
+  const resetFile = () => {
     setValue(initialState)
   }
   const handleInputChangeFile = ({ target }) => {
@@ -14,5 +14,5 @@ export const useFormFile = (initialState = {}) => {
     })
   }
 
-  return [value, handleInputChangeFile, reset]
+  return [value, handleInputChangeFile, resetFile]
 }

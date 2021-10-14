@@ -31,8 +31,8 @@ export const commicsReducers = (
     case types.commicDeleted:
       return {
         ...state,
-        commics: state.commics.map(
-          (commic) => commic.id !== state.activeCommic.id
+        commics: state.commics.filter(
+          (commic) => commic.id !== action.payload
         ),
       }
 
