@@ -19,6 +19,7 @@ import {
   storyStartLoading,
 } from '../actions/events'
 import { orgStartLoading } from '../actions/orgActions'
+import { commicStartLoading } from '../actions/commicsActions'
 
 export const AppRouter = () => {
   const { checking, uid } = useSelector(
@@ -31,6 +32,7 @@ export const AppRouter = () => {
     dispatch(storyStartLoading({}))
     dispatch(storyForCarouselLoading({}))
     dispatch(orgStartLoading())
+    dispatch(commicStartLoading({}))
   }, [dispatch])
 
   if (checking) {

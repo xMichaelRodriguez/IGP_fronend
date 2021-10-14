@@ -38,7 +38,6 @@ export const startstoryAddNew = (story) => {
           `La historia:${modStory.title} ha sido guardada`,
           'success'
         )
-        dispatch(uiRemoveError())
       }
     } catch (error) {
       console.log(error)

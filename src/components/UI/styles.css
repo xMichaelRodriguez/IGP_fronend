@@ -91,3 +91,12 @@
 .slick-active {
   color: #8f77f2 !important;
 }
+.hoverCommic:hover {
+  transition: all 0.3s ease-in-out;
+  transform: translateY(-0.5em);
+}
+
+.img-slider {
+  height: 467px;
+  object-fit: contain;
+}

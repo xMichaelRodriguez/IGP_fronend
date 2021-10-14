@@ -1,20 +1,20 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
-import '../styles.css'
+import '../styles.css';
 
-import { ListRoutesLearn } from '../ListRoutesLearn'
-import { ListRoutes } from '../ListRoutes'
-import { AuthButton } from '../AuthButton'
-import { LogoButton } from './LogoButton'
-import { ToggleButton } from './ToggleButton'
+import { ListRoutesLearn } from '../ListRoutesLearn';
+import { ListRoutes } from '../ListRoutes';
+import { AuthButton } from '../AuthButton';
+import { LogoButton } from './LogoButton';
+import { ToggleButton } from './ToggleButton';
 
 export const NavbarScreen = ({ routes }) => {
-  const { name } = useSelector((state) => state.auth)
+  const { name } = useSelector((state) => state.auth);
 
   return (
-    <nav className='shadow-sm  navbar navbar-expand-lg navbar-dark primary '>
+    <nav className='shadow  navbar navbar-expand-lg navbar-dark primary '>
       <div className='container'>
         <LogoButton />
         <ToggleButton />
@@ -26,7 +26,7 @@ export const NavbarScreen = ({ routes }) => {
           <ul className='navbar-nav ml-auto'>
             {routes.map((r) => (
               <>
-                {r.route.includes('aprendizaje') ? (
+                {r.route.includes('biblioteca') ? (
                   <ListRoutesLearn
                     key={r.id}
                     title={r.title}
@@ -49,9 +49,9 @@ export const NavbarScreen = ({ routes }) => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
 NavbarScreen.propTypes = {
   routes: PropTypes.array.isRequired,
-}
+};

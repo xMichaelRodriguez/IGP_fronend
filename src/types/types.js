@@ -37,4 +37,13 @@ export const types = {
 
   // ORGANIZATIONS
   orgLoaded: '[ORG] Organization Loaded',
-}
+
+  // Commics
+
+  commicStartAdNew: '[Commic] Start Add new Commic',
+  commicAdNew: '[Commic] Add new Commic',
+  commicLoaded: '[Commic] Load Commics',
+  commicDeleted: '[Commic] Delete Commics',
+  commicSetActive: '[Commic] set active Commic',
+  commicClearActive: '[Commic] clear active Commic',
+};

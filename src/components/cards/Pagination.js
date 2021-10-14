@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { commicStartLoading } from '../../actions/commicsActions';
 
 import { storyStartLoading } from '../../actions/events';
 import { noticeStartLoading } from '../../actions/noticesActions';
@@ -38,8 +39,10 @@ export const Pagination = ({ selector, subSelector }) => {
   useEffect(() => {
     if (selector === 'notice') {
       dispatch(noticeStartLoading({ page: pageNext }));
-    } else {
+    } else if (selector === 'story') {
       dispatch(storyStartLoading({ page: pageNext }));
+    } else {
+      dispatch(commicStartLoading());
     }
   }, [dispatch, pageNext, selector]);
 
