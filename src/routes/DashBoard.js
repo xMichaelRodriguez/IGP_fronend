@@ -1,20 +1,21 @@
-import React from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import React from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 // Screens
-import { HomeScreen } from '../components/home/HomeScreen'
-import { CardReadScreen } from '../components/UI/CardRead/CardReadScreen'
-import { OrganizationScreen } from '../components/organizations/OrganizationScreen'
-import { OrganizationCard } from '../components/organizations/OrganizationCard'
-import { NoticeScreen } from '../components/noticies/NoticeScreen'
-import { StoryScreen } from '../components/stories/StoryScreen'
-import { CuentosView } from '../components/violence/CuentosView'
-import { HistorietasView } from '../components/violence/HistorietasView'
-import { RightSection } from '../components/violence/RightSection'
-import { NavbarScreen } from '../components/UI/navbar/NavbarScreen'
-import { ButtonScrollToTop } from '../components/UI/ButtonScrollToTop'
-import { ChatBotButton } from '../components/UI/ChatBotButton'
-import { FooterScreen } from '../components/footer/FooterScreen'
+import { HomeScreen } from '../components/home/HomeScreen';
+import { CardReadScreen } from '../components/UI/CardRead/CardReadScreen';
+import { OrganizationScreen } from '../components/organizations/OrganizationScreen';
+import { OrganizationCard } from '../components/organizations/OrganizationCard';
+import { NoticeScreen } from '../components/noticies/NoticeScreen';
+import { StoryScreen } from '../components/stories/StoryScreen';
+import { CuentosView } from '../components/violence/CuentosView';
+import { CommicsScreen } from '../components/commics/CommicsScreen';
+import { RightSection } from '../components/violence/RightSection';
+import { NavbarScreen } from '../components/UI/navbar/NavbarScreen';
+import { ButtonScrollToTop } from '../components/UI/ButtonScrollToTop';
+import { ChatBotButton } from '../components/UI/ChatBotButton';
+import { FooterScreen } from '../components/footer/FooterScreen';
+import { CommicScreen } from '../components/commics/CommicScreen';
 
 export const DashBoard = () => {
   const routes = [
@@ -35,11 +36,11 @@ export const DashBoard = () => {
       id: 4,
     },
     {
-      route: '/aprendizaje',
-      title: 'Aprendizaje',
+      route: '/biblioteca',
+      title: 'Biblioteca',
       id: 5,
     },
-  ]
+  ];
 
   return (
     <>
@@ -80,15 +81,21 @@ export const DashBoard = () => {
           />
 
           <Route
-            path='/aprendizaje/cuentos'
+            path='/biblioteca/cuentos'
             component={CuentosView}
           />
           <Route
-            path='/aprendizaje/historietas'
-            component={HistorietasView}
+            exact
+            path='/biblioteca/commics/:commicId'
+            component={CommicScreen}
           />
           <Route
-            path='/aprendizaje/derechos'
+            path='/biblioteca/commics'
+            component={CommicsScreen}
+          />
+
+          <Route
+            path='/biblioteca/derechos'
             component={RightSection}
           />
 
@@ -100,5 +107,5 @@ export const DashBoard = () => {
       <ButtonScrollToTop />
       <ChatBotButton />
     </>
-  )
-}
+  );
+};

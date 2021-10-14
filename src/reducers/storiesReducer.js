@@ -1,4 +1,4 @@
-import { types } from '../types/types'
+import { types } from '../types/types';
 
 const initialState = {
   storyForCarousel: [],
@@ -8,7 +8,7 @@ const initialState = {
     total_page: null,
   },
   activeStory: null,
-}
+};
 
 export const storiesReducer = (
   state = initialState,
@@ -19,13 +19,13 @@ export const storiesReducer = (
       return {
         ...state,
         activeStory: action.payload,
-      }
+      };
 
     case types.storyClearActive:
       return {
         ...state,
         activeStory: null,
-      }
+      };
 
     case types.storyUpdated:
       return {
@@ -35,12 +35,12 @@ export const storiesReducer = (
             e.id === action.payload.id ? action.payload : e
           ),
         },
-      }
+      };
     case types.storyForCarouselLoaded:
       return {
         ...state,
         storyForCarousel: [...action.payload.stories],
-      }
+      };
 
     case types.storyDeleted:
       return {
@@ -51,7 +51,7 @@ export const storiesReducer = (
           ),
         },
         activeStory: null,
-      }
+      };
 
     case types.storyLoaded:
       return {
@@ -61,13 +61,9 @@ export const storiesReducer = (
           total_docs: action.payload.total_docs,
           total_page: action.payload.total_page,
         },
-      }
+      };
 
-    // case types.StoryactiveStoryLogout:
-    //   return {
-    //     ...initialState,
-    //   };
     default:
-      return state
+      return state;
   }
-}
+};

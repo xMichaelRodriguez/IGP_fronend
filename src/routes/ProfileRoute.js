@@ -1,5 +1,7 @@
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
+import { CommicsScreen } from '../components/commics/CommicsScreen'
+import { CreateCommic } from '../components/commics/CreateCommic'
 
 import { FooterScreen } from '../components/footer/FooterScreen'
 import { ManageScreen } from '../components/manage/ManageScreen'
@@ -25,6 +27,11 @@ export const ProfileRoute = () => {
       title: 'Historias de vida',
       id: 3,
     },
+    {
+      route: '/profile/commics',
+      title: 'Commics',
+      id: 4,
+    },
   ]
   return (
     <>
@@ -45,6 +52,15 @@ export const ProfileRoute = () => {
           <Route
             path='/profile/historias'
             component={StoryScreen}
+          />
+          <Route
+            exact
+            path='/profile/commics/crearCommic'
+            component={CreateCommic}
+          />
+          <Route
+            path='/profile/commics'
+            component={CommicsScreen}
           />
 
           <Route
