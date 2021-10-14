@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { commicStartLoading } from '../../actions/commicsActions'
-const INITIAL_PAGE = 1
+// const INITIAL_PAGE = 1
 export const PaginateCommic = () => {
   const { totalPage, prevPage, nextPage } = useSelector(
     (state) => state.commic
