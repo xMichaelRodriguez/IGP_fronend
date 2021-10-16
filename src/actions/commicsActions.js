@@ -9,11 +9,13 @@ import { uiRemoveError } from './authActios'
 export const commicStartLoading = ({ page = 1 }) => {
   return async (dispatch) => {
     try {
+
       const response = await fetchSync(
         `commics?page=${page}`
       )
       const content = await response.json()
       if (content.ok) {
+
         delete content.ok
         dispatch(commicsLoaded(content))
       }

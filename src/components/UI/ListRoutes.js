@@ -1,25 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import { useLocation } from 'react-use'
 
 export const ListRoutes = ({ title, id, route }) => {
-  const [isActiveClass, setIsActiveClass] = useState(null)
+  const location = useLocation().pathname
 
-  const handleIsActive = (num) => {
-    setIsActiveClass(num)
-  }
   return (
     <li
       className={
-        'nav-item ' + isActiveClass === route
-          ? 'activeNav '
-          : ''
+        `nav-item ${location === route ? "active" : ""}`
       }
     >
       <NavLink
         className='nav-link px-2'
         to={`${route}`}
-        onClick={() => handleIsActive(id)}
+
       >
         {title}
       </NavLink>

@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+import PropTypes from 'prop-types'
 import 'react-datepicker/dist/react-datepicker.css'
 import DatePicker from 'react-datepicker'
 import { registerLocale } from 'react-datepicker'
@@ -10,7 +13,6 @@ import {
 } from 'react-icons/fa'
 import moment from 'moment'
 import validator from 'validator'
-import { useDispatch, useSelector } from 'react-redux'
 import {
   setError,
   uiRemoveError,
@@ -28,14 +30,14 @@ export const DatePickerScreen = ({ rute }) => {
   const handleSearchForDate = () => {
     if (isFormValid()) {
       const start = moment(startDate)
-        .toISOString()
-        .toString()
-      const end = moment(endDate).toISOString().toString()
+      const startClone = start.clone().subtract(1, 'd').toISOString().toString()
+      const end = moment(endDate)
+      const endClone = end.clone().add(1, 'd').toISOString().toString()
       if (rute === 'notice') {
         dispatch(
           noticeStartLoading({
-            startDate: start,
-            endDate: end,
+            startDate: startClone,
+            endDate: endClone,
           })
         )
       } else {
@@ -72,6 +74,21 @@ export const DatePickerScreen = ({ rute }) => {
     return true
   }
 
+  const handleReset = () => {
+    setEndDate(null)
+    setStartDate(new Date())
+    dispatch(uiRemoveError())
+    if (rute === 'notice') {
+      dispatch(
+        noticeStartLoading({})
+      )
+    } else {
+      dispatch(
+        storyStartLoading({})
+      )
+    }
+  }
+
   return (
     <div className='container-fluid py-5 '>
       <div className='container rounded border border-dark p-3'>
@@ -81,10 +98,7 @@ export const DatePickerScreen = ({ rute }) => {
               <FaSearch />
               &nbsp; Filtrado por fechas
             </h4>
-            <small>
-              filtrar siempre con un día de más en la
-              entrada: hasta
-            </small>
+
           </div>
           {msgError.includes('mismo') && (
             <div className='col-md-12 mb-3'>
@@ -96,67 +110,85 @@ export const DatePickerScreen = ({ rute }) => {
               </div>
             </div>
           )}
-          <div className='col-md-12 '>
-            <ul className='form-inline   nav justify-content-center '>
-              <li className=' nav-item px-4 py-1 '>
-                <div className='form-group  mb-2'>
-                  <label
-                    htmlFor='datepicker '
-                    className='py-1'
-                  >
-                    De: &nbsp;
-                    <FaCalendar color='#8f77f2' />
-                  </label>
+          <div className='col-md-6 '>
+            <div className='form-group  mb-3'>
 
-                  <DatePicker
-                    className={`form-control ${
-                      msgError.includes('inicio')
-                        ? 'is-invalid'
-                        : ''
-                    }`}
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                    locale='es'
-                    popperClassName='pickerPosition '
-                  />
-                </div>
-              </li>
-              <li className=' nav-item px-4 py-1 '>
-                <div className='form-group mb-2 '>
-                  <label
-                    htmlFor='datepicker'
-                    className='py-1'
-                  >
-                    Hasta: &nbsp;
-                    <FaCalendar color='#8f77f2' />
-                  </label>
+              <label
+                htmlFor='datepicker '
+                className='py-1'
+              >
+                De: &nbsp;
+                <FaCalendar color='#8f77f2' />
+              </label>
 
-                  <DatePicker
-                    className={`form-control ${
-                      msgError.includes('final')
-                        ? 'is-invalid'
-                        : ''
-                    }`}
-                    placeholderText='10/10/2021'
-                    selected={endDate}
-                    onChange={(date) => setEndDate(date)}
-                    locale='es'
-                  />
+              <DatePicker
+                className={`w-75 form-control ${msgError.includes('inicio invalida')
+                  ? 'is-invalid'
+                  : ''
+                  }`}
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                locale='es'
+                popperClassName='pickerPosition '
+
+              />
+              {msgError.includes('inicio invalida') &&
+                <div className="text-danger pt-1">
+                  {msgError}
                 </div>
-              </li>
-              <li className='nav-item'>
-                <button
-                  className='btn primary '
-                  type='button'
-                  onClick={handleSearchForDate}
-                >
-                  <FaSearch /> Buscar
-                </button>
-              </li>
-            </ul>
+              }
+
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className='form-group mb-3 '>
+              <label
+                htmlFor='datepicker'
+                className='py-1'
+              >
+                Hasta: &nbsp;
+                <FaCalendar color='#8f77f2' />
+              </label>
+
+              <DatePicker
+                className={`w-75 form-control ${msgError.includes('final invalida')
+                  ? 'is-invalid'
+                  : ''
+                  }`}
+                placeholderText='10 / 10 / 2020 '
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                locale='es'
+
+              />
+              {msgError.includes('final invalida') &&
+                <div className="pt-1 text-danger">
+                  {msgError}
+                </div>
+              }
+            </div>
+          </div>
+          <div className="col-md-12 text-center">
+            <button
+              className='btn primary mr-3'
+              type='button'
+              onClick={handleSearchForDate}
+            >
+              <FaSearch /> Buscar
+            </button>
+            <button
+              className='btn btn-outline-primary text-break ml-3'
+              type='button'
+              onClick={handleReset}
+            >
+              Reiniciar busqueda
+            </button>
           </div>
         </div>
       </div>
     </div>
   )
+}
+DatePickerScreen.propTypes = {
+  rute: PropTypes.string.isRequired
 }

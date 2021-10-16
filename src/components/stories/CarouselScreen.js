@@ -55,7 +55,7 @@ export const CarouselScreen = () => {
 
         <Slider {...settings}>
           {storyForCarousel.map((story) => (
-            <CardItem route='historias' {...story} />
+            <CardItem key={story.id} route='historias' {...story} />
           ))}
         </Slider>
       </div>

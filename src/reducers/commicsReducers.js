@@ -2,7 +2,7 @@ import { types } from '../types/types'
 const INITIAL_STATE = {
   commics: [],
   totalDocs: 0,
-  totalPage: 0,
+  totalPages: 0,
   prevPage: null,
   nextPage: null,
   activeCommic: null,
@@ -16,9 +16,9 @@ export const commicsReducers = (
     case types.commicLoaded:
       return {
         ...state,
-        commics: action.payload.commics,
-        totalDocs: action.payload.total_docs,
-        totalPage: action.payload.total_page,
+        commics: action.payload.commicsFound,
+        totalDocs: action.payload.totalDocs,
+        totalPages: action.payload.totalPage,
         prevPage: action.payload.prevPage,
         nextPage: action.payload.nextPage,
       }

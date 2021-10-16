@@ -12,22 +12,22 @@ export const CardItem = ({
 }) => {
   return (
     <div
-      class='card mx-3 bg-dark text-white'
+      className='card mx-3 bg-dark text-white'
       style={{ height: '220px' }}
     >
       <img
         src={imageUrl}
-        class='card-img bg-card'
+        className='card-img bg-card'
         alt={imageUrl}
       />
-      <div class='card-img-overlay'>
+      <div className='card-img-overlay'>
         <p
-          class='card-text mb-0 font-weight-bold'
+          className='card-text mb-0 font-weight-bold'
           style={{ fontSize: '0.9rem' }}
         >
           {title}
         </p>
-        <p class='card-text mb-1'>
+        <p className='card-text mb-1'>
           <BiTime /> {moment(date).calendar()}
         </p>
         <Link
