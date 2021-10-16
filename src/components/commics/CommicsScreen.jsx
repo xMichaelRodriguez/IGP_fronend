@@ -2,9 +2,9 @@ import React from 'react'
 import { FaPlus } from 'react-icons/fa'
 import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
+import { Pagination } from '../cards/Pagination'
 import { WaitScreen } from '../wait/WaitScreen'
 import { CommicCard } from './CommicCard'
-import { PaginateCommic } from './PaginateCommic'
 
 export const CommicsScreen = () => {
   const { commics } = useSelector((state) => state.commic)
@@ -17,7 +17,7 @@ export const CommicsScreen = () => {
           {path.includes('profile') ? (
             <>
               <div className='col-md-6 mb-3'>
-                <PaginateCommic />
+                <Pagination selector={'commic'} />
               </div>
               <div className='col-md-6 mb-3'>
                 <Link
@@ -30,7 +30,7 @@ export const CommicsScreen = () => {
             </>
           ) : (
             <div className='col-md-12 mb-3'>
-              <PaginateCommic />
+              <Pagination selector={'commic'} />
             </div>
           )}
           {commics === [] ? (

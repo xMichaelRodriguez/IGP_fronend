@@ -1,53 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { commicStartLoading } from '../../actions/commicsActions';
 
+import PropTypes from 'prop-types'
 import { storyStartLoading } from '../../actions/events';
 import { noticeStartLoading } from '../../actions/noticesActions';
 
-const INITIAL_PAGE = 1;
 
-export const Pagination = ({ selector, subSelector }) => {
-  const node = useSelector((state) => state[selector]);
 
+export const Pagination = ({ selector }) => {
+  const { nextPage, prevPage, totalPages } = useSelector((state) => state[selector]);
+
+  const [active, setActive] = useState(1)
   const dispatch = useDispatch();
-  const [pageNext, setPageNext] = useState(INITIAL_PAGE);
-  const [active, setActive] = useState(1);
+
   //next Page
   const handleNextPage = () => {
-    if (pageNext < node[subSelector].total_page) {
-      setPageNext(pageNext + 1);
-      setActive(pageNext + 1);
-    } else {
-      setActive(node[subSelector].total_page);
-      setPageNext(node[subSelector].total_page);
+    if (nextPage !== null) {
+      setActive(prevPage)
+      if (selector === 'notice') {
+        dispatch(noticeStartLoading({ page: nextPage }))
+      } else if (selector === 'story') {
+        dispatch(storyStartLoading({ page: nextPage }))
+      }
     }
   };
 
   //previus page
   const handlePrevpage = () => {
-    if (pageNext > node[subSelector].total_page) {
-      setPageNext(pageNext - 1);
-      setActive(pageNext - 1);
-    } else {
-      setActive(INITIAL_PAGE);
-      setPageNext(INITIAL_PAGE);
+    if (prevPage !== null) {
+      setActive(prevPage)
+      if (selector === 'notice') {
+        dispatch(noticeStartLoading({ page: prevPage }))
+      } else if (selector === 'story') {
+        dispatch(storyStartLoading({ page: prevPage }))
+      }
     }
   };
 
-  //nextPage and PrevPage
-  useEffect(() => {
-    if (selector === 'notice') {
-      dispatch(noticeStartLoading({ page: pageNext }));
-    } else if (selector === 'story') {
-      dispatch(storyStartLoading({ page: pageNext }));
-    } else {
-      dispatch(commicStartLoading());
-    }
-  }, [dispatch, pageNext, selector]);
+
 
   const PageLink = () => {
-    const pages = node[subSelector].total_page;
+    const pages = totalPages;
     const pageArr = [];
     for (let index = 1; index <= pages; index++) {
       pageArr.push(index);
@@ -56,9 +49,8 @@ export const Pagination = ({ selector, subSelector }) => {
     return pageArr.map((page, index) => (
       <li
         key={index}
-        className={`page-item  ${
-          active === page ? 'active' : ''
-        }`}
+        className={`page-item  ${active === page ? 'active' : ''
+          }`}
       >
         <p className='page-link disabled'>{page}</p>
       </li>
@@ -70,24 +62,22 @@ export const Pagination = ({ selector, subSelector }) => {
         <nav aria-label='Page navigation example'>
           <ul className='pagination'>
             <li
-              className={`page-item ${
-                pageNext === INITIAL_PAGE ? 'disabled' : ''
-              }`}
+              className={`page-item ${prevPage === null ? 'disabled' : ''
+                }`}
               onClick={handlePrevpage}
             >
-              <p className='page-link'>Previous</p>
+              <p className='page-link'>Anterior</p>
             </li>
             <PageLink />
 
             <li
-              className={`page-item ${
-                pageNext === node[subSelector].total_page
-                  ? 'disabled'
-                  : ''
-              }`}
+              className={`page-item ${nextPage === null
+                ? 'disabled'
+                : ''
+                }`}
               onClick={handleNextPage}
             >
-              <p className='page-link'>Next</p>
+              <p className='page-link'>Siguiente</p>
             </li>
           </ul>
         </nav>
@@ -95,3 +85,7 @@ export const Pagination = ({ selector, subSelector }) => {
     </div>
   );
 };
+
+Pagination.propTypes = {
+  selector: PropTypes.string.isRequired
+}

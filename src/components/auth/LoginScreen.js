@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './style.css';
 import logoApp from '../../UVS-APP.svg';
 import { useForm } from '../../hooks/useForm';
 import validator from 'validator';
-import { startLogin } from '../../actions/authActios';
+import { setError, startLogin, uiRemoveError } from '../../actions/authActios';
 import { useHistory } from 'react-router';
 
 export const LoginScreen = () => {
@@ -15,8 +15,6 @@ export const LoginScreen = () => {
 
   const history = useHistory();
 
-  const [ErrorE, setErrorE] = useState(true);
-  const [ErrorP, setErrorP] = useState(true);
 
   const [formValue, handleInputChange] = useForm({
     email: '',
@@ -39,16 +37,16 @@ export const LoginScreen = () => {
 
   const isFormValid = () => {
     if (!validator.isEmail(email)) {
-      setErrorE(false);
+      dispatch(setError("no es un correo"))
+
       return false;
     }
 
-    if (password.length < 5) {
-      setErrorP(false);
+    if (password.length < 6) {
+      dispatch(setError("Contraseña debe contener mas de 6 caracteres, al menos una letra mayuscula y minuscula y tambien contener numeros "))
       return false;
     }
-    setErrorE(true);
-    setErrorP(true);
+    dispatch(uiRemoveError())
     return true;
   };
 
@@ -59,26 +57,26 @@ export const LoginScreen = () => {
           <h3 className='display-4 font-weight-bolder'>
             Inicio de Sesion
           </h3>
-          <form className='w-100 d-block mt-5 '>
+          <form className='w-100 d-block mt-5 needs-validation'>
             <div className='form-group'>
               <label htmlFor='correo'>Correo</label>
               <input
                 id='correo'
-                className={`form-control  ${
-                  !ErrorE && 'is-invalid'
-                } `}
+                className={`form-control  ${msgError.includes('correo') ? 'is-invalid' : ''
+                  } `}
                 placeholder='name@example.com'
                 name='email'
                 value={email}
                 onChange={handleInputChange}
                 autoComplete='off'
               />
-              {!ErrorE && (
+              {msgError.includes('correo') && (
                 <small className='invalid-feedback'>
-                  Correo invalido
+                  {msgError}
                 </small>
               )}
             </div>
+
             <div className='form-group'>
               <label htmlFor='password'>Contraseña</label>
               <input
@@ -86,25 +84,17 @@ export const LoginScreen = () => {
                 name='password'
                 value={password}
                 onChange={handleInputChange}
-                className={`form-control ${
-                  !ErrorP && 'is-invalid'
-                } `}
+                className={`form-control ${msgError.includes("Contraseña") || msgError.includes("password") ? 'is-invalid' : ''
+                  } `}
                 placeholder='password'
               />
-              {!ErrorP && (
-                <span className='invalid-feedback'>
-                  Contraseña invalida
+              {msgError.includes("Contraseña") || msgError.includes("password") ? (
+                <span className='invalid-feedback text-break'>
+                  {msgError}
                 </span>
-              )}
+              ) : ''}
             </div>
-            {!!msgError && (
-              <div
-                className='alert alert-danger mt-2'
-                role='alert'
-              >
-                {msgError}
-              </div>
-            )}
+
             <button
               type='submit'
               className='btn primary'

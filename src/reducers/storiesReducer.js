@@ -2,11 +2,11 @@ import { types } from '../types/types';
 
 const initialState = {
   storyForCarousel: [],
-  stories: {
-    storyArr: [],
-    total_docs: null,
-    total_page: null,
-  },
+  stories: [],
+  totalDocs: null,
+  totalPages: null,
+  prevPage: null,
+  nextPage: null,
   activeStory: null,
 };
 
@@ -30,11 +30,11 @@ export const storiesReducer = (
     case types.storyUpdated:
       return {
         ...state,
-        stories: {
-          storyArr: state.stories.storyArr.map((e) =>
-            e.id === action.payload.id ? action.payload : e
-          ),
-        },
+
+        stories: state.stories.map((e) =>
+          e.id === action.payload.id ? action.payload : e
+        ),
+
       };
     case types.storyForCarouselLoaded:
       return {
@@ -45,22 +45,24 @@ export const storiesReducer = (
     case types.storyDeleted:
       return {
         ...state,
-        stories: {
-          storyArr: state.stories.storyArr.map(
-            (e) => e.id !== action.payload
-          ),
-        },
+
+        stories: state.stories.map(
+          (e) => e.id !== action.payload
+        ),
+
         activeStory: null,
       };
 
     case types.storyLoaded:
       return {
         ...state,
-        stories: {
-          storyArr: [...action.payload.stories],
-          total_docs: action.payload.total_docs,
-          total_page: action.payload.total_page,
-        },
+
+        stories: [...action.payload.stories],
+        totalDocs: action.payload.totalDocs,
+        totalPages: action.payload.totalPages,
+        prevPage: action.payload.prevPage,
+        nextPage: action.payload.nextPage,
+
       };
 
     default:

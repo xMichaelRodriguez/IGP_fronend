@@ -9,8 +9,8 @@ import { Pagination } from '../cards/Pagination'
 import { DatePickerScreen } from './DatePickerScreen.js'
 
 export const NoticeScreen = () => {
-  const { noticeArr } = useSelector(
-    (state) => state.notice.noticies
+  const { noticies } = useSelector(
+    (state) => state.notice
   )
   const location = useLocation()
   const history = useHistory()
@@ -18,7 +18,7 @@ export const NoticeScreen = () => {
 
   return (
     <>
-      {noticeArr === [] && !noticeArr && (
+      {noticies === [] && !noticies && (
         <h3 className='display-4'>No Hay Noticias</h3>
       )}
       <section className='container mt-3'>
@@ -53,14 +53,14 @@ export const NoticeScreen = () => {
             <div className='col-md-12  animate__animated animate__fadeIn'>
               <Pagination
                 selector={'notice'}
-                subSelector='noticies'
+
               />
             </div>
           )}
         </div>
         <div className='row animate__animated animate__fadeIn'>
           <CardScreen
-            data={noticeArr !== [] && noticeArr}
+            data={noticies !== [] && noticies}
             route='noticias'
             mode={param}
             history={history}
