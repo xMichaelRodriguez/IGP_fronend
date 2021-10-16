@@ -30,9 +30,9 @@ export const DatePickerScreen = ({ rute }) => {
   const handleSearchForDate = () => {
     if (isFormValid()) {
       const start = moment(startDate)
-      const startClone = start.clone().subtract(1, 'd')
+      const startClone = start.clone().subtract(1, 'd').toISOString().toString()
       const end = moment(endDate)
-      const endClone = end.clone().add(1, 'd')
+      const endClone = end.clone().add(1, 'd').toISOString().toString()
       if (rute === 'notice') {
         dispatch(
           noticeStartLoading({
@@ -78,6 +78,15 @@ export const DatePickerScreen = ({ rute }) => {
     setEndDate(null)
     setStartDate(new Date())
     dispatch(uiRemoveError())
+    if (rute === 'notice') {
+      dispatch(
+        noticeStartLoading({})
+      )
+    } else {
+      dispatch(
+        storyStartLoading({})
+      )
+    }
   }
 
   return (
@@ -101,85 +110,79 @@ export const DatePickerScreen = ({ rute }) => {
               </div>
             </div>
           )}
-          <div className='col-md-12 '>
-            <ul className='form-inline   nav justify-content-center needs-validation' >
-              <li className=' nav-item px-4 py-1 '>
-                <div className='form-group  mb-3'>
+          <div className='col-md-6 '>
+            <div className='form-group  mb-3'>
 
-                  <label
-                    htmlFor='datepicker '
-                    className='py-1'
-                  >
-                    De: &nbsp;
-                    <FaCalendar color='#8f77f2' />
-                  </label>
+              <label
+                htmlFor='datepicker '
+                className='py-1'
+              >
+                De: &nbsp;
+                <FaCalendar color='#8f77f2' />
+              </label>
 
-                  <DatePicker
-                    className={`form-control ${msgError.includes('inicio invalida')
-                      ? 'is-invalid'
-                      : ''
-                      }`}
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                    locale='es'
-                    popperClassName='pickerPosition '
+              <DatePicker
+                className={`w-75 form-control ${msgError.includes('inicio invalida')
+                  ? 'is-invalid'
+                  : ''
+                  }`}
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                locale='es'
+                popperClassName='pickerPosition '
 
-                  />
-                  {msgError.includes('inicio invalida') &&
-                    <div className="text-danger pt-1">
-                      {msgError}
-                    </div>
-                  }
-
+              />
+              {msgError.includes('inicio invalida') &&
+                <div className="text-danger pt-1">
+                  {msgError}
                 </div>
-              </li>
-              <li className=' nav-item px-4 py-1 '>
-                <div className='form-group mb-3 '>
-                  <label
-                    htmlFor='datepicker'
-                    className='py-1'
-                  >
-                    Hasta: &nbsp;
-                    <FaCalendar color='#8f77f2' />
-                  </label>
+              }
 
-                  <DatePicker
-                    className={`form-control ${msgError.includes('final invalida')
-                      ? 'is-invalid'
-                      : ''
-                      }`}
-                    placeholderText='10 / 10 / 2020 '
-                    selected={endDate}
-                    onChange={(date) => setEndDate(date)}
-                    locale='es'
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className='form-group mb-3 '>
+              <label
+                htmlFor='datepicker'
+                className='py-1'
+              >
+                Hasta: &nbsp;
+                <FaCalendar color='#8f77f2' />
+              </label>
 
-                  />
-                  {msgError.includes('final invalida') &&
-                    <div className="pt-1 text-danger">
-                      {msgError}
-                    </div>
-                  }
+              <DatePicker
+                className={`w-75 form-control ${msgError.includes('final invalida')
+                  ? 'is-invalid'
+                  : ''
+                  }`}
+                placeholderText='10 / 10 / 2020 '
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                locale='es'
+
+              />
+              {msgError.includes('final invalida') &&
+                <div className="pt-1 text-danger">
+                  {msgError}
                 </div>
-              </li>
-              <li className='nav-item'>
-                <button
-                  className='btn primary '
-                  type='button'
-                  onClick={handleSearchForDate}
-                >
-                  <FaSearch /> Buscar
-                </button>
-              </li>
-              <li className='nav-item px-2'>
-                <button
-                  className='btn btn-outline-primary '
-                  type='button'
-                  onClick={handleReset}
-                >
-                  Reiniciar busqueda
-                </button>
-              </li>
-            </ul>
+              }
+            </div>
+          </div>
+          <div className="col-md-12 text-center">
+            <button
+              className='btn primary mr-3'
+              type='button'
+              onClick={handleSearchForDate}
+            >
+              <FaSearch /> Buscar
+            </button>
+            <button
+              className='btn btn-outline-primary text-break ml-3'
+              type='button'
+              onClick={handleReset}
+            >
+              Reiniciar busqueda
+            </button>
           </div>
         </div>
       </div>
