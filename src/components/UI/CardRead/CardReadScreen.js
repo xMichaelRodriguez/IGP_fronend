@@ -28,7 +28,7 @@ export const CardReadScreen = () => {
   const [dataToRead, setDataToRead] = useState({})
 
   useEffect(() => {
-    ;(async function () {
+    ; (async function () {
       const data = await fetchSync(path + '/' + Id)
       const body = await data.json()
 
@@ -65,8 +65,9 @@ export const CardReadScreen = () => {
   ) : (
     <div className='container-fluid py-5 animate__animated   animate__fadeIn '>
       <div className='container  card-body'>
+
         <buton
-          className='btn btn-link'
+          className='btn btn-link mb-3'
           onClick={() => {
             synth.cancel()
             history.goBack()
@@ -74,7 +75,49 @@ export const CardReadScreen = () => {
         >
           Volver
         </buton>
-        <h1 className='card-title display-5'>
+        <div className='row mb-3 '>
+          <div className='col-md-12 p-3 border-bottom border-secondary rounded m-5 shadow-sm'>
+            <p>Controles de reproducción</p>
+            <button
+              type="button"
+              className='btn primary mx-1 rounded w-25 mb-3'
+              onClick={() => handleSpeak(dataToRead)}
+              title='Narrar'
+            >
+              Reproducir  {''}
+              <FaPlay />
+            </button>
+
+            <button
+              type="button"
+              className='btn btn-outline-secondary mx-1 w-25 mb-3'
+              onClick={handleResume}
+              title='Reanudar'
+            >
+              Reanudar {' '}
+              <BiReset />
+            </button>
+
+            <button
+              type="button"
+              className='btn btn-outline-secondary mx-1 w-25 mb-3'
+              onClick={handlePause}
+              title='pausar'
+            >
+              Pausar {' '}
+              <FaPauseCircle />
+            </button>
+            <button
+              className='btn btn-outline-danger mx-1 mb-3'
+              onClick={handleCancel}
+              title='Cancelar'
+            >
+              cancelar {' '}
+              <FaTimesCircle />
+            </button>
+          </div>
+        </div>
+        <h1 className='card-title display-5 mb-3'>
           {dataToRead.title}
         </h1>
         <h6 className='card-subtitle mb-2 text-muted'>
@@ -97,41 +140,7 @@ export const CardReadScreen = () => {
           {dataToRead.body}
         </p>
 
-        <div className='row mb-3 '>
-          <div className='p-3 border border-secondary rounded'>
-            <p>Controles de reproducción</p>
-            <button
-              className='btn primary mx-1'
-              onClick={() => handleSpeak(dataToRead)}
-              title='Narrar'
-            >
-              <FaPlay />
-            </button>
 
-            <button
-              className='btn btn-outline-secondary mx-1'
-              onClick={handleResume}
-              title='Reanudar'
-            >
-              <BiReset />
-            </button>
-
-            <button
-              className='btn btn-outline-secondary mx-1'
-              onClick={handlePause}
-              title='pausar'
-            >
-              <FaPauseCircle />
-            </button>
-            <button
-              className='btn btn-outline-danger mx-1'
-              onClick={handleCancel}
-              title='Cancelar'
-            >
-              <FaTimesCircle />
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   )

@@ -9,7 +9,7 @@ export const CommicCard = ({ title, coverPage, id }) => {
   const location = useLocation()
   const param = location.pathname.split('/')
   const handleRedirect = () => {
-    history.push(`/biblioteca/commics/${id}`)
+    history.push(`/commics/${id}`)
   }
   const dispatch = useDispatch()
 
@@ -26,6 +26,7 @@ export const CommicCard = ({ title, coverPage, id }) => {
         src={coverPage.imageUrl}
         className='card-img bg-card'
         alt={coverPage.imageUrl}
+        style={{ maxHeight: '20rem' }}
       />
       <div className='card-img-overlay'>
         <p

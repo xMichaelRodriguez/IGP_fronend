@@ -15,7 +15,7 @@ export const NavbarScreen = ({ routes }) => {
 
   return (
     <nav className='shadow  navbar navbar-expand-lg navbar-dark primary '>
-      <div className='container'>
+      <div className='container-fluid'>
         <LogoButton />
         <ToggleButton />
 

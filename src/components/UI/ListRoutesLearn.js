@@ -33,12 +33,7 @@ export const ListRoutesLearn = ({ title, route }) => {
             Cuentos
           </Link>
 
-          <Link
-            className='dropdown-item'
-            to='/biblioteca/commics'
-          >
-            Commics
-          </Link>
+
         </div>
       </li>
     )

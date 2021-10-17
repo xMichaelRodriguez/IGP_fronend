@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { authReducer } from './authReducer';
+import { categoryReducer } from './categoryReducer';
 import { commicsReducers } from './commicsReducers';
 import { errorReducer } from './errorReducer';
 import { noticiesReducer } from './noticiesReducer';
@@ -14,4 +15,5 @@ export const rootReducer = combineReducers({
   notice: noticiesReducer,
   org: orgReducer,
   commic: commicsReducers,
+  category: categoryReducer
 });

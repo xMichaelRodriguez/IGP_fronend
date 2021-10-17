@@ -8,6 +8,7 @@ export const OrganizationItem = (props) => {
         src={props.image_url}
         alt={props.image_url}
         className='card-img'
+        style={{ maxHeight: "267px" }}
       />
 
       <div className='card-body'>
