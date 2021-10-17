@@ -16,6 +16,7 @@ import { ButtonScrollToTop } from '../components/UI/ButtonScrollToTop';
 import { ChatBotButton } from '../components/UI/ChatBotButton';
 import { FooterScreen } from '../components/footer/FooterScreen';
 import { CommicScreen } from '../components/commics/CommicScreen';
+import { SearchScreen } from '../components/search/SearchScreen';
 
 export const DashBoard = () => {
   const routes = [
@@ -31,15 +32,26 @@ export const DashBoard = () => {
       id: 3,
     },
     {
+      route: '/busqueda',
+      title: 'busqueda',
+      id: 4,
+    },
+    {
       route: '/organizaciones',
       title: 'Organizaciones',
-      id: 4,
+      id: 5,
+    },
+    {
+      route: '/commics',
+      title: 'Commics',
+      id: 6,
     },
     {
       route: '/biblioteca',
       title: 'Biblioteca',
-      id: 5,
+      id: 7,
     },
+
   ];
 
   return (
@@ -86,12 +98,16 @@ export const DashBoard = () => {
           />
           <Route
             exact
-            path='/biblioteca/commics/:commicId'
+            path='/commics/:commicId'
             component={CommicScreen}
           />
           <Route
-            path='/biblioteca/commics'
+            path='/commics'
             component={CommicsScreen}
+          />
+          <Route
+            path='/busqueda'
+            component={SearchScreen}
           />
 
           <Route

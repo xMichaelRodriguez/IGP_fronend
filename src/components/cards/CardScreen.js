@@ -52,10 +52,11 @@ export const CardScreen = ({
       return Object.entries(data).length !== 0 ? (
         data.map((d) => (
           <div className='col-md-4  ' key={d.id}>
-            <div className='card mb-3 shadow'>
+            <div className='card mb-3 shadow' >
               <img
                 src={d.imageUrl}
                 className='card-img-top'
+                style={{ maxHeight: "12em" }}
                 alt={d.imageUrl}
               />
               <div className='card-body'>

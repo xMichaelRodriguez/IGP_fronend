@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { useLocation } from 'react-use'
-
+import { FaSearch } from 'react-icons/fa'
 export const ListRoutes = ({ title, id, route }) => {
   const location = useLocation().pathname
 
@@ -17,7 +17,12 @@ export const ListRoutes = ({ title, id, route }) => {
         to={`${route}`}
 
       >
-        {title}
+        {title === 'busqueda' ? (
+          <>
+            <FaSearch /> {title}</>
+        ) : title}
+
+
       </NavLink>
     </li>
   )
