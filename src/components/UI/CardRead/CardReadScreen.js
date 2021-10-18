@@ -15,7 +15,9 @@ import {
   FaTimesCircle,
 } from 'react-icons/fa'
 import { BiReset, BiTime } from 'react-icons/bi'
+import Swal from 'sweetalert2'
 const speaker = new SpeechSynthesisUtterance()
+speaker.lang = 'es-ES'
 const synth = window.speechSynthesis
 
 export const CardReadScreen = () => {
@@ -35,16 +37,22 @@ export const CardReadScreen = () => {
       if (body.ok) {
         delete body.ok
         setDataToRead(body[path])
+      } else {
+        Swal.fire({ title: "Upss's", text: body.msg, icon: "error" }).then(result => {
+          if (result.isConfirmed) {
+            history.goBack()
+          }
+        })
       }
     })()
-  }, [Id, path])
+  }, [Id, path, history])
 
   const handleSpeak = (d) => {
-    speaker.voice = speechSynthesis.getVoices()[11]
+    speaker.voice = speechSynthesis.getVoices()[12]
     speaker.text = d.title
     speaker.pitch = 1
-    speaker.volume = 0.5
-    speaker.rate = 1.1
+    speaker.rate = 1.0
+
     speechSynthesis.speak(speaker)
     speaker.text = d.body
     speechSynthesis.speak(speaker)
@@ -58,7 +66,7 @@ export const CardReadScreen = () => {
   const handleCancel = () => {
     synth.cancel()
   }
-  return Object.entries(dataToRead).length === 0 ? (
+  return dataToRead === null ? (
     <div className='d-flex justify-content-center'>
       <WaitScreen />
     </div>
@@ -66,7 +74,8 @@ export const CardReadScreen = () => {
     <div className='container-fluid py-5 animate__animated   animate__fadeIn '>
       <div className='container  card-body'>
 
-        <buton
+        <button
+          type="button"
           className='btn btn-link mb-3'
           onClick={() => {
             synth.cancel()
@@ -74,47 +83,62 @@ export const CardReadScreen = () => {
           }}
         >
           Volver
-        </buton>
+        </button>
         <div className='row mb-3 '>
+
           <div className='col-md-12 p-3 border-bottom border-secondary rounded m-5 shadow-sm'>
             <p>Controles de reproducción</p>
-            <button
-              type="button"
-              className='btn primary mx-1 rounded w-25 mb-3'
-              onClick={() => handleSpeak(dataToRead)}
-              title='Narrar'
-            >
-              Reproducir  {''}
-              <FaPlay />
-            </button>
+            <div className="row">
+              <div className="col-md-3">
+                <button
+                  type="button"
+                  className='btn primary mx-1 rounded  mb-3'
+                  onClick={() => handleSpeak(dataToRead)}
+                  title='Narrar'
+                >
+                  Reproducir  {''}
+                  <FaPlay />
+                </button>
+              </div>
+              <div className="col-md-3">
+                <button
+                  type="button"
+                  className='btn btn-outline-secondary mx-1  mb-3'
+                  onClick={handleResume}
+                  title='Reanudar'
+                >
+                  Reanudar {' '}
+                  <BiReset />
+                </button>
+              </div>
+              <div className='col-md-3'>
+                <button
+                  type="button"
+                  className='btn btn-outline-secondary mx-1  mb-3'
+                  onClick={handlePause}
+                  title='pausar'
+                >
+                  Pausar {' '}
+                  <FaPauseCircle />
+                </button>
+              </div>
+              <div className="col-md-3">
+                <button
+                  className='btn btn-outline-danger mx-1 mb-3'
+                  onClick={handleCancel}
+                  title='Cancelar'
+                >
+                  cancelar {' '}
+                  <FaTimesCircle />
+                </button>
+              </div>
+            </div>
 
-            <button
-              type="button"
-              className='btn btn-outline-secondary mx-1 w-25 mb-3'
-              onClick={handleResume}
-              title='Reanudar'
-            >
-              Reanudar {' '}
-              <BiReset />
-            </button>
 
-            <button
-              type="button"
-              className='btn btn-outline-secondary mx-1 w-25 mb-3'
-              onClick={handlePause}
-              title='pausar'
-            >
-              Pausar {' '}
-              <FaPauseCircle />
-            </button>
-            <button
-              className='btn btn-outline-danger mx-1 mb-3'
-              onClick={handleCancel}
-              title='Cancelar'
-            >
-              cancelar {' '}
-              <FaTimesCircle />
-            </button>
+
+
+
+
           </div>
         </div>
         <h1 className='card-title display-5 mb-3'>

@@ -16,7 +16,6 @@ export const SearchScreen = ({ history }) => {
 
   const handleSearch = (e) => {
     e.preventDefault()
-
     history.push(`?q=${formValue.searchText}`)
   }
   const validSearchContainer =
@@ -58,7 +57,7 @@ export const SearchScreen = ({ history }) => {
         {validSearchContainer ? (
           ''
         ) : (
-          <SearchContainer query={q.toLowerCase()} />
+          <SearchContainer query={q} />
         )}
       </div>
     </div>
