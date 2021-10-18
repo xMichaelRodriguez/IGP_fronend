@@ -39,7 +39,7 @@ export const OrganizationCard = () => {
                 <h3 className='card-title font-weight-bold'>
                   {organization.acronym}
                 </h3>
-                <h6 class='card-subtitle mb-2 text-muted'>
+                <h6 className='card-subtitle mb-2 text-muted'>
                   {organization.name}
                 </h6>
                 <div className='row mt-2'>

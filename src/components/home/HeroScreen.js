@@ -12,7 +12,7 @@ export const HeroScreen = () => {
               Una Vida Segura Enseña
             </h3>
             <p className=' lead mb-3'>
-              Enriqueze el proceso de enseñanza sobre temas
+              Enriquece el proceso de enseñanza sobre temas
               de violencia y abuso de niños, niñas y
               adolescentes atravez del uso de una web app
             </p>

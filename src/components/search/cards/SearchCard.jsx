@@ -12,7 +12,7 @@ export const SearchCard = ({
 }) => {
   return (
     <div>
-      {imageUrl ? (
+      {imageUrl && (
         <div className='card mb-3 shadow'>
           <img
             src={imageUrl}
@@ -35,17 +35,17 @@ export const SearchCard = ({
             </Link>
           </div>
         </div>
-      ) : (
-        ''
       )}
 
-      {coverPage ? (
+      {coverPage && (
         <CommicCard
           title={title}
           coverPage={coverPage}
           id={id}
         />
-      ) : (
+      )}
+
+      {!coverPage && !imageUrl && (
         <div className='card mb-3 shadow'>
           <div className='card-body'>
             <h5 className='card-title'>{title}</h5>

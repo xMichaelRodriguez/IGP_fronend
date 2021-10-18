@@ -28,7 +28,7 @@ export const SubHero = () => {
               </b>
               . <br></br>
               Aprende y enseña los deberes y derechos de los
-              niños, niñas t adikescebtes mediante la
+              niños, niñas y adolescentes mediante la
               biblioteca virtual integrada en la applicación
             </p>
           </div>

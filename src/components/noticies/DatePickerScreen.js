@@ -170,14 +170,14 @@ export const DatePickerScreen = ({ rute }) => {
           </div>
           <div className="col-md-12 text-center">
             <button
-              className='btn primary mr-3'
+              className='btn primary mr-3 m-1'
               type='button'
               onClick={handleSearchForDate}
             >
               <FaSearch /> Buscar
             </button>
             <button
-              className='btn btn-outline-primary text-break ml-3'
+              className='btn btn-outline-primary text-break ml-3 m-1'
               type='button'
               onClick={handleReset}
             >
