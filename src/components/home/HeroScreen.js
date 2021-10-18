@@ -5,7 +5,7 @@ import LearnImage from '../../img/undraw_book_reading_kx9s.svg'
 export const HeroScreen = () => {
   return (
     <div className='container-fluid primary  py-5 '>
-      <div className='container'>
+      <div className='container py-5'>
         <div className='row '>
           <div className=' col-md-6 mb-3'>
             <h3 className='font-weight-bold display-4'>

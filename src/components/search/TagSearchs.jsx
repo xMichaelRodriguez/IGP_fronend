@@ -4,7 +4,7 @@ import { useLocation } from 'react-use'
 
 import queryString from 'query-string'
 import { CommicsScreen } from '../commics/CommicsScreen'
-import { CuentosView } from '../violence/CuentosView'
+import { CuentosView } from '../library/CuentosView'
 import building from '../../img/building_websites.svg'
 export const TagSearchs = ({ history }) => {
   const { category } = useSelector((state) => state)

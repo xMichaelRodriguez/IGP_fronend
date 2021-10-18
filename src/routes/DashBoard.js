@@ -8,15 +8,16 @@ import { OrganizationScreen } from '../components/organizations/OrganizationScre
 import { OrganizationCard } from '../components/organizations/OrganizationCard';
 import { NoticeScreen } from '../components/noticies/NoticeScreen';
 import { StoryScreen } from '../components/stories/StoryScreen';
-import { CuentosView } from '../components/violence/CuentosView';
+import { CuentosView } from '../components/library/CuentosView';
 import { CommicsScreen } from '../components/commics/CommicsScreen';
-import { RightSection } from '../components/violence/RightSection';
+
 import { NavbarScreen } from '../components/UI/navbar/NavbarScreen';
 import { ButtonScrollToTop } from '../components/UI/ButtonScrollToTop';
 import { ChatBotButton } from '../components/UI/ChatBotButton';
 import { FooterScreen } from '../components/footer/FooterScreen';
 import { CommicScreen } from '../components/commics/CommicScreen';
 import { SearchScreen } from '../components/search/SearchScreen';
+
 
 export const DashBoard = () => {
   const routes = [
@@ -46,11 +47,8 @@ export const DashBoard = () => {
       title: 'Commics',
       id: 6,
     },
-    {
-      route: '/biblioteca',
-      title: 'Biblioteca',
-      id: 7,
-    },
+
+
 
   ];
 
@@ -96,6 +94,7 @@ export const DashBoard = () => {
             path='/biblioteca/cuentos'
             component={CuentosView}
           />
+
           <Route
             exact
             path='/commics/:commicId'
@@ -110,10 +109,6 @@ export const DashBoard = () => {
             component={SearchScreen}
           />
 
-          <Route
-            path='/biblioteca/derechos'
-            component={RightSection}
-          />
 
           <Route path='/' component={HomeScreen} />
           <Redirect to='/' />

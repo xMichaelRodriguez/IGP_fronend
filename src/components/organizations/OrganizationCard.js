@@ -111,10 +111,10 @@ export const OrganizationCard = () => {
                     <ul className='list-group list-group-flush'>
                       {organization.redes.facebook_url.map(
                         (socialNetwork) => (
-                          <li className='list-group-item'>
+                          <li className='list-group-item' key={socialNetwork}>
                             <a
                               rel='noreferrer'
-                              key={socialNetwork}
+
                               className='btn-link'
                               href={socialNetwork}
                               target='_blank'
@@ -134,10 +134,10 @@ export const OrganizationCard = () => {
                     <ul className='list-group list-group-flush'>
                       {organization.redes.twitter_url.map(
                         (socialNetwork) => (
-                          <li className='list-group-item'>
+                          <li className='list-group-item' key={socialNetwork}>
                             <a
                               rel='noreferrer'
-                              key={socialNetwork}
+
                               className='btn-link'
                               href={socialNetwork}
                               target='_blank'
@@ -157,10 +157,10 @@ export const OrganizationCard = () => {
                     <ul className='list-group list-group-flush'>
                       {organization.redes.youtube_url.map(
                         (socialNetwork) => (
-                          <li className='list-group-item'>
+                          <li className='list-group-item' key={socialNetwork}>
                             <a
                               rel='noreferrer'
-                              key={socialNetwork}
+
                               className='btn-link'
                               href={socialNetwork}
                               target='_blank'
