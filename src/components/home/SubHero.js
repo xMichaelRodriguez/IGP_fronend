@@ -4,7 +4,7 @@ import childrens from '../../img/roadKnowledge.svg'
 export const SubHero = () => {
   return (
     <div className=' container-fluid   py-5 '>
-      <div className='container'>
+      <div className='container py-5'>
         <div className='row'>
           <div className='col-md-4 mb-3'>
             <img

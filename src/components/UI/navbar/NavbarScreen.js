@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import '../styles.css';
 
-import { ListRoutesLearn } from '../ListRoutesLearn';
+
 import { ListRoutes } from '../ListRoutes';
 import { AuthButton } from '../AuthButton';
 import { LogoButton } from './LogoButton';
@@ -23,24 +23,15 @@ export const NavbarScreen = ({ routes }) => {
           className='collapse navbar-collapse'
           id='navbarText'
         >
-          <ul className='navbar-nav ml-auto'>
+          <ul className='navbar-nav ml-auto mr-auto'>
             {routes.map((r) => (
-              <>
-                {r.route.includes('biblioteca') ? (
-                  <ListRoutesLearn
-                    key={r.id}
-                    title={r.title}
-                    route={r.route}
-                  />
-                ) : (
-                  <ListRoutes
-                    key={r.id}
-                    title={r.title}
-                    id={r.id}
-                    route={r.route}
-                  />
-                )}
-              </>
+              <ListRoutes
+                key={r.id}
+                title={r.title}
+                id={r.id}
+                route={r.route}
+              />
+
             ))}
             {name !== undefined && (
               <AuthButton key='/administrator' />

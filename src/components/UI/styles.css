@@ -11,12 +11,12 @@
 
 .btn-outline-primary:hover {
   color: #fff;
-  background-color: #8f77f2  !important;
+  background-color: #8f77f2 !important;
   border-color: #8f77f2;
 }
 .btn-outline-primary:active {
   color: #fff;
-  background-color: #8f77f2  !important;
+  background-color: #8f77f2 !important;
   border-color: #8f77f2;
 }
 
@@ -120,13 +120,13 @@
   object-fit: contain;
 }
 
-
-
-.navbar-dark .navbar-nav .nav-link.active{
+.navbar-dark .navbar-nav .nav-link.active {
   background-color: #fbfbfb;
   color: #8f77f2;
   font-weight: 600;
   border-radius: 10px;
   margin: 2px;
- 
+}
+.list-group-item {
+  border: none;
 }
