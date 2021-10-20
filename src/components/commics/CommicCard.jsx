@@ -9,7 +9,7 @@ export const CommicCard = ({ title, coverPage, id }) => {
   const location = useLocation()
   const param = location.pathname.split('/')
   const handleRedirect = () => {
-    history.push(`/commics/${id}`)
+    history.push(`/biblioteca/commics/${id}`)
   }
   const dispatch = useDispatch()
 

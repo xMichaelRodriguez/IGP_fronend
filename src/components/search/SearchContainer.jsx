@@ -4,15 +4,9 @@ import { useSelector } from 'react-redux'
 import { SearchCard } from './cards/SearchCard'
 
 export const SearchContainer = ({ query }) => {
-  const { notice, story, commic } = useSelector(
-    (state) => state
-  )
+  const { commic } = useSelector((state) => state)
 
-  const arrToFilter = [
-    ...notice.noticies,
-    ...story.stories,
-    ...commic.commics,
-  ]
+  const arrToFilter = [...commic.commics]
 
   const arrFiltered = arrToFilter.filter(
     ({ title, body }) => {
@@ -22,11 +16,17 @@ export const SearchContainer = ({ query }) => {
 
   return (
     <div className='card-columns'>
-      {arrFiltered.map((item) => (
-        <div className='' key={item.id}>
-          <SearchCard {...item} />
-        </div>
-      ))}
+      {query !== ''
+        ? arrFiltered.map((item) => (
+            <div className='' key={item.id}>
+              <SearchCard {...item} />
+            </div>
+          ))
+        : arrToFilter.map((item) => (
+            <div className='' key={item.id}>
+              <SearchCard {...item} />
+            </div>
+          ))}
     </div>
   )
 }

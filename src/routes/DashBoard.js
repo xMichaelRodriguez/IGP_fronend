@@ -32,22 +32,18 @@ export const DashBoard = () => {
       title: 'Historias de vida',
       id: 3,
     },
-    {
-      route: '/busqueda',
-      title: 'busqueda',
-      id: 4,
-    },
+
     {
       route: '/organizaciones',
       title: 'Organizaciones',
-      id: 5,
-    },
-    {
-      route: '/commics',
-      title: 'Commics',
-      id: 6,
+      id: 4,
     },
 
+    {
+      route: '/biblioteca',
+      title: 'Biblioteca',
+      id: 5,
+    },
 
 
   ];
@@ -97,15 +93,15 @@ export const DashBoard = () => {
 
           <Route
             exact
-            path='/commics/:commicId'
+            path='/biblioteca/commics/:commicId'
             component={CommicScreen}
           />
           <Route
-            path='/commics'
+            path='/biblioteca/commics'
             component={CommicsScreen}
           />
           <Route
-            path='/busqueda'
+            path='/biblioteca'
             component={SearchScreen}
           />
 
