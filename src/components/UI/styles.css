@@ -110,10 +110,6 @@
 .slick-active {
   color: #8f77f2 !important;
 }
-.hoverCommic:hover {
-  transition: all 0.3s ease-in-out;
-  transform: translateY(-0.5em);
-}
 
 .img-slider {
   height: 467px;
@@ -129,4 +125,8 @@
 }
 .list-group-item {
   border: none;
+}
+.text-primary-custom {
+  color: #8f77f2;
+  font-weight: 700;
 }

@@ -56,8 +56,7 @@ export const TagSearchs = ({ history }) => {
       ) : (
         ''
       )}
-      {q.toLowerCase() === 'derechos' ||
-      q.toLowerCase() === 'deberes' ? (
+      {q.toLowerCase() === 'derechos' ? (
         <div className=' d-flex justify-content-center align-items-center'>
           <h5>En Proceso...</h5>
           <img
@@ -69,6 +68,7 @@ export const TagSearchs = ({ history }) => {
       ) : (
         ''
       )}
+
       {q.toLowerCase() === 'cuentos' ? <CuentosView /> : ''}
     </>
   )

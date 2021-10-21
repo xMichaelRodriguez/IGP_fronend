@@ -17,6 +17,7 @@ import { ChatBotButton } from '../components/UI/ChatBotButton';
 import { FooterScreen } from '../components/footer/FooterScreen';
 import { CommicScreen } from '../components/commics/CommicScreen';
 import { SearchScreen } from '../components/search/SearchScreen';
+import { HomeWorkRead } from '../components/library/homeworks/HomeWorkRead';
 
 
 export const DashBoard = () => {
@@ -99,6 +100,10 @@ export const DashBoard = () => {
           <Route
             path='/biblioteca/commics'
             component={CommicsScreen}
+          />
+          <Route
+            path='/biblioteca/deberes'
+            component={HomeWorkRead}
           />
           <Route
             path='/biblioteca'

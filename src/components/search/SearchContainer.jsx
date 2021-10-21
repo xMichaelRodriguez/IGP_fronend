@@ -4,9 +4,11 @@ import { useSelector } from 'react-redux'
 import { SearchCard } from './cards/SearchCard'
 
 export const SearchContainer = ({ query }) => {
-  const { commic } = useSelector((state) => state)
+  const { commic, homeWorks } = useSelector(
+    (state) => state
+  )
 
-  const arrToFilter = [...commic.commics]
+  const arrToFilter = [...commic.commics, ...homeWorks]
 
   const arrFiltered = arrToFilter.filter(
     ({ title, body }) => {

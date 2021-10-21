@@ -3,6 +3,7 @@ import { authReducer } from './authReducer';
 import { categoryReducer } from './categoryReducer';
 import { commicsReducers } from './commicsReducers';
 import { errorReducer } from './errorReducer';
+import { homeworkReducer } from './homeWorksReducer';
 import { noticiesReducer } from './noticiesReducer';
 import { orgReducer } from './orgReducer';
 import { storiesReducer } from './storiesReducer';
@@ -15,5 +16,6 @@ export const rootReducer = combineReducers({
   notice: noticiesReducer,
   org: orgReducer,
   commic: commicsReducers,
-  category: categoryReducer
+  category: categoryReducer,
+  homeWorks: homeworkReducer
 });
