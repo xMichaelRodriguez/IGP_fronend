@@ -47,5 +47,10 @@ export const types = {
   commicClearActive: '[Commic] clear active Commic',
 
   // Category
-  categoryLoaded: '[Category] Load Categories'
+  categoryLoaded: '[Category] Load Categories',
+
+  // User To Forums
+  userLoginForum: "[FORUM] load user to forums",
+  defaultForumUser: "[FORUM] reset user",
+
 };

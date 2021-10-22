@@ -20,6 +20,7 @@ import {
 } from '../actions/events'
 import { orgStartLoading } from '../actions/orgActions'
 import { commicStartLoading } from '../actions/commicsActions'
+import { startLoadingForumUser } from '../actions/forumsAction'
 
 export const AppRouter = () => {
   const { checking, uid } = useSelector(
@@ -33,6 +34,7 @@ export const AppRouter = () => {
     dispatch(storyForCarouselLoading({}))
     dispatch(orgStartLoading())
     dispatch(commicStartLoading({}))
+    dispatch(startLoadingForumUser())
   }, [dispatch])
 
   if (checking) {
