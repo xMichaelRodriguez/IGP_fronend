@@ -17,6 +17,9 @@ import { ChatBotButton } from '../components/UI/ChatBotButton';
 import { FooterScreen } from '../components/footer/FooterScreen';
 import { CommicScreen } from '../components/commics/CommicScreen';
 import { SearchScreen } from '../components/search/SearchScreen';
+import { HomeWorkRead } from '../components/library/homeworks/HomeWorkRead';
+import { ForumnsMain } from '../components/forums/ForumnsMain';
+import { ForumScreenRead } from '../components/forums/ForumScreenRead';
 
 
 export const DashBoard = () => {
@@ -32,22 +35,19 @@ export const DashBoard = () => {
       title: 'Historias de vida',
       id: 3,
     },
-    {
-      route: '/busqueda',
-      title: 'busqueda',
-      id: 4,
-    },
+
     {
       route: '/organizaciones',
       title: 'Organizaciones',
-      id: 5,
-    },
-    {
-      route: '/commics',
-      title: 'Commics',
-      id: 6,
+      id: 4,
     },
 
+    {
+      route: '/biblioteca',
+      title: 'Biblioteca',
+      id: 5,
+    },
+    { route: '/foros', title: "Foros", id: 6 }
 
 
   ];
@@ -97,17 +97,32 @@ export const DashBoard = () => {
 
           <Route
             exact
-            path='/commics/:commicId'
+            path='/biblioteca/commics/:commicId'
             component={CommicScreen}
           />
           <Route
-            path='/commics'
+            path='/biblioteca/commics'
             component={CommicsScreen}
           />
           <Route
-            path='/busqueda'
+            path='/biblioteca/deberes'
+            component={HomeWorkRead}
+          />
+          <Route
+            path='/biblioteca'
             component={SearchScreen}
           />
+
+          <Route
+            exact
+            path='/foros/:foroId'
+            component={ForumScreenRead}
+          />
+          <Route
+            path='/foros'
+            component={ForumnsMain}
+          />
+
 
 
           <Route path='/' component={HomeScreen} />

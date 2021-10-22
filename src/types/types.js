@@ -4,6 +4,8 @@ export const types = {
   uiCloseChat: '[UI] Close Chat',
   uiOpenSide: '[UI] Open Sidebar',
   uiCloseSide: '[UI] Close Sidebars',
+  uiOpenModal: "[UI] Open Modal",
+  uiCloseModal: "[UI] Close Modal",
   //auth
   authFinishChecking: '[AUTH] Finish Checking Login State',
   authStartLogin: '[AUTH] Start Login',
@@ -47,5 +49,14 @@ export const types = {
   commicClearActive: '[Commic] clear active Commic',
 
   // Category
-  categoryLoaded: '[Category] Load Categories'
+  categoryLoaded: '[Category] Load Categories',
+
+  // User To Forums
+  userLoginForum: "[FORUM] load user to forums",
+  defaultForumUser: "[FORUM] reset user",
+  setActiveForum: '[FORUM] set active forum',
+  LoadForums: '[FORUM] load forums',
+  ClearActiveForum: '[FORUM] set clear forum',
+  activeForumAddNew: '[FORUM] created forun',
+
 };
