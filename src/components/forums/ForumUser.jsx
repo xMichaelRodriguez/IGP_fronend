@@ -15,6 +15,7 @@ export const ForumUser = ({ user }) => {
         <p className='mb-0 p-3'>
           <FaUserCircle /> {user.name}
         </p>
+
         <button
           className='btn primary btn-sm'
           onClick={handlerCreateForum}

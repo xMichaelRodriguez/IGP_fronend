@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { startLoadingForums } from '../../actions/forumsAction'
 
 import { CardForum } from './CardForum'
+import { CardUltimateForum } from './CardUltimateForum'
 import { ForumUser } from './ForumUser'
 import { ModalCreateForum } from './ModalCreateForum'
 import { RegisterForum } from './RegisterForum'
@@ -42,22 +43,12 @@ export const ForumnsMain = () => {
           <div className=' col-md-3  mb-3 order-2 order-md-12'>
             <div className='row'>
               <div className='col-md-12'>
-                <p className='h3'>Ultimos Foros</p>
+                <p className='h3'>Foro mas activo</p>
                 <hr />
-                {forums !== [] ? (
-                  forums.map((foro) => (
-                    <div
-                      className='col-md-12'
-                      key={foro._id}
-                    >
-                      <CardForum {...foro} />
-                    </div>
-                  ))
-                ) : (
-                  <h1 className='text-muted'>
-                    No hay foros
-                  </h1>
-                )}
+
+                <div className='col-md-12'>
+                  <CardUltimateForum />
+                </div>
               </div>
             </div>
           </div>
