@@ -8,6 +8,7 @@ import { noticiesReducer } from './noticiesReducer';
 import { orgReducer } from './orgReducer';
 import { storiesReducer } from './storiesReducer';
 import { uiReducer } from './uiReducer';
+import { userForumReducer } from './userForum';
 export const rootReducer = combineReducers({
   auth: authReducer,
   error: errorReducer,
@@ -17,5 +18,6 @@ export const rootReducer = combineReducers({
   org: orgReducer,
   commic: commicsReducers,
   category: categoryReducer,
-  homeWorks: homeworkReducer
+  homeWorks: homeworkReducer,
+  userForum: userForumReducer
 });

@@ -18,6 +18,8 @@ import { FooterScreen } from '../components/footer/FooterScreen';
 import { CommicScreen } from '../components/commics/CommicScreen';
 import { SearchScreen } from '../components/search/SearchScreen';
 import { HomeWorkRead } from '../components/library/homeworks/HomeWorkRead';
+import { ForumnsMain } from '../components/forums/ForumnsMain';
+import { ForumScreenRead } from '../components/forums/ForumScreenRead';
 
 
 export const DashBoard = () => {
@@ -45,6 +47,7 @@ export const DashBoard = () => {
       title: 'Biblioteca',
       id: 5,
     },
+    { route: '/foros', title: "Foros", id: 6 }
 
 
   ];
@@ -109,6 +112,17 @@ export const DashBoard = () => {
             path='/biblioteca'
             component={SearchScreen}
           />
+
+          <Route
+            exact
+            path='/foros/:foroId'
+            component={ForumScreenRead}
+          />
+          <Route
+            path='/foros'
+            component={ForumnsMain}
+          />
+
 
 
           <Route path='/' component={HomeScreen} />
