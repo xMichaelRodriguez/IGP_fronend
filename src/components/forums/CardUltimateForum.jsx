@@ -11,7 +11,9 @@ export const CardUltimateForum = () => {
     socketInstance.on('loaded-active-forums', (data) => {
       setUltimateForum(data)
     })
-    return () => {}
+    return () => {
+      setUltimateForum({})
+    }
   }, [setUltimateForum])
 
   return (

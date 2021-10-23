@@ -60,6 +60,7 @@ export const StartActiveForum = (forum) => {
                 dispatch(updateForums(data.forum))
                 dispatch(clearForum())
                 dispatch(uiCloseModal())
+                dispatch(startLoadingMyForums())
             }
 
 
@@ -94,4 +95,67 @@ export const startLoadingForums = () => {
 const setForums = (forums) => ({
     type: types.LoadForums,
     payload: forums
+})
+export const startLoadingMyForums = () => {
+    return (dispatch, getState) => {
+        const { user } = getState().userForum
+        socketInstance.emit('load-my-forums', user.uid)
+
+        socketInstance.on('loaded-my-forums', (data) => {
+
+            dispatch(setMyForums(data.forums))
+
+        })
+    }
+
+}
+
+const setMyForums = (forums) => ({
+    type: types.getMyForums,
+    payload: forums
+})
+
+
+export const startDeleteForum = (forumId) => {
+    return (dispatch) => {
+        Swal.fire({
+            title: 'Esta seguro de Eliminarlo?',
+            text: 'No podra revertir esto!',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#8f77f2',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Eliminar',
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+
+                socketInstance.emit('delete-my-forum', { forumId }, (data) => {
+
+                    if (!data.msg.includes('Foro Eliminado')) {
+                        Swal.fire({
+                            title: "Borrar Foro",
+                            text: data.msg,
+                            icon: 'error'
+                        })
+                    }
+                    dispatch(deletedForum(forumId))
+                    Swal.fire({
+                        title: "Eliminado!",
+                        text: "Foro eliminado",
+                        icon: 'success'
+                    })
+                });
+
+            }
+
+        })
+
+
+
+    }
+}
+
+const deletedForum = (id) => ({
+    type: types.deleteForum,
+    payload: id
 })

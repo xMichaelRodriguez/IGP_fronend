@@ -16,7 +16,9 @@ export const CardForum = ({
         <small>{moment(created).calendar()}</small>
         <footer className='blockquote-footer mb-3'>
           <small className='text-muted'>
-            <cite title='Source Title'>{content}</cite>
+            <cite title='Source Title'>
+              {content.substr(0, 200) + '...'}
+            </cite>
           </small>
         </footer>
         <button
