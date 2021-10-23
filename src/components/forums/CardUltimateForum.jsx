@@ -9,14 +9,17 @@ export const CardUltimateForum = () => {
   useEffect(() => {
     socketInstance.emit('loading-active-foro')
     socketInstance.on('loaded-active-forums', (data) => {
-      setUltimateForum(data)
+      setUltimateForum({
+        ...data,
+        content: `${data.content.substr(0, 150)} ...`,
+      })
     })
     return () => {
       setUltimateForum({})
     }
   }, [setUltimateForum])
 
-  return (
+  return ultimateForum !== {} ? (
     <div className='card p-1 mb-2 shadow-sm'>
       <blockquote className='blockquote mb-0 card-body'>
         <p className='font-weight-bold '>
@@ -43,5 +46,7 @@ export const CardUltimateForum = () => {
         </button>
       </blockquote>
     </div>
+  ) : (
+    ''
   )
 }
