@@ -23,20 +23,28 @@ export const ForumScreenRead = () => {
   }, [foroId])
   return (
     <div className='container-fluid py-5'>
-      <div className='container p-5 bg-light'>
+      <div className='container p-5 bg-light text-break'>
         {forum === {} && <h3>no se encontro el foro</h3>}
         <Link className='btn btn-link' to='/foros'>
           volver
         </Link>
 
-        <div className='d-flex justify-content-between'>
-          <p className='h3'>{forum.theme}</p>
-          <span className='text-muted '>
-            <FaClock /> {moment(forum.created).calendar()}
-          </span>
+        <div className='row mb-4'>
+          <div className='col-md-12 mb-2'>
+            <p className='h3'>{forum.theme}</p>
+          </div>
+          <div className='col-md-12'>
+            <p className='h3'>{forum.themeK}</p>
+            <span className='text-muted '>
+              <FaClock /> {moment(forum.created).calendar()}
+            </span>
+          </div>
         </div>
 
-        <p className='lead mt-5 text-break'>
+        <p
+          className='lead mt-5'
+          style={{ wordBreak: 'break-word' }}
+        >
           {forum.content}
         </p>
         <ListComments
