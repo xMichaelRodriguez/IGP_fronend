@@ -36,7 +36,9 @@ export const ForumScreenRead = () => {
           </span>
         </div>
 
-        <p className='lead mt-5'>{forum.content}</p>
+        <p className='lead mt-5 text-break'>
+          {forum.content}
+        </p>
         <ListComments
           commentOfForum={commentOfForum}
           setCommentOfForum={setCommentOfForum}
