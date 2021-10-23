@@ -59,8 +59,8 @@ export const StartActiveForum = (forum) => {
 
                 dispatch(updateForums(data.forum))
                 dispatch(clearForum())
-                dispatch(uiCloseModal())
                 dispatch(startLoadingMyForums())
+                dispatch(uiCloseModal())
             }
 
 

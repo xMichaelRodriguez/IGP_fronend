@@ -59,6 +59,7 @@ export const ModalCreateForum = () => {
     e.preventDefault()
     if (isValid()) {
       dispatch(StartActiveForum(formValue))
+      reset()
     }
   }
 

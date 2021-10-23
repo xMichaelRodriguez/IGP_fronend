@@ -16,7 +16,6 @@ export const ForumUser = ({ user }) => {
 
   useEffect(() => {
     dispatch(startLoadingMyForums())
-    return () => {}
   }, [dispatch])
   return (
     <div>

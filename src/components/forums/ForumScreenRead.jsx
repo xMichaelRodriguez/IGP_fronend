@@ -17,7 +17,9 @@ export const ForumScreenRead = () => {
     socketInstance.emit('findById', { foroId }, (data) => {
       setForum(data.forum)
     })
-    return () => {}
+    return () => {
+      setForum([])
+    }
   }, [foroId])
   return (
     <div className='container-fluid py-5'>
