@@ -1,8 +1,10 @@
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { FaClock } from 'react-icons/fa'
+import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
+import { uiRemoveError } from '../../actions/authActios'
 import { socketInstance } from '../../helpers/Sockets'
 import { CommentBox } from './CommentBox'
 import { ListComments } from './ListComments'
@@ -10,6 +12,7 @@ import { ListComments } from './ListComments'
 export const ForumScreenRead = () => {
   const { user } = useSelector((state) => state.userForum)
 
+  const dispatch = useDispatch()
   const [forum, setForum] = useState({})
   const [commentOfForum, setCommentOfForum] = useState([])
   const { foroId } = useParams()
@@ -21,11 +24,19 @@ export const ForumScreenRead = () => {
       setForum([])
     }
   }, [foroId])
+
+  const handleCleanInput = () => {
+    dispatch(uiRemoveError())
+  }
   return (
     <div className='container-fluid py-5'>
       <div className='container p-5 bg-light text-break'>
         {forum === {} && <h3>no se encontro el foro</h3>}
-        <Link className='btn btn-link' to='/foros'>
+        <Link
+          className='btn btn-link'
+          to='/foros'
+          onClick={handleCleanInput}
+        >
           volver
         </Link>
 
