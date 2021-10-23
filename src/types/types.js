@@ -58,5 +58,8 @@ export const types = {
   LoadForums: '[FORUM] load forums',
   ClearActiveForum: '[FORUM] set clear forum',
   activeForumAddNew: '[FORUM] created forun',
+  deleteForum: "[FORUM] delete forun",
+  getMyForums: "[FORUM] get my forums",
+
 
 };

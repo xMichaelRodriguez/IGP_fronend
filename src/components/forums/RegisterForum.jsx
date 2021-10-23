@@ -3,7 +3,8 @@ import { useForm } from '../../hooks/useForm'
 import { socketInstance } from '../../helpers/Sockets'
 import { useDispatch } from 'react-redux'
 import { startLoginForum } from '../../actions/forumsAction'
-
+import Swal from 'sweetalert2'
+import validator from 'validator'
 export const RegisterForum = () => {
   const dispatch = useDispatch()
   const [formValue, handleInputChange] = useForm({
@@ -12,15 +13,23 @@ export const RegisterForum = () => {
   const { userName } = formValue
   const handleRegister = (e) => {
     e.preventDefault()
-    socketInstance.emit(
-      'register',
-      {
-        userName,
-      },
-      (data) => {
-        dispatch(startLoginForum(data))
-      }
-    )
+    if (validator.isEmpty(userName)) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Apodo necesario para registrar',
+        icon: 'error',
+      })
+    } else {
+      socketInstance.emit(
+        'register',
+        {
+          userName,
+        },
+        (data) => {
+          dispatch(startLoginForum(data))
+        }
+      )
+    }
   }
   return (
     <form className='container' onSubmit={handleRegister}>
@@ -33,6 +42,7 @@ export const RegisterForum = () => {
           onChange={handleInputChange}
           className='form-control'
           aria-describedby='apodoHelp'
+          autoComplete='off'
         />
         <small
           id='apodoHelp'

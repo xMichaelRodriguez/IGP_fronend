@@ -6,7 +6,8 @@ const initialState = {
     },
 
     activeForum: null,
-    forums: []
+    forums: [],
+    myForums: []
 }
 export const userForumReducer = (
     state = initialState,
@@ -48,6 +49,18 @@ export const userForumReducer = (
                 forums: [...action.payload]
             }
 
+
+        case types.getMyForums:
+            return {
+                ...state,
+                myForums: [...action.payload]
+            }
+        case types.deleteForum:
+
+            return {
+                ...state,
+                myForums: state.myForums.filter(forum => forum._id !== action.payload)
+            }
         default:
             return state
     }
