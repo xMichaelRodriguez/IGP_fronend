@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { startLoadingForums } from '../../actions/forumsAction'
+import {
+  startLoadingForums,
+  startLoadingMyForums,
+} from '../../actions/forumsAction'
 
 import { CardForum } from './CardForum'
 import { CardUltimateForum } from './CardUltimateForum'
@@ -15,6 +18,7 @@ export const ForumnsMain = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(startLoadingForums())
+    dispatch(startLoadingMyForums())
   }, [dispatch])
   return (
     <>
