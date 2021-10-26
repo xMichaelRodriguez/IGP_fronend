@@ -20,7 +20,7 @@ export const SearchContainer = ({ query }) => {
     <div className='card-columns'>
       {query !== ''
         ? arrFiltered.map((item) => (
-            <div className='' key={item.id}>
+            <div key={item.id}>
               <SearchCard {...item} />
             </div>
           ))

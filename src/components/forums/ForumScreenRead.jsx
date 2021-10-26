@@ -1,6 +1,6 @@
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
-import { FaClock } from 'react-icons/fa'
+import { FaRegClock, FaRegUser } from 'react-icons/fa'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
@@ -30,38 +30,54 @@ export const ForumScreenRead = () => {
   }
   return (
     <div className='container-fluid py-5'>
-      <div className='container p-5 bg-light text-break'>
+      <div className='container p-2 text-break'>
         {forum === {} && <h3>no se encontro el foro</h3>}
-        <Link
-          className='btn btn-link'
-          to='/foros'
-          onClick={handleCleanInput}
-        >
-          volver
-        </Link>
 
-        <div className='row mb-4'>
-          <div className='col-md-12 mb-2'>
-            <p className='h3'>{forum.theme}</p>
-          </div>
-          <div className='col-md-12'>
-            <p className='h3'>{forum.themeK}</p>
-            <span className='text-muted '>
-              <FaClock /> {moment(forum.created).calendar()}
-            </span>
-          </div>
+        <div className='row mb-2'>
+          <nav
+            aria-label='breadcrumb'
+            onClick={handleCleanInput}
+          >
+            <ol class='breadcrumb'>
+              <li class='breadcrumb-item'>
+                <Link to='/'>Inicio</Link>
+              </li>
+              <li
+                class='breadcrumb-item active'
+                aria-current='page'
+              >
+                <Link to='/foros'> Foros</Link>
+              </li>
+              <li
+                class='breadcrumb-item active '
+                aria-current='page'
+              >
+                {forum.theme}
+              </li>
+            </ol>
+          </nav>
         </div>
 
+        <p className='h3'>{forum.theme}</p>
         <p
           className='lead mt-5'
           style={{ wordBreak: 'break-word' }}
         >
           {forum.content}
         </p>
-        <ListComments
-          commentOfForum={commentOfForum}
-          setCommentOfForum={setCommentOfForum}
-        />
+        <div className='row mb-2'>
+          <div className='col-md-4'>
+            <span className='font-weight-bolder border-bottom border-primary'>
+              <FaRegUser /> {forum.user?.name}
+            </span>
+          </div>
+          <div className='col-md-4'>
+            <span className='text-muted '>
+              <FaRegClock />{' '}
+              {moment(forum.created).calendar()}
+            </span>
+          </div>
+        </div>
         {Object.entries(user).length === 0 ? (
           <h5 className='text-danger'>
             Si quiere participar en este foro tiene que
@@ -74,6 +90,11 @@ export const ForumScreenRead = () => {
             foroId={foroId}
           />
         )}
+
+        <ListComments
+          commentOfForum={commentOfForum}
+          setCommentOfForum={setCommentOfForum}
+        />
       </div>
     </div>
   )

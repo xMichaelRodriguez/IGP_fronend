@@ -123,8 +123,10 @@
   border-radius: 10px;
   margin: 2px;
 }
+
 .list-group-item {
   border: none;
+  background-color: #eff3f5fa;
 }
 .text-primary-custom {
   color: #8f77f2;
@@ -169,11 +171,17 @@
 
 .containerMessage {
   padding: 20px;
-  max-height: 200px;
+  max-height: 500px;
   overflow-y: auto;
 }
 .containerMyForums {
   padding: 20px;
   max-height: 500px;
   overflow-y: auto;
+}
+
+.comment__title {
+  color: #8f77f2;
+  font-weight: 600;
+  font-size: 1.1rem;
 }

@@ -1,5 +1,6 @@
 import moment from 'moment'
 import React from 'react'
+import { FaRegClock } from 'react-icons/fa'
 import { useHistory } from 'react-router'
 
 export const CardForum = ({
@@ -10,26 +11,23 @@ export const CardForum = ({
 }) => {
   const history = useHistory()
   return (
-    <div className='card p-1 mb-2 shadow-sm'>
+    <div className='card p-1 mb-2'>
       <blockquote className='blockquote mb-0 card-body'>
         <p className='font-weight-bold '>{theme}</p>
-        <small>{moment(created).calendar()}</small>
-        <footer className='blockquote-footer mb-3'>
-          <small className='text-muted'>
-            <cite title='Source Title'>
-              {content.substr(0, 200) + '...'}
-            </cite>
-          </small>
-        </footer>
-        <button
-          className='btn btn-outline-primary'
-          type='button'
-          onClick={() => {
-            history.push(`/foros/${_id}`)
-          }}
-        >
-          Ver Foro
-        </button>
+        <small>
+          <FaRegClock /> {moment(created).calendar()}
+        </small>
+        <div className='row p-1'>
+          <button
+            className='btn btn-outline-primary'
+            type='button'
+            onClick={() => {
+              history.push(`/foros/${_id}`)
+            }}
+          >
+            Ver Foro
+          </button>
+        </div>
       </blockquote>
     </div>
   )

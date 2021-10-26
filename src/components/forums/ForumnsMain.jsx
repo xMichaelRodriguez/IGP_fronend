@@ -4,6 +4,7 @@ import {
   startLoadingForums,
   startLoadingMyForums,
 } from '../../actions/forumsAction'
+import { Pagination } from '../cards/Pagination'
 
 import { CardForum } from './CardForum'
 import { CardUltimateForum } from './CardUltimateForum'
@@ -17,7 +18,7 @@ export const ForumnsMain = () => {
   )
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(startLoadingForums())
+    dispatch(startLoadingForums({}))
     dispatch(startLoadingMyForums())
   }, [dispatch])
   return (
@@ -42,6 +43,9 @@ export const ForumnsMain = () => {
               ) : (
                 <h1 className='text-muted'>No hay foros</h1>
               )}
+              <div className='col-md-6 mt-3'>
+                <Pagination selector='userForum' />
+              </div>
             </div>
           </div>
           <div className=' col-md-3  mb-3 order-2 order-md-12'>

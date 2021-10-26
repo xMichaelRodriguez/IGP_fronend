@@ -81,10 +81,11 @@ export const setActiveForum = () => ({
 })
 
 
-export const startLoadingForums = () => {
+export const startLoadingForums = ({ page = 1 }) => {
     return (dispatch) => {
-        socketInstance.emit('loading-forums');
+        socketInstance.emit('loading-forums', page);
         socketInstance.on('loaded-forums', (data) => {
+            console.log(data)
             dispatch(setForums(data))
         });
 

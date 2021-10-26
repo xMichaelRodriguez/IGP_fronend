@@ -2,6 +2,7 @@ import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { socketInstance } from '../../helpers/Sockets'
+import { WaitScreen } from '../wait/WaitScreen'
 
 export const CardUltimateForum = () => {
   const [ultimateForum, setUltimateForum] = useState({})
@@ -19,7 +20,7 @@ export const CardUltimateForum = () => {
     }
   }, [setUltimateForum])
 
-  return ultimateForum !== {} ? (
+  return Object.entries(ultimateForum).length !== 0 ? (
     <div className='card p-1 mb-2 shadow-sm'>
       <blockquote className='blockquote mb-0 card-body'>
         <p className='font-weight-bold '>
@@ -47,6 +48,6 @@ export const CardUltimateForum = () => {
       </blockquote>
     </div>
   ) : (
-    ''
+    <WaitScreen />
   )
 }

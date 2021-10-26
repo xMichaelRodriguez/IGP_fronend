@@ -7,6 +7,10 @@ const initialState = {
 
     activeForum: null,
     forums: [],
+    totalDocs: null,
+    totalPages: null,
+    prevPage: null,
+    nextPage: null,
     myForums: []
 }
 export const userForumReducer = (
@@ -46,7 +50,11 @@ export const userForumReducer = (
         case types.LoadForums:
             return {
                 ...state,
-                forums: [...action.payload]
+                forums: [...action.payload.forums],
+                totalDocs: action.payload.totalDocs,
+                prevPage: action.payload.prevPage,
+                nextPage: action.payload.nextPage,
+                totalPages: action.payload.totalPages
             }
 
 
