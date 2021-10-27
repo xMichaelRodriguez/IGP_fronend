@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types'
 import { storyStartLoading } from '../../actions/events';
 import { noticeStartLoading } from '../../actions/noticesActions';
+import { startLoadingForums } from '../../actions/forumsAction';
 
 
 
@@ -16,11 +17,13 @@ export const Pagination = ({ selector }) => {
   //next Page
   const handleNextPage = () => {
     if (nextPage !== null) {
-      setActive(prevPage)
+      setActive(nextPage)
       if (selector === 'notice') {
         dispatch(noticeStartLoading({ page: nextPage }))
       } else if (selector === 'story') {
         dispatch(storyStartLoading({ page: nextPage }))
+      } else if (selector === 'userForum') {
+        dispatch(startLoadingForums({ page: nextPage }))
       }
     }
   };
@@ -33,6 +36,8 @@ export const Pagination = ({ selector }) => {
         dispatch(noticeStartLoading({ page: prevPage }))
       } else if (selector === 'story') {
         dispatch(storyStartLoading({ page: prevPage }))
+      } else if (selector === 'userForum') {
+        dispatch(startLoadingForums({ page: prevPage }))
       }
     }
   };

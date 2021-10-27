@@ -6,10 +6,20 @@ import { uiCloseModal } from "./uiActions";
 
 export const startLoginForum = (data) => {
     return (dispatch) => {
-        const { name, _id: uid } = data.user
 
-        sessionStorage.setItem('user', JSON.stringify({ name, uid }))
-        dispatch(forumAddUser({ name, uid }))
+        if (data.user === null) {
+            Swal.fire({
+                title: "Error",
+                text: data.msg,
+                icon: 'error'
+            })
+        } else {
+
+            const { name, _id: uid } = data.user
+
+            sessionStorage.setItem('user', JSON.stringify({ name, uid }))
+            dispatch(forumAddUser({ name, uid }))
+        }
     };
 };
 
@@ -85,7 +95,6 @@ export const startLoadingForums = ({ page = 1 }) => {
     return (dispatch) => {
         socketInstance.emit('loading-forums', page);
         socketInstance.on('loaded-forums', (data) => {
-            console.log(data)
             dispatch(setForums(data))
         });
 
@@ -145,6 +154,7 @@ export const startDeleteForum = (forumId) => {
                         text: "Foro eliminado",
                         icon: 'success'
                     })
+                    dispatch(startLoadingForums({}))
                 });
 
             }

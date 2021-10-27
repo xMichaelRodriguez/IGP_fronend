@@ -38,7 +38,7 @@ export const ForumUser = ({ user }) => {
         <div className='row containerMyForums'>
           {Object.entries(myForums).length !== 0 ? (
             myForums.map((forum) => (
-              <div className='col-md-12'>
+              <div className='col-md-12' key={forum._id}>
                 <UserCardForums myForums={forum} />
               </div>
             ))
