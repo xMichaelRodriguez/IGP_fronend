@@ -1,0 +1,6 @@
+[{
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target" : { "namespace": "android_app", "package_name": "app.netlify.uvs.twa",
+                     "sha256_cert_fingerprints": ["F7:BD:1D:88:54:C6:95:CA:28:C6:6F:F4:FE:5A:07:02:43:2C:0C:74:CE:70:D2:EF:6C:6E:70:56:31:08:A6:A3"] }
+      }
+]
