@@ -54,7 +54,7 @@ export const AppRouter = () => {
             path='/auth'
             render={AuthRouter}
           />
-
+          <Route path="/.well-known/assetlinks.json" />
           <Route path='/' component={DashBoard} />
         </Switch>
       </div>
