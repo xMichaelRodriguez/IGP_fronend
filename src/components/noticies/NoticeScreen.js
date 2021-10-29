@@ -1,7 +1,8 @@
 import 'moment/locale/es'
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router'
+import { noticeStartLoading } from '../../actions/noticesActions'
 
 import { CardScreen } from '../cards/CardScreen'
 import { Pagination } from '../cards/Pagination'
@@ -15,7 +16,10 @@ export const NoticeScreen = () => {
   const location = useLocation()
   const history = useHistory()
   const param = location.pathname.split('/')[1]
-
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(noticeStartLoading({}))
+  }, [dispatch])
   return (
     <>
       {noticies === [] && !noticies && (

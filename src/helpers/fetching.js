@@ -105,10 +105,14 @@ export const fetchAsync = (
 
     }
 
+
+
     if (
       method === 'POST' &&
       typeof data.imageUrl === 'object'
     ) {
+      console.log('entro post con imagen')
+
       const formDataPost = new FormData()
       formDataPost.append('title', content.title)
       formDataPost.append('body', content.body)
@@ -125,6 +129,16 @@ export const fetchAsync = (
           'x-token': token.toString(),
         },
         body: formDataPost,
+      })
+    } else if (method === 'POST') {
+      console.log('entro solo post');
+
+      return fetch(url, {
+        method, headers: {
+          'Content-Type': 'application/json',
+          'x-token': token.toString(),
+        },
+        body: JSON.stringify(data),
       })
     }
 
@@ -174,3 +188,5 @@ export const fetchAsyncToCommics = (
     })
   }
 }
+
+

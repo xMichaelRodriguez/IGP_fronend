@@ -62,7 +62,7 @@ export const CardScreen = ({
               <div className='card-body'>
                 <h5 className='card-title'>{d.title}</h5>
                 <h6 className='card-subtitle mb-2 text-muted'>
-                  {moment(d.date).format('DD/MM/YYYY')}
+                  {moment(d.date).calendar()}
                 </h6>
                 <p className='card-text text-justify'>
                   {d.body.substr(0, 100)}...

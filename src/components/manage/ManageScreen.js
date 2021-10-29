@@ -18,14 +18,13 @@ import {
 } from '../../actions/noticesActions';
 import { FaCloudUploadAlt } from 'react-icons/fa';
 import { fetchAsync } from '../../helpers/fetching';
-import moment from 'moment';
 import Swal from 'sweetalert2';
 
 const initialForm = {
   title: '',
   body: '',
   imageUrl: '',
-  date: moment().toISOString(),
+  date: new Date(),
   publicImg_id: '',
 };
 export const ManageScreen = () => {
@@ -120,15 +119,17 @@ export const ManageScreen = () => {
         const resp = await dispatch(
           noticetStartUpdated(formValue)
         );
-        if (!resp) return;
         dispatch(noticeClearActive());
         setFormValue(initialForm);
+        if (!resp) return;
       } else if (token === 'noticias' && !activeNotice) {
         // agrega una noticia
         const resp = await dispatch(
           startnoticeAddNew(formValue)
         );
+        dispatch(noticeClearActive());
         setFormValue(initialForm);
+
         if (!resp) return;
       } else if (token === 'historias' && activeStory) {
         // editar una historia
@@ -201,12 +202,14 @@ export const ManageScreen = () => {
           );
           dispatch(storyClearActive());
           setFormValue(initialForm);
+
         } else {
           if (body?.msg) {
             Swal.fire(body.msg);
           }
           Swal.fire({ title: 'Algo Salio Mal :(', text: body.errors.body.msg, icon: "info" });
         }
+
       }
     }
   };

@@ -16,10 +16,16 @@ export const startnoticeAddNew = (notice) => {
           Swal.showLoading();
         },
       });
+      delete notice.imageUrl
+      delete notice.publicImg_id
+
       const modNotice = {
         ...notice,
         date: new Date()
       };
+
+
+
       const resp = await fetchAsync(
         'noticies/newNotice',
         modNotice,
@@ -29,6 +35,7 @@ export const startnoticeAddNew = (notice) => {
 
       if (body.ok) {
         dispatch(noticeAddNew(modNotice));
+        dispatch(uiRemoveError());
         Swal.close();
         Swal.fire(
           'Guardado!!',
@@ -36,7 +43,6 @@ export const startnoticeAddNew = (notice) => {
           'success'
         );
       }
-      dispatch(uiRemoveError());
     } catch (error) {
       console.log(error);
       Swal.close();

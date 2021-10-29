@@ -45,12 +45,13 @@ export const noticiesReducer = (state = initialState, action) => {
       };
 
     case types.noticeLoaded:
+
       return {
         ...state,
         noticies: [...action.payload.noticies],
         totalDocs: action.payload.totalDocs,
-        totalPages: action.payload.totalPage,
-        nextpage: action.payload.nextpage,
+        totalPages: action.payload.totalPages,
+        nextPage: action.payload.nextPage,
         prevPage: action.payload.prevPage
 
       };
