@@ -86,19 +86,18 @@ export const ManageScreen = () => {
       return false;
     }
     if (!validator.isLength(formValue.title, { min: 20 })) {
-      dispatch(setError('Minimo 6 caracteres'));
+      dispatch(setError('Minimo 20 caracteres'));
       return false;
     }
 
     if (
-      validator.isEmpty(formValue.body) &&
-      validator.isLength(formValue.body, {
+      !validator.isLength(formValue.body, {
         min: 50,
-        max: 2000,
+        max: 2000
       })
     ) {
       dispatch(
-        setError('Cuerpo de la publicacion requerido')
+        setError('Cuerpo de la publicacion requerido, minimo 50 caracteres, maximo de 2000')
       );
       return false;
     }
@@ -122,6 +121,7 @@ export const ManageScreen = () => {
           noticetStartUpdated(formValue)
         );
         if (!resp) return;
+        dispatch(noticeClearActive());
         setFormValue(initialForm);
       } else if (token === 'noticias' && !activeNotice) {
         // agrega una noticia
@@ -150,13 +150,13 @@ export const ManageScreen = () => {
           publicImg_id: activeStory.publicImg_id,
         });
 
-        const resp = await fetchAsync(
+
+        const result = await fetchAsync(
           `stories/${activeStory.id}`,
           formValue,
           'PUT'
         );
-
-        const body = await resp.json();
+        const body = await result.json();
 
         if (body.ok) {
           dispatch(storyUpdated(body));
@@ -205,7 +205,7 @@ export const ManageScreen = () => {
           if (body?.msg) {
             Swal.fire(body.msg);
           }
-          Swal.fire('Algo Salio Mal :(');
+          Swal.fire({ title: 'Algo Salio Mal :(', text: body.errors.body.msg, icon: "info" });
         }
       }
     }
@@ -240,12 +240,11 @@ export const ManageScreen = () => {
           <label htmlFor='title'>Titulo</label>
           <input
             type='text'
-            className={`form-control ${
-              msgError.includes('Titulo') ||
+            className={`form-control ${msgError.includes('Titulo') ||
               msgError.includes('Minimo')
-                ? 'is-invalid'
-                : ''
-            }`}
+              ? 'is-invalid'
+              : ''
+              }`}
             name='title'
             value={formValue.title}
             onChange={handleInputChange}
@@ -253,7 +252,7 @@ export const ManageScreen = () => {
             autoComplete='off'
           />
           {msgError.includes('Titulo') ||
-          msgError.includes('Minimo') ? (
+            msgError.includes('Minimo') ? (
             <div className='invalid-feedback'>
               {msgError}
             </div>
@@ -262,19 +261,18 @@ export const ManageScreen = () => {
         <div className='form-group'>
           <label htmlFor='cuerpo'>Cuerpo</label>
           <textarea
-            className={`form-control ${
-              msgError.includes('Cuerpo') ||
+            className={`form-control ${msgError.includes('Cuerpo') ||
               msgError.includes('debe')
-                ? 'is-invalid'
-                : ''
-            }`}
+              ? 'is-invalid'
+              : ''
+              }`}
             name='body'
             rows='5'
             value={formValue.body}
             onChange={handleInputChange}
           ></textarea>
           {msgError.includes('Cuerpo') ||
-          msgError.includes('debe') ? (
+            msgError.includes('debe') ? (
             <div className='invalid-feedback'>
               {msgError}
             </div>
@@ -311,9 +309,8 @@ export const ManageScreen = () => {
               style={{
                 width: '50%',
                 height: '50%',
-                display: `${
-                  formValue.imageUrl ? 'block' : 'none'
-                }`,
+                display: `${formValue.imageUrl ? 'block' : 'none'
+                  }`,
               }}
             >
               <div className='card-img-top '>

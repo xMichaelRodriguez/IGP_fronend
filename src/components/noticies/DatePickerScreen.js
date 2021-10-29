@@ -4,14 +4,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import 'react-datepicker/dist/react-datepicker.css'
 import DatePicker from 'react-datepicker'
-import { registerLocale } from 'react-datepicker'
+import { registerLocale, setDefaultLocale } from 'react-datepicker'
 import es from 'date-fns/locale/es'
 import {
   FaCalendar,
   FaSearch,
-  FaTimesCircle,
 } from 'react-icons/fa'
-import moment from 'moment'
 import validator from 'validator'
 import {
   setError,
@@ -20,6 +18,7 @@ import {
 import { noticeStartLoading } from '../../actions/noticesActions'
 import { storyStartLoading } from '../../actions/events'
 registerLocale('es', es)
+setDefaultLocale('es')
 
 export const DatePickerScreen = ({ rute }) => {
   const { msgError } = useSelector((state) => state.error)
@@ -29,18 +28,18 @@ export const DatePickerScreen = ({ rute }) => {
 
   const handleSearchForDate = () => {
     if (isFormValid()) {
-      const start = moment(startDate)
-      const startClone = start.clone().subtract(1, 'd').toISOString().toString()
-      const end = moment(endDate)
-      const endClone = end.clone().add(1, 'd').toISOString().toString()
+      const start = new Date(startDate).toLocaleDateString('en-US')
+      const end = new Date(endDate).toLocaleDateString('en-US')
+
       if (rute === 'notice') {
         dispatch(
           noticeStartLoading({
-            startDate: startClone,
-            endDate: endClone,
+            startDate: start,
+            endDate: end,
           })
         )
       } else {
+
         dispatch(
           storyStartLoading({
             startDate: start,
@@ -60,15 +59,7 @@ export const DatePickerScreen = ({ rute }) => {
       dispatch(setError('Fecha final invalida'))
       return false
     }
-    if (
-      moment(startDate).format('YY-MM-DD') ===
-      moment(endDate).format('YY-MM-DD')
-    ) {
-      dispatch(
-        setError('No se puede buscar en el mismo dia')
-      )
-      return false
-    }
+
 
     dispatch(uiRemoveError())
     return true
@@ -100,16 +91,7 @@ export const DatePickerScreen = ({ rute }) => {
             </h4>
 
           </div>
-          {msgError.includes('mismo') && (
-            <div className='col-md-12 mb-3'>
-              <div
-                className='alert alert-danger '
-                role='alert'
-              >
-                <FaTimesCircle /> {msgError}
-              </div>
-            </div>
-          )}
+
           <div className='col-md-6 '>
             <div className='form-group  mb-3'>
 
@@ -128,7 +110,8 @@ export const DatePickerScreen = ({ rute }) => {
                   }`}
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
-                locale='es'
+                locale="es"
+                dateFormat="dd/MM/yyy"
                 popperClassName='pickerPosition '
 
               />
@@ -158,8 +141,8 @@ export const DatePickerScreen = ({ rute }) => {
                 placeholderText='10 / 10 / 2020 '
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
-                locale='es'
-
+                locale="es"
+                dateFormat="dd/MM/yyy"
               />
               {msgError.includes('final invalida') &&
                 <div className="pt-1 text-danger">

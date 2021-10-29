@@ -2,7 +2,6 @@ import { fetchAsync } from '../helpers/fetching'
 import { types } from '../types/types'
 import Swal from 'sweetalert2'
 import { uiRemoveError } from './authActios'
-import moment from 'moment'
 
 export const startstoryAddNew = (story) => {
   return async (dispatch) => {
@@ -21,7 +20,7 @@ export const startstoryAddNew = (story) => {
 
       const modStory = {
         ...story,
-        date: moment(),
+        date: new Date(),
       }
       const resp = await fetchAsync(
         'stories/new',
@@ -122,7 +121,7 @@ export const storyStartUpdated = (story) => {
       })
       const history = {
         ...story,
-        date: moment(),
+        date: new Date(),
       }
 
       const resp = await fetchAsync(

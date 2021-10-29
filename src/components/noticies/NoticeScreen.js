@@ -21,42 +21,44 @@ export const NoticeScreen = () => {
       {noticies === [] && !noticies && (
         <h3 className='display-4'>No Hay Noticias</h3>
       )}
-      <section className='container mt-3'>
-        <div className='container row '>
-          <div className='col-md-12 '>
-            <DatePickerScreen rute='notice' />
-          </div>
-          {param === 'profile' ? (
-            <>
-              <div className='col-md-6'>
+      <section className='container-fluid mt-3'>
+        <div className='container  '>
+          <div className='row'>
+            <div className='col-md-12 w-100'>
+              <DatePickerScreen rute='notice' />
+            </div>
+            {param === 'profile' ? (
+              <>
+                <div className='col-md-6'>
+                  <Pagination
+                    selector={'notice'}
+                    subSelector='noticies'
+                  />
+                </div>
+
+                <div className='col-md-6'>
+                  <button
+                    className='btn primary btn-block mb-3'
+                    type='button'
+                    onClick={() => {
+                      history.push(
+                        '/profile/mantenimiento/noticias'
+                      )
+                    }}
+                  >
+                    Nueva Noticia
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className='col-md-12  animate__animated animate__fadeIn'>
                 <Pagination
                   selector={'notice'}
-                  subSelector='noticies'
+
                 />
               </div>
-
-              <div className='col-md-6'>
-                <button
-                  className='btn primary btn-block mb-3'
-                  type='button'
-                  onClick={() => {
-                    history.push(
-                      '/profile/mantenimiento/noticias'
-                    )
-                  }}
-                >
-                  Nueva Noticia
-                </button>
-              </div>
-            </>
-          ) : (
-            <div className='col-md-12  animate__animated animate__fadeIn'>
-              <Pagination
-                selector={'notice'}
-
-              />
-            </div>
-          )}
+            )}
+          </div>
         </div>
         <div className='row animate__animated animate__fadeIn'>
           <CardScreen

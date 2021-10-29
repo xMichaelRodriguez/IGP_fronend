@@ -2,7 +2,6 @@ import { fetchAsync } from '../helpers/fetching';
 import { types } from '../types/types';
 import Swal from 'sweetalert2';
 import { uiRemoveError } from './authActios';
-import moment from 'moment';
 export const startnoticeAddNew = (notice) => {
   return async (dispatch) => {
     try {
@@ -19,7 +18,7 @@ export const startnoticeAddNew = (notice) => {
       });
       const modNotice = {
         ...notice,
-        date: moment().toISOString(),
+        date: new Date()
       };
       const resp = await fetchAsync(
         'noticies/newNotice',
@@ -100,7 +99,7 @@ export const noticetStartUpdated = (notice) => {
 
       const modNotice = {
         ...notice,
-        date: moment(),
+        date: new Date(),
       };
 
       const resp = await fetchAsync(
@@ -112,13 +111,13 @@ export const noticetStartUpdated = (notice) => {
 
       if (body.ok) {
         dispatch(noticetUpdated(body.noticies));
-        dispatch(noticeClearActive());
         Swal.close();
         Swal.fire(
           'Noticia Actualizada',
           notice.title,
           'success'
         );
+        dispatch(noticeClearActive());
       } else {
         Swal.close();
         Swal.fire('Error', body.msg, 'error');
