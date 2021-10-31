@@ -1,6 +1,5 @@
 import Swal from 'sweetalert2'
 import {
-  fetchAsync,
   fetchAsyncToCommics,
   fetchSync,
 } from '../helpers/fetching'
@@ -81,7 +80,7 @@ export const commicStartDelted = (id) => {
               Swal.showLoading()
             },
           })
-          const response = await fetchAsync(
+          const response = await fetchAsyncToCommics(
             `commics/${id}`,
             '',
             'DELETE'

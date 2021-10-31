@@ -28,8 +28,8 @@ export const DatePickerScreen = ({ rute }) => {
 
   const handleSearchForDate = () => {
     if (isFormValid()) {
-      const start = new Date(startDate).toLocaleDateString('en-US')
-      const end = new Date(endDate).toLocaleDateString('en-US')
+      const start = new Date(startDate)
+      const end = new Date(endDate)
 
       if (rute === 'notice') {
         dispatch(

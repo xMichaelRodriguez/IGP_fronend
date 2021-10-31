@@ -8,8 +8,9 @@ import {
 
 import validator from 'validator';
 import {
+  startstoryAddNew,
   storyClearActive,
-  storyUpdated,
+  storyStartUpdated,
 } from '../../actions/events';
 import {
   noticeClearActive,
@@ -17,8 +18,6 @@ import {
   startnoticeAddNew,
 } from '../../actions/noticesActions';
 import { FaCloudUploadAlt } from 'react-icons/fa';
-import { fetchAsync } from '../../helpers/fetching';
-import Swal from 'sweetalert2';
 
 const initialForm = {
   title: '',
@@ -116,100 +115,30 @@ export const ManageScreen = () => {
     if (isFormValid()) {
       if (token === 'noticias' && activeNotice) {
         // actualiza una noticia
-        const resp = await dispatch(
+        dispatch(
           noticetStartUpdated(formValue)
         );
+
         dispatch(noticeClearActive());
         setFormValue(initialForm);
-        if (!resp) return;
+
       } else if (token === 'noticias' && !activeNotice) {
         // agrega una noticia
-        const resp = await dispatch(
+        dispatch(
           startnoticeAddNew(formValue)
         );
         dispatch(noticeClearActive());
         setFormValue(initialForm);
 
-        if (!resp) return;
+
       } else if (token === 'historias' && activeStory) {
         // editar una historia
-        Swal.fire({
-          title: 'Actualizando...',
-          text: 'Por favor espere...',
-          allowOutsideClick: false,
-          allowEnterKey: false,
-          allowEscapeKey: false,
-          showConfirmButton: false,
-          onBeforeOpen: () => {
-            Swal.showLoading();
-          },
-        });
+        dispatch(storyStartUpdated(formValue))
+        setFormValue(initialForm);
 
-        setFormValue({
-          ...formValue,
-
-          publicImg_id: activeStory.publicImg_id,
-        });
-
-
-        const result = await fetchAsync(
-          `stories/${activeStory.id}`,
-          formValue,
-          'PUT'
-        );
-        const body = await result.json();
-
-        if (body.ok) {
-          dispatch(storyUpdated(body));
-          dispatch(storyClearActive());
-          Swal.close();
-          Swal.fire(
-            'Historia Actualizada',
-            formValue.title,
-            'success'
-          );
-          setFormValue(initialForm);
-        } else {
-          Swal.fire('Error', body.msg, 'danger');
-        }
       } else if (token === 'historias' && !activeStory) {
-        // agrega una historia
-        Swal.fire({
-          title: 'Guardando...',
-          text: 'Por favor espere...',
-          allowOutsideClick: false,
-          allowEnterKey: false,
-          allowEscapeKey: false,
-          showConfirmButton: false,
-          onBeforeOpen: () => {
-            Swal.showLoading();
-          },
-        });
-
-        const resp = await fetchAsync(
-          'stories/new',
-          formValue,
-          'POST'
-        );
-        const body = await resp.json();
-
-        if (body.ok) {
-          Swal.close();
-          Swal.fire(
-            'Historia Publicada',
-            formValue.title,
-            'success'
-          );
-          dispatch(storyClearActive());
-          setFormValue(initialForm);
-
-        } else {
-          if (body?.msg) {
-            Swal.fire(body.msg);
-          }
-          Swal.fire({ title: 'Algo Salio Mal :(', text: body.errors.body.msg, icon: "info" });
-        }
-
+        dispatch(startstoryAddNew(formValue))
+        setFormValue(initialForm)
       }
     }
   };

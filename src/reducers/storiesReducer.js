@@ -56,7 +56,6 @@ export const storiesReducer = (
     case types.storyLoaded:
       return {
         ...state,
-
         stories: [...action.payload.stories],
         totalDocs: action.payload.totalDocs,
         totalPages: action.payload.totalPages,

@@ -35,89 +35,40 @@ export const fetchAsync = (
         'x-token': token.toString(),
       },
     })
-  } else {
-    const content = {
-      title: data.title,
-      body: data.body,
-      date: new Date(),
-      imageUrl: data.imageUrl,
-      publicImg_id: data.publicImg_id
-    }
-    console.log('entro a else si no es get', data?.publicImg_id)
-    if (
-      content.imageUrl &&
-      content.publicImg_id
-    ) {
-      console.log("entro a validacion de imagen url y public img aid")
-      if (method === 'PUT') {
-        console.log('entro  put', typeof content.imageUrl)
-        if (typeof content.imageUrl === 'object') {
-          console.log('entro a typeof object')
-          const formDataPut = new FormData()
-          formDataPut.append('title', content.title)
-          formDataPut.append('body', content.body)
-          formDataPut.append('date', content.date)
+  }
 
-          formDataPut.append('image', content.imageUrl)
-          console.log(formDataPut.get('image'))
-          return fetch(url, {
-            method,
-            mode: 'cors',
-            headers: {
-              'Access-Control-Allow-Origin': '*',
-              accept: 'application/json',
-              'x-token': token.toString(),
-            },
-            body: formDataPut,
-          })
-        }
+  return fetch(url, {
+    method, mode: 'cors', headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+      'x-token': token.toString()
+    },
+    body: JSON.stringify(data)
+  })
+}
 
-        if (
-          content.publicImg_id !== '' &&
-          content.imageUrl.includes('https')
-        ) {
-          console.log('entro https')
-          return fetch(url, {
-            method,
-            mode: 'cors',
-
-            headers: {
-              'Access-Control-Allow-Origin': '*',
-              'Content-Type': 'application/json',
-              'x-token': token.toString(),
-            },
-            body: JSON.stringify(content),
-          })
-        }
-
-
-
-      }
-    } else if (method === 'PUT') {
-      return fetch(url, {
-        method, mode: 'cors', headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-          'x-token': token.toString()
-        },
-        body: JSON.stringify(data)
-      })
-
-    }
-
-
-
-    if (
-      method === 'POST' &&
-      typeof data.imageUrl === 'object'
-    ) {
-      console.log('entro post con imagen')
+export const fetchAsyncHistory = (
+  endPoint,
+  data,
+  method = 'POST') => {
+  const url = `${baseUrl}/${endPoint}` //localhost:4000/api/...
+  const token = localStorage.getItem('token') || ''
+  const content = {
+    title: data.title,
+    body: data.body,
+    date: new Date(),
+    imageUrl: data.imageUrl,
+    publicImg_id: data.publicImg_id
+  }
+  if (method === 'POST') {
+    if (typeof content.imageUrl === 'object') {
+      console.log('is object')
 
       const formDataPost = new FormData()
       formDataPost.append('title', content.title)
       formDataPost.append('body', content.body)
       formDataPost.append('date', content.date)
-      formDataPost.append('publicImg_id', data.publicImg_id)
+      formDataPost.append('publicImg_id', content.publicImg_id)
       formDataPost.append('image', content.imageUrl)
 
       return fetch(url, {
@@ -130,31 +81,73 @@ export const fetchAsync = (
         },
         body: formDataPost,
       })
-    } else if (method === 'POST') {
-      console.log('entro solo post');
+    } else {
+      console.log('is string');
 
       return fetch(url, {
         method, headers: {
           'Content-Type': 'application/json',
           'x-token': token.toString(),
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(content),
       })
     }
 
+  }
+  if (method === 'PUT') {
+    console.log('is PUT')
+    if (typeof content.imageUrl === 'object') {
+      console.log('is object PUT')
+      const formDataPut = new FormData()
+      formDataPut.append('title', content.title)
+      formDataPut.append('body', content.body)
+      formDataPut.append('date', content.date)
 
-    if (method === 'DELETE') {
+      formDataPut.append('image', content.imageUrl)
       return fetch(url, {
         method,
+        mode: 'cors',
         headers: {
-          'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
+          accept: 'application/json',
           'x-token': token.toString(),
         },
+        body: formDataPut,
+      })
+    }
+
+    if (
+      content.publicImg_id !== '' &&
+      typeof content.imageUrl === 'string'
+    ) {
+      console.log('is https')
+      return fetch(url, {
+        method,
+        mode: 'cors',
+
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          'x-token': token.toString(),
+        },
+        body: JSON.stringify(content),
       })
     }
   }
+
+
+
+  return fetch(url, {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'x-token': token.toString(),
+    },
+  })
+
 }
+
 
 export const fetchAsyncToCommics = (
   endPoint,
@@ -164,7 +157,7 @@ export const fetchAsyncToCommics = (
   const url = `${baseUrl}/${endPoint}` //localhost:4000/api/...
   const token = localStorage.getItem('token') || ''
 
-  console.log(url)
+
   if (method === 'POST') {
     const formData = new FormData()
 
@@ -187,6 +180,15 @@ export const fetchAsyncToCommics = (
       body: formData,
     })
   }
+  return fetch(url, {
+    method,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      accept: 'application/json',
+      'x-token': token.toString(),
+    },
+    body: JSON.stringify(data),
+  });
 }
 
 

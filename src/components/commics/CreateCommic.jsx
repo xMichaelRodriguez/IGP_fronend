@@ -9,7 +9,7 @@ import {
 import { commicStartAddNew } from '../../actions/commicsActions'
 import { useForm } from '../../hooks/useForm'
 import { useFormFile } from '../../hooks/useFormFile'
-
+import validator from 'validator'
 const initialState = {
   title: '',
   coverPage: '',
@@ -19,6 +19,7 @@ const initialState = {
   image4: '',
   image5: '',
 }
+const noValid = /\s/
 export const CreateCommic = () => {
   const [formValue, handleInputChangeFile, resetFile] =
     useFormFile(initialState)
@@ -32,28 +33,85 @@ export const CreateCommic = () => {
   initialState.title = formTitle.title
 
   const formValid = () => {
-    if (formValue.coverPage.length <= 0) {
+    if (validator.isEmpty(formValue.title)) {
+      dispatch(setError('Titulo del commic requerido'))
+      return false
+    }
+
+    if (typeof formValue.coverPage !== 'object') {
       dispatch(setError('Portada requerida'))
       return false
     }
-    if (formValue.image1.length <= 0) {
+    if (typeof formValue.image1 !== 'object') {
       dispatch(setError('Imagen 1 requerida'))
       return false
     }
-    if (formValue.image2.length <= 0) {
+    if (typeof formValue.image2 !== 'object') {
       dispatch(setError('Imagen 2 requerida'))
       return false
     }
-    if (formValue.image3.length <= 0) {
+    if (typeof formValue.image3 !== 'object') {
       dispatch(setError('Imagen 3 requerida'))
       return false
     }
-    if (formValue.image4.length <= 0) {
+    if (typeof formValue.image4 !== 'object') {
       dispatch(setError('Imagen 4 requerida'))
       return false
     }
-    if (formValue.image5.length <= 0) {
+    if (typeof formValue.image5 !== 'object') {
       dispatch(setError('Imagen 5 requerida'))
+      return false
+    }
+    dispatch(uiRemoveError())
+    return true
+  }
+  const formValidNames = () => {
+    if (noValid.test(formValue.coverPage?.name)) {
+      dispatch(
+        setError(
+          'Portada  su nombre no debe contener espacios'
+        )
+      )
+      return false
+    }
+    if (noValid.test(formValue.image1?.name)) {
+      dispatch(
+        setError(
+          'Imagen 1  su nombre no debe contener espacios'
+        )
+      )
+      return false
+    }
+    if (noValid.test(formValue.image2?.name)) {
+      dispatch(
+        setError(
+          'Imagen 2  su nombre no debe contener espacios'
+        )
+      )
+      return false
+    }
+    if (noValid.test(formValue.image3?.name)) {
+      dispatch(
+        setError(
+          'Imagen 3 su nombre no debe contener espacios'
+        )
+      )
+      return false
+    }
+    if (noValid.test(formValue.image4?.name)) {
+      dispatch(
+        setError(
+          'Imagen 4  su nombre no debe contener espacios'
+        )
+      )
+      return false
+    }
+    if (noValid.test(formValue.image5?.name)) {
+      dispatch(
+        setError(
+          'Imagen 5 su nombre no debe contener espacios'
+        )
+      )
       return false
     }
     dispatch(uiRemoveError())
@@ -61,7 +119,7 @@ export const CreateCommic = () => {
   }
 
   const handleSave = () => {
-    if (formValid()) {
+    if (formValid() && formValidNames()) {
       dispatch(commicStartAddNew({ commic: formValue }))
       resetFile()
       reset()
@@ -81,6 +139,7 @@ export const CreateCommic = () => {
           className='btn btn-link w-25'
           type='button'
           onClick={() => {
+            dispatch(uiRemoveError())
             history.goBack()
           }}
         >
@@ -93,15 +152,21 @@ export const CreateCommic = () => {
             </label>
             <input
               type='text'
-              className='form-control'
+              className={` form-control ${
+                msgError.includes('Titulo ')
+                  ? 'is-invalid'
+                  : ''
+              }`}
               id='commiictitle'
               value={formTitle.title}
               onChange={handleInputChange}
               name='title'
             />
-            <div className='valid-feedback'>
-              Looks good!
-            </div>
+            {msgError.includes('Titulo ') && (
+              <div className='invalid-feedback'>
+                {msgError}
+              </div>
+            )}
           </div>
           <div className='col-md-6 mb-3'>
             <label htmlFor='coverPage'>

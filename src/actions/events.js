@@ -1,4 +1,4 @@
-import { fetchAsync } from '../helpers/fetching'
+import { fetchAsync, fetchAsyncHistory } from '../helpers/fetching'
 import { types } from '../types/types'
 import Swal from 'sweetalert2'
 import { uiRemoveError } from './authActios'
@@ -18,23 +18,21 @@ export const startstoryAddNew = (story) => {
         },
       })
 
-      const modStory = {
-        ...story,
-        date: new Date(),
-      }
-      const resp = await fetchAsync(
+      console.log(story)
+      const resp = await fetchAsyncHistory(
         'stories/new',
-        modStory,
+        story,
         'POST'
       )
+
       const body = await resp.json()
       if (body.ok) {
-        dispatch(storyAddNew(modStory))
+        dispatch(storyAddNew(story))
         dispatch(uiRemoveError())
         Swal.close()
         Swal.fire(
           'Guardado!!',
-          `La historia:${modStory.title} ha sido guardada`,
+          `La historia:${story.title} ha sido guardada`,
           'success'
         )
       }
@@ -55,7 +53,7 @@ export const storyStartLoading = ({
   startDate = null,
   endDate = null,
 }) => {
-  return async (dipatch) => {
+  return async (dipatch, getState) => {
     try {
       let resp = null
       if (startDate !== null && endDate !== null) {
@@ -63,7 +61,7 @@ export const storyStartLoading = ({
           `stories/?page=${page}&startDate=${startDate}&endDate=${endDate}`
         )
       } else {
-        resp = await fetchAsync(`stories/?page=${page}`)
+        resp = await fetchAsyncHistory(`stories/?page=${page}`, '', 'GET')
       }
       const body = await resp.json()
 
@@ -119,29 +117,25 @@ export const storyStartUpdated = (story) => {
           Swal.showLoading()
         },
       })
-      const history = {
-        ...story,
-        date: new Date(),
-      }
 
-      const resp = await fetchAsync(
+      const resp = await fetchAsyncHistory(
         `stories/${story.id}`,
-        history,
+        story,
         'PUT'
       )
       const body = await resp.json()
 
       if (body.ok) {
-        dispatch(storyUpdated(story))
-        dispatch(storyClearActive())
 
         Swal.close()
         Swal.fire(
-          'Historia Actualizado',
+          'Historia Actualizada!!!',
           story.title,
           'success'
         )
+        dispatch(storyUpdated(story))
         dispatch(uiRemoveError())
+        dispatch(storyClearActive())
       } else {
         Swal.close()
         Swal.fire('Error', body.msg, 'error')

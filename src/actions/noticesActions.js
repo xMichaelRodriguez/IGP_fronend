@@ -78,6 +78,7 @@ export const noticeStartLoading = ({
         dipatch(noticeLoaded(body));
       }
     } catch (error) {
+
       console.log(error);
     }
   };
