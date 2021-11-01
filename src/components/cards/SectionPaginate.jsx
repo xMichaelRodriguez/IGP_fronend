@@ -5,19 +5,16 @@ import { Pagination } from '../cards/Pagination'
 
 export const SectionPaginate = () => {
   const location = useLocation()
-  const param = location.pathname.split('/')[1]
+  const param = location.pathname.split('/')
   const history = useHistory()
   return (
     <div className='container-fluid py-2'>
       <div className='container'>
         <div className='row'>
-          {param === 'profile' ? (
+          {param[1] === 'profile' ? (
             <>
               <div className='col-md-6'>
-                <Pagination
-                  selector={'story'}
-                  subSelector='stories'
-                />
+                <Pagination selector={'story'} />
               </div>
 
               <div className='col-md-6'>
@@ -26,11 +23,11 @@ export const SectionPaginate = () => {
                   type='button'
                   onClick={() => {
                     history.push(
-                      '/profile/mantenimiento/historias'
+                      `/profile/mantenimiento/${param[2]}`
                     )
                   }}
                 >
-                  Nueva Historia
+                  Nueva {param[2].split('s')}
                 </button>
               </div>
             </>
