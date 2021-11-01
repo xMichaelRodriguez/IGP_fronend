@@ -15,6 +15,7 @@ export const CommentBox = ({
   commentOfForum,
 }) => {
   const { user } = useSelector((state) => state.userForum)
+
   const { msgError } = useSelector((state) => state.error)
   const [formValue, handleInputChange, reset] = useForm({
     commentBox: '',

@@ -19,6 +19,14 @@ export const RegisterForum = () => {
         text: 'Apodo necesario para registrar',
         icon: 'error',
       })
+    } else if (
+      !validator.isLength(userName, { max: 10, min: 3 })
+    ) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Apodo debe contener minimo 3 caracteres y maximo 10',
+        icon: 'error',
+      })
     } else {
       socketInstance.emit(
         'register',

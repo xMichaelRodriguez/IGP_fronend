@@ -1,4 +1,6 @@
+import Swal from "sweetalert2";
 import { fetchAsync, fetchSync } from "../helpers/fetching";
+import { socketInstance } from "../helpers/Sockets";
 import { types } from "../types/types";
 // all modules
 export const startLogin = (email, password) => {
@@ -62,3 +64,40 @@ const login = (user) => ({
   type: types.authLogin,
   payload: user,
 });
+
+
+export const startForumDelete = (id = '', foroId = '') => {
+  return async (dispatch) => {
+    if (id !== '' && foroId !== '') {
+      Swal.fire({
+        title: 'Estas seguro?',
+        text: ' No podrás revertir esto!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#8f77f2',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, estoy seguro!',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          socketInstance.emit('delete-comment', id, (err) => {
+            console.log(err)
+          })
+
+          socketInstance.on('deletedComment', data => {
+            Swal.fire({
+              title: "Borrar Comentario",
+              text: data,
+              icon: "success"
+            });
+            socketInstance.emit('load-comments', foroId)
+
+          })
+        }
+      })
+
+
+
+    }
+  }
+}

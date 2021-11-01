@@ -38,18 +38,18 @@ export const ForumScreenRead = () => {
             aria-label='breadcrumb'
             onClick={handleCleanInput}
           >
-            <ol class='breadcrumb'>
-              <li class='breadcrumb-item'>
+            <ol className='breadcrumb'>
+              <li className='breadcrumb-item'>
                 <Link to='/'>Inicio</Link>
               </li>
               <li
-                class='breadcrumb-item active'
+                className='breadcrumb-item active'
                 aria-current='page'
               >
                 <Link to='/foros'> Foros</Link>
               </li>
               <li
-                class='breadcrumb-item active '
+                className='breadcrumb-item active '
                 aria-current='page'
               >
                 {forum.theme}
