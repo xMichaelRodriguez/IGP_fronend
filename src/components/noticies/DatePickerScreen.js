@@ -51,6 +51,11 @@ export const DatePickerScreen = ({ rute }) => {
   }
 
   const isFormValid = () => {
+
+    if (new Date(startDate).toLocaleDateString('es-ES') === new Date(endDate).toLocaleDateString('es-ES')) {
+      dispatch(setError('Las Fechas no pueden ser iguales'))
+      return false
+    }
     if (!validator.isDate(startDate)) {
       dispatch(setError('Fecha inicio invalida'))
       return false
@@ -91,7 +96,13 @@ export const DatePickerScreen = ({ rute }) => {
             </h4>
 
           </div>
+          <div className='col-md-12 mb-3'>
 
+            {msgError.includes('Las Fechas') ?
+              <div class="alert alert-danger" role="alert">
+                {msgError}
+              </div> : ''}
+          </div>
           <div className='col-md-6 '>
             <div className='form-group  mb-3'>
 
