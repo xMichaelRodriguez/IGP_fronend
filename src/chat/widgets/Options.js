@@ -1,7 +1,7 @@
-import React from 'react'
-import { FaChevronRight } from 'react-icons/fa'
+import React from 'react';
+import { FaChevronRight } from 'react-icons/fa';
 
-export const Options = ({ actionProvider }) => {
+const Options = ({ actionProvider }) => {
   return actionProvider.map((option) => (
     <blockquote
       key={option.id}
@@ -15,5 +15,6 @@ export const Options = ({ actionProvider }) => {
         <FaChevronRight /> {option.text}
       </p>
     </blockquote>
-  ))
-}
+  ));
+};
+export default Options;

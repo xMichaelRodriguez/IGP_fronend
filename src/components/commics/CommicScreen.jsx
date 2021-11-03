@@ -1,38 +1,37 @@
-import React, { useEffect } from 'react'
-import Slider from 'react-slick'
-import { useParams, useHistory } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useHistory } from 'react-router-dom';
+import Slider from 'react-slick';
+import { FaArrowCircleLeft } from 'react-icons/fa';
 
-import { useDispatch, useSelector } from 'react-redux'
 import {
   commicFindById,
   commitClearActive,
-} from '../../actions/commicsActions'
-import { WaitScreen } from '../wait/WaitScreen'
-import { FaArrowCircleLeft } from 'react-icons/fa'
+} from '../../actions/commicsActions';
 
-export const CommicScreen = () => {
-  const { activeCommic } = useSelector(
-    (state) => state.commic
-  )
-  const { commicId } = useParams()
-  const history = useHistory()
-  const dispatch = useDispatch()
+import WaitScreen from '../wait/WaitScreen';
+
+const CommicScreen = () => {
+  const { activeCommic } = useSelector((state) => state.commic);
+  const { commicId } = useParams();
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(commicFindById(commicId))
-  }, [dispatch, commicId])
+    dispatch(commicFindById(commicId));
+  }, [dispatch, commicId]);
   const settings = {
     dots: true,
     infinite: false,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-  }
+  };
 
   const handleBack = () => {
-    dispatch(commitClearActive)
-    history.goBack()
-  }
+    dispatch(commitClearActive);
+    history.goBack();
+  };
   return (
     <div className='container-fluid py-5 '>
       <div className='container '>
@@ -63,5 +62,6 @@ export const CommicScreen = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+export default CommicScreen;

@@ -1,30 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-export const OrganizationItem = (props) => {
+
+const OrganizationItem = (props) => {
   return (
     <div className='card shadow-sm   text-dark mb-3 animate__animated animate__fadeIn'>
       <img
         src={props.image_url}
         alt={props.image_url}
         className='card-img'
-        style={{ maxHeight: "267px" }}
+        style={{ maxHeight: '267px' }}
       />
 
       <div className='card-body'>
         <h5 className='card-title'>
-          <Link
-            className='text-link '
-            to={`/organizaciones/${props.acronym}`}
-          >
+          <Link className='text-link ' to={`/organizaciones/${props.acronym}`}>
             {props.acronym}
           </Link>
         </h5>
 
         <p className='card-text'>
-          <small className='text-muted'>
-            Correo: {props.officer_email}
-          </small>
+          <small className='text-muted'>Correo: {props.officer_email}</small>
         </p>
       </div>
     </div>
@@ -43,3 +39,4 @@ OrganizationItem.propTypes = {
   horarios: PropTypes.array.isRequired,
   telefonos: PropTypes.array.isRequired,
 };
+export default OrganizationItem;

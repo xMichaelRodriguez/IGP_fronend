@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-export const CuentosView = () => {
+const CuentosView = () => {
   return (
     <div className='container mt-5 mb-4card animate__animated   animate__fadeIn'>
       <div className=''>
@@ -14,5 +14,6 @@ export const CuentosView = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+export default CuentosView;

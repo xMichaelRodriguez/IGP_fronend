@@ -1,66 +1,52 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { socketInstance } from '../../helpers/Sockets'
-import { useForm } from '../../hooks/useForm'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import validator from 'validator';
+import socketInstance from '../../helpers/Sockets';
+import useForm from '../../hooks/useForm';
+import { setError, uiRemoveError } from '../../actions/authActios';
 
-import validator from 'validator'
-import { useDispatch } from 'react-redux'
-import {
-  setError,
-  uiRemoveError,
-} from '../../actions/authActios'
-export const CommentBox = ({
-  foroId,
-  setCommentOfForum,
-  commentOfForum,
-}) => {
-  const { user } = useSelector((state) => state.userForum)
+const CommentBox = ({ foroId, setCommentOfForum, commentOfForum }) => {
+  const { user } = useSelector((state) => state.userForum);
 
-  const { msgError } = useSelector((state) => state.error)
+  const { msgError } = useSelector((state) => state.error);
   const [formValue, handleInputChange, reset] = useForm({
     commentBox: '',
-  })
+  });
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const { commentBox } = formValue
+  const { commentBox } = formValue;
   const handlerCommentBox = () => {
     if (isvalid()) {
       socketInstance.emit(
         'comment-in-forum',
         { commentBox, userId: user.uid, forumId: foroId },
         (data) => {
-          setCommentOfForum([
-            ...commentOfForum,
-            data.comment,
-          ])
-          reset()
-        }
-      )
+          setCommentOfForum([...commentOfForum, data.comment]);
+          reset();
+        },
+      );
     }
-  }
+  };
   const isvalid = () => {
     if (validator.isEmpty(commentBox)) {
-      dispatch(setError('Escriba un comentario!'))
-      return false
+      dispatch(setError('Escriba un comentario!'));
+      return false;
     }
 
-    dispatch(uiRemoveError())
-    return true
-  }
+    dispatch(uiRemoveError());
+    return true;
+  };
   return (
     <div className='row mt-5 mb-3'>
       <div className='col-md-12'>
         <div className='form-group needs-validation'>
-          <label htmlFor='inputUserName'>
-            Tu Comentario
-          </label>
+          <label htmlFor='inputUserName'>Tu Comentario</label>
           <textarea
             type='text'
             className={`form-control  ${
-              msgError.includes('comentario!')
-                ? 'is-invalid'
-                : ''
+              msgError.includes('comentario!') ? 'is-invalid' : ''
             } `}
             id='inputUserName'
             name='commentBox'
@@ -69,9 +55,7 @@ export const CommentBox = ({
             rows='5'
           ></textarea>
           {msgError.includes('comentario!') && (
-            <small className='invalid-feedback'>
-              {msgError}
-            </small>
+            <small className='invalid-feedback'>{msgError}</small>
           )}
         </div>
       </div>
@@ -85,5 +69,11 @@ export const CommentBox = ({
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
+CommentBox.propTypes = {
+  foroId: PropTypes.string,
+  setCommentOfForum: PropTypes.func,
+  commentOfForum: PropTypes.array,
+};
+export default CommentBox;

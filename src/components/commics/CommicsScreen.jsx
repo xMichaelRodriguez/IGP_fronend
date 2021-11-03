@@ -1,15 +1,15 @@
-import React from 'react'
-import { FaPlus } from 'react-icons/fa'
-import { useSelector } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
-import { Pagination } from '../cards/Pagination'
-import { WaitScreen } from '../wait/WaitScreen'
-import { CommicCard } from './CommicCard'
+import React from 'react';
+import { FaPlus } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
+import Pagination from '../cards/Pagination.jsx';
+import WaitScreen from '../wait/WaitScreen';
+import CommicCard from './CommicCard.jsx';
 
-export const CommicsScreen = () => {
-  const { commics } = useSelector((state) => state.commic)
-  const location = useLocation()
-  const path = location.pathname.split('/')
+const CommicsScreen = () => {
+  const { commics } = useSelector((state) => state.commic);
+  const location = useLocation();
+  const path = location.pathname.split('/');
   return (
     <div className='container-fluid py-3 animate__animated   animate__fadeIn'>
       <div className='container'>
@@ -45,5 +45,6 @@ export const CommicsScreen = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+export default CommicsScreen;

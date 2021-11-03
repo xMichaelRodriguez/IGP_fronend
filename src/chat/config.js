@@ -1,15 +1,12 @@
 // Config starter code
-import { createChatBotMessage } from 'react-chatbot-kit'
-import { GeneralOptions } from './widgets/GeneralOptions'
-import { ListRights } from './widgets/ListRights'
+import { createChatBotMessage } from 'react-chatbot-kit';
+import { FaUserAstronaut } from 'react-icons/fa';
+import GeneralOptions from './widgets/GeneralOptions';
+import ListRights from './widgets/ListRights';
 
-import { FaUserAstronaut } from 'react-icons/fa'
-
-const nameBot = 'Secury-bot'
+const nameBot = 'Secury-bot';
 const config = {
-  initialMessages: [
-    createChatBotMessage(`Hola soy ${nameBot}`),
-  ],
+  initialMessages: [createChatBotMessage(`Hola soy ${nameBot}`)],
   botName: nameBot,
   customStyles: {
     botMessageBox: {
@@ -86,5 +83,5 @@ const config = {
       mapStateToProps: ['options'],
     },
   ],
-}
-export default config
+};
+export default config;

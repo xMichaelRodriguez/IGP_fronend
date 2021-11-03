@@ -2,21 +2,17 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
 
-import { WaitScreen } from '../wait/WaitScreen';
-import { OrganizationItem } from './OrganizationItem';
+import WaitScreen from '../wait/WaitScreen';
+import OrganizationItem from './OrganizationItem';
 
-export const OrganizationScreen = () => {
+const OrganizationScreen = () => {
   const location = useLocation();
-  const { organizaciones } = useSelector(
-    (state) => state.org
-  );
+  const { organizaciones } = useSelector((state) => state.org);
 
   return (
     <div className='container-fluid mt-3 animate__animated animate__fadeIn'>
       <div className='container'>
-        {Object.entries(organizaciones).length === 0 && (
-          <WaitScreen />
-        )}
+        {Object.entries(organizaciones).length === 0 && <WaitScreen />}
 
         <div className='card-columns'>
           {!location.pathname.includes('/organizations') &&
@@ -30,3 +26,4 @@ export const OrganizationScreen = () => {
     </div>
   );
 };
+export default OrganizationScreen;

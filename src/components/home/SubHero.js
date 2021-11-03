@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
 
-import childrens from '../../img/roadKnowledge.svg'
-export const SubHero = () => {
+import childrens from '../../img/roadKnowledge.svg';
+
+const SubHero = () => {
   return (
     <div className=' container-fluid   py-5 '>
       <div className='container py-5'>
@@ -21,19 +22,17 @@ export const SubHero = () => {
               Aprendamos y Avancemos Juntos
             </h2>
             <p className='lead mb-3'>
-              Reflexiona, lee historias de vida, noticias y
-              conoce organizaciones que brindan ayuda en{' '}
-              <b className='font-weight-bold'>
-                El Salvador
-              </b>
-              . <br></br>
-              Aprende y enseña los deberes y derechos de los
-              niños, niñas y adolescentes mediante la
-              biblioteca virtual integrada en la applicación
+              Reflexiona, lee historias de vida, noticias y conoce
+              organizaciones que brindan ayuda en{' '}
+              <b className='font-weight-bold'>El Salvador</b>. <br></br>
+              Aprende y enseña los deberes y derechos de los niños, niñas y
+              adolescentes mediante la biblioteca virtual integrada en la
+              applicación
             </p>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+export default SubHero;

@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
-import {
-  setError,
-  uiRemoveError,
-} from '../../actions/authActios';
-
 import validator from 'validator';
+import { FaCloudUploadAlt } from 'react-icons/fa';
+import { setError, uiRemoveError } from '../../actions/authActios';
+
 import {
   startstoryAddNew,
   storyClearActive,
@@ -17,7 +15,6 @@ import {
   noticetStartUpdated,
   startnoticeAddNew,
 } from '../../actions/noticesActions';
-import { FaCloudUploadAlt } from 'react-icons/fa';
 
 const initialForm = {
   title: '',
@@ -26,18 +23,14 @@ const initialForm = {
   date: new Date(),
   publicImg_id: '',
 };
-export const ManageScreen = () => {
+const ManageScreen = () => {
   const dispatch = useDispatch();
   const refImage = useRef(null);
   const { token } = useParams();
   const history = useHistory();
   const { msgError } = useSelector((state) => state.error);
-  const { activeNotice } = useSelector(
-    (state) => state.notice
-  );
-  const { activeStory } = useSelector(
-    (state) => state.story
-  );
+  const { activeNotice } = useSelector((state) => state.notice);
+  const { activeStory } = useSelector((state) => state.story);
   const [formValue, setFormValue] = useState(initialForm);
 
   useEffect(() => {
@@ -58,8 +51,8 @@ export const ManageScreen = () => {
   // maneja el cambio del input file
   const handleImage = (e) => {
     const image = e.target.files[0];
-    let readFile = new FileReader();
-    let img = refImage.current;
+    const readFile = new FileReader();
+    const img = refImage.current;
 
     if (image) {
       setFormValue({
@@ -68,7 +61,7 @@ export const ManageScreen = () => {
       });
 
       readFile.readAsDataURL(image);
-      readFile.onloadend = function () {
+      readFile.onloadend = () => {
         img.src = readFile.result;
       };
     }
@@ -91,11 +84,13 @@ export const ManageScreen = () => {
     if (
       !validator.isLength(formValue.body, {
         min: 50,
-        max: 2000
+        max: 2000,
       })
     ) {
       dispatch(
-        setError('Cuerpo de la publicacion requerido, minimo 50 caracteres, maximo de 2000')
+        setError(
+          'Cuerpo de la publicacion requerido, minimo 50 caracteres, maximo de 2000',
+        ),
       );
       return false;
     }
@@ -115,30 +110,22 @@ export const ManageScreen = () => {
     if (isFormValid()) {
       if (token === 'noticias' && activeNotice) {
         // actualiza una noticia
-        dispatch(
-          noticetStartUpdated(formValue)
-        );
+        dispatch(noticetStartUpdated(formValue));
 
         dispatch(noticeClearActive());
         setFormValue(initialForm);
-
       } else if (token === 'noticias' && !activeNotice) {
         // agrega una noticia
-        dispatch(
-          startnoticeAddNew(formValue)
-        );
+        dispatch(startnoticeAddNew(formValue));
         dispatch(noticeClearActive());
         setFormValue(initialForm);
-
-
       } else if (token === 'historias' && activeStory) {
         // editar una historia
-        dispatch(storyStartUpdated(formValue))
+        dispatch(storyStartUpdated(formValue));
         setFormValue(initialForm);
-
       } else if (token === 'historias' && !activeStory) {
-        dispatch(startstoryAddNew(formValue))
-        setFormValue(initialForm)
+        dispatch(startstoryAddNew(formValue));
+        setFormValue(initialForm);
       }
     }
   };
@@ -172,42 +159,36 @@ export const ManageScreen = () => {
           <label htmlFor='title'>Titulo</label>
           <input
             type='text'
-            className={`form-control ${msgError.includes('Titulo') ||
-              msgError.includes('Minimo')
-              ? 'is-invalid'
-              : ''
-              }`}
+            className={`form-control ${
+              msgError.includes('Titulo') || msgError.includes('Minimo')
+                ? 'is-invalid'
+                : ''
+            }`}
             name='title'
             value={formValue.title}
             onChange={handleInputChange}
             placeholder='titulo'
             autoComplete='off'
           />
-          {msgError.includes('Titulo') ||
-            msgError.includes('Minimo') ? (
-            <div className='invalid-feedback'>
-              {msgError}
-            </div>
+          {msgError.includes('Titulo') || msgError.includes('Minimo') ? (
+            <div className='invalid-feedback'>{msgError}</div>
           ) : null}
         </div>
         <div className='form-group'>
           <label htmlFor='cuerpo'>Cuerpo</label>
           <textarea
-            className={`form-control ${msgError.includes('Cuerpo') ||
-              msgError.includes('debe')
-              ? 'is-invalid'
-              : ''
-              }`}
+            className={`form-control ${
+              msgError.includes('Cuerpo') || msgError.includes('debe')
+                ? 'is-invalid'
+                : ''
+            }`}
             name='body'
             rows='5'
             value={formValue.body}
             onChange={handleInputChange}
           ></textarea>
-          {msgError.includes('Cuerpo') ||
-            msgError.includes('debe') ? (
-            <div className='invalid-feedback'>
-              {msgError}
-            </div>
+          {msgError.includes('Cuerpo') || msgError.includes('debe') ? (
+            <div className='invalid-feedback'>{msgError}</div>
           ) : null}
         </div>
         {token === 'historias' && (
@@ -228,10 +209,7 @@ export const ManageScreen = () => {
                 <FaCloudUploadAlt /> Subir Imagen
               </button>
               {msgError.includes('imagen') && (
-                <div
-                  className='alert alert-danger'
-                  role='alert'
-                >
+                <div className='alert alert-danger' role='alert'>
                   {msgError}
                 </div>
               )}
@@ -241,8 +219,7 @@ export const ManageScreen = () => {
               style={{
                 width: '50%',
                 height: '50%',
-                display: `${formValue.imageUrl ? 'block' : 'none'
-                  }`,
+                display: `${formValue.imageUrl ? 'block' : 'none'}`,
               }}
             >
               <div className='card-img-top '>
@@ -261,12 +238,11 @@ export const ManageScreen = () => {
 
         <div className='form-group'>
           <button className='btn primary' type='submit'>
-            {activeNotice || activeStory
-              ? 'Modificar'
-              : 'Guardar'}
+            {activeNotice || activeStory ? 'Modificar' : 'Guardar'}
           </button>
         </div>
       </form>
     </div>
   );
 };
+export default ManageScreen;

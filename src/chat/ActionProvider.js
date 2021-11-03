@@ -1,16 +1,14 @@
 //  in ActionProvider.js
 class ActionProvider {
   constructor(createChatBotMessage, setStateFunc) {
-    this.createChatBotMessage = createChatBotMessage
-    this.setState = setStateFunc
+    this.createChatBotMessage = createChatBotMessage;
+    this.setState = setStateFunc;
   }
 
   handleHello() {
-    const message = this.createChatBotMessage(
-      'Hola. Un placer conocerte.'
-    )
+    const message = this.createChatBotMessage('Hola. Un placer conocerte.');
 
-    this.addMessageToBotState(message)
+    this.addMessageToBotState(message);
   }
 
   handleHumanRights = () => {
@@ -19,10 +17,10 @@ class ActionProvider {
       {
         withAvatar: true,
         widget: 'humanRights',
-      }
-    )
-    this.addMessageToBotState(message)
-  }
+      },
+    );
+    this.addMessageToBotState(message);
+  };
 
   handleDefault = () => {
     const message = this.createChatBotMessage(
@@ -30,11 +28,11 @@ class ActionProvider {
       {
         withAvatar: true,
         widget: 'GeneralOptions',
-      }
-    )
+      },
+    );
 
-    this.addMessageToBotState(message)
-  }
+    this.addMessageToBotState(message);
+  };
 
   addMessageToBotState = (messages, newState) => {
     if (Array.isArray(messages)) {
@@ -44,7 +42,7 @@ class ActionProvider {
         messages: [...state.messages, ...messages],
         gist: '',
         infoBox: '',
-      }))
+      }));
     } else {
       this.setState((state) => ({
         ...state,
@@ -52,9 +50,9 @@ class ActionProvider {
         messages: [...state.messages, messages],
         gist: '',
         infoBox: '',
-      }))
+      }));
     }
-  }
+  };
 }
 
-export default ActionProvider
+export default ActionProvider;

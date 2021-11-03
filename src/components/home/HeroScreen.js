@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-import './styleAnimation.css'
-import LearnImage from '../../img/undraw_book_reading_kx9s.svg'
-export const HeroScreen = () => {
+import './styleAnimation.css';
+import LearnImage from '../../img/undraw_book_reading_kx9s.svg';
+
+const HeroScreen = () => {
   return (
     <div className='container-fluid primary  py-5 '>
       <div className='container py-5'>
@@ -12,9 +13,8 @@ export const HeroScreen = () => {
               Una Vida Segura Enseña
             </h3>
             <p className=' lead mb-3'>
-              Enriquece el proceso de enseñanza sobre temas
-              de violencia y abuso de niños, niñas y
-              adolescentes atravez del uso de una web app
+              Enriquece el proceso de enseñanza sobre temas de violencia y abuso
+              de niños, niñas y adolescentes atravez del uso de una web app
             </p>
           </div>
           <div className='col-md-6'>
@@ -31,5 +31,6 @@ export const HeroScreen = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+export default HeroScreen;

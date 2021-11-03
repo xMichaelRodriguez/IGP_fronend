@@ -1,9 +1,11 @@
-import { fetchAsync } from '../helpers/fetching';
-import { types } from '../types/types';
 import Swal from 'sweetalert2';
+import { fetchAsync } from '../helpers/fetching';
+import types from '../types/types';
 import { uiRemoveError } from './authActios';
+
 export const startnoticeAddNew = (notice) => {
   return async (dispatch) => {
+    const notice2 = { ...notice };
     try {
       Swal.fire({
         title: 'Guardando...',
@@ -16,21 +18,15 @@ export const startnoticeAddNew = (notice) => {
           Swal.showLoading();
         },
       });
-      delete notice.imageUrl
-      delete notice.publicImg_id
+      delete notice2.imageUrl;
+      delete notice2.publicImg_id;
 
       const modNotice = {
-        ...notice,
-        date: new Date()
+        ...notice2,
+        date: new Date(),
       };
 
-
-
-      const resp = await fetchAsync(
-        'noticies/newNotice',
-        modNotice,
-        'POST'
-      );
+      const resp = await fetchAsync('noticies/newNotice', modNotice, 'POST');
       const body = await resp.json();
 
       if (body.ok) {
@@ -40,10 +36,11 @@ export const startnoticeAddNew = (notice) => {
         Swal.fire(
           'Guardado!!',
           `La noticia:${notice.title} ha sido guardada`,
-          'success'
+          'success',
         );
       }
     } catch (error) {
+      /* eslint-disable no-console */
       console.log(error);
       Swal.close();
     }
@@ -65,7 +62,7 @@ export const noticeStartLoading = ({
       let resp = null;
       if (startDate !== null && endDate !== null) {
         resp = await fetchAsync(
-          `noticies/?page=${page}&startDate=${startDate}&endDate=${endDate}`
+          `noticies/?page=${page}&startDate=${startDate}&endDate=${endDate}`,
         );
       } else {
         resp = await fetchAsync(`noticies/?page=${page}`);
@@ -78,7 +75,6 @@ export const noticeStartLoading = ({
         dipatch(noticeLoaded(body));
       }
     } catch (error) {
-
       console.log(error);
     }
   };
@@ -112,18 +108,14 @@ export const noticetStartUpdated = (notice) => {
       const resp = await fetchAsync(
         `noticies/editNotice/${notice.id}`,
         modNotice,
-        'PUT'
+        'PUT',
       );
       const body = await resp.json();
 
       if (body.ok) {
         dispatch(noticetUpdated(body.noticies));
         Swal.close();
-        Swal.fire(
-          'Noticia Actualizada',
-          notice.title,
-          'success'
-        );
+        Swal.fire('Noticia Actualizada', notice.title, 'success');
         dispatch(noticeClearActive());
       } else {
         Swal.close();
@@ -157,24 +149,16 @@ export const startnoticeDeleted = (id) => {
         cancelButtonText: 'Cancelar',
       }).then((result) => {
         if (result.isConfirmed) {
-          fetchAsync(
-            `noticies/deleteNotice/${id}`,
-            {},
-            'DELETE'
-          ).then((resp) =>
-            resp.json().then((resp) => {
-              if (resp.ok) {
+          fetchAsync(`noticies/deleteNotice/${id}`, {}, 'DELETE').then((resp) =>
+            resp.json().then((response) => {
+              if (response.ok) {
                 dispatch(noticeDeleted(id));
                 dispatch(noticeStartLoading({}));
-                Swal.fire(
-                  'Noticia  Eliminada',
-                  '',
-                  'success'
-                );
+                Swal.fire('Noticia  Eliminada', '', 'success');
               } else {
-                Swal.fire('Error', resp.msg, 'error');
+                Swal.fire('Error', response.msg, 'error');
               }
-            })
+            }),
           );
         }
       });

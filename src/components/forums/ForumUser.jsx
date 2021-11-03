@@ -1,22 +1,21 @@
-import React, { useEffect } from 'react'
-import { FaPlusCircle, FaUserCircle } from 'react-icons/fa'
-import { useDispatch, useSelector } from 'react-redux'
-import { startLoadingMyForums } from '../../actions/forumsAction'
-import { uiOpenModal } from '../../actions/uiActions'
-import { UserCardForums } from './UserCardForums'
-export const ForumUser = ({ user }) => {
-  const { myForums } = useSelector(
-    (state) => state.userForum
-  )
-  const dispatch = useDispatch()
+import React, { useEffect } from 'react';
+import { FaPlusCircle, FaUserCircle } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { startLoadingMyForums } from '../../actions/forumsAction';
+import { uiOpenModal } from '../../actions/uiActions';
+import UserCardForums from './UserCardForums.jsx';
+
+const ForumUser = ({ user }) => {
+  const { myForums } = useSelector((state) => state.userForum);
+  const dispatch = useDispatch();
   const handlerCreateForum = () => {
     // dispatch(setActiveForum())
-    dispatch(uiOpenModal())
-  }
+    dispatch(uiOpenModal());
+  };
 
   useEffect(() => {
-    dispatch(startLoadingMyForums())
-  }, [dispatch])
+    dispatch(startLoadingMyForums());
+  }, [dispatch]);
   return (
     <div>
       <blockquote className='blockquote card'>
@@ -24,10 +23,7 @@ export const ForumUser = ({ user }) => {
           <FaUserCircle /> {user.name}
         </p>
 
-        <button
-          className='btn primary btn-sm'
-          onClick={handlerCreateForum}
-        >
+        <button className='btn primary btn-sm' onClick={handlerCreateForum}>
           <small>Crear Foro </small>
           <FaPlusCircle />
         </button>
@@ -38,6 +34,7 @@ export const ForumUser = ({ user }) => {
         <div className='row containerMyForums'>
           {Object.entries(myForums).length !== 0 ? (
             myForums.map((forum) => (
+              /* eslint no-underscore-dangle:0 */
               <div className='col-md-12' key={forum._id}>
                 <UserCardForums myForums={forum} />
               </div>
@@ -48,5 +45,6 @@ export const ForumUser = ({ user }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+export default ForumUser;

@@ -1,24 +1,17 @@
-import React from 'react'
-import { useHistory, useParams } from 'react-router'
+import React from 'react';
+import { useHistory, useParams } from 'react-router';
 
-import {
-  FaArrowLeft,
-  FaFacebook,
-  FaTwitter,
-  FaYoutube,
-} from 'react-icons/fa'
+import { FaArrowLeft, FaFacebook, FaTwitter, FaYoutube } from 'react-icons/fa';
 
-import { BiMailSend } from 'react-icons/bi'
-import { WaitScreen } from '../wait/WaitScreen'
-import { useOrganizations } from '../../hooks/useOrganizations'
+import { BiMailSend } from 'react-icons/bi';
+import WaitScreen from '../wait/WaitScreen';
+import useOrganizations from '../../hooks/useOrganizations';
 
-export const OrganizationCard = () => {
-  const history = useHistory()
-  const { organization_acronym } = useParams()
+const OrganizationCard = () => {
+  const history = useHistory();
+  const { organization_acronym: organizationAcronym } = useParams();
 
-  const { data: organization, loading } = useOrganizations(
-    organization_acronym
-  )
+  const { data: organization, loading } = useOrganizations(organizationAcronym);
 
   return (
     <div className='container-fluid py-4'>
@@ -54,33 +47,21 @@ export const OrganizationCard = () => {
                       Telefono(s)
                     </p>
                     <ul className='list-group list-group-flush'>
-                      {organization.telefonos.map(
-                        (telefono, index) => (
-                          <li
-                            className='list-group-item text-muted'
-                            key={index}
-                          >
-                            {telefono}
-                          </li>
-                        )
-                      )}
+                      {organization.telefonos.map((telefono, index) => (
+                        <li className='list-group-item text-muted' key={index}>
+                          {telefono}
+                        </li>
+                      ))}
                     </ul>
                   </div>
                   <div className='mb-2 col-md-12'>
-                    <p className='card-text font-weight-bold mb-1'>
-                      Horarios
-                    </p>
+                    <p className='card-text font-weight-bold mb-1'>Horarios</p>
                     <ul className='list-group list-group-flush'>
-                      {organization.horarios.map(
-                        (horario, index) => (
-                          <li
-                            className='list-group-item text-muted'
-                            key={index}
-                          >
-                            {horario + '\n'}
-                          </li>
-                        )
-                      )}
+                      {organization.horarios.map((horario, index) => (
+                        <li className='list-group-item text-muted' key={index}>
+                          {`${horario}\n`}
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -90,8 +71,7 @@ export const OrganizationCard = () => {
                   <p>Official de Información</p>
                   <h4>{organization.officer_name}</h4>
                   <p className='card-text text-muted'>
-                    <BiMailSend size='1.3rem' />{' '}
-                    {organization.officer_email}
+                    <BiMailSend size='1.3rem' /> {organization.officer_email}
                   </p>
 
                   <a
@@ -109,70 +89,58 @@ export const OrganizationCard = () => {
                   <div className='col-md-4'>
                     <p className='text-primary'>Facebook</p>
                     <ul className='list-group list-group-flush'>
-                      {organization.redes.facebook_url.map(
-                        (socialNetwork) => (
-                          <li className='list-group-item' key={socialNetwork}>
-                            <a
-                              rel='noreferrer'
-
-                              className='btn-link'
-                              href={socialNetwork}
-                              target='_blank'
-                            >
-                              <small>
-                                <FaFacebook color='blue' />{' '}
-                                {socialNetwork}
-                              </small>
-                            </a>
-                          </li>
-                        )
-                      )}
+                      {organization.redes.facebook_url.map((socialNetwork) => (
+                        <li className='list-group-item' key={socialNetwork}>
+                          <a
+                            rel='noreferrer'
+                            className='btn-link'
+                            href={socialNetwork}
+                            target='_blank'
+                          >
+                            <small>
+                              <FaFacebook color='blue' /> {socialNetwork}
+                            </small>
+                          </a>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                   <div className='col-md-4'>
                     <p className='text-primary'>Twitter</p>
                     <ul className='list-group list-group-flush'>
-                      {organization.redes.twitter_url.map(
-                        (socialNetwork) => (
-                          <li className='list-group-item' key={socialNetwork}>
-                            <a
-                              rel='noreferrer'
-
-                              className='btn-link'
-                              href={socialNetwork}
-                              target='_blank'
-                            >
-                              <small>
-                                <FaTwitter />{' '}
-                                {socialNetwork}
-                              </small>
-                            </a>
-                          </li>
-                        )
-                      )}
+                      {organization.redes.twitter_url.map((socialNetwork) => (
+                        <li className='list-group-item' key={socialNetwork}>
+                          <a
+                            rel='noreferrer'
+                            className='btn-link'
+                            href={socialNetwork}
+                            target='_blank'
+                          >
+                            <small>
+                              <FaTwitter /> {socialNetwork}
+                            </small>
+                          </a>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                   <div className='col-md-4'>
                     <p className='text-danger'>Youtube</p>
                     <ul className='list-group list-group-flush'>
-                      {organization.redes.youtube_url.map(
-                        (socialNetwork) => (
-                          <li className='list-group-item' key={socialNetwork}>
-                            <a
-                              rel='noreferrer'
-
-                              className='btn-link'
-                              href={socialNetwork}
-                              target='_blank'
-                            >
-                              <small>
-                                <FaYoutube color='red' />{' '}
-                                {socialNetwork}
-                              </small>
-                            </a>
-                          </li>
-                        )
-                      )}
+                      {organization.redes.youtube_url.map((socialNetwork) => (
+                        <li className='list-group-item' key={socialNetwork}>
+                          <a
+                            rel='noreferrer'
+                            className='btn-link'
+                            href={socialNetwork}
+                            target='_blank'
+                          >
+                            <small>
+                              <FaYoutube color='red' /> {socialNetwork}
+                            </small>
+                          </a>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
@@ -190,5 +158,6 @@ export const OrganizationCard = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
+export default OrganizationCard;

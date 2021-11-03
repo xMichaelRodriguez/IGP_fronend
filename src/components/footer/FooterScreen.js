@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-export const FooterScreen = () => {
+const FooterScreen = () => {
   return (
     <footer className=' primary container-fluid py-3 text-center'>
       <div className='container row'>
@@ -14,5 +14,6 @@ export const FooterScreen = () => {
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
+export default FooterScreen;

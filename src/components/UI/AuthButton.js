@@ -1,14 +1,14 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { startLogout } from '../../actions/authActios'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { startLogout } from '../../actions/authActios';
 
-export const AuthButton = () => {
-  const { name } = useSelector((state) => state.auth)
-  const dispatch = useDispatch()
+const AuthButton = () => {
+  const { name } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const handleLogout = () => {
-    dispatch(startLogout())
-  }
+    dispatch(startLogout());
+  };
   if (name) {
     return (
       <li className='nav-item dropdown'>
@@ -22,14 +22,8 @@ export const AuthButton = () => {
         >
           Administrador
         </span>
-        <div
-          className='dropdown-menu'
-          aria-labelledby='navbarDropdownMenuLink'
-        >
-          <Link
-            className='dropdown-item'
-            to='/profile/home'
-          >
+        <div className='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'>
+          <Link className='dropdown-item' to='/profile/home'>
             Perfil
           </Link>
           <Link className='dropdown-item' to='/'>
@@ -45,8 +39,8 @@ export const AuthButton = () => {
           </Link>
         </div>
       </li>
-    )
-  } else {
-    return ''
+    );
   }
-}
+  return '';
+};
+export default AuthButton;

@@ -1,44 +1,35 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { AuthRouter } from './AuthRouter'
-import { DashBoard } from './DashBoard'
-import { PrivateRoutes } from './PrivateRoute'
-import { ProfileRoute } from './ProfileRoute'
-import { PublicRoutes } from './PublicRoutes'
-import { startChecking } from '../actions/authActios'
-import { WaitScreen } from '../components/wait/WaitScreen'
-import { noticeStartLoading } from '../actions/noticesActions'
-import {
-  storyForCarouselLoading,
-  storyStartLoading,
-} from '../actions/events'
-import { orgStartLoading } from '../actions/orgActions'
-import { commicStartLoading } from '../actions/commicsActions'
-import { startLoadingForumUser } from '../actions/forumsAction'
+import AuthRouter from './AuthRouter';
+import DashBoard from './DashBoard';
+import PrivateRoutes from './PrivateRoute';
+import ProfileRoute from './ProfileRoute';
+import PublicRoutes from './PublicRoutes';
+import { startChecking } from '../actions/authActios';
+import WaitScreen from '../components/wait/WaitScreen';
+import { noticeStartLoading } from '../actions/noticesActions';
+import { storyForCarouselLoading, storyStartLoading } from '../actions/events';
+import orgStartLoading from '../actions/orgActions';
+import { commicStartLoading } from '../actions/commicsActions';
+import { startLoadingForumUser } from '../actions/forumsAction';
 
-export const AppRouter = () => {
-  const { checking, uid } = useSelector(
-    (state) => state.auth
-  )
-  const dispatch = useDispatch()
+const AppRouter = () => {
+  const { checking, uid } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(startChecking())
-    dispatch(noticeStartLoading({}))
-    dispatch(storyStartLoading({}))
-    dispatch(storyForCarouselLoading({}))
-    dispatch(orgStartLoading())
-    dispatch(commicStartLoading({}))
-    dispatch(startLoadingForumUser())
-  }, [dispatch])
+    dispatch(startChecking());
+    dispatch(noticeStartLoading({}));
+    dispatch(storyStartLoading({}));
+    dispatch(storyForCarouselLoading({}));
+    dispatch(orgStartLoading());
+    dispatch(commicStartLoading({}));
+    dispatch(startLoadingForumUser());
+  }, [dispatch]);
 
   if (checking) {
-    return <WaitScreen />
+    return <WaitScreen />;
   }
   return (
     <Router>
@@ -54,10 +45,11 @@ export const AppRouter = () => {
             path='/auth'
             render={AuthRouter}
           />
-          <Route exact path="/.well-known/assetlinks.json" />
+          <Route exact path='/.well-known/assetlinks.json' />
           <Route path='/' component={DashBoard} />
         </Switch>
       </div>
     </Router>
-  )
-}
+  );
+};
+export default AppRouter;

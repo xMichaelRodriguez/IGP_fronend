@@ -1,15 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import Slider from 'react-slick'
-import { useSelector } from 'react-redux'
-import { CardItem } from './CardItem'
-import './story.css'
-export const CarouselScreen = () => {
-  const { storyForCarousel } = useSelector(
-    (state) => state.story
-  )
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import Slider from 'react-slick';
+import { useSelector } from 'react-redux';
+import CardItem from './CardItem';
+import './story.css';
+
+const CarouselScreen = () => {
+  const { storyForCarousel } = useSelector((state) => state.story);
 
   const settings = {
     dots: true,
@@ -45,7 +44,7 @@ export const CarouselScreen = () => {
         },
       },
     ],
-  }
+  };
   return (
     <div className='container-fluid primary py-5 animate__animated animate__fadeIn'>
       <div className='container py-3'>
@@ -60,5 +59,6 @@ export const CarouselScreen = () => {
         </Slider>
       </div>
     </div>
-  )
-}
+  );
+};
+export default CarouselScreen;

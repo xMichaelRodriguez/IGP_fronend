@@ -1,57 +1,47 @@
-import moment from 'moment'
-import React, { useEffect, useState } from 'react'
-import { FaRegClock, FaRegUser } from 'react-icons/fa'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
-import { uiRemoveError } from '../../actions/authActios'
-import { socketInstance } from '../../helpers/Sockets'
-import { CommentBox } from './CommentBox'
-import { ListComments } from './ListComments'
+import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+import { FaRegClock, FaRegUser } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import { uiRemoveError } from '../../actions/authActios';
+import socketInstance from '../../helpers/Sockets';
+import CommentBox from './CommentBox.jsx';
+import ListComments from './ListComments.jsx';
 
-export const ForumScreenRead = () => {
-  const { user } = useSelector((state) => state.userForum)
+const ForumScreenRead = () => {
+  const { user } = useSelector((state) => state.userForum);
 
-  const dispatch = useDispatch()
-  const [forum, setForum] = useState({})
-  const [commentOfForum, setCommentOfForum] = useState([])
-  const { foroId } = useParams()
+  const dispatch = useDispatch();
+  const [forum, setForum] = useState({});
+  const [commentOfForum, setCommentOfForum] = useState([]);
+  const { foroId } = useParams();
   useEffect(() => {
     socketInstance.emit('findById', { foroId }, (data) => {
-      setForum(data.forum)
-    })
+      setForum(data.forum);
+    });
     return () => {
-      setForum([])
-    }
-  }, [foroId])
+      setForum([]);
+    };
+  }, [foroId]);
 
   const handleCleanInput = () => {
-    dispatch(uiRemoveError())
-  }
+    dispatch(uiRemoveError());
+  };
   return (
     <div className='container-fluid py-5'>
       <div className='container p-2 text-break'>
         {forum === {} && <h3>no se encontro el foro</h3>}
 
         <div className='row mb-2'>
-          <nav
-            aria-label='breadcrumb'
-            onClick={handleCleanInput}
-          >
+          <nav aria-label='breadcrumb' onClick={handleCleanInput}>
             <ol className='breadcrumb'>
               <li className='breadcrumb-item'>
                 <Link to='/'>Inicio</Link>
               </li>
-              <li
-                className='breadcrumb-item active'
-                aria-current='page'
-              >
+              <li className='breadcrumb-item active' aria-current='page'>
                 <Link to='/foros'> Foros</Link>
               </li>
-              <li
-                className='breadcrumb-item active '
-                aria-current='page'
-              >
+              <li className='breadcrumb-item active ' aria-current='page'>
                 {forum.theme}
               </li>
             </ol>
@@ -59,10 +49,7 @@ export const ForumScreenRead = () => {
         </div>
 
         <p className='h3'>{forum.theme}</p>
-        <p
-          className='lead mt-5'
-          style={{ wordBreak: 'break-word' }}
-        >
+        <p className='lead mt-5' style={{ wordBreak: 'break-word' }}>
           {forum.content}
         </p>
         <div className='row mb-2'>
@@ -73,15 +60,13 @@ export const ForumScreenRead = () => {
           </div>
           <div className='col-md-4'>
             <span className='text-muted '>
-              <FaRegClock />{' '}
-              {moment(forum.created).calendar()}
+              <FaRegClock /> {moment(forum.created).calendar()}
             </span>
           </div>
         </div>
         {Object.entries(user).length === 0 ? (
           <h5 className='text-danger'>
-            Si quiere participar en este foro tiene que
-            registrarse primero
+            Si quiere participar en este foro tiene que registrarse primero
           </h5>
         ) : (
           <CommentBox
@@ -97,5 +82,6 @@ export const ForumScreenRead = () => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
+export default ForumScreenRead;

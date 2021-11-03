@@ -1,89 +1,80 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import PropTypes from 'prop-types'
-import 'react-datepicker/dist/react-datepicker.css'
-import DatePicker from 'react-datepicker'
-import { registerLocale, setDefaultLocale } from 'react-datepicker'
-import es from 'date-fns/locale/es'
-import {
-  FaCalendar,
-  FaSearch,
-} from 'react-icons/fa'
-import validator from 'validator'
-import {
-  setError,
-  uiRemoveError,
-} from '../../actions/authActios'
-import { noticeStartLoading } from '../../actions/noticesActions'
-import { storyStartLoading } from '../../actions/events'
-registerLocale('es', es)
-setDefaultLocale('es')
+import PropTypes from 'prop-types';
+import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 
-export const DatePickerScreen = ({ rute }) => {
-  const { msgError } = useSelector((state) => state.error)
-  const dispatch = useDispatch()
-  const [startDate, setStartDate] = useState(new Date())
-  const [endDate, setEndDate] = useState(null)
+import es from 'date-fns/locale/es';
+import { FaCalendar, FaSearch } from 'react-icons/fa';
+import validator from 'validator';
+import { setError, uiRemoveError } from '../../actions/authActios';
+import { noticeStartLoading } from '../../actions/noticesActions';
+import { storyStartLoading } from '../../actions/events';
+
+registerLocale('es', es);
+setDefaultLocale('es');
+
+const DatePickerScreen = ({ rute }) => {
+  const { msgError } = useSelector((state) => state.error);
+  const dispatch = useDispatch();
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(null);
 
   const handleSearchForDate = () => {
     if (isFormValid()) {
-      const start = new Date(startDate)
-      const end = new Date(endDate)
+      const start = new Date(startDate);
+      const end = new Date(endDate);
 
       if (rute === 'notice') {
         dispatch(
           noticeStartLoading({
             startDate: start,
             endDate: end,
-          })
-        )
+          }),
+        );
       } else {
-
         dispatch(
           storyStartLoading({
             startDate: start,
             endDate: end,
-          })
-        )
+          }),
+        );
       }
     }
-  }
+  };
 
   const isFormValid = () => {
-
-    if (new Date(startDate).toLocaleDateString('es-ES') === new Date(endDate).toLocaleDateString('es-ES')) {
-      dispatch(setError('Las Fechas no pueden ser iguales'))
-      return false
+    if (
+      new Date(startDate).toLocaleDateString('es-ES') ===
+      new Date(endDate).toLocaleDateString('es-ES')
+    ) {
+      dispatch(setError('Las Fechas no pueden ser iguales'));
+      return false;
     }
     if (!validator.isDate(startDate)) {
-      dispatch(setError('Fecha inicio invalida'))
-      return false
+      dispatch(setError('Fecha inicio invalida'));
+      return false;
     }
     if (!validator.isDate(endDate)) {
-      dispatch(setError('Fecha final invalida'))
-      return false
+      dispatch(setError('Fecha final invalida'));
+      return false;
     }
 
-
-    dispatch(uiRemoveError())
-    return true
-  }
+    dispatch(uiRemoveError());
+    return true;
+  };
 
   const handleReset = () => {
-    setEndDate(null)
-    setStartDate(new Date())
-    dispatch(uiRemoveError())
+    setEndDate(null);
+    setStartDate(new Date());
+    dispatch(uiRemoveError());
     if (rute === 'notice') {
-      dispatch(
-        noticeStartLoading({})
-      )
+      dispatch(noticeStartLoading({}));
     } else {
-      dispatch(
-        storyStartLoading({})
-      )
+      dispatch(storyStartLoading({}));
     }
-  }
+  };
 
   return (
     <div className='container-fluid py-5 '>
@@ -94,75 +85,61 @@ export const DatePickerScreen = ({ rute }) => {
               <FaSearch />
               &nbsp; Filtrado por fechas
             </h4>
-
           </div>
           <div className='col-md-12 mb-3'>
-
-            {msgError.includes('Las Fechas') ?
-              <div class="alert alert-danger" role="alert">
+            {msgError.includes('Las Fechas') ? (
+              <div class='alert alert-danger' role='alert'>
                 {msgError}
-              </div> : ''}
+              </div>
+            ) : (
+              ''
+            )}
           </div>
           <div className='col-md-6 '>
             <div className='form-group  mb-3'>
-
-              <label
-                htmlFor='datepicker '
-                className='py-1'
-              >
+              <label htmlFor='datepicker ' className='py-1'>
                 De: &nbsp;
                 <FaCalendar color='#8f77f2' />
               </label>
 
               <DatePicker
-                className={`w-75 form-control ${msgError.includes('inicio invalida')
-                  ? 'is-invalid'
-                  : ''
-                  }`}
+                className={`w-75 form-control ${
+                  msgError.includes('inicio invalida') ? 'is-invalid' : ''
+                }`}
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
-                locale="es"
-                dateFormat="dd/MM/yyy"
+                locale='es'
+                dateFormat='dd/MM/yyy'
                 popperClassName='pickerPosition '
-
               />
-              {msgError.includes('inicio invalida') &&
-                <div className="text-danger pt-1">
-                  {msgError}
-                </div>
-              }
-
+              {msgError.includes('inicio invalida') && (
+                <div className='text-danger pt-1'>{msgError}</div>
+              )}
             </div>
           </div>
-          <div className="col-md-6">
+          <div className='col-md-6'>
             <div className='form-group mb-3 '>
-              <label
-                htmlFor='datepicker'
-                className='py-1'
-              >
+              <label htmlFor='datepicker' className='py-1'>
                 Hasta: &nbsp;
                 <FaCalendar color='#8f77f2' />
               </label>
 
               <DatePicker
-                className={`w-75 form-control ${msgError.includes('final invalida')
-                  ? 'is-invalid'
-                  : ''
-                  }`}
+                className={`w-75 form-control ${
+                  msgError.includes('final invalida') ? 'is-invalid' : ''
+                }`}
                 placeholderText='10 / 10 / 2020 '
                 selected={endDate}
                 onChange={(date) => setEndDate(date)}
-                locale="es"
-                dateFormat="dd/MM/yyy"
+                locale='es'
+                dateFormat='dd/MM/yyy'
               />
-              {msgError.includes('final invalida') &&
-                <div className="pt-1 text-danger">
-                  {msgError}
-                </div>
-              }
+              {msgError.includes('final invalida') && (
+                <div className='pt-1 text-danger'>{msgError}</div>
+              )}
             </div>
           </div>
-          <div className="col-md-12 text-center">
+          <div className='col-md-12 text-center'>
             <button
               className='btn primary mr-3 m-1'
               type='button'
@@ -181,8 +158,9 @@ export const DatePickerScreen = ({ rute }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 DatePickerScreen.propTypes = {
-  rute: PropTypes.string.isRequired
-}
+  rute: PropTypes.string.isRequired,
+};
+export default DatePickerScreen;

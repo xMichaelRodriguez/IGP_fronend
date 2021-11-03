@@ -4,13 +4,12 @@ import { useSelector } from 'react-redux';
 
 import '../styles.css';
 
+import ListRoutes from '../ListRoutes';
+import AuthButton from '../AuthButton';
+import LogoButton from './LogoButton.jsx';
+import ToggleButton from './ToggleButton.jsx';
 
-import { ListRoutes } from '../ListRoutes';
-import { AuthButton } from '../AuthButton';
-import { LogoButton } from './LogoButton';
-import { ToggleButton } from './ToggleButton';
-
-export const NavbarScreen = ({ routes }) => {
+const NavbarScreen = ({ routes }) => {
   const { name } = useSelector((state) => state.auth);
 
   return (
@@ -19,10 +18,7 @@ export const NavbarScreen = ({ routes }) => {
         <LogoButton />
         <ToggleButton />
 
-        <div
-          className='collapse navbar-collapse'
-          id='navbarText'
-        >
+        <div className='collapse navbar-collapse' id='navbarText'>
           <ul className='navbar-nav ml-auto mr-auto'>
             {routes.map((r) => (
               <ListRoutes
@@ -31,11 +27,8 @@ export const NavbarScreen = ({ routes }) => {
                 id={r.id}
                 route={r.route}
               />
-
             ))}
-            {name !== undefined && (
-              <AuthButton key='/administrator' />
-            )}
+            {name !== undefined && <AuthButton key='/administrator' />}
           </ul>
         </div>
       </div>
@@ -46,3 +39,5 @@ export const NavbarScreen = ({ routes }) => {
 NavbarScreen.propTypes = {
   routes: PropTypes.array.isRequired,
 };
+
+export default NavbarScreen;

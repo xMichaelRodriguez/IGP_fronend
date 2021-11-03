@@ -1,4 +1,4 @@
-import { types } from "../types/types";
+import types from '../types/types';
 
 const initialState = {
   checking: true,
@@ -6,7 +6,7 @@ const initialState = {
   // uid: null,
 };
 
-export const authReducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.authLogin:
       return {
@@ -29,3 +29,4 @@ export const authReducer = (state = initialState, action) => {
       return state;
   }
 };
+export default authReducer;

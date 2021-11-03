@@ -1,28 +1,28 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom'
-import queryString from 'query-string'
-import './styleSearch.css'
-import { FaSearch } from 'react-icons/fa'
-import { useForm } from '../../hooks/useForm'
-import { TagSearchs } from './TagSearchs'
-import { SearchContainer } from './SearchContainer'
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import queryString from 'query-string';
+import './styleSearch.css';
+import { FaSearch } from 'react-icons/fa';
+import useForm from '../../hooks/useForm';
+import TagSearchs from './TagSearchs.jsx';
+import SearchContainer from './SearchContainer.jsx';
 
-export const SearchScreen = ({ history }) => {
-  const location = useLocation()
-  const { q = '' } = queryString.parse(location.search)
+const SearchScreen = ({ history }) => {
+  const location = useLocation();
+  const { q = '' } = queryString.parse(location.search);
   const [formValue, handleInputChange] = useForm({
     searchText: q,
-  })
+  });
 
   const handleSearch = (e) => {
-    e.preventDefault()
-    history.push(`?q=${formValue.searchText}`)
-  }
+    e.preventDefault();
+    history.push(`?q=${formValue.searchText}`);
+  };
   const validSearchContainer =
     (q && q.toLowerCase() === 'derechos' && q === '') ||
     (q && q.toLowerCase() === 'cuentos' && q === '') ||
     (q && q.toLowerCase() === 'deberes' && q === '') ||
-    (q && q.toLowerCase() === 'commics' && q === '')
+    (q && q.toLowerCase() === 'commics' && q === '');
   return (
     <>
       <div className='container-fluid py-5'>
@@ -46,9 +46,7 @@ export const SearchScreen = ({ history }) => {
           </div>
           <div className='row mb-3'>
             <div className='col-md-12 mb-3'>
-              <h4 className='font-weight-bolder'>
-                Etiquetas
-              </h4>
+              <h4 className='font-weight-bolder'>Etiquetas</h4>
             </div>
 
             <TagSearchs history={history} />
@@ -70,5 +68,6 @@ export const SearchScreen = ({ history }) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
+export default SearchScreen;

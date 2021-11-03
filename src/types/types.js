@@ -1,26 +1,24 @@
-export const types = {
-  //ui
+const types = {
   uiOpenChat: '[UI] Open Chat',
   uiCloseChat: '[UI] Close Chat',
   uiOpenSide: '[UI] Open Sidebar',
   uiCloseSide: '[UI] Close Sidebars',
-  uiOpenModal: "[UI] Open Modal",
-  uiCloseModal: "[UI] Close Modal",
-  //auth
+  uiOpenModal: '[UI] Open Modal',
+  uiCloseModal: '[UI] Close Modal',
+  // auth
   authFinishChecking: '[AUTH] Finish Checking Login State',
   authStartLogin: '[AUTH] Start Login',
   authLogin: '[AUTH] Logged',
   authStartTokenRenew: '[AUTH] Start Token Renew',
   authLogout: '[AUTH] Auth Logout',
 
-  //Error
+  // Error
   setError: '[ERROR] Set Error Message',
   removeError: '[ERROR] Remove Error Message',
 
-  //storys
+  // storys
   storyLoaded: '[STORY]  Story Loaded',
-  storyForCarouselLoaded:
-    '[STORY]  Story For Carousel Loaded',
+  storyForCarouselLoaded: '[STORY]  Story For Carousel Loaded',
   storyStartAddNew: '[STORY] Start Add New',
   storyAddNew: '[STORY] Add New',
   storyClearActive: '[story] Clear Active story',
@@ -28,7 +26,7 @@ export const types = {
   storyDeleted: '[story] story Deleted',
   storySetActive: '[story] story set active',
 
-  //noticies
+  // noticies
   noticeLoaded: '[notice]  Story Loaded',
   noticeStartAddNew: '[notice] Start Add New',
   noticeAddNew: '[notice] Add New',
@@ -52,14 +50,13 @@ export const types = {
   categoryLoaded: '[Category] Load Categories',
 
   // User To Forums
-  userLoginForum: "[FORUM] load user to forums",
-  defaultForumUser: "[FORUM] reset user",
+  userLoginForum: '[FORUM] load user to forums',
+  defaultForumUser: '[FORUM] reset user',
   setActiveForum: '[FORUM] set active forum',
   LoadForums: '[FORUM] load forums',
   ClearActiveForum: '[FORUM] set clear forum',
   activeForumAddNew: '[FORUM] created forun',
-  deleteForum: "[FORUM] delete forun",
-  getMyForums: "[FORUM] get my forums",
-
-
+  deleteForum: '[FORUM] delete forun',
+  getMyForums: '[FORUM] get my forums',
 };
+export default types;

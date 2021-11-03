@@ -1,4 +1,4 @@
-import { types } from '../types/types';
+import types from '../types/types';
 
 const initialState = {
   storyForCarousel: [],
@@ -10,10 +10,7 @@ const initialState = {
   activeStory: null,
 };
 
-export const storiesReducer = (
-  state = initialState,
-  action
-) => {
+const storiesReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.storySetActive:
       return {
@@ -32,9 +29,8 @@ export const storiesReducer = (
         ...state,
 
         stories: state.stories.map((e) =>
-          e.id === action.payload.id ? action.payload : e
+          e.id === action.payload.id ? action.payload : e,
         ),
-
       };
     case types.storyForCarouselLoaded:
       return {
@@ -46,9 +42,7 @@ export const storiesReducer = (
       return {
         ...state,
 
-        stories: state.stories.map(
-          (e) => e.id !== action.payload
-        ),
+        stories: state.stories.map((e) => e.id !== action.payload),
 
         activeStory: null,
       };
@@ -61,10 +55,11 @@ export const storiesReducer = (
         totalPages: action.payload.totalPages,
         prevPage: action.payload.prevPage,
         nextPage: action.payload.nextPage,
-
       };
 
     default:
       return state;
   }
 };
+
+export default storiesReducer;

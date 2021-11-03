@@ -1,7 +1,6 @@
-import { types } from '../types/types';
+import types from '../types/types';
 
 const initialState = {
-
   noticies: [],
   totalDocs: null,
   totalPages: null,
@@ -11,7 +10,7 @@ const initialState = {
   activeNotice: null,
 };
 
-export const noticiesReducer = (state = initialState, action) => {
+const noticiesReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.noticeSetActive:
       return {
@@ -30,30 +29,25 @@ export const noticiesReducer = (state = initialState, action) => {
         ...state,
 
         noticies: state.noticies.map((e) =>
-          e.id === action.payload.id ? action.payload : e
+          e.id === action.payload.id ? action.payload : e,
         ),
-
       };
 
     case types.noticeDeleted:
       return {
         ...state,
-        noticies: state.noticies.filter(
-          (e) => e.id !== action.payload
-        ),
+        noticies: state.noticies.filter((e) => e.id !== action.payload),
         activeNotice: null,
       };
 
     case types.noticeLoaded:
-
       return {
         ...state,
         noticies: [...action.payload.noticies],
         totalDocs: action.payload.totalDocs,
         totalPages: action.payload.totalPages,
         nextPage: action.payload.nextPage,
-        prevPage: action.payload.prevPage
-
+        prevPage: action.payload.prevPage,
       };
 
     // case types.noticeactivenoticeLogout:
@@ -64,3 +58,4 @@ export const noticiesReducer = (state = initialState, action) => {
       return state;
   }
 };
+export default noticiesReducer;

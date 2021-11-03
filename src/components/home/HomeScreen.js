@@ -1,13 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-import { HeroScreen } from './HeroScreen'
-import { SubHero } from './SubHero'
+import HeroScreen from './HeroScreen';
+import SubHero from './SubHero';
 
-export const HomeScreen = () => {
+const HomeScreen = () => {
   return (
     <>
       <HeroScreen />
       <SubHero />
     </>
-  )
-}
+  );
+};
+export default HomeScreen;

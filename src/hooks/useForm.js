@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-//CUSTOM HOOK QUE SE ENCARGA DE MANEJAR LOS FORMULARIOS
-export const useForm = (initialState = {}) => {
+// CUSTOM HOOK QUE SE ENCARGA DE MANEJAR LOS FORMULARIOS
+const useForm = (initialState = {}) => {
   const [value, setValue] = useState(initialState);
 
   const reset = () => {
@@ -16,3 +16,4 @@ export const useForm = (initialState = {}) => {
 
   return [value, handleInputChange, reset];
 };
+export default useForm;

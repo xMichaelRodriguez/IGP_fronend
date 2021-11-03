@@ -1,20 +1,16 @@
-import React from 'react'
+import React from 'react';
 
-import { useSelector } from 'react-redux'
-import { SearchCard } from './cards/SearchCard'
+import { useSelector } from 'react-redux';
+import SearchCard from './cards/SearchCard.jsx';
 
-export const SearchContainer = ({ query }) => {
-  const { commic, homeWorks } = useSelector(
-    (state) => state
-  )
+const SearchContainer = ({ query }) => {
+  const { commic, homeWorks } = useSelector((state) => state);
 
-  const arrToFilter = [...commic.commics, ...homeWorks]
+  const arrToFilter = [...commic.commics, ...homeWorks];
 
-  const arrFiltered = arrToFilter.filter(
-    ({ title, body }) => {
-      return title.includes(query) || body?.includes(query)
-    }
-  )
+  const arrFiltered = arrToFilter.filter(({ title, body }) => {
+    return title.includes(query) || body?.includes(query);
+  });
 
   return (
     <div className='card-columns'>
@@ -30,5 +26,6 @@ export const SearchContainer = ({ query }) => {
             </div>
           ))}
     </div>
-  )
-}
+  );
+};
+export default SearchContainer;

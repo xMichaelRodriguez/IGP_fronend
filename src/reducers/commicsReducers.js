@@ -1,4 +1,5 @@
-import { types } from '../types/types'
+import types from '../types/types';
+
 const INITIAL_STATE = {
   commics: [],
   totalDocs: 0,
@@ -6,12 +7,9 @@ const INITIAL_STATE = {
   prevPage: null,
   nextPage: null,
   activeCommic: null,
-}
+};
 
-export const commicsReducers = (
-  state = INITIAL_STATE,
-  action
-) => {
+const commicsReducers = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case types.commicLoaded:
       return {
@@ -21,33 +19,32 @@ export const commicsReducers = (
         totalPages: action.payload.totalPage,
         prevPage: action.payload.prevPage,
         nextPage: action.payload.nextPage,
-      }
+      };
     case types.commicAddNew:
       return {
         ...state,
         commics: [...state.commics, action.payload],
-      }
+      };
 
     case types.commicDeleted:
       return {
         ...state,
-        commics: state.commics.filter(
-          (commic) => commic.id !== action.payload
-        ),
-      }
+        commics: state.commics.filter((commic) => commic.id !== action.payload),
+      };
 
     case types.commicSetActive:
       return {
         ...state,
         activeCommic: action.payload.commics,
-      }
+      };
     case types.commicClearActive:
       return {
         ...state,
         activeCommic: null,
-      }
+      };
 
     default:
-      return state
+      return state;
   }
-}
+};
+export default commicsReducers;

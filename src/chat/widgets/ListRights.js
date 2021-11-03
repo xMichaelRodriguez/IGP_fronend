@@ -1,8 +1,7 @@
-import React from 'react'
-import { BsChevronRight } from 'react-icons/bs'
+import React from 'react';
+import { BsChevronRight } from 'react-icons/bs';
 
-export const ListRights = (props) => {
-  console.log(props)
+const ListRights = (props) => {
   const linkMarkup = props.options.map((link) => (
     <li key={link.id} className='card mb-3 shadow'>
       <div className='card-body'>
@@ -12,20 +11,17 @@ export const ListRights = (props) => {
             {link.title}
           </p>
           <div className='card-text'>
-            <span className='blockquote-footer text-justify'>
-              {link.text}
-            </span>
+            <span className='blockquote-footer text-justify'>{link.text}</span>
           </div>
         </blockquote>
       </div>
     </li>
-  ))
+  ));
   return (
-    <ul
-      className='list-group mb-auto '
-      style={{ listStyle: 'none' }}
-    >
+    <ul className='list-group mb-auto ' style={{ listStyle: 'none' }}>
       {linkMarkup}
     </ul>
-  )
-}
+  );
+};
+
+export default ListRights;

@@ -1,16 +1,16 @@
-import React from 'react'
-import { Redirect, Route, Switch } from 'react-router-dom'
-import { CommicsScreen } from '../components/commics/CommicsScreen'
-import { CreateCommic } from '../components/commics/CreateCommic'
+import React from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import CommicsScreen from '../components/commics/CommicsScreen.jsx';
+import CreateCommic from '../components/commics/CreateCommic.jsx';
 
-import { FooterScreen } from '../components/footer/FooterScreen'
-import { ManageScreen } from '../components/manage/ManageScreen'
-import { NoticeScreen } from '../components/noticies/NoticeScreen'
-import { HomeProfile } from '../components/profile/HomeProfile'
-import { StoryScreen } from '../components/stories/StoryScreen'
-import { NavbarScreen } from '../components/UI/navbar/NavbarScreen'
+import FooterScreen from '../components/footer/FooterScreen';
+import ManageScreen from '../components/manage/ManageScreen';
+import NoticeScreen from '../components/noticies/NoticeScreen';
+import HomeProfile from '../components/profile/HomeProfile';
+import StoryScreen from '../components/stories/StoryScreen';
+import NavbarScreen from '../components/UI/navbar/NavbarScreen';
 
-export const ProfileRoute = () => {
+const ProfileRoute = () => {
   const routes = [
     {
       route: '/profile/home',
@@ -32,7 +32,7 @@ export const ProfileRoute = () => {
       title: 'Commics',
       id: 4,
     },
-  ]
+  ];
   return (
     <>
       <header>
@@ -45,33 +45,22 @@ export const ProfileRoute = () => {
             path='/profile/mantenimiento/:token'
             component={ManageScreen}
           />
-          <Route
-            path='/profile/noticias'
-            component={NoticeScreen}
-          />
-          <Route
-            path='/profile/historias'
-            component={StoryScreen}
-          />
+          <Route path='/profile/noticias' component={NoticeScreen} />
+          <Route path='/profile/historias' component={StoryScreen} />
           <Route
             exact
             path='/profile/commics/crearCommic'
             component={CreateCommic}
           />
-          <Route
-            path='/profile/commics'
-            component={CommicsScreen}
-          />
+          <Route path='/profile/commics' component={CommicsScreen} />
 
-          <Route
-            path='/profile/home'
-            component={HomeProfile}
-          />
+          <Route path='/profile/home' component={HomeProfile} />
 
           <Redirect to='/profile/home' />
         </Switch>
       </div>
       <FooterScreen className=' fixed-bottom' />
     </>
-  )
-}
+  );
+};
+export default ProfileRoute;

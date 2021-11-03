@@ -1,8 +1,8 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import { LoginScreen } from '../components/auth/LoginScreen';
+import LoginScreen from '../components/auth/LoginScreen';
 
-export const AuthRouter = () => {
+const AuthRouter = () => {
   return (
     <div className='d-flex justify-content-center'>
       <div className=''>
@@ -17,3 +17,4 @@ export const AuthRouter = () => {
     </div>
   );
 };
+export default AuthRouter;

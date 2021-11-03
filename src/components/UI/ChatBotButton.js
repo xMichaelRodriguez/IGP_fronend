@@ -1,31 +1,29 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import Chatbot from 'react-chatbot-kit'
-import 'react-chatbot-kit/build/main.css'
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Chatbot from 'react-chatbot-kit';
+import 'react-chatbot-kit/build/main.css';
 
-//icons
-import { BsFillChatSquareDotsFill } from 'react-icons/bs'
+// icons
+import { BsFillChatSquareDotsFill } from 'react-icons/bs';
 // views
-import ActionProvider from '../../chat/ActionProvider'
-import MessageParser from '../../chat/MessageParser'
-import config from '../../chat/config'
+import ActionProvider from '../../chat/ActionProvider';
+import MessageParser from '../../chat/MessageParser';
+import config from '../../chat/config';
 // actions
-import {
-  uiCloseChat,
-  uiOpenChat,
-} from '../../actions/uiActions'
-export const ChatBotButton = () => {
-  const { ChatOpen } = useSelector((state) => state.UI)
+import { uiCloseChat, uiOpenChat } from '../../actions/uiActions';
 
-  const dispatch = useDispatch()
+const ChatBotButton = () => {
+  const { ChatOpen } = useSelector((state) => state.UI);
+
+  const dispatch = useDispatch();
 
   const handlerDisplayChat = () => {
     if (ChatOpen) {
-      dispatch(uiCloseChat())
+      dispatch(uiCloseChat());
     } else {
-      dispatch(uiOpenChat())
+      dispatch(uiOpenChat());
     }
-  }
+  };
 
   return (
     <>
@@ -39,9 +37,7 @@ export const ChatBotButton = () => {
       {ChatOpen && (
         <div className='positions'>
           <div
-            className={`animate__animated ${
-              ChatOpen && 'animate__backInUp'
-            }`}
+            className={`animate__animated ${ChatOpen && 'animate__backInUp'}`}
           >
             <Chatbot
               config={config}
@@ -54,5 +50,7 @@ export const ChatBotButton = () => {
         </div>
       )}
     </>
-  )
-}
+  );
+};
+
+export default ChatBotButton;

@@ -1,21 +1,22 @@
-import React from 'react'
-import { FaTrash } from 'react-icons/fa'
-import { useDispatch } from 'react-redux'
-import { useHistory, useLocation } from 'react-router'
-import { commicStartDelted } from '../../actions/commicsActions'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { FaTrash } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+import { useHistory, useLocation } from 'react-router';
+import { commicStartDelted } from '../../actions/commicsActions';
 
-export const CommicCard = ({ title, coverPage, id }) => {
-  const history = useHistory()
-  const location = useLocation()
-  const param = location.pathname.split('/')
+const CommicCard = ({ title, coverPage, id }) => {
+  const history = useHistory();
+  const location = useLocation();
+  const param = location.pathname.split('/');
   const handleRedirect = () => {
-    history.push(`/biblioteca/commics/${id}`)
-  }
-  const dispatch = useDispatch()
+    history.push(`/biblioteca/commics/${id}`);
+  };
+  const dispatch = useDispatch();
 
-  const handleDelete = (id) => {
-    dispatch(commicStartDelted(id))
-  }
+  const handleDelete = (uid) => {
+    dispatch(commicStartDelted(uid));
+  };
 
   return (
     <div
@@ -54,5 +55,11 @@ export const CommicCard = ({ title, coverPage, id }) => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
+CommicCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  coverPage: PropTypes.string,
+  id: PropTypes.string,
+};
+export default CommicCard;

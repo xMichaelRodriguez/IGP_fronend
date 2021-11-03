@@ -1,8 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import studying from '../../../img/studying.svg'
-export const HomeWorkRead = () => {
+import studying from '../../../img/studying.svg';
+
+const HomeWorkRead = () => {
   return (
     <div className='container-fluid py-5 '>
       <div className='container py-5 text-break'>
@@ -12,24 +13,17 @@ export const HomeWorkRead = () => {
               <li class='breadcrumb-item'>
                 <Link to='/'>Inicio</Link>
               </li>
-              <li
-                class='breadcrumb-item active'
-                aria-current='page'
-              >
+              <li class='breadcrumb-item active' aria-current='page'>
                 <Link to='/biblioteca'> Biblioteca</Link>
               </li>
-              <li
-                class='breadcrumb-item active'
-                aria-current='page'
-              >
+              <li class='breadcrumb-item active' aria-current='page'>
                 <span>Deberes</span>
               </li>
             </ol>
           </nav>
         </div>
         <h4 className='display-5 mb-3 font-weight-bold text-center text-muted'>
-          Deberes que todo niño,niña y adolescente debe
-          cumplir
+          Deberes que todo niño,niña y adolescente debe cumplir
         </h4>
         <div className='row d-flex align-items-center'>
           <div className='col-md-6  mb-3 py-2'>
@@ -43,9 +37,7 @@ export const HomeWorkRead = () => {
                 </cite>
               </footer>
               <footer className='blockquote-footer py-1'>
-                <cite title='Source Title '>
-                  CUMPLIR CON LOS HORARIOS
-                </cite>
+                <cite title='Source Title '>CUMPLIR CON LOS HORARIOS</cite>
               </footer>
               <footer className='blockquote-footer py-1'>
                 <cite title='Source Title '>
@@ -75,8 +67,7 @@ export const HomeWorkRead = () => {
               </h5>
               <footer class='blockquote-footer py-2'>
                 <cite title='Source Title '>
-                  Estudiar diariamente las lecciones
-                  recibidas
+                  Estudiar diariamente las lecciones recibidas
                 </cite>
               </footer>
               <footer className='blockquote-footer py-1'>
@@ -85,19 +76,15 @@ export const HomeWorkRead = () => {
                 </cite>
               </footer>
               <footer className='blockquote-footer py-1'>
-                <cite title='Source Title '>
-                  Llegar puntuales al colegio
-                </cite>
+                <cite title='Source Title '>Llegar puntuales al colegio</cite>
+              </footer>
+              <footer className='blockquote-footer py-1'>
+                <cite title='Source Title '>No faltar sin motivo</cite>
               </footer>
               <footer className='blockquote-footer py-1'>
                 <cite title='Source Title '>
-                  No faltar sin motivo
-                </cite>
-              </footer>
-              <footer className='blockquote-footer py-1'>
-                <cite title='Source Title '>
-                  Mantener buena conducta Con sus compañeros
-                  y con los Profesores
+                  Mantener buena conducta Con sus compañeros y con los
+                  Profesores
                 </cite>
               </footer>
             </blockquote>
@@ -106,30 +93,24 @@ export const HomeWorkRead = () => {
           <div className='col-md-6  mb-3 py-2'>
             <blockquote class='blockquote text-center'>
               <h5 className='mb-1  text-primary-custom'>
-                3. CUIDAR A SUS ASCENDIENTES EN SU
-                ENFERMEDAD Y ANCIANIDAD
+                3. CUIDAR A SUS ASCENDIENTES EN SU ENFERMEDAD Y ANCIANIDAD
               </h5>
               <footer class='blockquote-footer py-1'>
                 <cite title='Source Title '>
-                  Cuidar a los padres y abuelitos cuando
-                  ellos se enferman
+                  Cuidar a los padres y abuelitos cuando ellos se enferman
                 </cite>
               </footer>
               <footer className='blockquote-footer py-1'>
                 <cite title='Source Title '>
-                  Ser atentos con los miembros del hogar que
-                  por su edad lo necesiten
+                  Ser atentos con los miembros del hogar que por su edad lo
+                  necesiten
                 </cite>
               </footer>
               <footer className='blockquote-footer py-1'>
-                <cite title='Source Title '>
-                  Expresarles cariño y amor.
-                </cite>
+                <cite title='Source Title '>Expresarles cariño y amor.</cite>
               </footer>
               <footer className='blockquote-footer py-1'>
-                <cite title='Source Title '>
-                  Escuchar sus consejos.
-                </cite>
+                <cite title='Source Title '>Escuchar sus consejos.</cite>
               </footer>
             </blockquote>
           </div>
@@ -143,5 +124,6 @@ export const HomeWorkRead = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
+export default HomeWorkRead;

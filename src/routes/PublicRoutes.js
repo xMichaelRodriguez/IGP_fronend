@@ -1,13 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import { Route } from "react-router-dom";
+import { Route } from 'react-router-dom';
 
-export const PublicRoutes = ({
-  isAuthenticated,
-  render: Component,
-  ...rest
-}) => {
+const PublicRoutes = ({ isAuthenticated, render: Component, ...rest }) => {
   return (
     <Route
       {...rest}
@@ -23,3 +19,4 @@ PublicRoutes.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   render: PropTypes.func.isRequired,
 };
+export default PublicRoutes;

@@ -1,20 +1,19 @@
-import Swal from "sweetalert2";
-import { fetchAsync, fetchSync } from "../helpers/fetching";
-import { socketInstance } from "../helpers/Sockets";
-import { types } from "../types/types";
+import Swal from 'sweetalert2';
+import { fetchAsync, fetchSync } from '../helpers/fetching';
+import socketInstance from '../helpers/Sockets';
+import types from '../types/types';
 // all modules
 export const startLogin = (email, password) => {
   return async (dispatch) => {
-    const resp = await fetchSync("auth", { email, password }, "POST");
+    const resp = await fetchSync('auth', { email, password }, 'POST');
     const body = await resp.json();
     if (body.ok) {
-      localStorage.setItem("token", body.token);
-      localStorage.setItem("token-initDate", new Date().getTime());
+      localStorage.setItem('token', body.token);
+      localStorage.setItem('token-initDate', new Date().getTime());
 
       dispatch(login({ uid: body.uid, name: body.name }));
       dispatch(uiRemoveError());
     } else {
-
       dispatch(setError(body.msg));
     }
   };
@@ -22,17 +21,17 @@ export const startLogin = (email, password) => {
 
 export const startChecking = () => {
   return async (dispatch) => {
-    const resp = await fetchAsync("auth/renew");
+    const resp = await fetchAsync('auth/renew');
 
     const body = await resp.json();
     if (body.ok) {
-      localStorage.setItem("token", body.token);
+      localStorage.setItem('token', body.token);
 
-      localStorage.setItem("token-initDate", new Date().getTime());
+      localStorage.setItem('token-initDate', new Date().getTime());
 
       dispatch(login({ uid: body.uid, name: body.name }));
     } else {
-      return dispatch(checkingFish());
+      dispatch(checkingFish());
     }
   };
 };
@@ -65,7 +64,6 @@ const login = (user) => ({
   payload: user,
 });
 
-
 export const startForumDelete = (id = '', foroId = '') => {
   return async (dispatch) => {
     if (id !== '' && foroId !== '') {
@@ -81,23 +79,25 @@ export const startForumDelete = (id = '', foroId = '') => {
       }).then((result) => {
         if (result.isConfirmed) {
           socketInstance.emit('delete-comment', id, (err) => {
-            console.log(err)
-          })
-
-          socketInstance.on('deletedComment', data => {
             Swal.fire({
-              title: "Borrar Comentario",
-              text: data,
-              icon: "success"
+              title: 'Error',
+              msg: err,
+              icon: 'error',
             });
-            socketInstance.emit('load-comments', foroId)
+            /* eslint-disable no-console */
+            console.log(err);
+          });
 
-          })
+          socketInstance.on('deletedComment', (data) => {
+            Swal.fire({
+              title: 'Borrar Comentario',
+              text: data,
+              icon: 'success',
+            });
+            socketInstance.emit('load-comments', foroId);
+          });
         }
-      })
-
-
-
+      });
     }
-  }
-}
+  };
+};

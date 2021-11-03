@@ -1,7 +1,7 @@
-import { fetchAsync, fetchAsyncHistory } from '../helpers/fetching'
-import { types } from '../types/types'
-import Swal from 'sweetalert2'
-import { uiRemoveError } from './authActios'
+import Swal from 'sweetalert2';
+import { fetchAsync, fetchAsyncHistory } from '../helpers/fetching';
+import types from '../types/types';
+import { uiRemoveError } from './authActios';
 
 export const startstoryAddNew = (story) => {
   return async (dispatch) => {
@@ -14,39 +14,35 @@ export const startstoryAddNew = (story) => {
         allowEscapeKey: false,
         showConfirmButton: false,
         onBeforeOpen: () => {
-          Swal.showLoading()
+          Swal.showLoading();
         },
-      })
+      });
 
-      console.log(story)
-      const resp = await fetchAsyncHistory(
-        'stories/new',
-        story,
-        'POST'
-      )
+      const resp = await fetchAsyncHistory('stories/new', story, 'POST');
 
-      const body = await resp.json()
+      const body = await resp.json();
       if (body.ok) {
-        dispatch(storyAddNew(story))
-        dispatch(uiRemoveError())
-        Swal.close()
+        dispatch(storyAddNew(story));
+        dispatch(uiRemoveError());
+        Swal.close();
         Swal.fire(
           'Guardado!!',
           `La historia:${story.title} ha sido guardada`,
-          'success'
-        )
+          'success',
+        );
       }
     } catch (error) {
-      console.log(error)
-      Swal.close()
+      /* eslint-disable-next-line no-console */
+      console.log(error);
+      Swal.close();
     }
-  }
-}
+  };
+};
 
 export const storyAddNew = (story) => ({
   type: types.storyAddNew,
   payload: story,
-})
+});
 
 export const storyStartLoading = ({
   page = 1,
@@ -55,54 +51,56 @@ export const storyStartLoading = ({
 }) => {
   return async (dipatch, getState) => {
     try {
-      let resp = null
+      let resp = null;
       if (startDate !== null && endDate !== null) {
         resp = await fetchAsync(
-          `stories/?page=${page}&startDate=${startDate}&endDate=${endDate}`
-        )
+          `stories/?page=${page}&startDate=${startDate}&endDate=${endDate}`,
+        );
       } else {
-        resp = await fetchAsyncHistory(`stories/?page=${page}`, '', 'GET')
+        resp = await fetchAsyncHistory(`stories/?page=${page}`, '', 'GET');
       }
-      const body = await resp.json()
+      const body = await resp.json();
 
       if (body.ok) {
-        delete body.ok
+        delete body.ok;
 
-        dipatch(storyLoaded(body))
+        dipatch(storyLoaded(body));
       }
     } catch (error) {
-      console.log(error)
+      /* eslint-disable-next-line no-console */
+      console.log(error);
     }
-  }
-}
+  };
+};
 
 const storyLoaded = (stories) => ({
   type: types.storyLoaded,
   payload: stories,
-})
+});
 
 export const storyForCarouselLoading = ({ page = 1 }) => {
   return async (dipatch) => {
     try {
-      const resp = await fetchAsync(`stories/?page=${page}`)
+      const resp = await fetchAsync(`stories/?page=${page}`);
 
-      const body = await resp.json()
+      const body = await resp.json();
 
       if (body.ok) {
-        delete body.ok
+        delete body.ok;
 
-        dipatch(storyForCarouselLoaded(body))
+        dipatch(storyForCarouselLoaded(body));
       }
     } catch (error) {
-      console.log(error)
+      /* eslint-disable-next-line no-console */
+      console.log(error);
     }
-  }
-}
+  };
+};
 
 const storyForCarouselLoaded = (stories) => ({
   type: types.storyForCarouselLoaded,
   payload: stories,
-})
+});
 export const storyStartUpdated = (story) => {
   return async (dispatch) => {
     try {
@@ -114,44 +112,35 @@ export const storyStartUpdated = (story) => {
         allowEscapeKey: false,
         showConfirmButton: false,
         onBeforeOpen: () => {
-          Swal.showLoading()
+          Swal.showLoading();
         },
-      })
+      });
 
-      const resp = await fetchAsyncHistory(
-        `stories/${story.id}`,
-        story,
-        'PUT'
-      )
-      const body = await resp.json()
+      const resp = await fetchAsyncHistory(`stories/${story.id}`, story, 'PUT');
+      const body = await resp.json();
 
       if (body.ok) {
-
-        Swal.close()
-        Swal.fire(
-          'Historia Actualizada!!!',
-          story.title,
-          'success'
-        )
-        dispatch(storyUpdated(story))
-        dispatch(uiRemoveError())
-        dispatch(storyClearActive())
+        Swal.close();
+        Swal.fire('Historia Actualizada!!!', story.title, 'success');
+        dispatch(storyUpdated(story));
+        dispatch(uiRemoveError());
+        dispatch(storyClearActive());
       } else {
-        Swal.close()
-        Swal.fire('Error', body.msg, 'error')
+        Swal.close();
+        Swal.fire('Error', body.msg, 'error');
       }
     } catch (error) {
-      Swal.close()
-
-      console.log(error)
+      Swal.close();
+      /* eslint-disable-next-line no-console */
+      console.log(error);
     }
-  }
-}
+  };
+};
 
 export const storyUpdated = (story) => ({
   type: types.storyUpdated,
   payload: story,
-})
+});
 
 export const startstoryDeleted = (id) => {
   return async (dispatch) => {
@@ -167,42 +156,38 @@ export const startstoryDeleted = (id) => {
         cancelButtonText: 'Cancelar',
       }).then((result) => {
         if (result.isConfirmed) {
-          fetchAsync(`stories/${id}`, {}, 'DELETE').then(
-            (resp) =>
-              resp.json().then((resp) => {
-                if (resp.ok) {
-                  dispatch(storyDeleted(id))
-                  dispatch(storyStartLoading({}))
-                  Swal.fire(
-                    'Historia  Eliminada',
-                    '',
-                    'success'
-                  )
-                } else {
-                  Swal.fire('Error', resp.msg, 'error')
-                }
-              })
-          )
+          fetchAsync(`stories/${id}`, {}, 'DELETE').then((resp) =>
+            resp.json().then((response) => {
+              if (response.ok) {
+                dispatch(storyDeleted(id));
+                dispatch(storyStartLoading({}));
+                Swal.fire('Historia  Eliminada', '', 'success');
+              } else {
+                Swal.fire('Error', response.msg, 'error');
+              }
+            }),
+          );
         }
-      })
+      });
     } catch (error) {
-      Swal.close()
-      Swal.fire('Error', error, 'error')
-      console.log(error)
+      Swal.close();
+
+      /* eslint-disable-next-line no-console */
+      console.log(error);
     }
-  }
-}
+  };
+};
 
 const storyDeleted = (id) => ({
   type: types.noticeDeleted,
   payload: id,
-})
+});
 
 export const StorySetActive = (story) => ({
   type: types.storySetActive,
   payload: story,
-})
+});
 
 export const storyClearActive = () => ({
   type: types.storyClearActive,
-})
+});

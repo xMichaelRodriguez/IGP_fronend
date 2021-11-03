@@ -1,15 +1,10 @@
-import moment from 'moment'
-import React from 'react'
-import { FaRegClock } from 'react-icons/fa'
-import { useHistory } from 'react-router'
+import moment from 'moment';
+import React from 'react';
+import { FaRegClock } from 'react-icons/fa';
+import { useHistory } from 'react-router';
 
-export const CardForum = ({
-  theme,
-  content,
-  created,
-  _id,
-}) => {
-  const history = useHistory()
+const CardForum = ({ theme, content, created, _id }) => {
+  const history = useHistory();
   return (
     <div className='card p-1 mb-2'>
       <blockquote className='blockquote mb-0 card-body'>
@@ -22,7 +17,7 @@ export const CardForum = ({
             className='btn btn-outline-primary'
             type='button'
             onClick={() => {
-              history.push(`/foros/${_id}`)
+              history.push(`/foros/${_id}`);
             }}
           >
             Ver Foro
@@ -30,5 +25,6 @@ export const CardForum = ({
         </div>
       </blockquote>
     </div>
-  )
-}
+  );
+};
+export default CardForum;

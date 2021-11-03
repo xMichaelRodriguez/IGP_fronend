@@ -1,19 +1,20 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { useLocation } from 'react-use'
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useLocation } from 'react-use';
 
-import queryString from 'query-string'
-import { CommicsScreen } from '../commics/CommicsScreen'
-import { CuentosView } from '../library/CuentosView'
-import building from '../../img/building_websites.svg'
-export const TagSearchs = ({ history }) => {
-  const { category } = useSelector((state) => state)
+import queryString from 'query-string';
+import CommicsScreen from '../commics/CommicsScreen.jsx';
+import CuentosView from '../library/CuentosView';
+import building from '../../img/building_websites.svg';
+
+const TagSearchs = ({ history }) => {
+  const { category } = useSelector((state) => state);
 
   const handleTagSearch = (query) => {
-    history.push(`?q=${query}`)
-  }
-  const location = useLocation()
-  const { q = '' } = queryString.parse(location.search)
+    history.push(`?q=${query}`);
+  };
+  const location = useLocation();
+  const { q = '' } = queryString.parse(location.search);
 
   return (
     <>
@@ -41,9 +42,7 @@ export const TagSearchs = ({ history }) => {
               </div>
               <div className='col-md-8'>
                 <div className='card-body'>
-                  <h5 className='card-title font-weight-bold'>
-                    {c.title}
-                  </h5>
+                  <h5 className='card-title font-weight-bold'>{c.title}</h5>
                 </div>
               </div>
             </div>
@@ -51,11 +50,7 @@ export const TagSearchs = ({ history }) => {
         </div>
       ))}
 
-      {q.toLowerCase() === 'commics' ? (
-        <CommicsScreen />
-      ) : (
-        ''
-      )}
+      {q.toLowerCase() === 'commics' ? <CommicsScreen /> : ''}
       {q.toLowerCase() === 'derechos' ? (
         <div className=' d-flex justify-content-center align-items-center'>
           <h5>En Proceso...</h5>
@@ -71,5 +66,6 @@ export const TagSearchs = ({ history }) => {
 
       {q.toLowerCase() === 'cuentos' ? <CuentosView /> : ''}
     </>
-  )
-}
+  );
+};
+export default TagSearchs;

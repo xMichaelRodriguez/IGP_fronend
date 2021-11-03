@@ -1,0 +1,40 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "airbnb-base",
+        "prettier",
+        "plugin:prettier/recommended",
+        "react-app"
+    ],
+    "plugins": [
+        "prettier",
+        "react"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2021,
+        "sourceType": "module"
+    },
+    "rules": {
+        "quotes": "warn",
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ],
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "peerDependencies": true
+            }
+        ]
+       
+    }
+}

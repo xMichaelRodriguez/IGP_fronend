@@ -1,16 +1,14 @@
-import React from 'react'
+import React from 'react';
 
-import Modal from 'react-modal'
-import { useDispatch, useSelector } from 'react-redux'
+import Modal from 'react-modal';
+import { useDispatch, useSelector } from 'react-redux';
 
-import validator from 'validator'
-import {
-  setError,
-  uiRemoveError,
-} from '../../actions/authActios'
-import { StartActiveForum } from '../../actions/forumsAction'
-import { uiCloseModal } from '../../actions/uiActions'
-import { useForm } from '../../hooks/useForm'
+import validator from 'validator';
+import { setError, uiRemoveError } from '../../actions/authActios';
+import { StartActiveForum } from '../../actions/forumsAction';
+import { uiCloseModal } from '../../actions/uiActions';
+import useForm from '../../hooks/useForm';
+
 const customStyles = {
   content: {
     top: '50%',
@@ -20,55 +18,49 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
   },
-}
-Modal.setAppElement('#root')
-export const ModalCreateForum = () => {
-  const { msgError } = useSelector((state) => state.error)
+};
+Modal.setAppElement('#root');
+const ModalCreateForum = () => {
+  const { msgError } = useSelector((state) => state.error);
 
-  const { modalOpen } = useSelector((state) => state.UI)
-  const dispatch = useDispatch()
+  const { modalOpen } = useSelector((state) => state.UI);
+  const dispatch = useDispatch();
 
   const [formValue, handleInputChange, reset] = useForm({
     theme: '',
     content: '',
-  })
-  const { theme, content } = formValue
+  });
+  const { theme, content } = formValue;
 
   const isValid = () => {
     if (validator.isEmpty(theme)) {
-      dispatch(
-        setError('El "Tema" para el foro es oblicatorio')
-      )
-      return false
+      dispatch(setError('El "Tema" para el foro es oblicatorio'));
+      return false;
     }
 
     if (validator.isEmpty(content)) {
-      dispatch(
-        setError(
-          'El "Contenido" para el foro es obligatorio'
-        )
-      )
-      return false
+      dispatch(setError('El "Contenido" para el foro es obligatorio'));
+      return false;
     }
 
-    dispatch(uiRemoveError())
-    return true
-  }
+    dispatch(uiRemoveError());
+    return true;
+  };
 
   const handleSaveForum = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (isValid()) {
-      dispatch(StartActiveForum(formValue))
-      reset()
+      dispatch(StartActiveForum(formValue));
+      reset();
     }
-  }
+  };
 
   const closeModal = () => {
     // TODO: cerrar el modal
-    dispatch(uiRemoveError())
-    dispatch(uiCloseModal())
-    reset()
-  }
+    dispatch(uiRemoveError());
+    dispatch(uiCloseModal());
+    reset();
+  };
 
   return (
     <Modal
@@ -88,9 +80,7 @@ export const ModalCreateForum = () => {
             <input
               type='text'
               className={`form-control mb-2  ${
-                msgError.includes('El "Tema"')
-                  ? 'is-invalid'
-                  : ''
+                msgError.includes('El "Tema"') ? 'is-invalid' : ''
               } `}
               id='titleForo'
               aria-describedby='foroHelp'
@@ -99,20 +89,14 @@ export const ModalCreateForum = () => {
               onChange={handleInputChange}
             />
             {msgError.includes('El "Tema"') && (
-              <small className='invalid-feedback'>
-                {msgError}
-              </small>
+              <small className='invalid-feedback'>{msgError}</small>
             )}
           </div>
           <div className='form-group'>
-            <label htmlFor='contenido'>
-              Contenido del foro
-            </label>
+            <label htmlFor='contenido'>Contenido del foro</label>
             <textarea
               className={`form-control mb-2 ${
-                msgError.includes('El "Contenido"')
-                  ? 'is-invalid'
-                  : ''
+                msgError.includes('El "Contenido"') ? 'is-invalid' : ''
               } `}
               id='contenido'
               rows='5'
@@ -121,9 +105,7 @@ export const ModalCreateForum = () => {
               onChange={handleInputChange}
             ></textarea>
             {msgError.includes('El "Contenido"') && (
-              <small className='invalid-feedback'>
-                {msgError}
-              </small>
+              <small className='invalid-feedback'>{msgError}</small>
             )}
           </div>
 
@@ -137,5 +119,6 @@ export const ModalCreateForum = () => {
         </form>
       </div>
     </Modal>
-  )
-}
+  );
+};
+export default ModalCreateForum;

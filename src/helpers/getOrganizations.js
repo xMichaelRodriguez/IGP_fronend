@@ -1,26 +1,23 @@
-const baseUrl = process.env.REACT_APP_API_URL
-export const getOrganizations = async (
-  categories = null
-) => {
+const baseUrl = process.env.REACT_APP_API_URL;
+const getOrganizations = async (categories = null) => {
   const url =
     categories !== null
-      ? baseUrl + '/organizations/' + categories
-      : '/organizations'
-  const resp = await fetch(url)
-  const data = await resp.json()
+      ? `${baseUrl}/organizations/${categories}`
+      : '/organizations';
+  const resp = await fetch(url);
+  const data = await resp.json();
   if (!data.ok) {
-    return null
+    return null;
   }
 
-  delete data.ok
+  delete data.ok;
 
-  const organizations = data.organizations.map(
-    (organization) => {
-      return {
-        ...organization,
-      }
-    }
-  )
+  const organizations = data.organizations.map((organization) => {
+    return {
+      ...organization,
+    };
+  });
 
-  return organizations
-}
+  return organizations;
+};
+export default getOrganizations;

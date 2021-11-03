@@ -1,26 +1,24 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   startLoadingForums,
   startLoadingMyForums,
-} from '../../actions/forumsAction'
-import { Pagination } from '../cards/Pagination'
+} from '../../actions/forumsAction';
+import Pagination from '../cards/Pagination.jsx';
 
-import { CardForum } from './CardForum'
-import { CardUltimateForum } from './CardUltimateForum'
-import { ForumUser } from './ForumUser'
-import { ModalCreateForum } from './ModalCreateForum'
-import { RegisterForum } from './RegisterForum'
+import CardForum from './CardForum.jsx';
+import CardUltimateForum from './CardUltimateForum.jsx';
+import ForumUser from './ForumUser.jsx';
+import ModalCreateForum from './ModalCreateForum.jsx';
+import RegisterForum from './RegisterForum.jsx';
 
-export const ForumnsMain = () => {
-  const { user, forums } = useSelector(
-    (state) => state.userForum
-  )
-  const dispatch = useDispatch()
+const ForumnsMain = () => {
+  const { user, forums } = useSelector((state) => state.userForum);
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(startLoadingForums({}))
-    dispatch(startLoadingMyForums())
-  }, [dispatch])
+    dispatch(startLoadingForums({}));
+    dispatch(startLoadingMyForums());
+  }, [dispatch]);
   return (
     <>
       <div className='container-fluid p-5'>
@@ -36,7 +34,7 @@ export const ForumnsMain = () => {
             <div className='row'>
               {forums !== [] ? (
                 forums.map((foro) => (
-                  <div className='col-md-12' key={foro._id}>
+                  <div className='col-md-12' key={foro._}>
                     <CardForum {...foro} />
                   </div>
                 ))
@@ -64,5 +62,6 @@ export const ForumnsMain = () => {
       </div>
       <ModalCreateForum />
     </>
-  )
-}
+  );
+};
+export default ForumnsMain;
