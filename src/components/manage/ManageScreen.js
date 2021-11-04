@@ -197,6 +197,7 @@ const ManageScreen = () => {
               <input
                 type='file'
                 style={{ display: 'none' }}
+                accept='image/*'
                 id='fileSelector'
                 name='fileSelector'
                 onChange={handleImage}
