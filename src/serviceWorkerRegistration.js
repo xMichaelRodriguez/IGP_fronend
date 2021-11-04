@@ -69,6 +69,7 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             /* eslint-disable-next-line no-console */
             console.log('service worked installed');
+            /* eslint-disable-next-line */
             window.addEventListener('beforeinstallprompt', function (e) {
               // log the platforms provided as options in an install prompt
               /* eslint-disable-next-line no-console */
