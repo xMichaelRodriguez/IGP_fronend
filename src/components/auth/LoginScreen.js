@@ -72,8 +72,10 @@ const LoginScreen = () => {
                 onChange={handleInputChange}
                 autoComplete='off'
               />
-              {msgError.includes('correo') && (
+              {msgError.includes('correo') || msgError.includes('user not') ? (
                 <small className='invalid-feedback'>{msgError}</small>
+              ) : (
+                ''
               )}
             </div>
 
