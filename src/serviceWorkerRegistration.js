@@ -67,13 +67,14 @@ function registerValidSW(swUrl, config) {
         if (installingWorker == null) {
           return;
         }
+        subscription(result);
         /* eslint-disable-next-line no-console */
         console.log('service worked installing');
         installingWorker.onstatechange = () => {
           if (installingWorker.state === 'installed') {
             /* eslint-disable-next-line no-console */
             console.log('service worked installed');
-            subscription(result);
+
             /* eslint-disable-next-line */
             window.addEventListener('beforeinstallprompt', function (e) {
               // log the platforms provided as options in an install prompt

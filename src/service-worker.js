@@ -75,7 +75,6 @@ self.addEventListener('message', (event) => {
 /* eslint-disable-next-line no-console */
 console.log('Service Worker Works');
 // Service Worker Support
-
 self.addEventListener('push', (e) => {
   const data = e.data.json();
   /* eslint-disable-next-line no-console */
