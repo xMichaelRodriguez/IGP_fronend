@@ -67,6 +67,8 @@ function registerValidSW(swUrl, config) {
         if (installingWorker == null) {
           return;
         }
+        /* eslint-disable-next-line no-console */
+        console.log('service worked installing');
         installingWorker.onstatechange = () => {
           if (installingWorker.state === 'installed') {
             /* eslint-disable-next-line no-console */
