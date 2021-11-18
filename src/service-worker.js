@@ -19,6 +19,7 @@ clientsClaim();
 // Their URLs are injected into the manifest variable below.
 // This variable must be present somewhere in your service worker file,
 // even if you decide not to use precaching. See https://cra.link/PWA
+/* eslint-disable-next-line no-underscore-dangle */
 precacheAndRoute(self.__WB_MANIFEST);
 
 // Set up App Shell-style routing, so that all navigation requests
@@ -71,3 +72,18 @@ self.addEventListener('message', (event) => {
 });
 
 // Any other custom service worker logic can go here.
+/* eslint-disable-next-line no-console */
+console.log('Service Worker Works');
+// Service Worker Support
+
+self.addEventListener('push', (e) => {
+  const data = e.data.json();
+  /* eslint-disable-next-line no-console */
+  console.log(data);
+  /* eslint-disable-next-line no-console */
+  console.log('Notification Received');
+  self.registration.showNotification(data.title, {
+    body: data.message,
+    icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Archlinux-icon-crystal-64.svg/1024px-Archlinux-icon-crystal-64.svg.png',
+  });
+});

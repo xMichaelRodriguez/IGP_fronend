@@ -9,7 +9,8 @@
 
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://cra.link/PWA
-
+const PUBLIC_VAPID_KEY =
+  'BDhHRWSvdN5KVnXm1ClGtKV2Yzc1keKuEfMtaijHCSfw_7IzQyhIwSUnU1TDNaI3zLfF8Ofp0gJHGvQY1x9k92E';
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -49,6 +50,7 @@ export function register(config) {
         });
       } else {
         // Is not localhost. Just register service worker
+
         registerValidSW(swUrl, config);
       }
     });
@@ -69,6 +71,7 @@ function registerValidSW(swUrl, config) {
           if (installingWorker.state === 'installed') {
             /* eslint-disable-next-line no-console */
             console.log('service worked installed');
+            subscription(result);
             /* eslint-disable-next-line */
             window.addEventListener('beforeinstallprompt', function (e) {
               // log the platforms provided as options in an install prompt
@@ -155,4 +158,42 @@ export function unregister() {
         console.error(error.message);
       });
   }
+}
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+  const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+  /* eslint-disable-next-line no-plusplus */
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+function subscription(result) {
+  /* eslint-disable-next-line no-console */
+  console.log('New Service Worker');
+  // Listen Push Notifications
+  /* eslint-disable-next-line no-console */
+  console.log('Listening Push Notifications');
+  return result.pushManager
+    .subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: urlBase64ToUint8Array(PUBLIC_VAPID_KEY),
+    })
+    .then((subscribed) => {
+      /* eslint-disable-next-line no-console */
+      // Send Notification
+      fetch('/subscription', {
+        method: 'POST',
+        body: JSON.stringify(subscribed),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then((resp) => {
+        /* eslint-disable-next-line no-console */
+        console.log('Subscribed!');
+      });
+    });
 }
