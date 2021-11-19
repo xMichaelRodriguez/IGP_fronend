@@ -76,7 +76,7 @@ self.addEventListener('message', (event) => {
 console.log('Service Worker Works');
 // Service Worker Support
 self.addEventListener('push', (e) => {
-  const data = JSON.parse(e.data);
+  const data = e.data.json();
   /* eslint-disable-next-line no-console */
   console.log(data);
   /* eslint-disable-next-line no-console */
