@@ -88,7 +88,7 @@ function registerValidSW(swUrl, config) {
       break;
   }
   navigator.serviceWorker
-    .register(swUrl)
+    .register(swUrl, { scope: '/' })
     .then((registration) => {
       const result = { ...registration };
 
