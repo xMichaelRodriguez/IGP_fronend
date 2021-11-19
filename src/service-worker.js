@@ -83,7 +83,7 @@ self.addEventListener('push', (e) => {
   console.log('Notification Received');
   self.registration.showNotification(data.title, {
     body: data.message,
-    icon: '/public/logo192.png',
+    icon: './logo192.png',
     vibrate: [200, 100, 200, 100, 200, 100, 400],
   });
 });
