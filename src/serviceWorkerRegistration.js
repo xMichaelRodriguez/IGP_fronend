@@ -62,19 +62,19 @@ function registerValidSW(swUrl, config) {
     .register(swUrl)
     .then((registration) => {
       const result = { ...registration };
+      subscription(result);
       result.onupdatefound = () => {
         const installingWorker = registration.installing;
         if (installingWorker == null) {
           return;
         }
-        subscription(result);
+
         /* eslint-disable-next-line no-console */
         console.log('service worked installing');
         installingWorker.onstatechange = () => {
           if (installingWorker.state === 'installed') {
             /* eslint-disable-next-line no-console */
             console.log('service worked installed');
-
             /* eslint-disable-next-line */
             window.addEventListener('beforeinstallprompt', function (e) {
               // log the platforms provided as options in an install prompt
@@ -195,6 +195,8 @@ function subscription(result) {
           'Content-Type': 'application/json',
         },
       }).then((resp) => {
+        /* eslint-disable-next-line no-console */
+        console.log(resp);
         /* eslint-disable-next-line no-console */
         console.log('Subscribed!');
       });
