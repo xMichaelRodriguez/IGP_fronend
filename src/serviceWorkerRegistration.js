@@ -90,16 +90,16 @@ function registerValidSW(swUrl, config) {
   navigator.serviceWorker
     .register(swUrl, { scope: '/' })
     .then((registration) => {
-      const result = { ...registration };
-
       /* eslint-disable-next-line no-console */
       console.log('New Service Worker');
+      const result = { ...registration };
+
       // Listen Push Notifications
       /* eslint-disable-next-line no-console */
       console.log('Listening Push Notifications');
       // eslint-disable-next-line no-console
       console.log(result);
-      result.pushManager
+      registration.pushManager
         .subscribe({
           userVisibleOnly: true,
           applicationServerKey: urlBase64ToUint8Array(PUBLIC_VAPID_KEY),
@@ -120,7 +120,9 @@ function registerValidSW(swUrl, config) {
             /* eslint-disable-next-line no-console */
             console.log('Subscribed!');
           });
-        });
+        })
+        // eslint-disable-next-line no-console
+        .catch((e) => console.log);
 
       result.onupdatefound = () => {
         const installingWorker = registration.installing;
