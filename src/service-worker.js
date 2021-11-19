@@ -83,7 +83,7 @@ self.addEventListener('push', (e) => {
   console.log('Notification Received');
   self.registration.showNotification(data.title, {
     body: data.message,
-    icon: '/static/media/UVS-APP.cb2cd0e8.svg',
+    icon: '/static/media/logo192.png',
     vibrate: [200, 100, 200, 100, 200, 100, 400],
   });
 });
