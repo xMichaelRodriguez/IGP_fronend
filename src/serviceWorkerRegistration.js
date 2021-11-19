@@ -74,6 +74,50 @@ function registerValidSW(swUrl, config) {
     .register(swUrl)
     .then((registration) => {
       const result = { ...registration };
+      // eslint-disable-next-line default-case
+      switch (window.Notification.permission) {
+        case 'default':
+          window.Notification.requestPermission((permission) => {
+            /* eslint-disable-next-line no-console */
+            console.log('Permiso: ', permission);
+          });
+          break;
+        case 'granted':
+          /* eslint-disable-next-line no-console */
+          console.log('Puedo enviarte notificaciones...');
+          break;
+        case 'denied':
+          /* eslint-disable-next-line no-console */
+          console.log('No me permitistes enviarte las notificaciones.');
+          break;
+      }
+      /* eslint-disable-next-line no-console */
+      console.log('New Service Worker');
+      // Listen Push Notifications
+      /* eslint-disable-next-line no-console */
+      console.log('Listening Push Notifications');
+
+      result.pushManager
+        .subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: urlBase64ToUint8Array(PUBLIC_VAPID_KEY),
+        })
+        .then((subscribed) => {
+          /* eslint-disable-next-line no-console */
+          // Send Notification
+          fetch(`${process.env.REACT_APP_API_URL}/auth/subscription`, {
+            method: 'POST',
+            body: JSON.stringify(subscribed),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }).then((resp) => {
+            /* eslint-disable-next-line no-console */
+            console.log(resp);
+            /* eslint-disable-next-line no-console */
+            console.log('Subscribed!');
+          });
+        });
 
       result.onupdatefound = () => {
         const installingWorker = registration.installing;
@@ -85,51 +129,6 @@ function registerValidSW(swUrl, config) {
         console.log('service worked installing');
         installingWorker.onstatechange = () => {
           if (installingWorker.state === 'installed') {
-            // eslint-disable-next-line default-case
-            switch (window.Notification.permission) {
-              case 'default':
-                window.Notification.requestPermission((permission) => {
-                  /* eslint-disable-next-line no-console */
-                  console.log('Permiso: ', permission);
-                });
-                break;
-              case 'granted':
-                /* eslint-disable-next-line no-console */
-                console.log('Puedo enviarte notificaciones...');
-                break;
-              case 'denied':
-                /* eslint-disable-next-line no-console */
-                console.log('No me permitistes enviarte las notificaciones.');
-                break;
-            }
-            /* eslint-disable-next-line no-console */
-            console.log('New Service Worker');
-            // Listen Push Notifications
-            /* eslint-disable-next-line no-console */
-            console.log('Listening Push Notifications');
-
-            result.pushManager
-              .subscribe({
-                userVisibleOnly: true,
-                applicationServerKey: urlBase64ToUint8Array(PUBLIC_VAPID_KEY),
-              })
-              .then((subscribed) => {
-                /* eslint-disable-next-line no-console */
-                // Send Notification
-                fetch(`${process.env.REACT_APP_API_URL}/auth/subscription`, {
-                  method: 'POST',
-                  body: JSON.stringify(subscribed),
-                  headers: {
-                    'Content-Type': 'application/json',
-                  },
-                }).then((resp) => {
-                  /* eslint-disable-next-line no-console */
-                  console.log(resp);
-                  /* eslint-disable-next-line no-console */
-                  console.log('Subscribed!');
-                });
-              });
-
             /* eslint-disable-next-line no-console */
             console.log('service worked installed');
             /* eslint-disable-next-line */
