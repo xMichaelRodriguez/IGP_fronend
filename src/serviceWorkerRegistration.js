@@ -62,12 +62,56 @@ function registerValidSW(swUrl, config) {
     .register(swUrl)
     .then((registration) => {
       const result = { ...registration };
-      subscription(result);
+
       result.onupdatefound = () => {
         const installingWorker = registration.installing;
         if (installingWorker == null) {
           return;
         }
+        // eslint-disable-next-line default-case
+        switch (window.Notification.permission) {
+          case 'default':
+            window.Notification.requestPermission((permission) => {
+              /* eslint-disable-next-line no-console */
+              console.log('Permiso: ', permission);
+            });
+            break;
+          case 'granted':
+            /* eslint-disable-next-line no-console */
+            console.log('Puedo enviarte notificaciones...');
+            break;
+          case 'denied':
+            /* eslint-disable-next-line no-console */
+            console.log('No me permitistes enviarte las notificaciones.');
+            break;
+        }
+        /* eslint-disable-next-line no-console */
+        console.log('New Service Worker');
+        // Listen Push Notifications
+        /* eslint-disable-next-line no-console */
+        console.log('Listening Push Notifications');
+
+        result.pushManager
+          .subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: urlBase64ToUint8Array(PUBLIC_VAPID_KEY),
+          })
+          .then((subscribed) => {
+            /* eslint-disable-next-line no-console */
+            // Send Notification
+            fetch(`${process.env.REACT_APP_API_URL}/auth/subscription`, {
+              method: 'POST',
+              body: JSON.stringify(subscribed),
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }).then((resp) => {
+              /* eslint-disable-next-line no-console */
+              console.log(resp);
+              /* eslint-disable-next-line no-console */
+              console.log('Subscribed!');
+            });
+          });
 
         /* eslint-disable-next-line no-console */
         console.log('service worked installing');
@@ -173,53 +217,4 @@ function urlBase64ToUint8Array(base64String) {
     outputArray[i] = rawData.charCodeAt(i);
   }
   return outputArray;
-}
-function subscription(result) {
-  /**
-   * verificamos el permiso asignado
-   * @param permission default -> preguntar al usuario, granted -> Otorgado el permiso, denied -> NO hay permiso
-   */
-  // eslint-disable-next-line default-case
-  switch (window.Notification.permission) {
-    case 'default':
-      window.Notification.requestPermission((permission) => {
-        /* eslint-disable-next-line no-console */
-        console.log('Permiso: ', permission);
-      });
-      break;
-    case 'granted':
-      /* eslint-disable-next-line no-console */
-      console.log('Puedo enviarte notificaciones...');
-      break;
-    case 'denied':
-      /* eslint-disable-next-line no-console */
-      console.log('No me permitistes enviarte las notificaciones.');
-      break;
-  }
-  /* eslint-disable-next-line no-console */
-  console.log('New Service Worker');
-  // Listen Push Notifications
-  /* eslint-disable-next-line no-console */
-  console.log('Listening Push Notifications');
-  return result.pushManager
-    .subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array(PUBLIC_VAPID_KEY),
-    })
-    .then((subscribed) => {
-      /* eslint-disable-next-line no-console */
-      // Send Notification
-      fetch(`${process.env.REACT_APP_API_URL}/auth/subscription`, {
-        method: 'POST',
-        body: JSON.stringify(subscribed),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).then((resp) => {
-        /* eslint-disable-next-line no-console */
-        console.log(resp);
-        /* eslint-disable-next-line no-console */
-        console.log('Subscribed!');
-      });
-    });
 }
