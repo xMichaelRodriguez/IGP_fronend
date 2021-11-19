@@ -20,12 +20,12 @@ const AppRouter = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(startChecking());
+    dispatch(orgStartLoading());
+    dispatch(startLoadingForumUser());
     dispatch(noticeStartLoading({}));
     dispatch(storyStartLoading({}));
     dispatch(storyForCarouselLoading({}));
-    dispatch(orgStartLoading());
     dispatch(commicStartLoading({}));
-    dispatch(startLoadingForumUser());
   }, [dispatch]);
 
   if (checking) {
