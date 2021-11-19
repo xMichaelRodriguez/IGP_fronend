@@ -10,7 +10,7 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://cra.link/PWA
 const PUBLIC_VAPID_KEY =
-  'BDhHRWSvdN5KVnXm1ClGtKV2Yzc1keKuEfMtaijHCSfw_7IzQyhIwSUnU1TDNaI3zLfF8Ofp0gJHGvQY1x9k92E';
+  'BLoLfsjJyBN5ZDRwBWg2KwldSwn589g0gP_-kb-XFknbQb7adCXWijL6quu9oJS5gmgSUotX8Yc5AIjqg5Na0fE';
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
