@@ -56,6 +56,18 @@ export function register(config) {
     });
   }
 }
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+  const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+  /* eslint-disable-next-line no-plusplus */
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
 
 function registerValidSW(swUrl, config) {
   navigator.serviceWorker
@@ -68,55 +80,56 @@ function registerValidSW(swUrl, config) {
         if (installingWorker == null) {
           return;
         }
-        // eslint-disable-next-line default-case
-        switch (window.Notification.permission) {
-          case 'default':
-            window.Notification.requestPermission((permission) => {
-              /* eslint-disable-next-line no-console */
-              console.log('Permiso: ', permission);
-            });
-            break;
-          case 'granted':
-            /* eslint-disable-next-line no-console */
-            console.log('Puedo enviarte notificaciones...');
-            break;
-          case 'denied':
-            /* eslint-disable-next-line no-console */
-            console.log('No me permitistes enviarte las notificaciones.');
-            break;
-        }
-        /* eslint-disable-next-line no-console */
-        console.log('New Service Worker');
-        // Listen Push Notifications
-        /* eslint-disable-next-line no-console */
-        console.log('Listening Push Notifications');
-
-        result.pushManager
-          .subscribe({
-            userVisibleOnly: true,
-            applicationServerKey: urlBase64ToUint8Array(PUBLIC_VAPID_KEY),
-          })
-          .then((subscribed) => {
-            /* eslint-disable-next-line no-console */
-            // Send Notification
-            fetch(`${process.env.REACT_APP_API_URL}/auth/subscription`, {
-              method: 'POST',
-              body: JSON.stringify(subscribed),
-              headers: {
-                'Content-Type': 'application/json',
-              },
-            }).then((resp) => {
-              /* eslint-disable-next-line no-console */
-              console.log(resp);
-              /* eslint-disable-next-line no-console */
-              console.log('Subscribed!');
-            });
-          });
 
         /* eslint-disable-next-line no-console */
         console.log('service worked installing');
         installingWorker.onstatechange = () => {
           if (installingWorker.state === 'installed') {
+            // eslint-disable-next-line default-case
+            switch (window.Notification.permission) {
+              case 'default':
+                window.Notification.requestPermission((permission) => {
+                  /* eslint-disable-next-line no-console */
+                  console.log('Permiso: ', permission);
+                });
+                break;
+              case 'granted':
+                /* eslint-disable-next-line no-console */
+                console.log('Puedo enviarte notificaciones...');
+                break;
+              case 'denied':
+                /* eslint-disable-next-line no-console */
+                console.log('No me permitistes enviarte las notificaciones.');
+                break;
+            }
+            /* eslint-disable-next-line no-console */
+            console.log('New Service Worker');
+            // Listen Push Notifications
+            /* eslint-disable-next-line no-console */
+            console.log('Listening Push Notifications');
+
+            result.pushManager
+              .subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array(PUBLIC_VAPID_KEY),
+              })
+              .then((subscribed) => {
+                /* eslint-disable-next-line no-console */
+                // Send Notification
+                fetch(`${process.env.REACT_APP_API_URL}/auth/subscription`, {
+                  method: 'POST',
+                  body: JSON.stringify(subscribed),
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                }).then((resp) => {
+                  /* eslint-disable-next-line no-console */
+                  console.log(resp);
+                  /* eslint-disable-next-line no-console */
+                  console.log('Subscribed!');
+                });
+              });
+
             /* eslint-disable-next-line no-console */
             console.log('service worked installed');
             /* eslint-disable-next-line */
@@ -205,16 +218,4 @@ export function unregister() {
         console.error(error.message);
       });
   }
-}
-function urlBase64ToUint8Array(base64String) {
-  const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
-  const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
-
-  const rawData = window.atob(base64);
-  const outputArray = new Uint8Array(rawData.length);
-  /* eslint-disable-next-line no-plusplus */
-  for (let i = 0; i < rawData.length; ++i) {
-    outputArray[i] = rawData.charCodeAt(i);
-  }
-  return outputArray;
 }
