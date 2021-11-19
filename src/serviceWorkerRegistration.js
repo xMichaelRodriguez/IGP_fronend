@@ -96,7 +96,6 @@ function registerValidSW(swUrl, config) {
       // Listen Push Notifications
       /* eslint-disable-next-line no-console */
       console.log('Listening Push Notifications');
-
       result.pushManager
         .subscribe({
           userVisibleOnly: true,
@@ -104,6 +103,7 @@ function registerValidSW(swUrl, config) {
         })
         .then((subscribed) => {
           /* eslint-disable-next-line no-console */
+          console.log('Push Notification subscribing', subscribed);
           // Send Notification
           fetch(`${process.env.REACT_APP_API_URL}/auth/subscription`, {
             method: 'POST',
