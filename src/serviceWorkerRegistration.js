@@ -70,32 +70,35 @@ function urlBase64ToUint8Array(base64String) {
 }
 
 function registerValidSW(swUrl, config) {
+  // eslint-disable-next-line default-case
+  switch (window.Notification.permission) {
+    case 'default':
+      window.Notification.requestPermission((permission) => {
+        /* eslint-disable-next-line no-console */
+        console.log('Permiso: ', permission);
+      });
+      break;
+    case 'granted':
+      /* eslint-disable-next-line no-console */
+      console.log('Puedo enviarte notificaciones...');
+      break;
+    case 'denied':
+      /* eslint-disable-next-line no-console */
+      console.log('No me permitistes enviarte las notificaciones.');
+      break;
+  }
   navigator.serviceWorker
     .register(swUrl)
     .then((registration) => {
       const result = { ...registration };
-      // eslint-disable-next-line default-case
-      switch (window.Notification.permission) {
-        case 'default':
-          window.Notification.requestPermission((permission) => {
-            /* eslint-disable-next-line no-console */
-            console.log('Permiso: ', permission);
-          });
-          break;
-        case 'granted':
-          /* eslint-disable-next-line no-console */
-          console.log('Puedo enviarte notificaciones...');
-          break;
-        case 'denied':
-          /* eslint-disable-next-line no-console */
-          console.log('No me permitistes enviarte las notificaciones.');
-          break;
-      }
+
       /* eslint-disable-next-line no-console */
       console.log('New Service Worker');
       // Listen Push Notifications
       /* eslint-disable-next-line no-console */
       console.log('Listening Push Notifications');
+      // eslint-disable-next-line no-console
+      console.log(result);
       result.pushManager
         .subscribe({
           userVisibleOnly: true,
