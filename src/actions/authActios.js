@@ -14,7 +14,9 @@ export const startLogin = (email, password) => {
       dispatch(login({ uid: body.uid, name: body.name }));
       dispatch(uiRemoveError());
     } else {
-      dispatch(setError(body.msg));
+      body.errors
+        ? dispatch(setError(body?.errors?.password.msg))
+        : dispatch(setError(body.msg));
     }
   };
 };

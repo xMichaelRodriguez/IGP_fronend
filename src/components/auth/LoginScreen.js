@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './style.css';
@@ -11,6 +11,7 @@ import { setError, startLogin, uiRemoveError } from '../../actions/authActios';
 const LoginScreen = () => {
   const { msgError } = useSelector((state) => state.error);
   const { uid } = useSelector((state) => state.auth);
+  const [state, setState] = useState(0);
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -20,7 +21,6 @@ const LoginScreen = () => {
     password: '',
   });
   const { email, password } = formValue;
-
   useEffect(() => {
     if (uid) {
       history.push('/');
@@ -29,15 +29,17 @@ const LoginScreen = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+    setState(1);
     if (isFormValid()) {
       dispatch(startLogin(email, password));
     }
   };
 
   const isFormValid = () => {
+    setState(1);
     if (!validator.isEmail(email)) {
       dispatch(setError('no es un correo'));
-
+      setState(0);
       return false;
     }
 
@@ -47,8 +49,10 @@ const LoginScreen = () => {
           'Contraseña debe contener mas de 6 caracteres, al menos una letra mayuscula y minuscula y tambien contener numeros ',
         ),
       );
+      setState(0);
       return false;
     }
+    setState(1);
     dispatch(uiRemoveError());
     return true;
   };
@@ -87,24 +91,44 @@ const LoginScreen = () => {
                 value={password}
                 onChange={handleInputChange}
                 className={`form-control ${
-                  msgError.includes('Contraseña') ||
-                  msgError.includes('password')
+                  msgError.includes('Contraseña Invalida') ||
+                  msgError.includes('must contain a number')
                     ? 'is-invalid'
                     : ''
                 } `}
                 placeholder='password'
               />
-              {msgError.includes('Contraseña') ||
-              msgError.includes('password') ? (
+              {msgError.includes('Contraseña Invalida') ? (
                 <span className='invalid-feedback text-break'>{msgError}</span>
               ) : (
                 ''
               )}
+              {msgError.includes('must contain a number') ? (
+                <span className='invalid-feedback text-break'>
+                  debe contener numeros
+                </span>
+              ) : (
+                ''
+              )}
             </div>
-
-            <button type='submit' className='btn primary' onClick={handleLogin}>
-              Iniciar Sesión
-            </button>
+            {state === 0 ? (
+              <button
+                type='submit'
+                className='btn primary'
+                onClick={handleLogin}
+              >
+                Iniciar Sesión
+              </button>
+            ) : (
+              <button className='btn primary' type='button' disabled>
+                <span
+                  className='spinner-grow spinner-grow-sm'
+                  role='status'
+                  aria-hidden='true'
+                ></span>
+                Loading...
+              </button>
+            )}
           </form>
         </div>
         <div className='col-md-4 py-3 primary '>
