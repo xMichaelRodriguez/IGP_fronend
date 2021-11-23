@@ -2,7 +2,7 @@ import moment from 'moment';
 import React, { useEffect } from 'react';
 import { FaRegClock, FaRegUser } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import { uiRemoveError } from '../../actions/authActios';
 import { startLoadingActiveForum } from '../../actions/forumsAction';
 import socketInstance from '../../helpers/Sockets';
@@ -12,6 +12,7 @@ import ListComments from './ListComments.jsx';
 const ForumScreenRead = () => {
   const { user } = useSelector((state) => state.userForum);
   const { activeForum } = useSelector((state) => state.userForum);
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const { foroId } = useParams();
@@ -31,6 +32,14 @@ const ForumScreenRead = () => {
           <h3>No se Encontro EL Foro</h3>
         ) : (
           <>
+            <button
+              className='btn btn-link'
+              onClick={() => {
+                history.goBack();
+              }}
+            >
+              Volver
+            </button>
             <div className='row mb-2'>
               <nav aria-label='breadcrumb' onClick={handleCleanInput}>
                 <ol className='breadcrumb'>

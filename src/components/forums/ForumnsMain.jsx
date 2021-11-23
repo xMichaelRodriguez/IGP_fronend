@@ -39,7 +39,7 @@ const ForumnsMain = () => {
                   </div>
                 ))
               ) : (
-                <h1 className='text-muted'>No hay foros</h1>
+                <h2 className='text-muted'>No hay foros</h2>
               )}
               <div className='col-md-6 mt-3'>
                 <Pagination selector='userForum' />
