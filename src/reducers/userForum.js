@@ -13,6 +13,12 @@ const initialState = {
   prevPage: null,
   nextPage: null,
   myForums: [],
+  commentsForum: [
+    {
+      commentFather: [],
+      replyComments: [],
+    },
+  ],
 };
 const userForumReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -63,6 +69,29 @@ const userForumReducer = (state = initialState, action) => {
       return {
         ...state,
         myForums: state.myForums.filter((forum) => forum.id !== action.payload),
+      };
+    case types.loadingComments:
+      return {
+        ...state,
+        commentsForum: [...action.payload],
+      };
+    case types.replyOneComment:
+      return {
+        ...state,
+        commentsForum: state.commentsForum.map(
+          ({ commentFather, replyComments }) => ({
+            commentFather: { ...commentFather },
+            replyComments: [...replyComments, action.payload.replies],
+          }),
+        ),
+      };
+    case types.addNewComment:
+      return {
+        ...state,
+        commentsForum: [
+          ...state.commentsForum,
+          { commentFather: action.payload, replyComments: [] },
+        ],
       };
     default:
       return state;

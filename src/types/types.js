@@ -58,5 +58,8 @@ const types = {
   activeForumAddNew: '[FORUM] created forun',
   deleteForum: '[FORUM] delete forun',
   getMyForums: '[FORUM] get my forums',
+  replyOneComment: '[FORUM] Reply one comment',
+  addNewComment: '[FORUM] Create New COmment',
+  loadingComments: '[FORUM] Loading Comment of one Forum',
 };
 export default types;

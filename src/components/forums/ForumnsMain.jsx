@@ -34,7 +34,7 @@ const ForumnsMain = () => {
             <div className='row'>
               {forums !== [] ? (
                 forums.map((foro) => (
-                  <div className='col-md-12' key={foro._}>
+                  <div className='col-md-12 list-unstyled' key={foro._}>
                     <CardForum {...foro} />
                   </div>
                 ))

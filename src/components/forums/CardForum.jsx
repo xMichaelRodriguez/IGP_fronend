@@ -3,12 +3,12 @@ import React from 'react';
 import { FaRegClock } from 'react-icons/fa';
 import { useHistory } from 'react-router';
 
-const CardForum = ({ theme, content, created, _id }) => {
+const CardForum = ({ theme, content, created, _id, user }) => {
   const history = useHistory();
   return (
-    <div className='card p-1 mb-2'>
+    <div className='card p-1 mb-2 '>
       <blockquote className='blockquote mb-0 card-body'>
-        <p className='font-weight-bold '>{theme}</p>
+        <p className=' '>{theme}</p>
         <small>
           <FaRegClock /> {moment(created).calendar()}
         </small>

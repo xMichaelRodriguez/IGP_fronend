@@ -1,65 +1,30 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FaTrash } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import { startForumDelete } from '../../actions/authActios';
 import socketInstance from '../../helpers/Sockets';
+import { startLoadingCommentsForum } from '../../actions/forumsAction';
+import ItemCommentList from './ItemCommentList.jsx';
 
-const ListComments = ({ commentOfForum, setCommentOfForum }) => {
+const ListComments = () => {
+  const { commentsForum } = useSelector((state) => state.userForum);
   const dispatch = useDispatch();
   const { foroId } = useParams();
-  const { uid } = useSelector((state) => state.auth);
   useEffect(() => {
     socketInstance.emit('load-comments', foroId);
 
     socketInstance.on('comments-loaded', (data) => {
-      setCommentOfForum([...data]);
+      dispatch(startLoadingCommentsForum(data));
     });
-    return () => {
-      setCommentOfForum([]);
-    };
-  }, [foroId, setCommentOfForum]);
+  }, [foroId, dispatch]);
 
-  const handleDeleteComment = (id) => {
-    dispatch(startForumDelete(id, foroId));
-  };
   return (
-    <div className='row mt-5 '>
-      <div className='col-md-12'>
-        <ul className='list-group containerMessage mt-5 '>
-          {commentOfForum !== []
-            ? commentOfForum.map((comment) => (
-                <li className='list-group-item p-0 mb-0' key={comment._}>
-                  <blockquote className='blockquote  p-3'>
-                    <div className='row'>
-                      <div className='col-md-8 mb-2'>
-                        <span className='mb-0 comment__title'>
-                          {comment.user.name}
-                        </span>
-                        <footer className='blockquote-footer text-dark'>
-                          <cite title='Source Title comment__content '>
-                            {comment.comment}
-                          </cite>
-                        </footer>
-                      </div>
-                      {uid ? (
-                        <div className='col-md-4'>
-                          <button
-                            className='btn btn-outline-danger'
-                            /* eslint no-underscore-dangle:0 */
-                            onClick={() => handleDeleteComment(comment._id)}
-                            type='button'
-                          >
-                            <FaTrash /> Eliminar
-                          </button>
-                        </div>
-                      ) : (
-                        ''
-                      )}
-                    </div>
-                  </blockquote>
-                </li>
+    <div className='row mt-2 '>
+      <div className='col-md-12 bg-light'>
+        <ul className='list-grouplist-unstyled containerMessage'>
+          {commentsForum !== []
+            ? commentsForum.map((comment, index) => (
+                <ItemCommentList key={index} {...comment} />
               ))
             : ''}
         </ul>

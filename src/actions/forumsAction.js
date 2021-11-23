@@ -145,3 +145,40 @@ const deletedForum = (id) => ({
   type: types.deleteForum,
   payload: id,
 });
+
+export const startLoadingActiveForum = (forum) => {
+  return (dispatch) => {
+    dispatch(loadedActiveForum(forum));
+  };
+};
+
+const loadedActiveForum = (forum) => ({
+  type: types.setActiveForum,
+  payload: forum,
+});
+
+export const startLoadingCommentsForum = (comments) => ({
+  type: types.loadingComments,
+  payload: [...comments],
+});
+
+export const startReplyOneComment = (data) => {
+  return async (dispatch) => {
+    dispatch(replyOneComment(data));
+  };
+};
+
+const replyOneComment = (comment) => ({
+  type: types.replyOneComment,
+  payload: comment,
+});
+
+export const startNewComment = (comment, foroId) => {
+  return (dispatch) => {
+    dispatch(addNewComment(comment, foroId));
+  };
+};
+const addNewComment = (comment, foroId) => ({
+  type: types.addNewComment,
+  payload: comment,
+});

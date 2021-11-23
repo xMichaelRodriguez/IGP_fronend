@@ -5,8 +5,12 @@ import validator from 'validator';
 import socketInstance from '../../helpers/Sockets';
 import useForm from '../../hooks/useForm';
 import { setError, uiRemoveError } from '../../actions/authActios';
+import {
+  startNewComment,
+  startReplyOneComment,
+} from '../../actions/forumsAction';
 
-const CommentBox = ({ foroId, setCommentOfForum, commentOfForum }) => {
+const CommentBox = ({ foroId, context, idReply }) => {
   const { user } = useSelector((state) => state.userForum);
 
   const { msgError } = useSelector((state) => state.error);
@@ -19,14 +23,27 @@ const CommentBox = ({ foroId, setCommentOfForum, commentOfForum }) => {
   const { commentBox } = formValue;
   const handlerCommentBox = () => {
     if (isvalid()) {
-      socketInstance.emit(
-        'comment-in-forum',
-        { commentBox, userId: user.uid, forumId: foroId },
-        (data) => {
-          setCommentOfForum([...commentOfForum, data.comment]);
-          reset();
-        },
-      );
+      if (context === 'father') {
+        socketInstance.emit(
+          'comment-in-forum',
+          { commentBox, userId: user.uid, forumId: foroId },
+          (data) => {
+            dispatch(startNewComment(data.comment, foroId));
+            reset();
+          },
+        );
+      } else {
+        socketInstance.emit(
+          'reply-comment',
+          { commentBox, user: user.uid, commentId: foroId },
+          (data) => {
+            dispatch(startReplyOneComment(data));
+            reset();
+          },
+        );
+
+        reset();
+      }
     }
   };
   const isvalid = () => {
@@ -61,7 +78,7 @@ const CommentBox = ({ foroId, setCommentOfForum, commentOfForum }) => {
       </div>
       <div className='col-md-12'>
         <button
-          className='btn btn-outline-primary'
+          className='btn primary '
           type='button'
           onClick={handlerCommentBox}
         >
