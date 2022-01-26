@@ -115,7 +115,6 @@ export const storyStartUpdated = (story) => {
           Swal.showLoading();
         },
       });
-
       const resp = await fetchAsyncHistory(`stories/${story.id}`, story, 'PUT');
       const body = await resp.json();
 

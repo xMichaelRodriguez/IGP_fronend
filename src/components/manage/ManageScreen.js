@@ -15,6 +15,7 @@ import {
   noticetStartUpdated,
   startnoticeAddNew,
 } from '../../actions/noticesActions';
+import TextEditorComponent from './TextEditorComponent';
 
 const initialForm = {
   title: '',
@@ -26,18 +27,24 @@ const initialForm = {
 const ManageScreen = () => {
   const dispatch = useDispatch();
   const refImage = useRef(null);
+
   const { token } = useParams();
   const history = useHistory();
+
   const { msgError } = useSelector((state) => state.error);
   const { activeNotice } = useSelector((state) => state.notice);
   const { activeStory } = useSelector((state) => state.story);
+
   const [formValue, setFormValue] = useState(initialForm);
+  const [editorTextChanges, setEditorTextChanges] = useState('');
 
   useEffect(() => {
     if (token === 'noticias' && activeNotice) {
       setFormValue(activeNotice);
+      setEditorTextChanges(activeNotice.body);
     } else if (token === 'historias' && activeStory) {
       setFormValue(activeStory);
+      setEditorTextChanges(activeStory.body);
     }
   }, [token, activeNotice, activeStory]);
 
@@ -82,7 +89,7 @@ const ManageScreen = () => {
     }
 
     if (
-      !validator.isLength(formValue.body, {
+      !validator.isLength(editorTextChanges, {
         min: 50,
         max: 2000,
       })
@@ -108,24 +115,33 @@ const ManageScreen = () => {
     e.preventDefault();
 
     if (isFormValid()) {
+      const newFormValue = {
+        ...formValue,
+        body: editorTextChanges,
+      };
+
       if (token === 'noticias' && activeNotice) {
         // actualiza una noticia
-        dispatch(noticetStartUpdated(formValue));
+        dispatch(noticetStartUpdated(newFormValue));
 
         dispatch(noticeClearActive());
         setFormValue(initialForm);
+        setEditorTextChanges('');
       } else if (token === 'noticias' && !activeNotice) {
         // agrega una noticia
-        dispatch(startnoticeAddNew(formValue));
+        dispatch(startnoticeAddNew(newFormValue));
         dispatch(noticeClearActive());
         setFormValue(initialForm);
+        setEditorTextChanges('');
       } else if (token === 'historias' && activeStory) {
         // editar una historia
-        dispatch(storyStartUpdated(formValue));
+        dispatch(storyStartUpdated(newFormValue));
         setFormValue(initialForm);
+        setEditorTextChanges('');
       } else if (token === 'historias' && !activeStory) {
-        dispatch(startstoryAddNew(formValue));
+        dispatch(startstoryAddNew(newFormValue));
         setFormValue(initialForm);
+        setEditorTextChanges('');
       }
     }
   };
@@ -136,6 +152,7 @@ const ManageScreen = () => {
     dispatch(noticeClearActive());
     dispatch(uiRemoveError());
     setFormValue(initialForm);
+    setEditorTextChanges('');
     history.goBack();
   };
 
@@ -175,8 +192,12 @@ const ManageScreen = () => {
           ) : null}
         </div>
         <div className='form-group'>
-          <label htmlFor='cuerpo'>Cuerpo</label>
-          <textarea
+          <label htmlFor='cuerpo'>Descripcion</label>
+          <TextEditorComponent
+            editorTextChanges={editorTextChanges}
+            setEditorTextChanges={setEditorTextChanges}
+          />
+          {/* <textarea
             className={`form-control ${
               msgError.includes('Cuerpo') || msgError.includes('debe')
                 ? 'is-invalid'
@@ -189,7 +210,7 @@ const ManageScreen = () => {
           ></textarea>
           {msgError.includes('Cuerpo') || msgError.includes('debe') ? (
             <div className='invalid-feedback'>{msgError}</div>
-          ) : null}
+          ) : null} */}
         </div>
         {token === 'historias' && (
           <>

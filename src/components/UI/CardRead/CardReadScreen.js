@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router';
+import parserHTML from 'html-react-parser';
 
 import 'moment/locale/es';
 import moment from 'moment';
@@ -42,7 +43,9 @@ const CardReadScreen = () => {
     };
 
     fetchCard();
-  }, [Id, path, history]);
+
+    return () => {};
+  }, [Id, path, history, dataToRead]);
 
   const handleSpeak = (d) => {
     const voice = speechSynthesis.getVoices()[12];
@@ -64,7 +67,7 @@ const CardReadScreen = () => {
   const handleCancel = () => {
     synth.cancel();
   };
-  return dataToRead === null ? (
+  return dataToRead === {} ? (
     <div className='d-flex justify-content-center'>
       <WaitScreen />
     </div>
@@ -128,6 +131,7 @@ const CardReadScreen = () => {
             </div>
           </div>
         </div>
+
         <h1 className='card-title display-5 mb-3'>{dataToRead.title}</h1>
         <h6 className='card-subtitle mb-2 text-muted'>
           <BiTime /> {moment(dataToRead.date).calendar()}
@@ -142,12 +146,8 @@ const CardReadScreen = () => {
             />
           </div>
         )}
-        <p
-          className='text-justify card-text text-dark'
-          style={{ fontSize: '20px' }}
-        >
-          {dataToRead.body}
-        </p>
+
+        {dataToRead?.body ? parserHTML(dataToRead.body) : ''}
       </div>
     </div>
   );

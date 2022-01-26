@@ -37,7 +37,10 @@ const CardScreen = ({ data, route, mode, history }) => {
     return Object.entries(data).length !== 0 ? (
       data.map((d) => (
         <div className='col-md-4  ' key={d.id}>
-          <div className='card mb-3 shadow'>
+          <div
+            className='card mb-3 shadow'
+            style={{ maxHeight: '400px', height: '390px' }}
+          >
             <img
               src={d.imageUrl}
               className='card-img-top'
@@ -45,13 +48,11 @@ const CardScreen = ({ data, route, mode, history }) => {
               alt={d.imageUrl}
             />
             <div className='card-body'>
-              <h5 className='card-title'>{d.title}</h5>
-              <h6 className='card-subtitle mb-2 text-muted'>
+              <span className='badge bg-info text-light mb-2'>
                 {moment(d.date).calendar()}
-              </h6>
-              <p className='card-text text-justify'>
-                {d.body.substr(0, 100)}...
-              </p>
+              </span>
+              <h5 className='card-title'>{d.title}</h5>
+
               {mode === 'profile' ? (
                 <>
                   <button
